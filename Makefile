@@ -47,6 +47,7 @@ $(NAME): $(LIBFT) $(MLX) $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) -L lib/.mlx_linux -l mlx_Linux -L/usr/lib -lXext -lX11 -lm -lz -o $(NAME)
 
 clean:
+	rm -rf ./lib/.mlx_linux
 	rm -rf $(OBJ_PATH)
 	$(MAKE) -s -C lib/libft clean
 
