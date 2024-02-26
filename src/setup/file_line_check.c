@@ -6,7 +6,7 @@
 /*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 15:08:21 by yubi42            #+#    #+#             */
-/*   Updated: 2024/02/26 15:37:31 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/02/26 16:44:52 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,13 +90,13 @@ int	line_valid(t_read *reading, t_cub *cub, t_cub_ok *setup_vars,
 	if (reading->str == NULL)
 		return (TRUE);
 	if (ft_strncmp(reading->str, "NO", 2) == 0 && reading->str[2] == ' ')
-		return (check_filepath(&cub->no, &setup_vars->no, reading, err));
+		return (check_filepath(&cub->no_path, &setup_vars->no, reading, err));
 	if (ft_strncmp(reading->str, "SO", 2) == 0 && reading->str[2] == ' ')
-		return (check_filepath(&cub->so, &setup_vars->so, reading, err));
+		return (check_filepath(&cub->so_path, &setup_vars->so, reading, err));
 	if (ft_strncmp(reading->str, "WE", 2) == 0 && reading->str[2] == ' ')
-		return (check_filepath(&cub->we, &setup_vars->we, reading, err));
+		return (check_filepath(&cub->we_path, &setup_vars->we, reading, err));
 	if (ft_strncmp(reading->str, "EA", 2) == 0 && reading->str[2] == ' ')
-		return (check_filepath(&cub->ea, &setup_vars->ea, reading, err));
+		return (check_filepath(&cub->ea_path, &setup_vars->ea, reading, err));
 	if (ft_strncmp(reading->str, "F", 1) == 0 && reading->str[1] == ' ')
 		return (check_rgb(&cub->f, &setup_vars->f, reading, err));
 	if (ft_strncmp(reading->str, "C", 1) == 0 && reading->str[1] == ' ')

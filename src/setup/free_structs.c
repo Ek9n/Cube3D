@@ -6,7 +6,7 @@
 /*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:50:16 by yubi42            #+#    #+#             */
-/*   Updated: 2024/02/26 15:37:28 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/02/26 16:48:10 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,25 @@ void	free_str(char **str)
 	}
 }
 
+void	free_ptr(void **ptr)
+{
+	if (*ptr)
+	{
+		free(*ptr);
+		*ptr = NULL;
+	}
+}
+
 void	free_cub(t_cub *cub)
 {
-	free_str(&cub->no);
-	free_str(&cub->so);
-	free_str(&cub->we);
-	free_str(&cub->ea);
+	free_str(&cub->no_path);
+	free_str(&cub->so_path);
+	free_str(&cub->we_path);
+	free_str(&cub->ea_path);
+	free_ptr(&cub->no_addr);
+	free_ptr(&cub->so_addr);
+	free_ptr(&cub->we_addr);
+	free_ptr(&cub->ea_addr);
 	free_str(&cub->map_str);
 }
 

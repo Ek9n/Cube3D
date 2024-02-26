@@ -6,7 +6,7 @@
 /*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:46:24 by yubi42            #+#    #+#             */
-/*   Updated: 2024/02/26 15:37:24 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/02/26 16:41:25 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,14 @@ void	init_reading(t_read *reading)
 
 void	init_cub(t_cub *cub)
 {
-	cub->no = NULL;
-	cub->so = NULL;
-	cub->we = NULL;
-	cub->ea = NULL;
+	cub->no_path = NULL;
+	cub->so_path = NULL;
+	cub->we_path = NULL;
+	cub->ea_path = NULL;
+	cub->no_addr = NULL;
+	cub->so_addr = NULL;
+	cub->we_addr = NULL;
+	cub->ea_addr = NULL;
 	cub->f[0] = -1;
 	cub->f[1] = -1;
 	cub->f[2] = -1;

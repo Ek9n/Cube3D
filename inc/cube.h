@@ -6,7 +6,7 @@
 /*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/02/26 15:37:43 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/02/26 16:48:16 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,14 @@ typedef struct s_read
 
 typedef struct s_cub
 {
-    char* no;
-    char* so;
-    char* we;
-    char* ea;
+    char* no_path;
+    char* so_path;
+    char* we_path;
+    char* ea_path;
+    void* no_addr;
+    void* so_addr;
+    void* we_addr;
+    void* ea_addr;
     int f[3];
     int c[3];
     char *map_str;
@@ -101,6 +105,7 @@ int		line_valid(t_read *reading, t_cub *cub, t_cub_ok *setup_vars,
 // free_structs.c
 
 void	free_str(char **str);
+void	free_ptr(void **ptr);
 void	free_cub(t_cub *cub);
 void	free_grid(int ***grid, int max_row);
 void	free_map(t_map *map);
