@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 15:47:45 by yubi42            #+#    #+#             */
-/*   Updated: 2024/02/26 14:16:13 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/02/26 15:52:57 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -514,8 +514,8 @@ int	map_validator(t_data *data, t_cub cub, char (*err)[50])
  */
 int	main(int ac, char **av)
 {
-	t_data data;
-	t_cub cub;
+	t_data	data;
+	t_cub	cub;
 
 	
 	init_data(&data);
@@ -529,6 +529,28 @@ int	main(int ac, char **av)
 		return (0);
 	}
 	ft_printf("all ok :)\n");
+
+
+
+	// 
+	// mlx_destroy_image(data->mlx_ptr, data->img.mlx_img);
+
+	
+	// data->img.mlx_img = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
+	// data->img.addr = mlx_get_data_addr(data->img.mlx_img, &data->img.bpp, \
+	// 	&data->img.line_len, &data->img.endian);
+	// mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, 
+	// 		data->img.mlx_img, 0, 0);
+
+
+
+	// mlx_loop_hook(data.mlx_ptr, &render, &data);
+	// mlx_hook(data.win_ptr, KeyPress, KeyPressMask, &handle_keypress, &data);
+	// mlx_mouse_hook(data.win_ptr, &handle_mouse, &data);
+	// mlx_hook(data.win_ptr, 17, 1L << 17, close_window, &data);
+	// mlx_loop(data.mlx_ptr);	
+	// 
+
 	free_map(data.map);
 	free_cub(&cub);
 	return (1);

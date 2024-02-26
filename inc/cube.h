@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/02/26 14:23:38 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/02/26 16:20:52 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <fcntl.h>
 # include <stdio.h>
 # include <stdlib.h>
-#include <string.h>
+# include <string.h>
 # include <errno.h>
 # include <unistd.h>
 # include <limits.h>
@@ -40,10 +40,14 @@ typedef struct s_read
 
 typedef struct s_cub
 {
-    char* no;
-    char* so;
-    char* we;
-    char* ea;
+    char* no_path;
+    char* so_path;
+    char* we_path;
+    char* ea_path;
+    void* no;
+    void* so;
+    void* we;
+    void* ea;
     int f[3];
     int c[3];
     char *map_str;
@@ -68,11 +72,28 @@ typedef struct s_map
     int j;
 }		t_map;
 
+typedef struct s_player
+{
+    int x;
+    int y;
+    float rot;
+}		t_player;
+
 typedef struct s_data
 {
     char err[50];
+    t_img *img;
+    t_player *player;
+    t_cub *cub;
     t_map *map;
 }       t_data;
 
+typedef struct s_img
+{
+	void *mlx_img;
+	char *addr;
+
+
+} t_img;
 
 #endif
