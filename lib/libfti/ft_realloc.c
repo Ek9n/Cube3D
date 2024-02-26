@@ -1,35 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_realloc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/24 15:47:45 by yubi42            #+#    #+#             */
-/*   Updated: 2024/02/26 15:37:09 by yubi42           ###   ########.fr       */
+/*   Created: 2024/02/25 15:36:58 by yubi42            #+#    #+#             */
+/*   Updated: 2024/02/25 23:50:41 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube.h"
+#include "libft.h"
 
-int	main(int ac, char **av)
+void	*ft_realloc(void *str, size_t size)
 {
-	t_data data;
-	t_cub cub;
+	void	*new_str;
 
-	
-	init_data(&data);
-	init_cub(&cub);
-	if (!input_validator(ac, av, &data.err) || !file_validator(av[1], &cub, &data.err)
-		|| !map_validator(&data, cub, &data.err))
+	new_str = malloc(size * sizeof(char));
+	if (!new_str)
+		return (NULL);
+	if (str != NULL)
 	{
-		ft_printf_err("Error\n%s\n", data.err);
-		free_cub(&cub);
-		free_map(data.map);
-		return (0);
+		ft_memmove(new_str, str, size - 2);
+		free(str);
 	}
-	ft_printf("all ok :)\n");
-	free_map(data.map);
-	free_cub(&cub);
-	return (1);
+	return (new_str);
 }
