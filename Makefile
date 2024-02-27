@@ -8,11 +8,14 @@ MLX		= lib/.mlx_linux/libmlx.a
 SRC_PATH = src/
 OBJ_PATH = .obj/
 SUBOBJ_PATH = .obj/close \
+				.obj/execute \
 				.obj/setup \
+				
 
 SRC		=	main.c \
 			close/err.c \
 			close/free_structs.c \
+			execute/run_game.c \
 			setup/file_check.c \
 			setup/file_line_check.c \
 			setup/init_structs.c \

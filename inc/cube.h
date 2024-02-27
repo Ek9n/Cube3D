@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/02/27 13:37:33 by hstein           ###   ########.fr       */
+/*   Updated: 2024/02/27 13:46:29 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <fcntl.h>
 # include <stdio.h>
 # include <stdlib.h>
-#include <string.h>
+# include <string.h>
 # include <errno.h>
 # include <unistd.h>
 # include <limits.h>
@@ -149,5 +149,10 @@ int	map_validator(t_data *data, t_texture cub, char (*err)[50]);
 int	file_validator(char *file, t_texture *cub, char (*err)[50]);
 int	input_validator(int ac, char **av, char (*err)[50]);
 
+// ============== EXECUTE =============
+
+// run_game.c
+
+void    run_game(t_data *data);
 
 #endif
