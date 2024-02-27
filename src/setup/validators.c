@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   validators.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:58:15 by yubi42            #+#    #+#             */
-/*   Updated: 2024/02/27 13:24:00 by jborner          ###   ########.fr       */
+/*   Updated: 2024/02/27 13:36:58 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-int	map_validator(t_data *data, t_cub cub, char (*err)[50])
+int	map_validator(t_data *data, t_texture cub, char (*err)[50])
 {
 	count_map_row_col(cub.map_str, &data->map->col_max, &data->map->row_max);
 	create_grid(data->map);
@@ -23,10 +23,10 @@ int	map_validator(t_data *data, t_cub cub, char (*err)[50])
 	return (TRUE);
 }
 
-int	file_validator(char *file, t_cub *cub, char (*err)[50])
+int	file_validator(char *file, t_texture *cub, char (*err)[50])
 {
 	t_read		reading;
-	t_cub_ok	setup_vars;
+	t_texture_ok	setup_vars;
 
 	init_setup_vars(&setup_vars);
 	init_reading(&reading);

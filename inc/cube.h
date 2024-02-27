@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/02/27 13:18:01 by jborner          ###   ########.fr       */
+/*   Updated: 2024/02/27 13:37:33 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef struct s_read
     int return_value;
 }       t_read;
 
-typedef struct s_cub
+typedef struct s_texture
 {
     char* no_path;
     char* so_path;
@@ -49,9 +49,9 @@ typedef struct s_cub
     int f[3];
     int c[3];
     char *map_str;
-}		t_cub;
+}		t_texture;
 
-typedef struct s_cub_ok
+typedef struct s_texture_ok
 {
     int no;
     int so;
@@ -59,7 +59,7 @@ typedef struct s_cub_ok
     int ea;
     int f;
     int c;
-}       t_cub_ok;
+}       t_texture_ok;
 
 typedef struct s_map
 {
@@ -72,17 +72,17 @@ typedef struct s_map
 
 typedef struct s_player
 {
-    char err[50];
-    t_cub *texture;
-    t_map *map;
+    int x;
+    int y;
+    float angle;
 }       t_player;
-
 
 typedef struct s_data
 {
     char err[50];
-    t_cub *texture;
+    t_texture *texture;
     t_map *map;
+    t_player *player;
 }       t_data;
 
 
@@ -96,10 +96,10 @@ int	malloc_err(void *ptr, int *return_value, char (*err)[50]);
 
 // file_check.c
 
-int		setup_found(t_cub_ok setup_vars);
-void	setup_vars_check(t_cub *cub, t_read *reading, t_cub_ok *setup_vars,
+int		setup_found(t_texture_ok setup_vars);
+void	setup_vars_check(t_texture *cub, t_read *reading, t_texture_ok *setup_vars,
 			char (*err)[50]);
-void	setup_map_str(t_cub *cub, t_read *reading, char (*err)[50]);
+void	setup_map_str(t_texture *cub, t_read *reading, char (*err)[50]);
 
 // file_line_check.c
 
@@ -108,23 +108,23 @@ int		check_filepath(char **cub, int *setup_var, t_read *reading,
 int		is_rgb_num(char *str);
 int		check_rgb(int (*cub)[3], int *setup_var, t_read *reading,
 			char (*err)[50]);
-int		line_valid(t_read *reading, t_cub *cub, t_cub_ok *setup_vars,
+int		line_valid(t_read *reading, t_texture *cub, t_texture_ok *setup_vars,
 			char (*err)[50]);
 
 // free_structs.c
 
 void	free_str(char **str);
 void	free_ptr(void **ptr);
-void	free_cub(t_cub *cub);
+void	free_cub(t_texture *cub);
 void	free_grid(int ***grid, int max_row);
 void	free_map(t_map *map);
 void	free_data(t_data *data);
 
 // init_structs.c
 
-void	init_setup_vars(t_cub_ok *setup_vars);
+void	init_setup_vars(t_texture_ok *setup_vars);
 void	init_reading(t_read *reading);
-void	init_cub(t_cub *cub);
+void	init_texture(t_texture *cub);
 void	init_map(t_map *map);
 void	init_data(t_data *data);
 
@@ -145,8 +145,8 @@ int		fill_grid(char *str, t_map *map, char (*err)[50]);
 
 // validators.c
 
-int	map_validator(t_data *data, t_cub cub, char (*err)[50]);
-int	file_validator(char *file, t_cub *cub, char (*err)[50]);
+int	map_validator(t_data *data, t_texture cub, char (*err)[50]);
+int	file_validator(char *file, t_texture *cub, char (*err)[50]);
 int	input_validator(int ac, char **av, char (*err)[50]);
 
 

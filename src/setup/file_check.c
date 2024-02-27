@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   file_check.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 15:08:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/02/26 15:37:35 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/02/27 13:36:58 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-int	setup_found(t_cub_ok setup_vars)
+int	setup_found(t_texture_ok setup_vars)
 {
 	if (setup_vars.no == FALSE || setup_vars.so == FALSE)
 		return (FALSE);
@@ -23,7 +23,7 @@ int	setup_found(t_cub_ok setup_vars)
 	return (TRUE);
 }
 
-void	setup_vars_check(t_cub *cub, t_read *reading, t_cub_ok *setup_vars,
+void	setup_vars_check(t_texture *cub, t_read *reading, t_texture_ok *setup_vars,
 		char (*err)[50])
 {
 	while (reading->bytes > 0 && !setup_found(*setup_vars))
@@ -49,7 +49,7 @@ void	setup_vars_check(t_cub *cub, t_read *reading, t_cub_ok *setup_vars,
 	}
 }
 
-void	setup_map_str(t_cub *cub, t_read *reading, char (*err)[50])
+void	setup_map_str(t_texture *cub, t_read *reading, char (*err)[50])
 {
 	reading->i = 0;
 	while (reading->bytes > 0 && reading->buf == '\n')

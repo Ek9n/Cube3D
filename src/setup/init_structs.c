@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   init_structs.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:46:24 by yubi42            #+#    #+#             */
-/*   Updated: 2024/02/27 13:20:42 by jborner          ###   ########.fr       */
+/*   Updated: 2024/02/27 13:36:58 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-void	init_setup_vars(t_cub_ok *setup_vars)
+void	init_setup_vars(t_texture_ok *setup_vars)
 {
 	setup_vars->no = FALSE;
 	setup_vars->so = FALSE;
@@ -29,7 +29,7 @@ void	init_reading(t_read *reading)
 	reading->i = 0;
 }
 
-void	init_cub(t_cub *cub)
+void	init_texture(t_texture *cub)
 {
 	cub->no_path = NULL;
 	cub->so_path = NULL;
@@ -63,7 +63,7 @@ void	init_data(t_data *data)
 	data->map = NULL;
 	data->texture = NULL;
 	data->map = malloc (sizeof(t_map));
-	data->texture = malloc (sizeof(t_cub));
+	data->texture = malloc (sizeof(t_texture));
 	init_map(data->map);
-	init_cub(data->texture);
+	init_texture(data->texture);
 }

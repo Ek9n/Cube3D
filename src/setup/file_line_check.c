@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file_line_check.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 15:08:21 by yubi42            #+#    #+#             */
-/*   Updated: 2024/02/26 16:44:52 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/02/27 13:36:58 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int	check_rgb(int (*cub)[3], int *setup_var, t_read *reading, char (*err)[50])
 	return (TRUE);
 }
 
-int	line_valid(t_read *reading, t_cub *cub, t_cub_ok *setup_vars,
+int	line_valid(t_read *reading, t_texture *cub, t_texture_ok *setup_vars,
 		char (*err)[50])
 {
 	if (reading->str == NULL)
