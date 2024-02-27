@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 14:29:57 by hstein            #+#    #+#             */
-/*   Updated: 2024/02/27 14:38:40 by hstein           ###   ########.fr       */
+/*   Updated: 2024/02/27 14:48:08 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void create_img(t_data *data, void **img, char *path)
     img_height = HEIGHT;
     *img = mlx_xpm_file_to_image(data->mlx, path, &img_width, &img_height);
     if (!*img)
-        close_game(data, "Not able to allocate memory");
+        close_game(data, "Not able to allocate memory or wrong img path");
 }
 
 void	mlx_init_data(t_data *data)
