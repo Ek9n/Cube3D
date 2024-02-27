@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 13:41:09 by hstein            #+#    #+#             */
-/*   Updated: 2024/02/27 13:46:53 by hstein           ###   ########.fr       */
+/*   Updated: 2024/02/27 14:39:40 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 void run_game(t_data *data)
 {
-    (void) data;
+    mlx_init_data(data);
     printf("hi");
 }

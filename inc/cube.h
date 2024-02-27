@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/02/27 13:46:29 by hstein           ###   ########.fr       */
+/*   Updated: 2024/02/27 14:32:09 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 
 #define TRUE 1
 #define FALSE 0
+#define WIDTH 300
+#define HEIGHT 300
 
 typedef struct s_read
 {
@@ -79,6 +81,8 @@ typedef struct s_player
 
 typedef struct s_data
 {
+    void    *mlx;
+    void    *mlx_win;
     char err[50];
     t_texture *texture;
     t_map *map;
@@ -86,11 +90,6 @@ typedef struct s_data
 }       t_data;
 
 
-// ================= SETUP ==================
-
-// err.c
-
-int	malloc_err(void *ptr, int *return_value, char (*err)[50]);
 
 // ================= SETUP ==================
 
@@ -100,6 +99,8 @@ int		setup_found(t_texture_ok setup_vars);
 void	setup_vars_check(t_texture *cub, t_read *reading, t_texture_ok *setup_vars,
 			char (*err)[50]);
 void	setup_map_str(t_texture *cub, t_read *reading, char (*err)[50]);
+
+
 
 // file_line_check.c
 
@@ -149,10 +150,34 @@ int	map_validator(t_data *data, t_texture cub, char (*err)[50]);
 int	file_validator(char *file, t_texture *cub, char (*err)[50]);
 int	input_validator(int ac, char **av, char (*err)[50]);
 
+// ================= MLX_SETUP ==================
+
+// mlx_init.c
+
+void    create_img(t_data *data, void **img, char *path);
+void    mlx_init_data(t_data *data);
+
 // ============== EXECUTE =============
 
 // run_game.c
 
 void    run_game(t_data *data);
+void	mlx_init_data(t_data *data);
+
+
+// ================= CLOSE ==================
+
+// err.c
+
+int     malloc_err(void *ptr, int *return_value, char (*err)[50]);
+void	close_game(t_data *data, char *msg);
+
+// ============== JESS =============
+
+
+
+// ============== HANNES =============
+
+
 
 #endif
