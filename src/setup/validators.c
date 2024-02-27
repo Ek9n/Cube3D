@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validators.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:58:15 by yubi42            #+#    #+#             */
-/*   Updated: 2024/02/26 15:37:12 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/02/27 13:24:00 by jborner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,11 @@
 
 int	map_validator(t_data *data, t_cub cub, char (*err)[50])
 {
-	t_map	*map;
-
-	map = malloc(sizeof(t_map));
-	if (malloc_err(map, NULL, err))
+	count_map_row_col(cub.map_str, &data->map->col_max, &data->map->row_max);
+	create_grid(data->map);
+	if (malloc_err(&data->map->grid, NULL, err))
 		return (FALSE);
-	init_map(map);
-	data->map = map;
-	count_map_row_col(cub.map_str, &map->col_max, &map->row_max);
-	create_grid(map);
-	if (malloc_err(&map->grid, NULL, err))
-		return (FALSE);
-	if (!fill_grid(cub.map_str, map, err) || !check_grid(map, err))
+	if (!fill_grid(cub.map_str, data->map, err) || !check_grid(data->map, err))
 		return (FALSE);
 	return (TRUE);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/02/26 16:48:16 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/02/27 13:18:01 by jborner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,18 @@ typedef struct s_map
     int j;
 }		t_map;
 
+typedef struct s_player
+{
+    char err[50];
+    t_cub *texture;
+    t_map *map;
+}       t_player;
+
+
 typedef struct s_data
 {
     char err[50];
+    t_cub *texture;
     t_map *map;
 }       t_data;
 
@@ -109,6 +118,7 @@ void	free_ptr(void **ptr);
 void	free_cub(t_cub *cub);
 void	free_grid(int ***grid, int max_row);
 void	free_map(t_map *map);
+void	free_data(t_data *data);
 
 // init_structs.c
 

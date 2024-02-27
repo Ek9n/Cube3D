@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_structs.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:46:24 by yubi42            #+#    #+#             */
-/*   Updated: 2024/02/26 16:41:25 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/02/27 13:20:42 by jborner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,9 @@ void	init_data(t_data *data)
 {
 	data->err[0] = '\0';
 	data->map = NULL;
+	data->texture = NULL;
+	data->map = malloc (sizeof(t_map));
+	data->texture = malloc (sizeof(t_cub));
+	init_map(data->map);
+	init_cub(data->texture);
 }

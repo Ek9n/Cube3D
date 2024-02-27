@@ -7,14 +7,14 @@ MLX		= lib/.mlx_linux/libmlx.a
 
 SRC_PATH = src/
 OBJ_PATH = .obj/
-SUBOBJ_PATH = .obj/err_handler \
+SUBOBJ_PATH = .obj/close \
 				.obj/setup \
 
 SRC		=	main.c \
-			err_handler/err.c \
+			close/err.c \
+			close/free_structs.c \
 			setup/file_check.c \
 			setup/file_line_check.c \
-			setup/free_structs.c \
 			setup/init_structs.c \
 			setup/map_grid_check.c \
 			setup/map_grid_create_n_fill.c \
@@ -47,7 +47,6 @@ $(NAME): $(LIBFT) $(MLX) $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) -L lib/.mlx_linux -l mlx_Linux -L/usr/lib -lXext -lX11 -lm -lz -o $(NAME)
 
 clean:
-	rm -rf ./lib/.mlx_linux
 	rm -rf $(OBJ_PATH)
 	$(MAKE) -s -C lib/libft clean
 
