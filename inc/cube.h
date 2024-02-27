@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/02/27 14:32:09 by hstein           ###   ########.fr       */
+/*   Updated: 2024/02/27 16:21:48 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "../lib/libft/libft.h"
 # include <mlx.h>
+# include <mlx_int.h>
 # include <fcntl.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -25,8 +26,9 @@
 
 #define TRUE 1
 #define FALSE 0
-#define WIDTH 300
-#define HEIGHT 300
+#define IMG_SIZE 64
+#define WIDTH IMG_SIZE*10
+#define HEIGHT IMG_SIZE*10
 
 typedef struct s_read
 {
@@ -40,6 +42,9 @@ typedef struct s_read
 
 typedef struct s_texture
 {
+    char* img_map_ground;
+    char* map_ground;
+
     char* no_path;
     char* so_path;
     char* we_path;
@@ -83,6 +88,8 @@ typedef struct s_data
 {
     void    *mlx;
     void    *mlx_win;
+    int width;
+    int height;
     char err[50];
     t_texture *texture;
     t_map *map;
@@ -155,7 +162,7 @@ int	input_validator(int ac, char **av, char (*err)[50]);
 // mlx_init.c
 
 void    create_img(t_data *data, void **img, char *path);
-void    mlx_init_data(t_data *data);
+void    mlx_init_game(t_data *data);
 
 // ============== EXECUTE =============
 
@@ -177,7 +184,9 @@ void	close_game(t_data *data, char *msg);
 
 
 // ============== HANNES =============
-
+// ================= CONTROL ==================
+// keypress.c
+int handle_keypress(int keysym, t_data *data);
 
 
 #endif

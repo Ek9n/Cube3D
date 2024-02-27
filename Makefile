@@ -11,6 +11,7 @@ SUBOBJ_PATH = .obj/close \
 				.obj/execute \
 				.obj/setup \
 				.obj/mlx_setup \
+				.obj/control \
 				
 
 SRC		=	main.c \
@@ -24,6 +25,7 @@ SRC		=	main.c \
 			setup/map_grid_create_n_fill.c \
 			setup/validators.c \
 			mlx_setup/mlx_init.c \
+			control/keypress.c \
 
 SRCS    = $(addprefix $(SRC_PATH), $(SRC))
 OBJ     = $(SRC:.c=.o)
