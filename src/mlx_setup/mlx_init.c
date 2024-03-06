@@ -6,13 +6,13 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 14:29:57 by hstein            #+#    #+#             */
-/*   Updated: 2024/02/27 16:07:15 by hstein           ###   ########.fr       */
+/*   Updated: 2024/03/06 13:50:39 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-void create_img(t_data *data, void **img, char *path)
+void    create_img(t_data *data, void **img, char *path)
 {
     int img_width;
     int img_height;
@@ -24,7 +24,7 @@ void create_img(t_data *data, void **img, char *path)
         close_game(data, "Not able to allocate memory or wrong img path");
 }
 
-void	mlx_init_game(t_data *data)
+void    mlx_init_game(t_data *data)
 {
     data->width = IMG_SIZE * data->map->col_max;
     data->height = IMG_SIZE * data->map->row_max;

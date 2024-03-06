@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 15:29:02 by hstein            #+#    #+#             */
-/*   Updated: 2024/02/27 15:41:47 by hstein           ###   ########.fr       */
+/*   Updated: 2024/03/06 14:05:07 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	handle_keypress(int keysym, t_data *data)
 	(void)data;
 	if (keysym == XK_Escape)
 	{
-		mlx_destroy_window(data->mlx, data->mlx_win); // free usw. adden
 		close_game(data, NULL);
 	}
 	// if (keysym == XK_Up)

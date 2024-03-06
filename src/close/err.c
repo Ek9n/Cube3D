@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   err.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 15:03:58 by yubi42            #+#    #+#             */
-/*   Updated: 2024/02/27 14:55:01 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/03/06 14:08:05 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,6 @@ void	close_game(t_data *data, char *msg)
 	if (!msg)
 		exit(EXIT_SUCCESS);
 	ft_printf_err(msg);
+	mlx_destroy_window(data->mlx, data->mlx_win);
 	exit(EXIT_FAILURE);
 }
