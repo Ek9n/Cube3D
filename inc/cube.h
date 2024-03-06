@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/03/06 14:47:58 by hstein           ###   ########.fr       */
+/*   Updated: 2024/03/06 15:56:58 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,9 @@
 #define TRUE 1
 #define FALSE 0
 #define IMG_SIZE 64
-#define WIDTH IMG_SIZE*10
-#define HEIGHT IMG_SIZE*10
+
+#define GREEN 0xFF00
+#define PURPLE 0xFF00FF
 
 typedef struct s_read
 {
@@ -40,8 +41,20 @@ typedef struct s_read
     int return_value;
 }       t_read;
 
+typedef struct  s_img
+{
+    void    *img_ptr;   // Zeiger auf das Bild in der Grafikbibliothek
+    char    *addr;      // Zeiger auf den Anfang des Bildspeichers
+    int     bpp;        // Bits pro Pixel
+    int     line_length;    // Länge einer Zeile im Bild in Bytes
+    int     endian;     // Endianness (1 für big endian, 0 für little endian)
+} t_img;
+
 typedef struct s_texture
 {
+    t_img *img1;
+
+
     char* img_map_ground;
     char* map_ground;
 

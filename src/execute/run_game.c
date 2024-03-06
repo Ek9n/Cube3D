@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 13:41:09 by hstein            #+#    #+#             */
-/*   Updated: 2024/03/06 14:45:20 by hstein           ###   ########.fr       */
+/*   Updated: 2024/03/06 17:06:05 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,21 +54,6 @@ void destroy_textures(t_data *data)
 		mlx_destroy_image(data->mlx, data->texture->ea_addr);
 }
 
-// void    create_minimap(t_texture *textures)
-// {
-
-// 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->texture->no_addr, col * IMG_SIZE, row * IMG_SIZE);
-
-// }
-
-// void	img_pix_put(t_texture *, int x, int y, int clr)
-// {
-// 	char	*pixel;
-
-// 	pixel = img->addr + (y * img->line_len + x * (img->bpp / 8));
-// 	*(int *)pixel = clr;
-// }
-
 /*
 typedef struct	s_img
 {
@@ -86,13 +71,52 @@ typedef struct	s_img
 }				t_img;
 */
 
+// Beispiel, wie man eine t_img Struktur erstellt und füllt
+t_img   *create_image(void *mlx_ptr, int width, int height)
+{
+    t_img   *img;
+
+    // Speicher für die t_img Struktur reservieren
+    img = (t_img *)malloc(sizeof(t_img));
+    if (!img)
+        return (NULL);
+
+    // Das Bild in der Grafikbibliothek erstellen und einen Zeiger darauf speichern
+    img->img_ptr = mlx_new_image(mlx_ptr, width, height);
+    if (!img->img_ptr)
+    {
+        free(img);
+        return (NULL);
+    }
+
+    // Informationen über das Bild abrufen und in die t_img Struktur speichern
+    img->addr = mlx_get_data_addr(img->img_ptr, &img->bpp, &img->line_length, &img->endian);
+
+    // Rückgabe der fertigen t_img Struktur
+    return (img);
+}
+
+// void	img_pix_put(t_img *img, int x, int y, int color)
+// {
+// 	char	*pixel;
+
+// 	pixel = img->addr + (y * img->line_len + x * (img->bpp / 8));
+// 	*(int *)pixel = color;
+// }
+
 void	run_game(t_data *data)
 {
 	printf("(run_game) hi :-)\n");
 	mlx_init_game(data);
 
 	print_grid(data->map);
+
+	data->texture->img1 = create_image(data->mlx, 64, 64);
+
 	create_minimap(data);
+
+	img_pix_put(data->texture->img1->img_ptr, 40, 40, 0x00FF00);
+	mlx_put_image_to_window(data->mlx, data->mlx_win, data->texture->img1->img_ptr, 128, 128);
 	// destroy_textures(data);
 	// create_minimap(data);
 	// data->texture->img_map_ground = mlx_new_image(data->mlx, IMG_SIZE, IMG_SIZE);
@@ -106,6 +130,7 @@ void	run_game(t_data *data)
 
 	mlx_loop(data->mlx);
 }
+
 /*
 	void	img_pix_put(t_img *img, int x, int y, int clr)
 	{
