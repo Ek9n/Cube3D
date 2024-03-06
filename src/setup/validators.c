@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validators.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:58:15 by yubi42            #+#    #+#             */
-/*   Updated: 2024/02/27 13:36:58 by hstein           ###   ########.fr       */
+/*   Updated: 2024/03/06 14:18:57 by jborner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	map_validator(t_data *data, t_texture cub, char (*err)[50])
 	create_grid(data->map);
 	if (malloc_err(&data->map->grid, NULL, err))
 		return (FALSE);
-	if (!fill_grid(cub.map_str, data->map, err) || !check_grid(data->map, err))
+	if (!fill_grid(cub.map_str, data->map, data->player, err) || !check_grid(data->map, err))
 		return (FALSE);
 	return (TRUE);
 }

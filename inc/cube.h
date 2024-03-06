@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/03/06 14:29:36 by hstein           ###   ########.fr       */
+/*   Updated: 2024/03/06 14:47:58 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,7 @@ void	init_setup_vars(t_texture_ok *setup_vars);
 void	init_reading(t_read *reading);
 void	init_texture(t_texture *cub);
 void	init_map(t_map *map);
+void	init_player(t_player *player);
 void	init_data(t_data *data);
 
 // map_grid_check.c
@@ -149,7 +150,7 @@ void	print_grid(t_map *map);
 void	count_map_row_col(char *str, int *max_col, int *max_row);
 void	create_grid(t_map *map);
 void	newline_grid(t_map *map);
-int		fill_grid(char *str, t_map *map, char (*err)[50]);
+int		fill_grid(char *str, t_map *map, t_player *player, char (*err)[50]);
 
 // validators.c
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_grid_create_n_fill.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:55:14 by yubi42            #+#    #+#             */
-/*   Updated: 2024/02/26 15:37:16 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/03/06 14:34:27 by jborner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,23 @@ void	newline_grid(t_map *map)
 	++map->j;
 }
 
-int	fill_grid(char *str, t_map *map, char (*err)[50])
+void set_player(t_player *player, t_map *map, char c)
+{
+	map->grid[map->j][map->i] = 2;
+	player->x = map->j;
+	player->y = map->i;
+	if (c == 'N')
+		player->angle = 0;
+	else if (c == 'E')
+		player->angle = 0.5;
+	else if (c == 'S')
+		player->angle = 1;
+	else if (c == 'W')
+		player->angle = 1.5;
+	map->i++;
+}
+
+int	fill_grid(char *str, t_map *map, t_player *player, char (*err)[50])
 {
 	int	s_i;
 
@@ -81,9 +97,7 @@ int	fill_grid(char *str, t_map *map, char (*err)[50])
 			map->grid[map->j][map->i++] = 0;
 		else if (str[s_i] == 'N' || str[s_i] == 'E' || str[s_i] == 'S'
 			|| str[s_i] == 'W')
-			{
-				map->grid[map->j][map->i++] = 2;
-			}
+				set_player(player, map, str[s_i]);
 		else if (str[s_i] == '\n')
 			newline_grid(map);
 		else
