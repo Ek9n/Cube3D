@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_structs.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:46:24 by yubi42            #+#    #+#             */
-/*   Updated: 2024/02/27 13:36:58 by hstein           ###   ########.fr       */
+/*   Updated: 2024/03/06 14:15:56 by jborner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,24 @@ void	init_map(t_map *map)
 	map->j = 0;
 }
 
+void	init_player(t_player *player)
+{
+	player->x = -1;
+	player->y = -1;
+	player->angle = -1;
+}
+
+
 void	init_data(t_data *data)
 {
 	data->err[0] = '\0';
 	data->map = NULL;
 	data->texture = NULL;
+	data->player = NULL;
 	data->map = malloc (sizeof(t_map));
 	data->texture = malloc (sizeof(t_texture));
+	data->player = malloc (sizeof(t_player));
+	init_player(data->player);
 	init_map(data->map);
 	init_texture(data->texture);
 }

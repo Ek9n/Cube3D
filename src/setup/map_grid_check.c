@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_grid_check.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 15:01:10 by yubi42            #+#    #+#             */
-/*   Updated: 2024/02/26 15:37:20 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/03/06 14:38:09 by jborner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,10 @@ void	check_mid(t_map *map, int *return_value, int *player_count,
 		*return_value = FALSE;
 	}
 	if (map->grid[map->j][map->i] == 2)
+	{
+		map->grid[map->j][map->i] = 0;
 		(*player_count)++;	
+	}
 }
 
 
