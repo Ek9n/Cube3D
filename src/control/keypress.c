@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 15:29:02 by hstein            #+#    #+#             */
-/*   Updated: 2024/03/06 14:10:28 by hstein           ###   ########.fr       */
+/*   Updated: 2024/03/10 15:07:57 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,24 +19,16 @@ int	handle_keypress(int keysym, t_data *data)
 	{
 		close_game(data, NULL);
 	}
-	// if (keysym == XK_Up)
-	// 	data->map.scale += 1.5;
-	// if (keysym == XK_Down)
-	// 	data->map.scale -= 1.5;
-	// if (keysym == XK_space)
-	// 	data->map.rotation_active = !data->map.rotation_active;
-	// if (keysym == XK_d)
-	// 	data->map.descale_z -= 0.01;
-	// if (keysym == XK_s)
-	// 	data->map.descale_z += 0.01;
+	if (keysym == XK_Up)
+		data->player->x -= 1.5;
+	if (keysym == XK_Down)
+		data->player->x += 1.5;
+	if (keysym == XK_Left)
+		data->player->y -= 1.5;
+	if (keysym == XK_Right)
+		data->player->y += 1.5;
 	return (0);
 }
-
-// int	close_window(t_data *data)
-// {
-// 	destroy_win_and_img(data);
-// 	return (0);
-// }
 
 // int	handle_mouse(int button, int x, int y, t_data *data)
 // {

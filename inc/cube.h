@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/03/06 15:56:58 by hstein           ###   ########.fr       */
+/*   Updated: 2024/03/10 14:10:37 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct  s_img
 typedef struct s_texture
 {
     t_img *img1;
+    t_img *img2;
 
 
     char* img_map_ground;

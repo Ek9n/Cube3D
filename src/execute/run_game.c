@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 13:41:09 by hstein            #+#    #+#             */
-/*   Updated: 2024/03/06 17:06:05 by hstein           ###   ########.fr       */
+/*   Updated: 2024/03/10 15:09:23 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ t_img   *create_image(void *mlx_ptr, int width, int height)
     t_img   *img;
 
     // Speicher für die t_img Struktur reservieren
-    img = (t_img *)malloc(sizeof(t_img));
+    img = malloc(sizeof(t_img));
     if (!img)
         return (NULL);
 
@@ -96,12 +96,27 @@ t_img   *create_image(void *mlx_ptr, int width, int height)
     return (img);
 }
 
-// void	img_pix_put(t_img *img, int x, int y, int color)
-// {
-// 	char	*pixel;
+void	img_pix_put(t_img *img, int x, int y, int color)
+{
+	char	*pixel;
 
-// 	pixel = img->addr + (y * img->line_len + x * (img->bpp / 8));
-// 	*(int *)pixel = color;
+	pixel = img->addr + (y * img->line_length + x * (img->bpp / 8));
+	*(int *)pixel = color;
+}
+
+// void img_pix_put_trans(t_img *img, int x, int y)
+// {
+//     char *pixel;
+
+//     pixel = img->addr + (y * img->line_length + x * (img->bpp / 8));
+
+//     // Setze die Alphakomponente des Pixels auf den maximalen Wert (100% transparent)
+//     *(pixel + (img->endian ? 0 : 3)) = 0; // Annahme: ARGB-Reihenfolge, Alpha an erster oder letzter Stelle
+
+//     // // Setze die Farbkomponenten auf 0 (Transparent)
+//     // *(pixel + (img->endian ? 1 : 2)) = 0; // Blau oder Rot
+//     // *(pixel + (img->endian ? 2 : 1)) = 0; // Grün oder Grün
+//     // *(pixel + (img->endian ? 3 : 0)) = 0; // Rot oder Blau
 // }
 
 void	run_game(t_data *data)
@@ -111,12 +126,19 @@ void	run_game(t_data *data)
 
 	print_grid(data->map);
 
-	data->texture->img1 = create_image(data->mlx, 64, 64);
+	data->texture->img1 = create_image(data->mlx, 128, 128);
+	data->texture->img2 = create_image(data->mlx, 64, 64);
 
 	create_minimap(data);
 
-	img_pix_put(data->texture->img1->img_ptr, 40, 40, 0x00FF00);
+	img_pix_put(data->texture->img1, 32, 32, 0xFF00);
+	// img_pix_put(data->texture->img2, 6, 5, 0x64000000);
+	// img_pix_put_trans(data->texture->img1, 32, 32);
+
+	// img_pix_put(data->texture->img1, 5, 5, 0xFF00);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->texture->img1->img_ptr, 128, 128);
+	
+	// mlx_put_image_to_window(data->mlx, data->mlx_win, data->texture->img2->img_ptr, 128, 128);
 	// destroy_textures(data);
 	// create_minimap(data);
 	// data->texture->img_map_ground = mlx_new_image(data->mlx, IMG_SIZE, IMG_SIZE);
