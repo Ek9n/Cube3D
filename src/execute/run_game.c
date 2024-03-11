@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 13:41:09 by hstein            #+#    #+#             */
-/*   Updated: 2024/03/10 15:09:23 by hstein           ###   ########.fr       */
+/*   Updated: 2024/03/11 15:40:42 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ typedef struct	s_img
 	XImage			*image;
 	Pixmap			pix;
 	GC				gc;
-	int				size_line;
+	int				bytes_per_line;
 	int				bpp;
 	int				width;
 	int				height;
@@ -90,7 +90,7 @@ t_img   *create_image(void *mlx_ptr, int width, int height)
     }
 
     // Informationen über das Bild abrufen und in die t_img Struktur speichern
-    img->addr = mlx_get_data_addr(img->img_ptr, &img->bpp, &img->line_length, &img->endian);
+    img->addr = mlx_get_data_addr(img->img_ptr, &img->bpp, &img->bytes_per_line, &img->endian);
 
     // Rückgabe der fertigen t_img Struktur
     return (img);
@@ -100,7 +100,7 @@ void	img_pix_put(t_img *img, int x, int y, int color)
 {
 	char	*pixel;
 
-	pixel = img->addr + (y * img->line_length + x * (img->bpp / 8));
+	pixel = img->addr + (y * img->bytes_per_line + x * (img->bpp / 8));
 	*(int *)pixel = color;
 }
 
@@ -119,6 +119,38 @@ void	img_pix_put(t_img *img, int x, int y, int color)
 //     // *(pixel + (img->endian ? 3 : 0)) = 0; // Rot oder Blau
 // }
 
+void	put_pixel_img(t_img *img, int x, int y, int color)
+{
+	char	*dst;
+
+	if (color == (int)0xFF000000)
+		return ;
+	if (x >= 0 && y >= 0 && x < img->width && y < img->height) {
+		dst = img->addr + (y * img->bytes_per_line + x * (img->bpp / 8));
+		*(unsigned int *) dst = color;
+	}
+}
+
+unsigned int	get_pixel_img(t_img *img, int x, int y) {
+	return (*(unsigned int *)((img->addr
+			+ (y * img->bytes_per_line) + (x * img->bpp / 8))));
+}
+
+void	put_img_to_img(t_img *dst, t_img *src, int x, int y) {
+	int i;
+	int j;
+
+	i = 0;
+	while(i < src->width) {
+		j = 0;
+		while (j < src->height) {
+			put_pixel_img(dst, x + i, y + j, get_pixel_img(src, i, j));
+			j++;
+		}
+		i++;
+	}
+}
+
 void	run_game(t_data *data)
 {
 	printf("(run_game) hi :-)\n");
@@ -126,18 +158,31 @@ void	run_game(t_data *data)
 
 	print_grid(data->map);
 
-	data->texture->img1 = create_image(data->mlx, 128, 128);
+	data->texture->img1 = create_image(data->mlx, 5*64, 5*64);
 	data->texture->img2 = create_image(data->mlx, 64, 64);
 
-	create_minimap(data);
+	// create_minimap(data);
 
-	img_pix_put(data->texture->img1, 32, 32, 0xFF00);
-	// img_pix_put(data->texture->img2, 6, 5, 0x64000000);
-	// img_pix_put_trans(data->texture->img1, 32, 32);
+// Make img green:
+	for (int y = 0; y < 5*IMG_SIZE; y++)
+	{
+		for (int x = 0; x < 5*IMG_SIZE; x++)
+		{
+			// if ((x > 0 && x <= IMG_SIZE) && (y > 0 && y <= IMG_SIZE)) //hier stimmt was nicht.. ist vielleicht auch nicht wichtig and eiser stelle...
+			img_pix_put(data->texture->img1, y, x, GREEN);
+		}
+	}
+	img_pix_put(data->texture->img2, 32, 32, PURPLE);
+	put_img_to_img(data->texture->img1, data->texture->img2, 128, 128);
 
-	// img_pix_put(data->texture->img1, 5, 5, 0xFF00);
-	mlx_put_image_to_window(data->mlx, data->mlx_win, data->texture->img1->img_ptr, 128, 128);
-	
+	// for (int j = 0; j < 10; j++)
+	// {
+	// 	for (int i = 0; i < 10; i++)
+			mlx_put_image_to_window(data->mlx, data->mlx_win, \
+				data->texture->img1->img_ptr, 0, 0);
+				// data->texture->img1->img_ptr, j * IMG_SIZE, i * IMG_SIZE);
+	// }
+
 	// mlx_put_image_to_window(data->mlx, data->mlx_win, data->texture->img2->img_ptr, 128, 128);
 	// destroy_textures(data);
 	// create_minimap(data);

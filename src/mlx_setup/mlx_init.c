@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 14:29:57 by hstein            #+#    #+#             */
-/*   Updated: 2024/03/06 16:00:38 by hstein           ###   ########.fr       */
+/*   Updated: 2024/03/11 13:26:14 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ void    create_img(t_data *data, void **img, char *path)
 
 void    mlx_init_game(t_data *data)
 {
-    data->width = IMG_SIZE * data->map->col_max;
-    data->height = IMG_SIZE * data->map->row_max;
 	data->mlx = mlx_init();
 	if (data->mlx == NULL)
         close_game(data, "ERROR");

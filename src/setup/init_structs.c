@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_structs.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:46:24 by yubi42            #+#    #+#             */
-/*   Updated: 2024/03/06 14:15:56 by jborner          ###   ########.fr       */
+/*   Updated: 2024/03/11 13:26:59 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ void	init_player(t_player *player)
 
 void	init_data(t_data *data)
 {
+    data->width = 10*IMG_SIZE;
+    data->height = 10*IMG_SIZE;
 	data->err[0] = '\0';
 	data->map = NULL;
 	data->texture = NULL;

@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/03/10 14:10:37 by hstein           ###   ########.fr       */
+/*   Updated: 2024/03/11 12:56:52 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,13 @@ typedef struct  s_img
     void    *img_ptr;   // Zeiger auf das Bild in der Grafikbibliothek
     char    *addr;      // Zeiger auf den Anfang des Bildspeichers
     int     bpp;        // Bits pro Pixel
-    int     line_length;    // Länge einer Zeile im Bild in Bytes
     int     endian;     // Endianness (1 für big endian, 0 für little endian)
+    int     bytes_per_line;  // Länge einer Zeile im Bild in Bytes
+    int     width;
+    int     height;
+    int     x;
+    int     y;
+    int     z;
 } t_img;
 
 typedef struct s_texture
@@ -102,8 +107,8 @@ typedef struct s_data
 {
     void    *mlx;
     void    *mlx_win;
-    int width;
-    int height;
+    int     width;
+    int     height;
     char err[50];
     t_texture *texture;
     t_map *map;
