@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/03/12 14:33:30 by hstein           ###   ########.fr       */
+/*   Updated: 2024/03/12 17:30:36 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 
 #define GREEN 0xFF00
 #define PURPLE 0xFF00FF
+#define YELLOW 0xffff00
 
 typedef struct s_read
 {
@@ -57,6 +58,11 @@ typedef struct  s_img
 
 typedef struct s_texture
 {
+    t_img *map_img;
+    t_img *floor;
+    t_img *wall;
+    t_img *exit;
+    t_img *player;
     t_img *base_img;
     t_img *img1;
     t_img *img2;
