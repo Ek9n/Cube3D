@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_structs.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:50:16 by yubi42            #+#    #+#             */
-/*   Updated: 2024/02/27 14:54:37 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/03/12 14:37:44 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ void	free_cub(t_texture *cub)
 	free_str(&cub->so_path);
 	free_str(&cub->we_path);
 	free_str(&cub->ea_path);
-	free_ptr(&cub->no_addr);
-	free_ptr(&cub->so_addr);
-	free_ptr(&cub->we_addr);
-	free_ptr(&cub->ea_addr);
+	// free_ptr(&cub->no_addr);
+	// free_ptr(&cub->so_addr);
+	// free_ptr(&cub->we_addr);
+	// free_ptr(&cub->ea_addr);
 	free_str(&cub->map_str);
 	free(cub);
 	}

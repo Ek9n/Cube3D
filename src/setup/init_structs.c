@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:46:24 by yubi42            #+#    #+#             */
-/*   Updated: 2024/03/11 13:26:59 by hstein           ###   ########.fr       */
+/*   Updated: 2024/03/12 14:07:24 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,13 @@ void	init_texture(t_texture *cub)
 	cub->so_path = NULL;
 	cub->we_path = NULL;
 	cub->ea_path = NULL;
-	cub->no_addr = NULL;
-	cub->so_addr = NULL;
-	cub->we_addr = NULL;
-	cub->ea_addr = NULL;
+	cub->base_img = NULL;
+	cub->img1 = NULL;
+	cub->img2 = NULL;
+	cub->no = NULL;
+	cub->so = NULL;
+	cub->ea = NULL;
+	cub->we = NULL;
 	cub->f[0] = -1;
 	cub->f[1] = -1;
 	cub->f[2] = -1;

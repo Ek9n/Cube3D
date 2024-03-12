@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/03/11 12:56:52 by hstein           ###   ########.fr       */
+/*   Updated: 2024/03/12 14:33:30 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct  s_img
     char    *addr;      // Zeiger auf den Anfang des Bildspeichers
     int     bpp;        // Bits pro Pixel
     int     endian;     // Endianness (1 für big endian, 0 für little endian)
-    int     bytes_per_line;  // Länge einer Zeile im Bild in Bytes
+    int     bytes_per_line;
     int     width;
     int     height;
     int     x;
@@ -57,9 +57,13 @@ typedef struct  s_img
 
 typedef struct s_texture
 {
+    t_img *base_img;
     t_img *img1;
     t_img *img2;
-
+    t_img *no;
+    t_img *so;
+    t_img *ea;
+    t_img *we;
 
     char* img_map_ground;
     char* map_ground;
@@ -68,10 +72,6 @@ typedef struct s_texture
     char* so_path;
     char* we_path;
     char* ea_path;
-    void* no_addr;
-    void* so_addr;
-    void* we_addr;
-    void* ea_addr;
     int f[3];
     int c[3];
     char *map_str;
@@ -181,7 +181,7 @@ int	input_validator(int ac, char **av, char (*err)[50]);
 
 // mlx_init.c
 
-void    create_img(t_data *data, void **img, char *path);
+t_img    *create_img(t_data *data, char *path, int w, int h);
 void    mlx_init_game(t_data *data);
 
 // ============== EXECUTE =============
