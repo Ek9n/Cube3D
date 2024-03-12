@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 13:41:09 by hstein            #+#    #+#             */
-/*   Updated: 2024/03/12 14:54:11 by hstein           ###   ########.fr       */
+/*   Updated: 2024/03/12 15:16:53 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,68 +62,38 @@ void	img_pix_put(t_img *img, int x, int y, int color)
 	*(int *)pixel = color;
 }
 
-// void	put_pixel_img(t_img *img, int x, int y, int color)
-// {
-// 	char	*dst;
-
-// 	if (color == (int)0xFF000000)
-// 		return ;
-// 	if (x >= 0 && y >= 0 && x < img->width && y < img->height) {
-// 		dst = img->addr + (y * img->bytes_per_line + x * (img->bpp / 8));
-// 		*(unsigned int *) dst = color;
-// 	}
-// }
-
-// unsigned int	get_pixel_img(t_img *img, int x, int y) {
-// 	return (*(unsigned int *)((img->addr
-// 			+ (y * img->bytes_per_line) + (x * img->bpp / 8))));
-// }
-
-// void	put_img_to_img(t_img *dst, t_img *src, int x, int y) {
-// 	int i;
-// 	int j;
-
-// 	i = 0;
-// 	while(i < src->width) {
-// 		j = 0;
-// 		while (j < src->height) {
-// 			put_pixel_img(dst, x + i, y + j, get_pixel_img(src, i, j));
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-// }
-void	put_pixel_img(t_img img, int x, int y, int color)
+void	put_pixel_img(t_img *img, int x, int y, int color)
 {
 	char	*dst;
 
-	if (color == (int)0x333333)
+	if (color == (int)0x000000)
 		return ;
-	if (x >= 0 && y >= 0 && x < img.width && y < img.height) {
-		dst = img.addr + (y * img.bytes_per_line + x * (img.bpp / 8));
+	if (x >= 0 && y >= 0 && x < img->width && y < img->height) {
+		dst = img->addr + (y * img->bytes_per_line + x * (img->bpp / 8));
 		*(unsigned int *) dst = color;
 	}
 }
 
-unsigned int	get_pixel_img(t_img img, int x, int y) {
-	return (*(unsigned int *)((img.addr
-			+ (y * img.bytes_per_line) + (x * img.bpp / 8))));
+unsigned int	get_pixel_img(t_img *img, int x, int y) {
+	return (*(unsigned int *)((img->addr
+			+ (y * img->bytes_per_line) + (x * img->bpp / 8))));
 }
 
-void	put_img_to_img(t_img dst, t_img src, int x, int y) {
+void	put_img_to_img(t_img *dst, t_img *src, int x, int y) {
 	int i;
 	int j;
 
 	i = 0;
-	while(i < src.width) {
+	while(i < src->width) {
 		j = 0;
-		while (j < src.height) {
+		while (j < src->height) {
 			put_pixel_img(dst, x + i, y + j, get_pixel_img(src, i, j));
 			j++;
 		}
 		i++;
 	}
 }
+
 void	run_game(t_data *data)
 {
 	mlx_init_game(data);
@@ -131,32 +101,23 @@ void	run_game(t_data *data)
 
 	print_grid(data->map);
 
-	data->texture->base_img = create_img(data, NULL, data->width, data->height);
-	data->texture->img1 = create_img(data, NULL, 64, 64);
-	// create_minimap(data);
+	// data->texture->base_img = create_img(data, NULL, data->width, data->height);
+	// data->texture->img1 = create_img(data, NULL, 64, 64);
+	create_minimap(data);
 
-// Make img green:
-	for (int y = 0; y < data->width; y++)
-	{
-		for (int x = 0; x < data->height; x++)
-			img_pix_put(data->texture->base_img, y, x, GREEN);
-	}
-
-	// for (int y = 0; y < IMG_SIZE; y++)
+	// Make img green:
+	// for (int y = 0; y < data->width; y++)
 	// {
-	// 	for (int x = 0; x < IMG_SIZE; x++)
-	// 		img_pix_put(data->texture->img1, y, x, PURPLE);
+	// 	for (int x = 0; x < data->height; x++)
+	// 		img_pix_put(data->texture->base_img, y, x, GREEN);
 	// }
-	// img_pix_put(data->texture->base_img, 100, 63, PURPLE);
-/* 	img_pix_put(data->texture->img1, 32, 32, PURPLE); */
-	
-	put_img_to_img(*data->texture->base_img, *data->texture->ea, 0, 0);
 
-	mlx_put_image_to_window(data->mlx, data->mlx_win, data->texture->base_img->img_ptr, 0, 0);
+	// img_pix_put(data->texture->img1, 32, 32, PURPLE);
+	// put_img_to_img(data->texture->base_img, data->texture->img1, 0, 0);
+	// mlx_put_image_to_window(data->mlx, data->mlx_win, data->texture->base_img->img_ptr, 0, 0);
 
 	printf("rows:%d, cols:%d\n", data->map->row_max, data->map->col_max);
 	mlx_hook(data->mlx_win, KeyPress, KeyPressMask, &handle_keypress, data);
-	// mlx_hook(data->mlx_win, KeyRelease, KeyReleaseMask, &handle_keyrelease, data);
 
 	mlx_loop(data->mlx);
 }
