@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/03/14 13:18:28 by hstein           ###   ########.fr       */
+/*   Updated: 2024/03/14 13:49:25 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,6 +218,8 @@ void	close_game(t_data *data, char *msg);
 // ================= CONTROL ==================
 // keypress.c
 int handle_keypress(int keysym, t_data *data);
+// ================= EVENTS ==================
+// collision.c
 
 
 #endif

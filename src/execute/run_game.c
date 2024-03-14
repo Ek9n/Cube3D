@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 13:41:09 by hstein            #+#    #+#             */
-/*   Updated: 2024/03/14 13:18:27 by hstein           ###   ########.fr       */
+/*   Updated: 2024/03/14 13:47:28 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ void    create_minimap(t_data *data)
 		row = -1;
 		z++;
 	}
-	put_img_to_img(data->texture->map_img, data->texture->exit, data->player->y * IMG_SIZE, data->player->x * IMG_SIZE);
 }
 
 void	fill_img_color(t_img *img, int color)
@@ -125,7 +124,8 @@ int	render(t_data *data)
 
 	// mlx_put_image_to_window(data->mlx, data->mlx_win, data->texture->map_img->img_ptr, 0, 0);
 	put_img_to_img(data->texture->base_img, data->texture->map_img, 0, 0);
-	put_img_to_img(data->texture->base_img, data->texture->player, data->player->y * IMG_SIZE, data->player->x * IMG_SIZE);
+	put_img_to_img(data->texture->base_img, data->texture->player, data->player->y, data->player->x);
+	// put_img_to_img(data->texture->base_img, data->texture->player, data->player->y * IMG_SIZE, data->player->x * IMG_SIZE);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->texture->base_img->img_ptr, 0, 0);
 
 	return (0);
@@ -157,14 +157,12 @@ void	run_game(t_data *data)
 
 	data->texture->exit = create_img(data, NULL, 64, 64);
 	fill_img_color(data->texture->exit, GREEN);
-	
+
 	create_minimap(data);
 	// mlx_put_image_to_window(data->mlx, data->mlx_win, data->texture->map_img->img_ptr, 0, 0);
 
 	mlx_loop_hook(data->mlx, &render, data);
-	// mlx_loop_hook(data->mlx, &handle_keypress, data);
 	mlx_hook(data->mlx_win, KeyPress, KeyPressMask, &handle_keypress, data);
-	
 	// mlx_key_hook (void *win_ptr, int (*funct_ptr)(), void *param);
 	// mlx_expose_hook (void *win_ptr, int (*funct_ptr)(), void *param);
 

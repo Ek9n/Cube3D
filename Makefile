@@ -26,6 +26,7 @@ SRC		=	main.c \
 			setup/validators.c \
 			mlx_setup/mlx_init.c \
 			control/keypress.c \
+			# events/collision.c \
 
 SRCS    = $(addprefix $(SRC_PATH), $(SRC))
 OBJ     = $(SRC:.c=.o)
