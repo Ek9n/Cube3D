@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/03/12 17:30:36 by hstein           ###   ########.fr       */
+/*   Updated: 2024/03/14 13:18:28 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,14 @@
 #define FALSE 0
 #define IMG_SIZE 64
 
+#define TRANS 0x000000
 #define GREEN 0xFF00
 #define PURPLE 0xFF00FF
-#define YELLOW 0xffff00
+#define YELLOW 0xFFFF00
+#define BLACK 0x000001
+#define RED 0xFF0000
+#define LIME 0x00FF00
+#define BLUE 0x0000FF
 
 typedef struct s_read
 {
@@ -58,12 +63,12 @@ typedef struct  s_img
 
 typedef struct s_texture
 {
+    t_img *base_img;
     t_img *map_img;
     t_img *floor;
     t_img *wall;
     t_img *exit;
     t_img *player;
-    t_img *base_img;
     t_img *img1;
     t_img *img2;
     t_img *no;
@@ -104,8 +109,8 @@ typedef struct s_map
 
 typedef struct s_player
 {
-    int x;
-    int y;
+    float x;
+    float y;
     float angle;
 }       t_player;
 
