@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file_line_check.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 15:08:21 by yubi42            #+#    #+#             */
-/*   Updated: 2024/02/27 13:36:58 by hstein           ###   ########.fr       */
+/*   Updated: 2024/03/14 00:59:18 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@ int	is_rgb_num(char *str)
 	while (str[i])
 	{
 		if (!ft_isdigit(str[i++]))
-			return (FALSE);
+			return (FALSE);	
 	}
 	if (ft_atoi(str) > 255)
-		return (FALSE);
+		return (FALSE);	
 	return (TRUE);
 }
 
@@ -59,7 +59,7 @@ int	check_rgb(int (*cub)[3], int *setup_var, t_read *reading, char (*err)[50])
 	char	**split;
 
 	split = NULL;
-	split = ft_split(ft_skip_ws(&reading->str[3]), ',');
+	split = ft_split(ft_skip_ws(&reading->str[2]), ',');
 	if (!split)
 	{
 		ft_strlcpy(*err, "Not enough memory", ft_strlen("Not enough memory")

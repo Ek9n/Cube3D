@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_structs.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:46:24 by yubi42            #+#    #+#             */
-/*   Updated: 2024/03/12 14:07:24 by hstein           ###   ########.fr       */
+/*   Updated: 2024/03/14 13:53:34 by jborner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,19 @@ void	init_reading(t_read *reading)
 	reading->i = 0;
 }
 
+void init_minimap(t_minimap *minimap)
+{
+	minimap->base = NULL;
+	minimap->resize = NULL;
+	minimap->small = NULL;
+	minimap->wall = NULL;
+	minimap->ground = NULL;
+	minimap->player = NULL;
+}
+
 void	init_texture(t_texture *cub)
 {
+	cub->minimap = NULL;
 	cub->no_path = NULL;
 	cub->so_path = NULL;
 	cub->we_path = NULL;
@@ -70,8 +81,10 @@ void	init_player(t_player *player)
 
 void	init_data(t_data *data)
 {
-    data->width = 10*IMG_SIZE;
-    data->height = 10*IMG_SIZE;
+	data->mlx = NULL;
+	data->mlx_win = NULL;
+    data->width = 1600;
+    data->height = 800;
 	data->err[0] = '\0';
 	data->map = NULL;
 	data->texture = NULL;

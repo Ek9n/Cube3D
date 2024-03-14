@@ -3,23 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 14:29:57 by hstein            #+#    #+#             */
-/*   Updated: 2024/03/12 14:36:41 by hstein           ###   ########.fr       */
+/*   Updated: 2024/03/13 22:22:42 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-t_img    *create_img(t_data *data, char *path, int w, int h)
+void init_img(t_image *img)
 {
-    t_img *img;
+    img->addr = NULL;
+    img->img_ptr = NULL;
+}
+
+t_image    *create_img(t_data *data, char *path, int w, int h)
+{
+    t_image *img;
 
     img = NULL;
-    img = malloc(sizeof(t_img));
+    img = malloc(sizeof(t_image));
     if (!img)
         close_game(data, "Not able to allocate memory or wrong img path");
+    init_img(img);
     if (path)
         img->img_ptr = mlx_xpm_file_to_image(data->mlx, path, &(img->width), &(img->height));
     else
@@ -44,9 +51,9 @@ void    mlx_init_game(t_data *data)
 	if (data->mlx_win == NULL)
 		close_game(data, "ERROR");
 
-	// data->textures->no_path = mlx_new_image(data->mlx, WIDTH, HEIGHT);
     data->texture->no = create_img(data, data->texture->no_path, 0, 0);
     data->texture->so = create_img(data, data->texture->so_path, 0, 0);
     data->texture->we = create_img(data, data->texture->we_path, 0, 0);
     data->texture->ea = create_img(data, data->texture->ea_path, 0, 0);
+    // resize_img(data, &data->texture->ea, data->img_width, data->img_height);
 }

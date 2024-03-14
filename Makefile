@@ -1,5 +1,5 @@
 CC      = gcc
-CFLAGS  = -Wall -Werror -Wextra -g
+CFLAGS  = -g -Wall -Werror -Wextra
 NAME    = cube3d
 
 LIBFT   = lib/libft/libft.a
@@ -8,24 +8,33 @@ MLX		= lib/.mlx_linux/libmlx.a
 SRC_PATH = src/
 OBJ_PATH = .obj/
 SUBOBJ_PATH = .obj/close \
-				.obj/execute \
-				.obj/setup \
-				.obj/mlx_setup \
 				.obj/control \
+				.obj/execute \
+				.obj/render_utils \
+				.obj/mlx_setup \
+				.obj/setup \
+				
 				
 
 SRC		=	main.c \
 			close/err.c \
 			close/free_structs.c \
+			control/keypress.c \
+			execute/render_game.c \
 			execute/run_game.c \
+			mlx_setup/create_minimap.c \
+			mlx_setup/mlx_init.c \
+			render_utils/put_pixel.c \
+			render_utils/render_utils.c \
+			render_utils/resize_img.c \
 			setup/file_check.c \
 			setup/file_line_check.c \
 			setup/init_structs.c \
 			setup/map_grid_check.c \
 			setup/map_grid_create_n_fill.c \
 			setup/validators.c \
-			mlx_setup/mlx_init.c \
-			control/keypress.c \
+			
+			
 
 SRCS    = $(addprefix $(SRC_PATH), $(SRC))
 OBJ     = $(SRC:.c=.o)

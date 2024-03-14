@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_grid_create_n_fill.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:55:14 by yubi42            #+#    #+#             */
-/*   Updated: 2024/03/06 14:34:27 by jborner          ###   ########.fr       */
+/*   Updated: 2024/03/14 10:18:37 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ void	newline_grid(t_map *map)
 void set_player(t_player *player, t_map *map, char c)
 {
 	map->grid[map->j][map->i] = 2;
-	player->x = map->j;
-	player->y = map->i;
+	player->x = map->j * IMG_SIZE;
+	player->y = map->i * IMG_SIZE;
 	if (c == 'N')
 		player->angle = 0;
 	else if (c == 'E')
