@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/03/14 13:49:25 by hstein           ###   ########.fr       */
+/*   Updated: 2024/03/18 19:50:36 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@
 #define RED 0xFF0000
 #define LIME 0x00FF00
 #define BLUE 0x0000FF
+
+#define PI 3.14159265359 
 
 typedef struct s_read
 {
@@ -111,7 +113,7 @@ typedef struct s_player
 {
     float x;
     float y;
-    float angle;
+    float rot;
 }       t_player;
 
 typedef struct s_data

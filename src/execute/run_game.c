@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 13:41:09 by hstein            #+#    #+#             */
-/*   Updated: 2024/03/14 13:47:28 by hstein           ###   ########.fr       */
+/*   Updated: 2024/03/18 20:15:20 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,73 @@
 // 	if (data->texture->ea_addr)
 // 		mlx_destroy_image(data->mlx, data->texture->ea_addr);
 // }
+
+void	rot_pxl(t_img *img)
+{
+	// int x;
+	// int y;
+
+	// double scale;
+
+	// scale = 1;
+	// x = 0;
+
+	// printf("img->height = %d\n", img->height);
+	float	rot = 30.0 / 180.0 * PI;
+	// int off_x = 25;
+	// int off_y = 0;
+
+	while (x < img->height)
+	{
+		y = 0;
+		while (y < img->width)
+		{
+			// z = map->coords[x][y].z;
+
+			//printf("off_x: %f, off_y: %f\n", off_x, off_y);
+			map->a_z = 30.0 / 180 * 3.145;
+			map->a_x = 30.0 / 180 * 3.145;
+
+			float cos_z = cos(map->a_z);
+			float sin_z = sin(map->a_z);
+			// float cos_x = cos(map->a_x);
+			// float sin_x = sin(map->a_x);
+
+			// map->coords[x][y].x_iso = x * cos(map->a_z) - y * sin(map->a_z);
+			// map->coords[x][y].y_iso = (x * sin(map->a_z) + y * cos(map->a_z)) * cos(map->a_x) + z * sin(map->a_x);
+			
+			double xx;
+			double yy;
+			xx = x * cos_z - y * sin_z;
+			yy = x * sin_z + y * cos_z;
+			// xx = (x - off_x) * cos_z - (y - off_y) * sin_z;
+			// yy = (x - off_x) * sin_z + (y - off_y) * cos_z;
+
+			// rotate around x-axis:
+			// yy = yy * cos_x - z * sin_x;
+
+			// z = yy * sin_x + z * cos_x;
+			printf("xx=%f yy=%f\n", xx, yy);
+			printf("off_xx=%f off_yy=%f\n", off_x, off_y);
+
+			// xx = x;
+			// yy = y;
+			if (xx + off_x <= HEIGHT && xx + off_x >= 0 && yy + off_y <= WIDTH && yy + off_y >= 0)
+			{
+				// img_pix_put(&data->img, yy, xx, GREEN_PIXEL);
+				img_pix_put(&data->img, yy + off_y, xx + off_x, GREEN_PIXEL);
+				// img_pix_put(&data->img, yy + off_y + 50, xx + off_x, GREEN_PIXEL);
+
+			}
+
+			// map->coords[x][y].x = xx * scale;
+			// map->coords[x][y].y = yy * scale;
+			// printf("z=%d x=%f y=%f\n", z, map->coords[(int)x][(int)y].x_iso, map->coords[(int)x][(int)y].y_iso);
+			y++;
+		}
+		x++;
+	}
+}
 
 void	img_pix_put(t_img *img, int x, int y, int color)
 {
@@ -124,6 +191,7 @@ int	render(t_data *data)
 
 	// mlx_put_image_to_window(data->mlx, data->mlx_win, data->texture->map_img->img_ptr, 0, 0);
 	put_img_to_img(data->texture->base_img, data->texture->map_img, 0, 0);
+	rot_pxl(data->texture->player);
 	put_img_to_img(data->texture->base_img, data->texture->player, data->player->y, data->player->x);
 	// put_img_to_img(data->texture->base_img, data->texture->player, data->player->y * IMG_SIZE, data->player->x * IMG_SIZE);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->texture->base_img->img_ptr, 0, 0);
@@ -144,7 +212,7 @@ void	run_game(t_data *data)
 	create_frame(data->texture->map_img, 10, 0xFFFFFF);
 
 	data->texture->player = create_img(data, NULL, 64, 64);
-	fill_img_color(data->texture->player, RED);
+	fill_img_color(data->texture->player, GREEN);
 	create_frame(data->texture->player, 24, TRANS);
 
 	data->texture->floor = create_img(data, NULL, 64, 64);
