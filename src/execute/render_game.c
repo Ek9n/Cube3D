@@ -6,7 +6,7 @@
 /*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 13:58:23 by jborner           #+#    #+#             */
-/*   Updated: 2024/03/14 14:01:45 by jborner          ###   ########.fr       */
+/*   Updated: 2024/03/19 15:58:43 by jborner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	render_minimap(t_data *data, t_minimap *minimap)
 		}
 	}
 	put_img_to_img(minimap->base, data->texture->minimap->player, data->player->y, data->player->x);
+	// render_rays(data, minimap);
 	copy_to_small(data->player->x, data->player->y, minimap->base, minimap->small);
 	if(minimap->resize)
 		free_img(minimap->resize, data->mlx);
@@ -59,6 +60,8 @@ while (x < bg->height)
 	++x;
 }
 }
+
+
 
 int		render(t_data *data)
 {

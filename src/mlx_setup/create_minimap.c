@@ -3,14 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   create_minimap.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 14:04:35 by jborner           #+#    #+#             */
-/*   Updated: 2024/03/15 15:09:49 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/03/19 16:10:48 by jborner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
+
+void draw_ray(t_data *data)
+{
+int col;
+int row;
+int len;
+
+
+row = 32;
+col = 32;
+len = col + 20;
+while(col < len)
+{
+	put_pixel_img(data->texture->minimap->player, col, row - 1, RED);
+	put_pixel_img(data->texture->minimap->player, col, row, RED);
+	put_pixel_img(data->texture->minimap->player, col, row + 1, RED);
+	col++;
+}
+}
 
 
 void	create_minimap_texture(t_minimap *minimap, t_data *data)
@@ -26,6 +45,7 @@ void	create_minimap_texture(t_minimap *minimap, t_data *data)
 	minimap->player = create_img(data, NULL , 64, 64);
 	fill_img_color(minimap->player, RED);
 	create_frame(minimap->player, 24, TRANS);
+	draw_ray(data);
 	minimap->exit = create_img(data, NULL, 64, 64);
 	fill_img_color(minimap->exit, GREEN);
 }
