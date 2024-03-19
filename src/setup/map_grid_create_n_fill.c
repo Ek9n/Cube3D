@@ -6,7 +6,7 @@
 /*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:55:14 by yubi42            #+#    #+#             */
-/*   Updated: 2024/03/14 10:18:37 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/03/19 13:27:17 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,14 +72,17 @@ void set_player(t_player *player, t_map *map, char c)
 	player->x = map->j * IMG_SIZE;
 	player->y = map->i * IMG_SIZE;
 	if (c == 'N')
-		player->angle = 0;
+		player->angle = 1.5 * PI;
 	else if (c == 'E')
-		player->angle = 0.5;
+		player->angle = 0;
 	else if (c == 'S')
-		player->angle = 1;
+		player->angle = 0.5 * PI;
 	else if (c == 'W')
-		player->angle = 1.5;
+		player->angle = 1 * PI;
+	player->dx = sin(player->angle) * MOVSPEED;
+	player->dy = cos(player->angle) * MOVSPEED;
 	map->i++;
+
 }
 
 int	fill_grid(char *str, t_map *map, t_player *player, char (*err)[50])

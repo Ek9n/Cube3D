@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/03/14 14:24:24 by jborner          ###   ########.fr       */
+/*   Updated: 2024/03/19 14:12:33 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,11 @@
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
+# include <math.h>
 
 # define TRUE 1
 # define FALSE 0
+# define PI 3.1415926535
 # define IMG_SIZE 64
 
 #define TRANS 0x000000
@@ -36,6 +38,7 @@
 #define RED 0xFF0000
 #define LIME 0x00FF00
 #define BLUE 0x0000FF
+#define MOVSPEED 3
 
 typedef struct s_read
 {
@@ -118,8 +121,10 @@ typedef struct s_map
 
 typedef struct s_player
 {
-	int			x;
-	int			y;
+	float		x;
+	float		y;
+	float		dx;
+	float		dy;
 	float		angle;
 }				t_player;
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_minimap.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 14:04:35 by jborner           #+#    #+#             */
-/*   Updated: 2024/03/14 14:05:30 by jborner          ###   ########.fr       */
+/*   Updated: 2024/03/15 15:09:49 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 void	create_minimap_texture(t_minimap *minimap, t_data *data)
 {
 	minimap->base = create_img(data, NULL, IMG_SIZE * data->map->col_max, IMG_SIZE * data->map->col_max);
+	data->texture->minimap->small = create_img(data, NULL, 5 * IMG_SIZE, 5 * IMG_SIZE);
 	minimap->ground = create_img(data, NULL , 64, 64);
 	fill_img_color(minimap->ground, BLUE);
 	create_frame(minimap->ground, 1, BLACK);
@@ -66,5 +67,4 @@ void	create_minimap(t_data *data)
 	init_minimap(data->texture->minimap);
 	data->texture->minimap->resize_value = 5;
 	create_minimap_texture(data->texture->minimap, data);
-	data->texture->minimap->small = create_img(data, NULL, 5 * IMG_SIZE, 5 * IMG_SIZE);
 }
