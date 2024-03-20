@@ -6,7 +6,7 @@
 /*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:55:14 by yubi42            #+#    #+#             */
-/*   Updated: 2024/03/19 13:27:17 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/03/20 11:40:05 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,9 @@ void set_player(t_player *player, t_map *map, char c)
 		player->angle = 1 * PI;
 	player->dx = sin(player->angle) * MOVSPEED;
 	player->dy = cos(player->angle) * MOVSPEED;
+	player->x_sin = sin(player->angle);
+	player->y_cos = cos(player->angle);
 	map->i++;
-
 }
 
 int	fill_grid(char *str, t_map *map, t_player *player, char (*err)[50])

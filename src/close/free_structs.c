@@ -6,7 +6,7 @@
 /*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:50:16 by yubi42            #+#    #+#             */
-/*   Updated: 2024/03/16 11:27:20 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/03/20 07:18:10 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void free_minimap(t_minimap *minimap, t_data *data)
 	free_img(minimap->wall, data->mlx);
 	free_img(minimap->ground, data->mlx);
 	free_img(minimap->player, data->mlx);
+	free_img(minimap->player_rot, data->mlx);
 	free_img(minimap->exit, data->mlx);
 	free(minimap);
 }

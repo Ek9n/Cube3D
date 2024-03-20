@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_game.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 13:58:23 by jborner           #+#    #+#             */
-/*   Updated: 2024/03/19 15:58:43 by jborner          ###   ########.fr       */
+/*   Updated: 2024/03/20 07:22:44 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void	render_minimap(t_data *data, t_minimap *minimap)
 					*IMG_SIZE, row * IMG_SIZE);
 		}
 	}
-	put_img_to_img(minimap->base, data->texture->minimap->player, data->player->y, data->player->x);
-	// render_rays(data, minimap);
+	rotate_img(data, &minimap->player, &minimap->player_rot);
+	put_img_to_img(minimap->base, minimap->player_rot, data->player->y, data->player->x);
 	copy_to_small(data->player->x, data->player->y, minimap->base, minimap->small);
 	if(minimap->resize)
 		free_img(minimap->resize, data->mlx);

@@ -6,7 +6,7 @@
 /*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 15:29:02 by hstein            #+#    #+#             */
-/*   Updated: 2024/03/19 14:12:34 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/03/20 11:39:53 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void rotate_player(t_data *data, int sign)
 			data->player->angle += 2 * PI * sign;
 		data->player->dx = sin(data->player->angle) * MOVSPEED;
 		data->player->dy = cos(data->player->angle) * MOVSPEED;
+		data->player->x_sin = sin(data->player->angle);
+		data->player->y_cos = cos(data->player->angle);
 }
 
 int	handle_keypress(int keysym, t_data *data)

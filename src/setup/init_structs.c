@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_structs.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:46:24 by yubi42            #+#    #+#             */
-/*   Updated: 2024/03/14 13:53:34 by jborner          ###   ########.fr       */
+/*   Updated: 2024/03/20 07:17:42 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void init_minimap(t_minimap *minimap)
 	minimap->wall = NULL;
 	minimap->ground = NULL;
 	minimap->player = NULL;
+	minimap->player_rot = NULL;
 }
 
 void	init_texture(t_texture *cub)

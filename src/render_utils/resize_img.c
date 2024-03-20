@@ -3,48 +3,91 @@
 /*                                                        :::      ::::::::   */
 /*   resize_img.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:51:16 by yubi42            #+#    #+#             */
-/*   Updated: 2024/03/14 14:09:43 by jborner          ###   ########.fr       */
+/*   Updated: 2024/03/20 11:51:47 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-void scale_img(t_image **old, t_image **new, int w, int h)
+void	scale_img(t_image **old, t_image **new, int w, int h)
 {
-    unsigned int color;
-    int x; 
-    int y;
-	float x_ratio;
-	float y_ratio;
+	unsigned int	color;
+	int				x;
+	int				y;
+	float			x_ratio;
+	float			y_ratio;
 
-    x_ratio = (float)(*old)->width / w;
-    y_ratio = (float)(*old)->height / h;
-    y = 0;
-	while ( y < h)
+	x_ratio = (float)(*old)->width / w;
+	y_ratio = (float)(*old)->height / h;
+	y = 0;
+	while (y < h)
 	{
-        x = 0;
+		x = 0;
 		while (x < w)
 		{
 			color = get_pixel_img(*old, (int)(x * x_ratio), (int)(y * y_ratio));
 			put_pixel_img(*new, x, y, color);
-            x++;
+			x++;
 		}
-        y++;
+		y++;
 	}
 }
 
-t_image *resize_img(t_data *data, t_image **old, int w, int h)
+t_image	*resize_img(t_data *data, t_image **old, int w, int h)
 {
-    t_image *new_img = create_img(data, NULL, w, h);
+	t_image	*new_img;
 
-    if (!new_img)
-        close_game(data, "Not able to allocate memory");
+	new_img = create_img(data, NULL, w, h);
+	if (!new_img)
+		close_game(data, "Not able to allocate memory");
+	new_img->bpp = (*old)->bpp;
+	new_img->endian = (*old)->endian;
+	scale_img(old, &new_img, w, h);
+	return (new_img);
+}
 
-    new_img->bpp = (*old)->bpp;
-    new_img->endian = (*old)->endian;
-    scale_img(old, &new_img, w, h);
-    return(new_img);
+float calc_old_x(t_data *data, t_image **old, int x, int y)
+{
+    float old_x;
+
+	old_x = (x - (*old)->width / 2) * data->player->y_cos + (y - (*old)->height / 2) * data->player->x_sin + (*old)->width / 2;
+    return (old_x);
+}
+
+float calc_old_y(t_data *data, t_image **old, int x, int y)
+{
+    float old_y;
+
+	old_y = -(x - (*old)->width / 2) * data->player->x_sin + (y - (*old)->height / 2) * data->player->y_cos + (*old)->height / 2;
+    return (old_y);
+}
+
+void	rotate_img(t_data *data, t_image **old, t_image **new)
+{
+	int x;
+	int y;
+    float old_x;
+    float old_y;
+
+	if (*new)
+		free_img(*new, data->mlx);
+	*new = create_img(data, NULL, (*old)->width, (*old)->height);
+	y = 0;
+	while (y < (*old)->height)
+	{
+		x = 0;
+		while (x < (*old)->width)
+		{
+            old_x = calc_old_x(data, old, x, y);
+            old_y = calc_old_y(data, old, x, y);
+			if (old_x >= 0 && old_x < (*old)->width && old_y >= 0
+				&& old_y < (*old)->height)
+				put_pixel_img(*new, x, y, get_pixel_img(*old, old_x, old_y));
+			x++;
+		}
+		y++;
+	}
 }

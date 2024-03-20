@@ -6,7 +6,7 @@
 /*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/03/19 14:12:33 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/03/20 11:39:42 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ typedef struct s_minimap
 	t_image		*wall;
 	t_image		*ground;
 	t_image		*player;
+	t_image		*player_rot;
 	t_image		*exit;
 
 }				t_minimap;
@@ -125,6 +126,8 @@ typedef struct s_player
 	float		y;
 	float		dx;
 	float		dy;
+	float		x_sin;
+	float		y_cos;
 	float		angle;
 }				t_player;
 
@@ -201,6 +204,7 @@ unsigned long rgb_to_hex(int rgb[3]);
 // resize_img.c
 void			scale_img(t_image **old, t_image **new, int w, int h);
 t_image			*resize_img(t_data *data, t_image **old, int w, int h);
+void rotate_img(t_data *data, t_image **old, t_image **new);
 
 // ================= SETUP ==================
 
