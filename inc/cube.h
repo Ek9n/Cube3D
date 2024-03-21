@@ -6,7 +6,7 @@
 /*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/03/20 11:39:42 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/03/21 20:20:45 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,28 +17,31 @@
 # include <errno.h>
 # include <fcntl.h>
 # include <limits.h>
+# include <math.h>
 # include <mlx.h>
 # include <mlx_int.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
-# include <math.h>
 
 # define TRUE 1
 # define FALSE 0
 # define PI 3.1415926535
 # define IMG_SIZE 64
 
-#define TRANS 0x000000
-#define GREEN 0xFF00
-#define PURPLE 0xFF00FF
-#define YELLOW 0xFFFF00
-#define BLACK 0x000001
-#define RED 0xFF0000
-#define LIME 0x00FF00
-#define BLUE 0x0000FF
-#define MOVSPEED 3
+# define TRANS 0x000000
+# define GREEN 0xFF00
+# define PURPLE 0xFF00FF
+# define YELLOW 0xFFFF00
+# define BLACK 0x000001
+# define RED 0xFF0000
+# define LIME 0x00FF00
+# define BLUE 0x0000FF
+# define MOVSPEED 3
+# define NUM_KEYS 65536
+# define MOV_DELAY 10
+# define ROT_DELAY 10
 
 typedef struct s_read
 {
@@ -69,7 +72,7 @@ typedef struct s_minimap
 	t_image		*base;
 	t_image		*resize;
 	t_image		*small;
-    int         resize_value;
+	int			resize_value;
 	t_image		*wall;
 	t_image		*ground;
 	t_image		*player;
@@ -129,6 +132,7 @@ typedef struct s_player
 	float		x_sin;
 	float		y_cos;
 	float		angle;
+	float		rot_multi;
 }				t_player;
 
 typedef struct s_data
@@ -137,6 +141,9 @@ typedef struct s_data
 	void		*mlx_win;
 	int			width;
 	int			height;
+	int			keys[NUM_KEYS];
+	int			delay[NUM_KEYS];
+	int			rot[NUM_KEYS];
 	int			minimap_width;
 	int			minimap_height;
 	char		err[50];
@@ -164,14 +171,19 @@ void			free_data(t_data *data);
 // ================= CONTROL ==================
 
 // keypress.c
+
+void			move_player(t_data *data, int sign, int num);
+void			rotate_player(t_data *data, int sign, int num);
+void			handle_keys(t_data *data);
 int				handle_keypress(int keysym, t_data *data);
+int				handle_keyrelease(int keysym, t_data *data);
 
 // ============== EXECUTE =============
 
-//render_game.c
-void	render_minimap(t_data *data, t_minimap *minimap);
-void	render_background(t_data *data, t_image *bg);
-int		render(t_data *data);
+// render_game.c
+void			render_minimap(t_data *data, t_minimap *minimap);
+void			render_background(t_data *data, t_image *bg);
+int				render(t_data *data);
 
 // run_game.c
 void			run_game(t_data *data);
@@ -179,12 +191,13 @@ void			run_game(t_data *data);
 // ================= MLX_SETUP ==================
 
 // create_minimap.c
-void	create_minimap_texture(t_minimap *minimap, t_data *data);
-void copy_to_small(int player_row, int player_col, t_image *full, t_image *part);
-void	create_minimap(t_data *data);
+void			create_minimap_texture(t_minimap *minimap, t_data *data);
+void			copy_to_small(int player_row, int player_col, t_image *full,
+					t_image *part);
+void			create_minimap(t_data *data);
 
 // mlx_init.c
-void init_img(t_image *img);
+void			init_img(t_image *img);
 t_image			*create_img(t_data *data, char *path, int w, int h);
 void			mlx_init_game(t_data *data);
 
@@ -197,14 +210,14 @@ unsigned int	get_pixel_img(t_image *img, int x, int y);
 void			put_img_to_img(t_image *dst, t_image *src, int x, int y);
 
 // render_utils.c
-void	fill_img_color(t_image *img, int color);
-void	create_frame(t_image *img, int size, int color);
-unsigned long rgb_to_hex(int rgb[3]);
+void			fill_img_color(t_image *img, int color);
+void			create_frame(t_image *img, int size, int color);
+unsigned long	rgb_to_hex(int rgb[3]);
 
 // resize_img.c
 void			scale_img(t_image **old, t_image **new, int w, int h);
 t_image			*resize_img(t_data *data, t_image **old, int w, int h);
-void rotate_img(t_data *data, t_image **old, t_image **new);
+void			rotate_img(t_data *data, t_image **old, t_image **new);
 
 // ================= SETUP ==================
 
@@ -223,15 +236,15 @@ int				check_rgb(int (*cub)[3], int *setup_var, t_read *reading,
 int				line_valid(t_read *reading, t_texture *cub,
 					t_texture_ok *setup_vars, char (*err)[50]);
 
-
-
 // init_structs.c
+
 void			init_setup_vars(t_texture_ok *setup_vars);
 void			init_reading(t_read *reading);
 void			init_minimap(t_minimap *minimap);
 void			init_texture(t_texture *cub);
 void			init_map(t_map *map);
 void			init_player(t_player *player);
+void			init_array(int array[NUM_KEYS], int num);
 void			init_data(t_data *data);
 
 // map_grid_check.c
@@ -252,8 +265,5 @@ int				fill_grid(char *str, t_map *map, t_player *player,
 int				map_validator(t_data *data, t_texture cub, char (*err)[50]);
 int				file_validator(char *file, t_texture *cub, char (*err)[50]);
 int				input_validator(int ac, char **av, char (*err)[50]);
-
-
-
 
 #endif

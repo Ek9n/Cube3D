@@ -6,7 +6,7 @@
 /*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:51:16 by yubi42            #+#    #+#             */
-/*   Updated: 2024/03/20 11:51:47 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/03/21 14:30:44 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,28 +49,30 @@ t_image	*resize_img(t_data *data, t_image **old, int w, int h)
 	return (new_img);
 }
 
-float calc_old_x(t_data *data, t_image **old, int x, int y)
+float	calc_old_x(t_data *data, t_image **old, int x, int y)
 {
-    float old_x;
+	float	old_x;
 
-	old_x = (x - (*old)->width / 2) * data->player->y_cos + (y - (*old)->height / 2) * data->player->x_sin + (*old)->width / 2;
-    return (old_x);
+	old_x = (x - (*old)->width / 2) * data->player->y_cos + (y - (*old)->height
+		/ 2) * data->player->x_sin + (*old)->width / 2;
+	return (old_x);
 }
 
-float calc_old_y(t_data *data, t_image **old, int x, int y)
+float	calc_old_y(t_data *data, t_image **old, int x, int y)
 {
-    float old_y;
+	float	old_y;
 
-	old_y = -(x - (*old)->width / 2) * data->player->x_sin + (y - (*old)->height / 2) * data->player->y_cos + (*old)->height / 2;
-    return (old_y);
+	old_y = -(x - (*old)->width / 2) * data->player->x_sin + (y - (*old)->height
+		/ 2) * data->player->y_cos + (*old)->height / 2;
+	return (old_y);
 }
 
 void	rotate_img(t_data *data, t_image **old, t_image **new)
 {
 	int x;
 	int y;
-    float old_x;
-    float old_y;
+	float old_x;
+	float old_y;
 
 	if (*new)
 		free_img(*new, data->mlx);
@@ -81,8 +83,8 @@ void	rotate_img(t_data *data, t_image **old, t_image **new)
 		x = 0;
 		while (x < (*old)->width)
 		{
-            old_x = calc_old_x(data, old, x, y);
-            old_y = calc_old_y(data, old, x, y);
+			old_x = calc_old_x(data, old, x, y);
+			old_y = calc_old_y(data, old, x, y);
 			if (old_x >= 0 && old_x < (*old)->width && old_y >= 0
 				&& old_y < (*old)->height)
 				put_pixel_img(*new, x, y, get_pixel_img(*old, old_x, old_y));
