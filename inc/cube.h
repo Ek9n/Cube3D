@@ -6,7 +6,7 @@
 /*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/03/21 20:20:45 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/03/22 16:38:23 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@
 # define RED 0xFF0000
 # define LIME 0x00FF00
 # define BLUE 0x0000FF
-# define MOVSPEED 3
+# define MOVSPEED 1
 # define NUM_KEYS 65536
-# define MOV_DELAY 10
-# define ROT_DELAY 10
+# define ANIM_DELAY 5
+#define ROT_MIN 10
 
 typedef struct s_read
 {
@@ -133,6 +133,7 @@ typedef struct s_player
 	float		y_cos;
 	float		angle;
 	float		rot_multi;
+	float		speed[3];
 }				t_player;
 
 typedef struct s_data
@@ -244,7 +245,7 @@ void			init_minimap(t_minimap *minimap);
 void			init_texture(t_texture *cub);
 void			init_map(t_map *map);
 void			init_player(t_player *player);
-void			init_array(int array[NUM_KEYS], int num);
+void			init_array(int array[NUM_KEYS], int num, int num2);
 void			init_data(t_data *data);
 
 // map_grid_check.c

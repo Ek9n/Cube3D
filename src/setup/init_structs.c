@@ -6,7 +6,7 @@
 /*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:46:24 by yubi42            #+#    #+#             */
-/*   Updated: 2024/03/21 19:10:41 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/03/22 16:24:06 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,15 +78,20 @@ void	init_player(t_player *player)
 	player->y = -1;
 	player->angle = -1;
 	player->rot_multi = 1;
+	player->speed[0] = 0;
+	player->speed[0] = 0;
+	player->speed[0] = 0;
 }
 
-void	init_array(int array[NUM_KEYS], int num)
+void	init_array(int array[NUM_KEYS], int num, int num2)
 {
 	int i;
 
 	i = 0;
 	while(i < NUM_KEYS)
 		array[i++] = num;
+	array[XK_Up] = num2;
+	array[XK_Down] = num2;
 }
 
 
@@ -103,9 +108,9 @@ void	init_data(t_data *data)
 	data->map = malloc (sizeof(t_map));
 	data->texture = malloc (sizeof(t_texture));
 	data->player = malloc (sizeof(t_player));
-	init_array(data->keys, 0);
-	init_array(data->delay, 0);
-	init_array(data->rot, 0);
+	init_array(data->keys, 0, 0);
+	init_array(data->delay, 0, 0);
+	init_array(data->rot, 4, 4);
 	init_player(data->player);
 	init_map(data->map);
 	init_texture(data->texture);
