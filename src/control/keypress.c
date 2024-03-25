@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keypress.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 15:29:02 by hstein            #+#    #+#             */
-/*   Updated: 2024/03/24 19:43:03 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/03/25 14:09:39 by jborner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	rotate_player(t_data *data, int sign, int num)
 		data->rot[num] += 2;
 	else if (!data->keys[num])
 		data->rot[num] -= 2;
-	data->player->angle += 0.1 * sign * (1 + (((data->rot[num] * data->rot[num]) -  2 * data->rot[num]) / 400));
+	data->player->angle += 0.1 * sign * (1 + (((data->rot[num] * data->rot[num])) / 200));
 	if (data->player->angle < 0 || data->player->angle >= 2 * PI)
 		data->player->angle -= 2 * PI * sign;	
 	data->player->x_sin = sin(data->player->angle);

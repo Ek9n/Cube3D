@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_game.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 13:58:23 by jborner           #+#    #+#             */
-/*   Updated: 2024/03/25 13:55:22 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/03/25 15:15:42 by jborner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,23 @@
 
 int		wall_found(t_data *data, float current_x, float current_y, float angle)
 {
-	if ((int)current_x % 64 == 0 && current_x / 64 < data->map->row_max && current_y / 64 < data->map->col_max)
+	if ((int)current_x % IMG_SIZE == 0 && (int)current_y % IMG_SIZE == 0 && current_x / IMG_SIZE < data->map->row_max && current_y / IMG_SIZE < data->map->col_max)
 	{
-		if(angle < PI && data->map->grid[(int)current_x / 64][(int)current_y / 64] == 1)
-			return (1);
-		if (angle >= PI && data->map->grid[((int)current_x / 64) - 1][(int)current_y / 64] == 1)
+		if(data->map->grid[((int)current_x / IMG_SIZE) - 1][((int)current_y / IMG_SIZE) - 1] == 1)
 			return (1);
 	}
-	if((int)current_y % 64 == 0 && current_x / 64 < data->map->row_max && current_y / 64 < data->map->col_max)
+	if ((int)current_x % IMG_SIZE == 0 && current_x / IMG_SIZE < data->map->row_max && current_y / IMG_SIZE < data->map->col_max)
 	{
-		if (((angle >= 1.5 * PI || angle < 0.5 * PI)) && data->map->grid[(int)current_x / 64][(int)current_y / 64] == 1)
+		if(angle < PI && data->map->grid[(int)current_x / IMG_SIZE][(int)current_y / IMG_SIZE] == 1)
 			return (1);
-		if ((angle >= 0.5 * PI && angle < 1.5 *PI) && data->map->grid[(int)current_x / 64][((int)current_y / 64) - 1] == 1)
+		if (angle >= PI && data->map->grid[((int)current_x / IMG_SIZE) - 1][(int)current_y / IMG_SIZE] == 1)
+			return (1);
+	}
+	if((int)current_y % IMG_SIZE == 0 && current_x / IMG_SIZE < data->map->row_max && current_y / IMG_SIZE < data->map->col_max)
+	{
+		if (((angle >= 1.5 * PI || angle < 0.5 * PI)) && data->map->grid[(int)current_x / IMG_SIZE][(int)current_y / IMG_SIZE] == 1)
+			return (1);
+		if ((angle >= 0.5 * PI && angle < 1.5 *PI) && data->map->grid[(int)current_x / IMG_SIZE][((int)current_y / IMG_SIZE) - 1] == 1)
 			return (1);
 	}
 	
@@ -44,7 +49,7 @@ float distance(float x1, float y1, float x2, float y2)
 
 void	cast_ray(t_data *data, float angle, int x, int y)
 {
-	float	ray_len;
+	int	ray_len;
 	float step_x;
     float step_y;
 	float current_x;
@@ -54,7 +59,7 @@ void	cast_ray(t_data *data, float angle, int x, int y)
 	current_y = y;
 	step_x = sin(angle);
 	step_y = cos(angle);
-	ray_len = 0.0;
+	ray_len = 0;
 	while (ray_len < data->texture->minimap->base->width)
 	{
 		if (current_x >= IMG_SIZE && current_x < data->texture->minimap->base->height 
@@ -72,31 +77,39 @@ void	cast_ray(t_data *data, float angle, int x, int y)
 			break ;
 		current_x += step_x;
         current_y += step_y;
-		ray_len += 1.0;
+		ray_len += 1;
 		// printf("in loop i = %f\n", ray_len);
 	}
-	// printf("end i = %f\n", ray_len);
+	printf("end ray = %i\n", ray_len);
 }
 
 void cast_rays(t_data *data, float angle/* , int deg, int amount */) 
 {
     int start_x;
     int start_y;
-/*     float total;
+
+/* 	int i;
+    float total;
     float step;
 	float current_angle; */
-
-	start_x = data->player->x + (data->texture->minimap->player->height / 2);
-	start_y = data->player->y + (data->texture->minimap->player->width / 2);
+	
+	start_x = data->player->x + (data->texture->minimap->player->height / 2) +1;
+	start_y = data->player->y + (data->texture->minimap->player->width / 2) +1;
 /* 	total = deg * (2 * PI / 360.0);
 	step = total / (amount); 
-    current_angle = angle - (total / 2);   */
+    current_angle = angle - (total / 2);  
+	i = 0; */
 	cast_ray(data, angle, start_x, start_y);
-
-/*     while (current_angle < angle + (total / 2)) 
+	// draw_ray_into_base(data, ray_len, i);
+/* 
+    while (angle + (step * i) < angle + (total / 2)) 
 	{
-        cast_ray(data, current_angle, start_x, start_y);
+        cast_ray(data, angle + step * i, start_x, start_y);
+		// draw_ray_into_base(data, ray_len, i);
+		cast_ray(data, angle - step * i, start_x, start_y);
+		// draw_ray_into_base(data, ray_len, i);
         current_angle += step;
+		i++;
     } */
 }
 
@@ -122,7 +135,7 @@ void	render_minimap(t_data *data, t_minimap *minimap)
 	rotate_img(data, &minimap->player, &minimap->player_rot);
 	put_img_to_img(minimap->base, minimap->player_rot, data->player->y,
 		data->player->x);
-	cast_rays(data, data->player->angle /* , 60, 20 */);
+	cast_rays(data, data->player->angle /* , 60, 30 */);
 	copy_to_small(data->player->x, data->player->y, minimap->base,
 		minimap->small);
 	if (minimap->resize)
@@ -175,7 +188,7 @@ void	delay_reset_all(int *key, int *delay, int *rot)
 		delay_reset_one(&delay[XK_Down], &rot[XK_Down]);
 }
 
-int	new_render_req(t_data *data)
+/* int	new_render_req(t_data *data)
 {
 	if (data->keys[XK_Right] || data->keys[XK_d]
 		|| data->rot[XK_Right] > ROT_MIN || data->keys[XK_Left]
@@ -185,6 +198,7 @@ int	new_render_req(t_data *data)
 		return (1);
 	return (0);
 }
+ */
 
 int	render(t_data *data)
 {

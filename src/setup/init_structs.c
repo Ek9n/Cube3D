@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_structs.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:46:24 by yubi42            #+#    #+#             */
-/*   Updated: 2024/03/22 16:24:06 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/03/25 13:53:12 by jborner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ void	init_player(t_player *player)
 	player->x = -1;
 	player->y = -1;
 	player->angle = -1;
-	player->rot_multi = 1;
 	player->speed[0] = 0;
 	player->speed[0] = 0;
 	player->speed[0] = 0;
