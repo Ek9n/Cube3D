@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/03/25 13:53:05 by jborner          ###   ########.fr       */
+/*   Updated: 2024/03/25 16:16:04 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
+# include <time.h>
+# include <sys/time.h>
+# include <stdbool.h>
 
 # define TRUE 1
 # define FALSE 0
@@ -133,7 +136,14 @@ typedef struct s_player
 	float		y_cos;
 	float		angle;
 	float		speed[3];
-}				t_player;
+}	t_player;
+
+typedef struct s_ray
+{
+	int		ray_len;
+	int		img_col;
+	char	img_dir;
+}	t_ray;
 
 typedef struct s_data
 {
@@ -150,6 +160,7 @@ typedef struct s_data
 	t_texture	*texture;
 	t_map		*map;
 	t_player	*player;
+	t_ray		ray;
 }				t_data;
 
 // ================= CLOSE ==================
@@ -213,6 +224,8 @@ void			put_img_to_img(t_image *dst, t_image *src, int x, int y);
 void			fill_img_color(t_image *img, int color);
 void			create_frame(t_image *img, int size, int color);
 unsigned long	rgb_to_hex(int rgb[3]);
+int				remote_delay_ms(size_t delay);
+size_t			delay_ms(void);
 
 // resize_img.c
 void			scale_img(t_image **old, t_image **new, int w, int h);
