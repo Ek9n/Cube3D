@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/03/25 16:16:04 by hstein           ###   ########.fr       */
+/*   Updated: 2024/03/26 14:27:26 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,9 @@ typedef struct s_player
 
 typedef struct s_ray
 {
+	int		ray_amount;
 	int		ray_len;
+	int		ray_distance;
 	int		img_col;
 	char	img_dir;
 }	t_ray;

@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 13:58:23 by jborner           #+#    #+#             */
-/*   Updated: 2024/03/26 13:36:54 by hstein           ###   ########.fr       */
+/*   Updated: 2024/03/26 17:30:39 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,18 +62,6 @@ float distance(float x1, float y1, float x2, float y2)
     return (sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)));
 }
 
-void	generate_vertical(t_image *img, t_ray ray)
-{
-	(void) ray;
-	int	i = -1;
-
-	while (++i < 300)
-	{
-		put_pixel_img(img, 50 + i, 400, GREEN);
-
-	}
-}
-
 void	cast_ray(t_data *data, float angle, int x, int y)
 {
 	float step_x;
@@ -106,41 +94,162 @@ void	cast_ray(t_data *data, float angle, int x, int y)
 		data->ray.ray_len += 1;
 		// printf("in loop i = %f\n", data->ray.ray_len);
 	}
-	// generate_vertical(data->texture->base_img, data->ray);
 	printf("end ray = %i\n", data->ray.ray_len);
 }
 
+void	generate_vertical(t_data *data, t_ray ray, int i)
+{
+	int	len = data->height - ray.ray_len * 5;
+
+	int	j = -1;
+
+	// i = i - ray.ray_amount / 2;
+
+	while (++j < len)
+	{
+		put_pixel_img(data->texture->base_img, data->width / 2 + i * ray.ray_distance, data->height / 2 - len / 2 + j, GREEN);
+
+	}
+}
+
+// void	cast_rays(t_data *data, float angle, int deg, int amount) 
+// {
+//     int		start_x;
+//     int		start_y;
+
+// 	int		i;
+//     float	total;
+//     float	step;
+// 	float	current_angle;
+	
+// 	start_x = data->player->x + (data->texture->minimap->player->height / 2);
+// 	start_y = data->player->y + (data->texture->minimap->player->width / 2);
+// 	total = deg * (2 * PI / 360.0);
+// 	step = total / amount; 
+//     current_angle = angle - (total / 2);  
+// 	i = 0;
+// 	// cast_ray(data, angle, start_x, start_y);
+// 	// draw_ray_into_base(data, ray_len, i);
+// 	data->ray.ray_amount = amount;
+// 	data->ray.ray_distance = data->width / amount;
+// 	printf("DISTANCE:%d\n", data->ray.ray_distance);
+
+//     while (angle + (step * i) < angle + (total / 2)) 
+// 	{
+// 		if (i == 0)
+//         	cast_ray(data, angle + step * i, start_x, start_y);
+// 		else if (i < amount/2)
+//         	cast_ray(data, angle + step * -i, start_x, start_y);
+// 		else
+//         	cast_ray(data, angle + step * i, start_x, start_y);
+// 		// generate_vertical(data, data->ray, i);
+// 		// draw_ray_into_base(data, ray_len, i);
+	
+// 		// if (i > 0)
+// 		// {
+// 		// 	cast_ray(data, angle - step * i, start_x, start_y);
+// 		// 	generate_vertical(data, data->ray, i);
+// 		// }
+
+// 		// draw_ray_into_base(data, ray_len, i);
+
+//         current_angle += step;
+// 		i++;
+//     }
+// 	printf("%c\n", data->ray.img_dir);
+// }
+
 void	cast_rays(t_data *data, float angle, int deg, int amount) 
 {
-    int start_x;
-    int start_y;
+    int		start_x;
+    int		start_y;
 
-	int i;
-    float total;
-    float step;
-	float current_angle;
+	int		i;
+    float	total;
+    float	step;
+	float	current_angle;
 	
-	start_x = data->player->x + (data->texture->minimap->player->height / 2) +1;
-	start_y = data->player->y + (data->texture->minimap->player->width / 2) +1;
+	start_x = data->player->x + (data->texture->minimap->player->height / 2);
+	start_y = data->player->y + (data->texture->minimap->player->width / 2);
 	total = deg * (2 * PI / 360.0);
-	step = total / (amount); 
+	step = total / amount; 
     current_angle = angle - (total / 2);  
 	i = 0;
 	// cast_ray(data, angle, start_x, start_y);
 	// draw_ray_into_base(data, ray_len, i);
+	data->ray.ray_amount = amount;
+	data->ray.ray_distance = data->width / amount;
+	printf("DISTANCE:%d\n", data->ray.ray_distance);
 
     while (angle + (step * i) < angle + (total / 2)) 
 	{
-        cast_ray(data, angle + step * i, start_x, start_y);
+		if (i == 0)
+		{
+        	cast_ray(data, angle + step * i, start_x, start_y);
+
+		}
+		else if (i < amount / 2)
+        	cast_ray(data, angle + step * i, start_x, start_y);
+		// else
+        // 	cast_ray(data, angle + step * i, start_x, start_y);
+
+        // cast_ray(data, angle + step * i, start_x, start_y);
+		// generate_vertical(data, data->ray, i);
+		// // draw_ray_into_base(data, ray_len, i);
+		// if (i > 0)
+		// {
+		// 	cast_ray(data, angle - step * i, start_x, start_y);
+		// 	generate_vertical(data, data->ray, i);
+		// }
+
 		// draw_ray_into_base(data, ray_len, i);
-		if (i > 0)
-			cast_ray(data, angle - step * i, start_x, start_y);
-		// draw_ray_into_base(data, ray_len, i);
+
         current_angle += step;
 		i++;
     }
 	printf("%c\n", data->ray.img_dir);
 }
+
+
+// void	cast_rays(t_data *data, float angle, int deg, int amount) 
+// {
+//     int		start_x;
+//     int		start_y;
+
+// 	int		i;
+//     float	total;
+//     float	step;
+// 	float	current_angle;
+	
+// 	start_x = data->player->x + (data->texture->minimap->player->height / 2);
+// 	start_y = data->player->y + (data->texture->minimap->player->width / 2);
+// 	total = deg * (2 * PI / 360.0);
+// 	step = total / amount; 
+//     current_angle = angle - (total / 2);  
+// 	i = 0;
+// 	// cast_ray(data, angle, start_x, start_y);
+// 	// draw_ray_into_base(data, ray_len, i);
+// 	data->ray.ray_amount = amount;
+// 	data->ray.ray_distance = data->width / amount;
+// 	printf("DISTANCE:%d\n", data->ray.ray_distance);
+
+//     while (angle + (step * i) < angle + (total / 2)) 
+// 	{
+//         cast_ray(data, angle + step * i, start_x, start_y);
+// 		generate_vertical(data, data->ray, i);
+// 		// draw_ray_into_base(data, ray_len, i);
+// 		if (i > 0)
+// 		{
+// 			cast_ray(data, angle - step * i, start_x, start_y);
+// 			generate_vertical(data, data->ray, i);
+// 		}
+// 		// draw_ray_into_base(data, ray_len, i);
+
+//         current_angle += step;
+// 		i++;
+//     }
+// 	printf("%c\n", data->ray.img_dir);
+// }
 
 void	render_minimap(t_data *data, t_minimap *minimap)
 {
@@ -164,7 +273,7 @@ void	render_minimap(t_data *data, t_minimap *minimap)
 	rotate_img(data, &minimap->player, &minimap->player_rot);
 	put_img_to_img(minimap->base, minimap->player_rot, data->player->y,
 		data->player->x);
-	cast_rays(data, data->player->angle , 60, 30);
+	cast_rays(data, data->player->angle , 60, 5);
 	copy_to_small(data->player->x, data->player->y, minimap->base,
 		minimap->small);
 	if (minimap->resize)
