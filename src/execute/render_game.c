@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 13:58:23 by jborner           #+#    #+#             */
-/*   Updated: 2024/03/25 17:49:10 by hstein           ###   ########.fr       */
+/*   Updated: 2024/03/26 13:36:54 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,18 @@ float distance(float x1, float y1, float x2, float y2)
     return (sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)));
 }
 
+void	generate_vertical(t_image *img, t_ray ray)
+{
+	(void) ray;
+	int	i = -1;
+
+	while (++i < 300)
+	{
+		put_pixel_img(img, 50 + i, 400, GREEN);
+
+	}
+}
+
 void	cast_ray(t_data *data, float angle, int x, int y)
 {
 	float step_x;
@@ -94,10 +106,11 @@ void	cast_ray(t_data *data, float angle, int x, int y)
 		data->ray.ray_len += 1;
 		// printf("in loop i = %f\n", data->ray.ray_len);
 	}
+	// generate_vertical(data->texture->base_img, data->ray);
 	printf("end ray = %i\n", data->ray.ray_len);
 }
 
-void cast_rays(t_data *data, float angle, int deg, int amount) 
+void	cast_rays(t_data *data, float angle, int deg, int amount) 
 {
     int start_x;
     int start_y;
