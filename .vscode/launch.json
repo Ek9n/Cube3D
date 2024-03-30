@@ -8,7 +8,7 @@
             "name": "(gdb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "/home/hstein/Repositories/Cube3D/",
+            "program": "/home/hstein/Repositories/Cube3D/cub3d",
             "args": ["maps/sample.cub"],
             "stopAtEntry": false,
             "cwd": "/home/hstein/Repositories/Cube3D",
