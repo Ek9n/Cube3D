@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/03/26 14:27:26 by hstein           ###   ########.fr       */
+/*   Updated: 2024/04/02 17:47:49 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,6 +221,8 @@ void			img_pix_put(t_image *img, int x, int y, int color);
 void			put_pixel_img(t_image *img, int x, int y, int color);
 unsigned int	get_pixel_img(t_image *img, int x, int y);
 void			put_img_to_img(t_image *dst, t_image *src, int x, int y);
+void	put_pxl_to_img_from_img(t_ray ray, t_image *dst, t_image *src, int x, int y);
+
 
 // render_utils.c
 void			fill_img_color(t_image *img, int color);

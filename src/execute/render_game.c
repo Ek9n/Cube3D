@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 13:58:23 by jborner           #+#    #+#             */
-/*   Updated: 2024/04/02 16:56:38 by hstein           ###   ########.fr       */
+/*   Updated: 2024/04/02 17:19:04 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,11 +104,13 @@ void	cast_ray(t_data *data, float angle, int x, int y)
 void	generate_vertical(t_data *data, t_ray ray, int i)
 {
 	int	len = data->height * 20 / ray.ray_len;
+	printf("len %i\n", len);
 	int	j = -1;
 
 	while (++j < len)
 	{
 		put_pixel_img(data->texture->base_img, i * ray.ray_distance, (data->height / 2) - (len / 2) + j, GREEN);
+		// put_pixel_img(data->texture->base_img, i * ray.ray_distance, (data->height / 2) - (len / 2) + j, GREEN);
 	}
 }
 
@@ -135,11 +137,11 @@ void	cast_rays(t_data *data, float angle, int deg, int amount)
 	i = 0;
     while (i < amount) 
 	{
-		printf("1i:%d\n", i);
-		printf("1total:%f\n", total);
-		printf("1step:%f\n", step);
-		printf("1step*i:%f\n", step * i);
-		printf("1anglestep:%f\n", angle + step * i);
+		// printf("1i:%d\n", i);
+		// printf("1total:%f\n", total);
+		// printf("1step:%f\n", step);
+		// printf("1step*i:%f\n", step * i);
+		// printf("1anglestep:%f\n", angle + step * i);
         // cast_ray(data, angle + step * i, start_x, start_y);
         // cast_ray(data, angle + (step * i), start_x, start_y);
         cast_ray(data, angle + (step * i) - total/2 + step/2, start_x, start_y);
