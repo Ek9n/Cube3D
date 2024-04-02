@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_game.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 13:58:23 by jborner           #+#    #+#             */
-/*   Updated: 2024/03/25 17:49:10 by hstein           ###   ########.fr       */
+/*   Updated: 2024/04/02 11:12:45 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	cast_ray(t_data *data, float angle, int x, int y)
 		data->ray.ray_len += 1;
 		// printf("in loop i = %f\n", data->ray.ray_len);
 	}
-	printf("end ray = %i\n", data->ray.ray_len);
+	// printf("end ray = %i\n", data->ray.ray_len);
 }
 
 void cast_rays(t_data *data, float angle, int deg, int amount) 
@@ -126,7 +126,7 @@ void cast_rays(t_data *data, float angle, int deg, int amount)
         current_angle += step;
 		i++;
     }
-	printf("%c\n", data->ray.img_dir);
+	// printf("%c\n", data->ray.img_dir);
 }
 
 void	render_minimap(t_data *data, t_minimap *minimap)
@@ -152,6 +152,10 @@ void	render_minimap(t_data *data, t_minimap *minimap)
 	put_img_to_img(minimap->base, minimap->player_rot, data->player->y,
 		data->player->x);
 	cast_rays(data, data->player->angle , 60, 30);
+/* 	put_pixel_img(data->texture->minimap->base, data->player->corners[2][1], data->player->corners[2][0], YELLOW);
+	put_pixel_img(data->texture->minimap->base, data->player->corners[1][1], data->player->corners[1][0], YELLOW);
+	put_pixel_img(data->texture->minimap->base, data->player->corners[2][1], data->player->corners[2][0], YELLOW);
+	put_pixel_img(data->texture->minimap->base, data->player->corners[3][1], data->player->corners[3][0], YELLOW); */
 	copy_to_small(data->player->x, data->player->y, minimap->base,
 		minimap->small);
 	if (minimap->resize)
@@ -182,39 +186,26 @@ void	render_background(t_data *data, t_image *bg)
 	}
 }
 
-void	delay_reset_one(int *delay, int *rot)
+void	delay_reset_one(int *delay)
 {
 	*delay = 0;
-	*rot = ROT_MIN;
 }
 
 void	delay_reset_all(int *key, int *delay, int *rot)
 {
 	if (delay[XK_Right] != 0 && (key[XK_Right] == 0 && key[XK_d] == 0)
 		&& rot[XK_Right] <= ROT_MIN)
-		delay_reset_one(&delay[XK_Right], &rot[XK_Right]);
+		delay[XK_Right] = 0;
 	if (delay[XK_Left] != 0 && (key[XK_Left] == 0 && key[XK_a] == 0)
 		&& rot[XK_Left] <= ROT_MIN)
-		delay_reset_one(&delay[XK_Left], &rot[XK_Left]);
+		delay[XK_Left] = 0;
 	if (delay[XK_Up] != 0 && (key[XK_Up] == 0 && key[XK_w] == 0)
-		&& rot[XK_Up] <= ROT_MIN)
-		delay_reset_one(&delay[XK_Up], &rot[XK_Up]);
+		&& rot[XK_Up] <= MOV_MIN)
+		delay[XK_Up] = 0;
 	if (delay[XK_Down] != 0 && (key[XK_Down] == 0 && key[XK_s] == 0)
-		&& rot[XK_Down] <= ROT_MIN)
-		delay_reset_one(&delay[XK_Down], &rot[XK_Down]);
+		&& rot[XK_Down] <= MOV_MIN)
+		delay[XK_Down] = 0;
 }
-
-/* int	new_render_req(t_data *data)
-{
-	if (data->keys[XK_Right] || data->keys[XK_d]
-		|| data->rot[XK_Right] > ROT_MIN || data->keys[XK_Left]
-		|| data->keys[XK_a] || data->rot[XK_Left] > ROT_MIN || data->keys[XK_Up]
-		|| data->keys[XK_w] || data->rot[XK_Up] > ROT_MIN || data->keys[XK_Down]
-		|| data->keys[XK_s] || data->rot[XK_Down] > ROT_MIN)
-		return (1);
-	return (0);
-}
- */
 
 int	render(t_data *data)
 {

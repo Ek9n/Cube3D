@@ -1,6 +1,6 @@
 CC      = gcc
 CFLAGS  = -g -Wall -Werror -Wextra
-NAME    = cube3d
+NAME    = cub3d
 
 LIBFT   = lib/libft/libft.a
 MLX		= lib/.mlx_linux/libmlx.a
@@ -19,6 +19,7 @@ SUBOBJ_PATH = .obj/close \
 SRC		=	main.c \
 			close/err.c \
 			close/free_structs.c \
+			control/collision_check.c \
 			control/keypress.c \
 			execute/render_game.c \
 			execute/run_game.c \

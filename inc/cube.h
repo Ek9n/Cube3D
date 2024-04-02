@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/03/25 16:16:04 by hstein           ###   ########.fr       */
+/*   Updated: 2024/04/02 11:04:56 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@
 # include <math.h>
 # include <mlx.h>
 # include <mlx_int.h>
+# include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
-# include <unistd.h>
-# include <time.h>
 # include <sys/time.h>
-# include <stdbool.h>
+# include <time.h>
+# include <unistd.h>
 
 # define TRUE 1
 # define FALSE 0
@@ -44,7 +44,8 @@
 # define MOVSPEED 1
 # define NUM_KEYS 65536
 # define ANIM_DELAY 5
-#define ROT_MIN 10
+# define ROT_MIN 5
+# define MOV_MIN 10
 
 typedef struct s_read
 {
@@ -136,14 +137,17 @@ typedef struct s_player
 	float		y_cos;
 	float		angle;
 	float		speed[3];
-}	t_player;
+	int			corners[4][2];
+	int			dead;
+	int			wall_hit;
+}				t_player;
 
 typedef struct s_ray
 {
-	int		ray_len;
-	int		img_col;
-	char	img_dir;
-}	t_ray;
+	int			ray_len;
+	int			img_col;
+	char		img_dir;
+}				t_ray;
 
 typedef struct s_data
 {
@@ -180,6 +184,14 @@ void			free_map(t_map *map);
 void			free_data(t_data *data);
 
 // ================= CONTROL ==================
+
+// collision_check.c
+
+void set_corners_mov(t_player *player, int sign);
+void set_corners_rot(t_player *player, int sign);
+/* int check_middle_collision(t_map *map, t_player *player); */
+int	check_corner_collision(t_data *data, t_map *map, t_player *player);
+int	check_collision(t_data *data, int sign, char move);
 
 // keypress.c
 
@@ -271,6 +283,9 @@ void			print_grid(t_map *map);
 void			count_map_row_col(char *str, int *max_col, int *max_row);
 void			create_grid(t_map *map);
 void			newline_grid(t_map *map);
+void			set_player_corners(t_player *player);
+int				fill_grid(char *str, t_map *map, t_player *player,
+					char (*err)[50]);
 int				fill_grid(char *str, t_map *map, t_player *player,
 					char (*err)[50]);
 
