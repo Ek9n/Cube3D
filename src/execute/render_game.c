@@ -106,11 +106,28 @@ void	generate_vertical(t_data *data, t_ray ray, int i)
 	int	len = data->height * 20 / ray.ray_len;
 	printf("len %i\n", len);
 	int	j = -1;
+	int	k = 0;
+	int	l = 0;
 
 	while (++j < len)
 	{
-		put_pixel_img(data->texture->base_img, i * ray.ray_distance, (data->height / 2) - (len / 2) + j, GREEN);
 		// put_pixel_img(data->texture->base_img, i * ray.ray_distance, (data->height / 2) - (len / 2) + j, GREEN);
+		
+		put_pixel_img(data->texture->base_img, i * ray.ray_distance, (data->height / 2) - (len / 2) + j, 
+			get_pixel_img(data->texture->no, k, ray.img_col));
+
+		k++;
+		if (k % 10 == 0)
+			l++;
+		if (k >= IMG_SIZE)
+		// if (k >= 238)
+			k = 0;
+		if (l == IMG_SIZE || k == 0)
+			l = 0;
+		// put_pixel_img(data->texture->base_img, i * ray.ray_distance, (data->height / 2) - (len / 2) + j, GREEN);
+		// put_pxl_to_img_from_img(ray, data->texture->base_img, data->texture->no, 
+			// i * ray.ray_distance, (data->height / 2) - (len / 2) + j);
+
 	}
 }
 
@@ -180,7 +197,7 @@ void	render_minimap(t_data *data, t_minimap *minimap)
 	rotate_img(data, &minimap->player, &minimap->player_rot);
 	put_img_to_img(minimap->base, minimap->player_rot, data->player->y,
 		data->player->x);
-	cast_rays(data, data->player->angle , 60, data->width/4);
+	cast_rays(data, data->player->angle , 60, data->width);
 	copy_to_small(data->player->x, data->player->y, minimap->base,
 		minimap->small);
 	if (minimap->resize)

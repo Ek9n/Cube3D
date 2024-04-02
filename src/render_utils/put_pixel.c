@@ -57,7 +57,7 @@ void	put_img_to_img(t_image *dst, t_image *src, int x, int y)
 void	put_pxl_to_img_from_img(t_ray ray, t_image *dst, t_image *src, int x, int y)
 {
 	int i;
-	int j;
+	int j;(void) ray;
 
 	i = 0;
 	while(i < src->width) {
