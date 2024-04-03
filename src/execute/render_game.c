@@ -78,14 +78,14 @@ void	cast_ray(t_data *data, float angle, int x, int y)
 	{
 		if (current_x >= IMG_SIZE && current_x < data->texture->minimap->base->height 
 			&& current_y >= IMG_SIZE && current_y < data->texture->minimap->base->width)
+		{
+			if (wall_found(data, current_x, current_y))
 			{
-				if (wall_found(data, current_x, current_y))
-				{
-					// distance(x,y, current_x,current_y);
-					break;
-				}
-				put_pixel_img(data->texture->minimap->base, (int)current_y, (int)current_x, GREEN);
+				// distance(x,y, current_x,current_y);
+				break;
 			}
+			put_pixel_img(data->texture->minimap->base, (int)current_y, (int)current_x, GREEN);
+		}
 		else
 			break ;
 		current_x += step_x;
@@ -103,31 +103,32 @@ void	cast_ray(t_data *data, float angle, int x, int y)
 //     int wall_height = WALL_HEIGHT * VIEW_DISTANCE / wall_distance;
 void	generate_vertical(t_data *data, t_ray ray, int i)
 {
-	int	len = data->height * 20 / ray.ray_len;
+	int	len = data->height * 100 / ray.ray_len;
+	double	j = 0;
+	double	k = 0;
+	double	step = 64.0 / len;
+	t_image *IMG;
+	// int	len = data->height * 20 / ray.ray_len;
 	printf("len %i\n", len);
-	int	j = -1;
-	int	k = 0;
-	int	l = 0;
-
-	while (++j < len)
+	printf(" ray.ray_distance%d\n", ray.ray_distance);
+	if (ray.img_dir == 'N')
+		IMG = data->texture->no;
+	else if (ray.img_dir == 'S')
+		IMG = data->texture->so;
+	else if (ray.img_dir == 'W')
+		IMG = data->texture->we;
+	else if (ray.img_dir == 'E')
+		IMG = data->texture->ea;
+	else
+		IMG = NULL;
+	while (j < len)
 	{
-		// put_pixel_img(data->texture->base_img, i * ray.ray_distance, (data->height / 2) - (len / 2) + j, GREEN);
 		
-		put_pixel_img(data->texture->base_img, i * ray.ray_distance, (data->height / 2) - (len / 2) + j, 
-			get_pixel_img(data->texture->no, k, ray.img_col));
+		put_pixel_img(data->texture->base_img, i, (data->height / 2) - (len / 2) + j, 
+			get_pixel_img(IMG, k, ray.img_col));
 
-		k++;
-		if (k % 10 == 0)
-			l++;
-		if (k >= IMG_SIZE)
-		// if (k >= 238)
-			k = 0;
-		if (l == IMG_SIZE || k == 0)
-			l = 0;
-		// put_pixel_img(data->texture->base_img, i * ray.ray_distance, (data->height / 2) - (len / 2) + j, GREEN);
-		// put_pxl_to_img_from_img(ray, data->texture->base_img, data->texture->no, 
-			// i * ray.ray_distance, (data->height / 2) - (len / 2) + j);
-
+		k += step;
+		j++;
 	}
 }
 
@@ -149,7 +150,7 @@ void	cast_rays(t_data *data, float angle, int deg, int amount)
 	// draw_ray_into_base(data, ray_len, i);
 	data->ray.ray_amount = amount;
 	data->ray.ray_distance = data->width / amount;
-	printf("DISTANCE:%d\n", data->ray.ray_distance);
+	// printf("DISTANCE:%d\n", data->ray.ray_distance);
 
 	i = 0;
     while (i < amount) 
