@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 17:54:28 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/08 14:43:11 by hstein           ###   ########.fr       */
+/*   Updated: 2024/04/08 15:04:02 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	cast_ray(t_data *data, float angle, int x, int y)
 
 void	generate_vertical(t_data *data, t_ray ray, int i)
 {
-	double	len = data->height * IMG_SIZE / ray.ray_len;
+	double	len = data->height * 80 / ray.ray_len;
 	double	j = 0;
 	double	k = 0;
 	double	step = 64.0 / len;
@@ -109,7 +109,7 @@ void	cast_rays(t_data *data, float angle, int deg, int amount)
 	// cast_ray(data, angle, start_x, start_y);
 	// draw_ray_into_base(data, ray_len, i);
 	data->ray.ray_amount = amount;
-	data->ray.ray_distance = data->width / amount;
+	// data->ray.ray_distance = data->width / amount;
 	// printf("DISTANCE:%d\n", data->ray.ray_distance);
 
 	i = 0;
