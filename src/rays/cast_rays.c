@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cast_rays.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 17:54:28 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/06 21:43:00 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/08 14:23:07 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int do_row_step(t_data *data, t_check_ray *ray)
 {
-	// put_pixel_img(data->texture->minimap->base, (int)ray->row_y, (int)ray->row_x, GREEN);
+	put_pixel_img(data->texture->minimap->base, (int)ray->row_y, (int)ray->row_x, GREEN);
 	if (wall_found(data, ray->row_x, ray->row_y))
 	{
 		data->ray.ray_len = ray->dis_row;
@@ -28,7 +28,7 @@ int do_row_step(t_data *data, t_check_ray *ray)
 
 int do_col_step(t_data *data, t_check_ray *ray)
 {
-	// put_pixel_img(data->texture->minimap->base, (int)ray->col_y, (int)ray->col_x, GREEN);
+	put_pixel_img(data->texture->minimap->base, (int)ray->col_y, (int)ray->col_x, GREEN);
 	if (wall_found(data, ray->col_x, ray->col_y))
 	{
 		data->ray.ray_len = ray->dis_col;
@@ -79,13 +79,15 @@ void	generate_vertical(t_data *data, t_ray ray, int i)
 		IMG = data->texture->we;
 	else if (ray.img_dir == 'E')
 		IMG = data->texture->ea;
+	else if (ray.img_dir == 'B')
+		IMG = data->texture->black;
 	else
 		IMG = NULL;
 	while (j <= len)
 	{
 		
 		put_pixel_img(data->texture->base_img, i, (data->height / 2) - (len / 2) + j, 
-			get_pixel_img(IMG, k, ray.img_col));
+			get_pixel_img(IMG, ray.img_col, k));
 
 		k += step;
 		j++;

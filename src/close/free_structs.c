@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_structs.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:50:16 by yubi42            #+#    #+#             */
-/*   Updated: 2024/03/20 07:18:10 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/08 14:16:07 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	free_cub(t_texture *cub, t_data *data)
 	free_img(cub->base_img, data->mlx);
 	free_img(cub->img1, data->mlx);
 	free_img(cub->img2, data->mlx);
+	free_img(cub->black, data->mlx);
 	free_img(cub->no, data->mlx);
 	free_img(cub->so, data->mlx);
 	free_img(cub->ea, data->mlx);

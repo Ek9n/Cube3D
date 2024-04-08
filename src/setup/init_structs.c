@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_structs.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:46:24 by yubi42            #+#    #+#             */
-/*   Updated: 2024/03/25 13:53:12 by jborner          ###   ########.fr       */
+/*   Updated: 2024/04/08 14:15:42 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	init_texture(t_texture *cub)
 	cub->base_img = NULL;
 	cub->img1 = NULL;
 	cub->img2 = NULL;
+	cub->black = NULL;
 	cub->no = NULL;
 	cub->so = NULL;
 	cub->ea = NULL;

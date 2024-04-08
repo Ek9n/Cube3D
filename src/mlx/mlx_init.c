@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 14:29:57 by hstein            #+#    #+#             */
-/*   Updated: 2024/03/13 22:22:42 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/08 14:22:42 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,6 @@ void    mlx_init_game(t_data *data)
     data->texture->so = create_img(data, data->texture->so_path, 0, 0);
     data->texture->we = create_img(data, data->texture->we_path, 0, 0);
     data->texture->ea = create_img(data, data->texture->ea_path, 0, 0);
+    data->texture->black = create_img(data, "./img/black.xpm", 0, 0);
     // resize_img(data, &data->texture->ea, data->img_width, data->img_height);
 }
