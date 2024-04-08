@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 17:54:28 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/08 14:23:07 by hstein           ###   ########.fr       */
+/*   Updated: 2024/04/08 14:43:11 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	cast_ray(t_data *data, float angle, int x, int y)
 
 void	generate_vertical(t_data *data, t_ray ray, int i)
 {
-	int	len = data->height * IMG_SIZE / ray.ray_len;
+	double	len = data->height * IMG_SIZE / ray.ray_len;
 	double	j = 0;
 	double	k = 0;
 	double	step = 64.0 / len;
@@ -85,10 +85,8 @@ void	generate_vertical(t_data *data, t_ray ray, int i)
 		IMG = NULL;
 	while (j <= len)
 	{
-		
 		put_pixel_img(data->texture->base_img, i, (data->height / 2) - (len / 2) + j, 
 			get_pixel_img(IMG, ray.img_col, k));
-
 		k += step;
 		j++;
 	}

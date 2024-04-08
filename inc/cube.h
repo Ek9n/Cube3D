@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/08 14:15:17 by hstein           ###   ########.fr       */
+/*   Updated: 2024/04/08 14:47:54 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,8 +170,8 @@ typedef struct s_check_ray
 typedef struct s_ray
 {
 	int		ray_amount;
-	int		ray_len;
-	int		ray_distance;
+	double	ray_len;
+	double	ray_distance;
 	int		img_col;
 	char	img_dir;
 }	t_ray;
