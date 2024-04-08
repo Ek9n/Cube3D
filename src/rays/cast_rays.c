@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cast_rays.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 17:54:28 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/08 15:04:02 by hstein           ###   ########.fr       */
+/*   Updated: 2024/04/08 16:00:32 by jborner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,32 +106,14 @@ void	cast_rays(t_data *data, float angle, int deg, int amount)
 	total = deg * (PI / 180.0);
 	step = total / amount;
     current_angle = angle - (total / 2);
-	// cast_ray(data, angle, start_x, start_y);
-	// draw_ray_into_base(data, ray_len, i);
 	data->ray.ray_amount = amount;
-	// data->ray.ray_distance = data->width / amount;
-	// printf("DISTANCE:%d\n", data->ray.ray_distance);
 
 	i = 0;
     while (i < amount) 
 	{
-		// printf("1i:%d\n", i);
-		// printf("1total:%f\n", total);
-		// printf("1step:%f\n", step);
-		// printf("1step*i:%f\n", step * i);
-		// printf("1anglestep:%f\n", angle + step * i);
-        // cast_ray(data, angle + step * i, start_x, start_y);
-        // cast_ray(data, angle + (step * i), start_x, start_y);
         cast_ray(data, angle + (step * i) - total/2 + step/2, start_x, start_y);
 		generate_vertical(data, data->ray, i);
-		// if (i > 0)
-		// {
-		// 	cast_ray(data, angle - step * i, start_x, start_y);
-		// 	generate_vertical(data, data->ray, i);
-		// }
-
         current_angle += step;
 		i++;
     }
-	// printf("%c\n", data->ray.img_dir);
 }
