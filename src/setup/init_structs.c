@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:46:24 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/08 14:15:42 by hstein           ###   ########.fr       */
+/*   Updated: 2024/04/09 17:20:48 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,9 @@ void	init_data(t_data *data)
 {
 	data->mlx = NULL;
 	data->mlx_win = NULL;
-    data->width = 1600;
-    data->height = 800;
+	// mlx_get_screen_size(data->mlx, &data->height, &data->height);
+    data->width = 1920;
+    data->height = 1080;
 	data->err[0] = '\0';
 	data->map = NULL;
 	data->texture = NULL;

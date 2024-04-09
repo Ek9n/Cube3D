@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 13:58:23 by jborner           #+#    #+#             */
-/*   Updated: 2024/04/08 14:56:04 by hstein           ###   ########.fr       */
+/*   Updated: 2024/04/09 17:54:34 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,34 @@
 //     // Skalieren Sie die Wandhöhe basierend auf dem Abstand des Betrachters zur Wand
 //     int wall_height = WALL_HEIGHT * VIEW_DISTANCE / wall_distance;
 
+// void rotate_image(t_img *image, double angle) {
+//     // Zentrum des Bildes berechnen
+//     int center_x = image->width / 2;
+//     int center_y = image->height / 2;
 
+//     // Konvertiere den Winkel in Radiant
+//     double radians = angle * M_PI / 180.0;
+
+//     // Neue Pixelwerte berechnen
+//     t_img rotated_image = *image; // Kopiere das Bild
+
+//     for (int y = 0; y < image->height; y++) {
+//         for (int x = 0; x < image->width; x++) {
+//             // Berechne die Koordinaten im rotierten Bild
+//             int new_x = (int)((x - center_x) * cos(radians) - (y - center_y) * sin(radians)) + center_x;
+//             int new_y = (int)((x - center_x) * sin(radians) + (y - center_y) * cos(radians)) + center_y;
+
+//             // Überprüfe, ob die neuen Koordinaten innerhalb des Bildes liegen
+//             if (new_x >= 0 && new_x < image->width && new_y >= 0 && new_y < image->height) {
+//                 // Setze den Pixelwert im rotierten Bild
+//                 rotated_image.pixels[new_y * image->width + new_x] = image->pixels[y * image->width + x];
+//             }
+//         }
+//     }
+
+//     // Aktualisiere das ursprüngliche Bild mit dem rotierten Bild
+//     *image = rotated_image;
+// }
 
 void	render_minimap(t_data *data, t_minimap *minimap)
 {
@@ -95,8 +122,11 @@ int	render(t_data *data)
 		render_background(data, data->texture->base_img);
 		delay_reset_all(data->keys, data->delay, data->rot);
 		render_minimap(data, data->texture->minimap);
-		put_img_to_img(data->texture->base_img, data->texture->minimap->resize,
-			10, 10);
+		put_img_to_img(data->texture->base_img, data->texture->minimap->resize, 10, 10);
+		
+		// rotate_img(data, &data->texture->carframe2, &data->texture->carframe2);
+		
+		put_img_to_img(data->texture->base_img, data->texture->carframe2, 0, 0);
 		mlx_put_image_to_window(data->mlx, data->mlx_win,
 				data->texture->base_img->img_ptr, 0, 0);
 	}

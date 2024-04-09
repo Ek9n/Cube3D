@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/08 15:58:48 by jborner          ###   ########.fr       */
+/*   Updated: 2024/04/09 17:14:44 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@
 # define MOVSPEED 1
 # define NUM_KEYS 65536
 # define ANIM_DELAY 5
-#define ROT_MIN 10
+# define ROT_MIN 10
 # define EPSILON 1e-6
 
 typedef struct s_read
@@ -89,6 +89,8 @@ typedef struct s_texture
 {
 	t_minimap	*minimap;
 	t_image		*base_img;
+	t_image		*carframe;
+	t_image		*carframe2;
 	t_image		*img1;
 	t_image		*img2;
 	t_image 	*black;

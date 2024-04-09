@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_game.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 13:41:09 by hstein            #+#    #+#             */
-/*   Updated: 2024/03/21 18:07:13 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/09 17:16:18 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@ void	run_game(t_data *data)
 	create_minimap(data);
 	render(data);
 	printf("rows:%d, cols:%d\n", data->map->row_max, data->map->col_max);
+
+	// create_img(data, "./img/carframe.xmp", 0, 0);
+data->texture->carframe = create_img(data, "./img/carframe.xpm", 0, 0);
+data->texture->carframe2 = resize_img(data, &data->texture->carframe, data->width, data->height);
 	mlx_loop_hook(data->mlx, &render, data);
 	mlx_hook(data->mlx_win, KeyPress, KeyPressMask, &handle_keypress, data);
 	mlx_hook(data->mlx_win, KeyRelease, KeyReleaseMask, &handle_keyrelease, data);
