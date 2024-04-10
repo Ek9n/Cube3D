@@ -6,47 +6,73 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 13:58:23 by jborner           #+#    #+#             */
-/*   Updated: 2024/04/09 17:54:34 by hstein           ###   ########.fr       */
+/*   Updated: 2024/04/10 17:13:04 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-// #define WALL_HEIGHT 100 // Höhe der Wand in Bildschirmpunkten
-// #define VIEW_DISTANCE 200 // Maximale Betrachtungsentfernung
-// // Funktion zum Rendern einer vertikalen Wand
-// void render_wall(int wall_distance) {
-//     // Skalieren Sie die Wandhöhe basierend auf dem Abstand des Betrachters zur Wand
-//     int wall_height = WALL_HEIGHT * VIEW_DISTANCE / wall_distance;
-
-// void rotate_image(t_img *image, double angle) {
-//     // Zentrum des Bildes berechnen
-//     int center_x = image->width / 2;
-//     int center_y = image->height / 2;
-
-//     // Konvertiere den Winkel in Radiant
+// void rotate_image(t_image *img, double angle)
+// {
+//     int center_x = img->width / 2;
+//     int center_y = img->height / 2;
 //     double radians = angle * M_PI / 180.0;
 
-//     // Neue Pixelwerte berechnen
-//     t_img rotated_image = *image; // Kopiere das Bild
+//     char *img_rot = calloc(img->width * img->height, sizeof(char));
 
-//     for (int y = 0; y < image->height; y++) {
-//         for (int x = 0; x < image->width; x++) {
+//     if (img_rot == NULL) {
+//         printf("Fehler: Speicher konnte nicht allokiert werden.\n");
+//         return;
+//     }
+//     for (int y = 0; y < img->height; y++) {
+//         for (int x = 0; x < img->width; x++) {
 //             // Berechne die Koordinaten im rotierten Bild
 //             int new_x = (int)((x - center_x) * cos(radians) - (y - center_y) * sin(radians)) + center_x;
 //             int new_y = (int)((x - center_x) * sin(radians) + (y - center_y) * cos(radians)) + center_y;
 
 //             // Überprüfe, ob die neuen Koordinaten innerhalb des Bildes liegen
-//             if (new_x >= 0 && new_x < image->width && new_y >= 0 && new_y < image->height) {
+//             if (new_x >= 0 && new_x < img->width && new_y >= 0 && new_y < img->height) {
 //                 // Setze den Pixelwert im rotierten Bild
-//                 rotated_image.pixels[new_y * image->width + new_x] = image->pixels[y * image->width + x];
+//                 img_rot[y * img->width + x] = img->addr[new_y * img->width + new_x];
+//                 img_rot[y * img->width + x] = img->addr[new_y * img->width + new_x];
 //             }
 //         }
 //     }
-
-//     // Aktualisiere das ursprüngliche Bild mit dem rotierten Bild
-//     *image = rotated_image;
+//     // free(img->addr); // Freigabe des alten Bilddatenspeichers
+//     img->addr = img_rot;
 // }
+
+void	rotate_image(t_data *data, t_image *img, double angle)
+{
+	int center_x = img->width / 2;
+	int center_y = img->height / 2;
+	double radians = angle * M_PI / 180.0;
+
+    t_image *img_rot;
+
+    // img = NULL;
+    img_rot = calloc(1, sizeof(t_image));
+    init_img(img_rot);
+    img_rot->img_ptr = mlx_new_image(data->mlx, img->width, img->height);
+
+	for (int y = 0; y < img->height; y++) {
+		for (int x = 0; x < img->width; x++) {
+			// Berechne die Koordinaten im rotierten Bild
+			int new_x = (int)((x - center_x) * cos(radians) - (y - center_y) * sin(radians)) + center_x;
+			int new_y = (int)((x - center_x) * sin(radians) + (y - center_y) * cos(radians)) + center_y;
+
+			// Überprüfe, ob die neuen Koordinaten innerhalb des Bildes liegen
+			if (new_x >= 0 && new_x < img->width && new_y >= 0 && new_y < img->height) {
+				// Setze den Pixelwert im rotierten Bild
+				put_pixel_img(img_rot, new_x, new_y, get_pixel_img(img, x, y));
+				// img_rot[y * img->width + x] = img->addr[new_y * img->width + new_x];
+				// img_rot[y * img->width + x] = img->addr[new_y * img->width + new_x];
+			}
+		}
+	}
+	// free(img->addr); // Freigabe des alten Bilddatenspeichers
+	img->addr = img_rot->addr;
+}
 
 void	render_minimap(t_data *data, t_minimap *minimap)
 {
@@ -123,10 +149,15 @@ int	render(t_data *data)
 		delay_reset_all(data->keys, data->delay, data->rot);
 		render_minimap(data, data->texture->minimap);
 		put_img_to_img(data->texture->base_img, data->texture->minimap->resize, 10, 10);
-		
-		// rotate_img(data, &data->texture->carframe2, &data->texture->carframe2);
-		
+
 		put_img_to_img(data->texture->base_img, data->texture->carframe2, 0, 0);
+
+		static bool flag;
+		if (flag == 0)
+			rotate_image(data, data->texture->steeringwheel, 30);
+		flag = 1;
+		put_img_to_img(data->texture->base_img, data->texture->steeringwheel2, 800, 800);
+		
 		mlx_put_image_to_window(data->mlx, data->mlx_win,
 				data->texture->base_img->img_ptr, 0, 0);
 	}

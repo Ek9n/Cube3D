@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/09 17:14:44 by hstein           ###   ########.fr       */
+/*   Updated: 2024/04/10 16:43:37 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,17 +59,17 @@ typedef struct s_read
 
 typedef struct s_image
 {
-	void *img_ptr; // Zeiger auf das Bild in der Grafikbibliothek
-	char *addr;    // Zeiger auf den Anfang des Bildspeichers
-	int bpp;       // Bits pro Pixel
-	int endian;    // Endianness (1 für big endian, 0 für little endian)
-	int			bytes_per_line;
-	int			width;
-	int			height;
-	int			x;
-	int			y;
-	int			z;
-}				t_image;
+	void	*img_ptr; // Zeiger auf das Bild in der Grafikbibliothek
+	char	*addr;    // Zeiger auf den Anfang des Bildspeichers
+	int		bpp;       // Bits pro Pixel
+	int		endian;    // Endianness (1 für big endian, 0 für little endian)
+	int		bytes_per_line;
+	int		width;
+	int		height;
+	int		x;
+	int		y;
+	int		z;
+}	t_image;
 
 typedef struct s_minimap
 {
@@ -91,6 +91,8 @@ typedef struct s_texture
 	t_image		*base_img;
 	t_image		*carframe;
 	t_image		*carframe2;
+	t_image		*steeringwheel;
+	t_image		*steeringwheel2;
 	t_image		*img1;
 	t_image		*img2;
 	t_image 	*black;
