@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/10 16:43:37 by hstein           ###   ########.fr       */
+/*   Updated: 2024/04/11 16:41:38 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -343,5 +343,9 @@ int				fill_grid(char *str, t_map *map, t_player *player,
 int				map_validator(t_data *data, t_texture cub, char (*err)[50]);
 int				file_validator(char *file, t_texture *cub, char (*err)[50]);
 int				input_validator(int ac, char **av, char (*err)[50]);
+
+
+void	rotate_image(t_data *data, t_image **img, double angle);
+
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 14:29:57 by hstein            #+#    #+#             */
-/*   Updated: 2024/04/10 17:01:23 by hstein           ###   ########.fr       */
+/*   Updated: 2024/04/11 16:48:55 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,9 @@ void    mlx_init_game(t_data *data)
     data->texture->ea = create_img(data, data->texture->ea_path, 0, 0);
     data->texture->black = create_img(data, "./img/black.xpm", 0, 0);
     // resize_img(data, &data->texture->ea, data->img_width, data->img_height);
+    data->texture->steeringwheel = create_img(data, "./img/steeringwheel.xpm", 0, 0);
+    // rotate_image(data, &data->texture->steeringwheel, 30);
+    // data->texture->steeringwheel2 = create_img(data, "./img/steeringwheel.xpm", 0, 0);
+    data->texture->carframe = create_img(data, "./img/carframe.xpm", 0, 0);
+    data->texture->carframe2 = resize_img(data, &data->texture->carframe, data->width, data->height);
 }

@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 13:58:23 by jborner           #+#    #+#             */
-/*   Updated: 2024/04/10 17:13:04 by hstein           ###   ########.fr       */
+/*   Updated: 2024/04/11 16:55:32 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,36 +42,38 @@
 //     img->addr = img_rot;
 // }
 
-void	rotate_image(t_data *data, t_image *img, double angle)
+void	rotate_image(t_data *data, t_image **img, double angle)
 {
-	int center_x = img->width / 2;
-	int center_y = img->height / 2;
-	double radians = angle * M_PI / 180.0;
+	int center_x = (*img)->width / 2;
+	int center_y = (*img)->height / 2;
+	double radians = angle * PI / 180.0;
 
     t_image *img_rot;
 
     // img = NULL;
-    img_rot = calloc(1, sizeof(t_image));
-    init_img(img_rot);
-    img_rot->img_ptr = mlx_new_image(data->mlx, img->width, img->height);
+    // img_rot = calloc(1, sizeof(t_image));
+    // init_img(img_rot);
+    // img_rot->img_ptr = mlx_new_image(data->mlx, img->width, img->height);
+	img_rot = create_img(data, NULL, (*img)->width, (*img)->height);
 
-	for (int y = 0; y < img->height; y++) {
-		for (int x = 0; x < img->width; x++) {
+	for (int y = 0; y < (*img)->height; y++) {
+		for (int x = 0; x < (*img)->width; x++) {
 			// Berechne die Koordinaten im rotierten Bild
-			int new_x = (int)((x - center_x) * cos(radians) - (y - center_y) * sin(radians)) + center_x;
-			int new_y = (int)((x - center_x) * sin(radians) + (y - center_y) * cos(radians)) + center_y;
+			int new_x = round(((x - center_x) * cos(radians) - (y - center_y) * sin(radians)) + center_x);
+			int new_y = round(((x - center_x) * sin(radians) + (y - center_y) * cos(radians)) + center_y);
 
 			// Überprüfe, ob die neuen Koordinaten innerhalb des Bildes liegen
-			if (new_x >= 0 && new_x < img->width && new_y >= 0 && new_y < img->height) {
+			if (new_x >= 0 && new_x < (*img)->width && new_y >= 0 && new_y < (*img)->height) {
 				// Setze den Pixelwert im rotierten Bild
-				put_pixel_img(img_rot, new_x, new_y, get_pixel_img(img, x, y));
+				put_pixel_img(img_rot, new_x, new_y, get_pixel_img(*img, x, y));
 				// img_rot[y * img->width + x] = img->addr[new_y * img->width + new_x];
 				// img_rot[y * img->width + x] = img->addr[new_y * img->width + new_x];
 			}
 		}
 	}
 	// free(img->addr); // Freigabe des alten Bilddatenspeichers
-	img->addr = img_rot->addr;
+	// free_img(img, data->mlx);
+	*img = img_rot;
 }
 
 void	render_minimap(t_data *data, t_minimap *minimap)
@@ -156,7 +158,7 @@ int	render(t_data *data)
 		if (flag == 0)
 			rotate_image(data, data->texture->steeringwheel, 30);
 		flag = 1;
-		put_img_to_img(data->texture->base_img, data->texture->steeringwheel2, 800, 800);
+		put_img_to_img(data->texture->base_img, data->texture->steeringwheel, 800, 800);
 		
 		mlx_put_image_to_window(data->mlx, data->mlx_win,
 				data->texture->base_img->img_ptr, 0, 0);

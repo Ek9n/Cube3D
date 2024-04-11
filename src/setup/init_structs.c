@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:46:24 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/09 17:20:48 by hstein           ###   ########.fr       */
+/*   Updated: 2024/04/11 16:22:51 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,10 @@ void	init_texture(t_texture *cub)
 	cub->we_path = NULL;
 	cub->ea_path = NULL;
 	cub->base_img = NULL;
+	cub->carframe = NULL;
+	cub->carframe2 = NULL;
+	cub->steeringwheel = NULL;
+	cub->steeringwheel2 = NULL;
 	cub->img1 = NULL;
 	cub->img2 = NULL;
 	cub->black = NULL;

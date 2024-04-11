@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 13:41:09 by hstein            #+#    #+#             */
-/*   Updated: 2024/04/10 16:43:54 by hstein           ###   ########.fr       */
+/*   Updated: 2024/04/11 16:31:38 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,16 @@ void	run_game(t_data *data)
 	print_grid(data->map);
 	data->texture->base_img = create_img(data, NULL, data->width, data->height);
 	create_minimap(data);
-	render(data);
+	// render(data);
 	printf("rows:%d, cols:%d\n", data->map->row_max, data->map->col_max);
 
-	// create_img(data, "./img/carframe.xmp", 0, 0);
-data->texture->steeringwheel = create_img(data, "./img/steeringwheel.xpm", 129, 129);
-data->texture->steeringwheel2 = create_img(data, "./img/steeringwheel.xpm", 129, 129);
-data->texture->carframe = create_img(data, "./img/carframe.xpm", 1000, 563);
-data->texture->carframe2 = resize_img(data, &data->texture->carframe, data->width, data->height);
+
+// printf("hi%i\n",data->texture->carframe2->width);
 	mlx_loop_hook(data->mlx, &render, data);
 	mlx_hook(data->mlx_win, KeyPress, KeyPressMask, &handle_keypress, data);
 	mlx_hook(data->mlx_win, KeyRelease, KeyReleaseMask, &handle_keyrelease, data);
 	mlx_loop(data->mlx);
 }
-
 /*
 	void	img_pix_put(t_img *img, int x, int y, int clr)
 	{
