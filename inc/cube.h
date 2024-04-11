@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/08 15:58:48 by jborner          ###   ########.fr       */
+/*   Updated: 2024/04/11 14:16:01 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,8 +141,12 @@ typedef struct s_player
 }	t_player;
 
 
-typedef struct s_check_ray
+typedef struct s_ray
 {
+	int		ray_amount;
+	double	ray_len;
+	int		img_col;
+	t_image	*img;
 	int x;
 	int y;
 	float angle;
@@ -165,15 +169,6 @@ typedef struct s_check_ray
 	float dis_row;
 	float dis_col;
 	int first_col;
-}	t_check_ray;
-
-typedef struct s_ray
-{
-	int		ray_amount;
-	double	ray_len;
-	// double	ray_distance;
-	int		img_col;
-	char	img_dir;
 }	t_ray;
 
 typedef struct s_data
@@ -253,16 +248,16 @@ void			mlx_init_game(t_data *data);
 // ============== RAYS ==============
 
 // cast_rays.c
-int do_row_step(t_data *data, t_check_ray *ray);
-int do_col_step(t_data *data, t_check_ray *ray);
+int do_row_step(t_data *data, t_ray *ray);
+int do_col_step(t_data *data, t_ray *ray);
 void	cast_ray(t_data *data, float angle, int x, int y);
-void	generate_vertical(t_data *data, t_ray ray, int i);
+void	generate_vertical(t_data *data, t_ray ray, int i, t_image *img);
 void	cast_rays(t_data *data, float angle, int deg, int amount);
 
 //init_ray_checker.c
-void init_ray_steps(t_check_ray *ray);
-void init_next_steps(t_check_ray *ray);
-void init_check_ray(t_check_ray *ray, float angle, int x, int y);
+void init_ray_steps(t_ray *ray);
+void init_next_steps(t_ray *ray);
+void init_check_ray(t_ray *ray, float angle, int x, int y);
 
 //ray_checker_utils.c
 float distance(float x1, float y1, float x2, float y2);
@@ -278,7 +273,6 @@ void			img_pix_put(t_image *img, int x, int y, int color);
 void			put_pixel_img(t_image *img, int x, int y, int color);
 unsigned int	get_pixel_img(t_image *img, int x, int y);
 void			put_img_to_img(t_image *dst, t_image *src, int x, int y);
-void			put_pxl_to_img_from_img(t_ray ray, t_image *dst, t_image *src, int x, int y);
 
 
 // render_utils.c
