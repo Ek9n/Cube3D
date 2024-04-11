@@ -6,7 +6,7 @@
 /*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/02 11:04:56 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/11 14:25:30 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@
 # define ANIM_DELAY 5
 # define ROT_MIN 5
 # define MOV_MIN 10
+# define EPSILON 1e-6
 
 typedef struct s_read
 {
@@ -91,6 +92,7 @@ typedef struct s_texture
 	t_image		*base_img;
 	t_image		*img1;
 	t_image		*img2;
+	t_image 	*black;
 	t_image		*no;
 	t_image		*so;
 	t_image		*ea;
@@ -142,12 +144,36 @@ typedef struct s_player
 	int			wall_hit;
 }				t_player;
 
+
 typedef struct s_ray
 {
-	int			ray_len;
-	int			img_col;
-	char		img_dir;
-}				t_ray;
+	int		ray_amount;
+	double	ray_len;
+	int		img_col;
+	t_image	*img;
+	int x;
+	int y;
+	float angle;
+	float sin;
+	float cos;
+	float fabs_sin;
+	float fabs_cos;
+	float row_x;
+	float row_y;
+	float col_x;
+	float col_y;
+	float row_step;
+	float col_step;
+	float row_step_x;
+	float row_step_y;
+	float col_step_x;
+	float col_step_y;
+	float first_row_step;
+	float first_col_step;
+	float dis_row;
+	float dis_col;
+	int first_col;
+}	t_ray;
 
 typedef struct s_data
 {
@@ -203,6 +229,10 @@ int				handle_keyrelease(int keysym, t_data *data);
 
 // ============== EXECUTE =============
 
+// delay.c
+void	delay_reset_one(int *delay, int *rot);
+void	delay_reset_all(int *key, int *delay, int *rot);
+
 // render_game.c
 void			render_minimap(t_data *data, t_minimap *minimap);
 void			render_background(t_data *data, t_image *bg);
@@ -211,26 +241,51 @@ int				render(t_data *data);
 // run_game.c
 void			run_game(t_data *data);
 
-// ================= MLX_SETUP ==================
+// ================= MINIMAP ==================
 
 // create_minimap.c
+void	draw_ray(t_data *data);
 void			create_minimap_texture(t_minimap *minimap, t_data *data);
 void			copy_to_small(int player_row, int player_col, t_image *full,
 					t_image *part);
 void			create_minimap(t_data *data);
+
+// ================= MLX ==================
 
 // mlx_init.c
 void			init_img(t_image *img);
 t_image			*create_img(t_data *data, char *path, int w, int h);
 void			mlx_init_game(t_data *data);
 
+// ============== RAYS ==============
+
+// cast_rays.c
+int do_row_step(t_data *data, t_ray *ray);
+int do_col_step(t_data *data, t_ray *ray);
+void	cast_ray(t_data *data, float angle, int x, int y);
+void	generate_vertical(t_data *data, t_ray ray, int i, t_image *img);
+void	cast_rays(t_data *data, float angle, int deg, int amount);
+
+//init_ray_checker.c
+void init_ray_steps(t_ray *ray);
+void init_next_steps(t_ray *ray);
+void init_check_ray(t_ray *ray, float angle, int x, int y);
+
+//ray_checker_utils.c
+float distance(float x1, float y1, float x2, float y2);
+void adjust_angle(float *angle);
+
+//wall_detection.c
+int	wall_found(t_data *data, float cur_x, float cur_y);
+
 // ============== RENDER UTILS ==============
 
-// put_pixel.c
+// draw_pixel.c
 void			img_pix_put(t_image *img, int x, int y, int color);
 void			put_pixel_img(t_image *img, int x, int y, int color);
 unsigned int	get_pixel_img(t_image *img, int x, int y);
 void			put_img_to_img(t_image *dst, t_image *src, int x, int y);
+
 
 // render_utils.c
 void			fill_img_color(t_image *img, int color);

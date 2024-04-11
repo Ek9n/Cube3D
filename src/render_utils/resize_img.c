@@ -6,7 +6,7 @@
 /*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:51:16 by yubi42            #+#    #+#             */
-/*   Updated: 2024/03/21 14:30:44 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/08 19:06:41 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,28 +51,22 @@ t_image	*resize_img(t_data *data, t_image **old, int w, int h)
 
 float	calc_old_x(t_data *data, t_image **old, int x, int y)
 {
-	float	old_x;
-
-	old_x = (x - (*old)->width / 2) * data->player->y_cos + (y - (*old)->height
-		/ 2) * data->player->x_sin + (*old)->width / 2;
-	return (old_x);
+	return ((x - (*old)->width / 2) * data->player->y_cos + (y - (*old)->height
+			/ 2) * data->player->x_sin + (*old)->width / 2);
 }
 
 float	calc_old_y(t_data *data, t_image **old, int x, int y)
 {
-	float	old_y;
-
-	old_y = -(x - (*old)->width / 2) * data->player->x_sin + (y - (*old)->height
-		/ 2) * data->player->y_cos + (*old)->height / 2;
-	return (old_y);
+	return (-(x - (*old)->width / 2) * data->player->x_sin + (y - (*old)->height
+			/ 2) * data->player->y_cos + (*old)->height / 2);
 }
 
 void	rotate_img(t_data *data, t_image **old, t_image **new)
 {
-	int x;
-	int y;
-	float old_x;
-	float old_y;
+	int		x;
+	int		y;
+	float	old_x;
+	float	old_y;
 
 	if (*new)
 		free_img(*new, data->mlx);

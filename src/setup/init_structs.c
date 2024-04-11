@@ -6,7 +6,7 @@
 /*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:46:24 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/02 11:03:41 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/11 14:27:21 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	init_texture(t_texture *cub)
 	cub->base_img = NULL;
 	cub->img1 = NULL;
 	cub->img2 = NULL;
+	cub->black = NULL;
 	cub->no = NULL;
 	cub->so = NULL;
 	cub->ea = NULL;

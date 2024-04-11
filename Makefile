@@ -1,4 +1,4 @@
-CC      = gcc
+CC      = cc
 CFLAGS  = -g -Wall -Werror -Wextra
 NAME    = cub3d
 
@@ -10,8 +10,10 @@ OBJ_PATH = .obj/
 SUBOBJ_PATH = .obj/close \
 				.obj/control \
 				.obj/execute \
+				.obj/minimap \
+				.obj/mlx \
+				.obj/rays \
 				.obj/render_utils \
-				.obj/mlx_setup \
 				.obj/setup \
 				
 				
@@ -21,11 +23,16 @@ SRC		=	main.c \
 			close/free_structs.c \
 			control/collision_check.c \
 			control/keypress.c \
+			execute/delay.c \
 			execute/render_game.c \
 			execute/run_game.c \
-			mlx_setup/create_minimap.c \
-			mlx_setup/mlx_init.c \
-			render_utils/put_pixel.c \
+			minimap/create_minimap.c \
+			mlx/mlx_init.c \
+			rays/cast_rays.c \
+			rays/init_ray_checker.c \
+			rays/ray_checker_utils.c \
+			rays/wall_detection.c \
+			render_utils/draw_pixel.c \
 			render_utils/render_utils.c \
 			render_utils/resize_img.c \
 			setup/file_check.c \

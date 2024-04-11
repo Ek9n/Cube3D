@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 14:02:56 by jborner           #+#    #+#             */
-/*   Updated: 2024/03/25 15:46:42 by hstein           ###   ########.fr       */
+/*   Updated: 2024/04/08 19:12:23 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,26 +51,44 @@ size_t	delay_ms(void)
 
 void	fill_img_color(t_image *img, int color)
 {
-	for (int y = 0; y < img->width; y++)
+	int	y;
+	int	x;
+
+	y = 0;
+	while (y < img->width)
 	{
-		for (int x = 0; x < img->height; x++)
+		x = 0;
+		while (x < img->height)
+		{
 			img_pix_put(img, y, x, color);
+			++x;
+		}
+		++y;
 	}
 }
 
 void	create_frame(t_image *img, int size, int color)
 {
-	for (int y = 0; y < img->width; y++)
+	int	y;
+	int	x;
+
+	y = 0;
+	while (y < img->width)
 	{
-		for (int x = 0; x < img->height; x++)
+		x = 0;
+		while (x < img->height)
 		{
-			if ((x < size || x >= img->height - size) || (y < size || y >= img->width - size))
+			if ((x < size || x >= img->height - size) || (y < size
+					|| y >= img->width - size))
 				img_pix_put(img, y, x, color);
+			++x;
 		}
+		++y;
 	}
 }
 
-unsigned long rgb_to_hex(int rgb[3])
-{   
-    return ((unsigned long)(rgb[0] & 0xff) << 16) + ((unsigned long)(rgb[1] & 0xff) << 8) + (rgb[2] & 0xff);
+unsigned long	rgb_to_hex(int rgb[3])
+{
+	return (((unsigned long)(rgb[0] & 0xff) << 16)
+		+ ((unsigned long)(rgb[1] & 0xff) << 8) + (rgb[2] & 0xff));
 }
