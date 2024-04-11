@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   collision_check.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 13:50:10 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/02 15:45:06 by jborner          ###   ########.fr       */
+/*   Updated: 2024/04/11 14:29:45 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,13 +83,13 @@ int	check_mid_wall(t_map *map, int x1, int y1, int x2, int y2, int modx,
 {
 	if (modx > mody)
 	{
-		printf("check: x %i, y %i\n", x1 / IMG_SIZE, y2 / IMG_SIZE);
+		// printf("check: x %i, y %i\n", x1 / IMG_SIZE, y2 / IMG_SIZE);
 		if (map->grid[x1 / IMG_SIZE][y2 / IMG_SIZE] == 1)
 			return (1);
 	}
 	else
 	{
-		printf("check: x %i, y %i\n", x2 / IMG_SIZE, y1 / IMG_SIZE);
+		// printf("check: x %i, y %i\n", x2 / IMG_SIZE, y1 / IMG_SIZE);
 		if (map->grid[x2 / IMG_SIZE][y1 / IMG_SIZE] == 1)
 			return (1);
 	}
@@ -151,7 +151,7 @@ int	calc_coll_angle(t_data *data, float *angle, char side, char dir)
 		*angle += 2 * PI;
 	if (!data->player->wall_hit)
 		data->player->angle = *angle;
-	printf("WALL HIT\n");
+	// printf("WALL HIT\n");
 	data->player->wall_hit = 1;
 	data->player->dead = 1;
 	return (1);
@@ -178,7 +178,7 @@ int	check_corner_collision(t_data *data, t_map *map, t_player *player)
 		data->rot[XK_Up] = MOV_MIN;
 		data->rot[XK_Down] = MOV_MIN;
 		player->wall_hit = 1;
-		printf("FRONT WALL HIT\n");
+		// printf("FRONT WALL HIT\n");
 		player->dead = 1;
 		return (1);
 	}
