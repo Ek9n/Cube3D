@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_game.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 13:58:23 by jborner           #+#    #+#             */
-/*   Updated: 2024/04/11 14:26:27 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/15 16:24:05 by jborner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,10 @@ void	render_minimap(t_data *data, t_minimap *minimap)
 	put_img_to_img(minimap->base, minimap->player_rot, data->player->y,
 		data->player->x);
 	cast_rays(data, data->player->angle , 60, data->width);
+	put_pixel_img(data->texture->minimap->base, data->player->corners[0][1], data->player->corners[0][0], YELLOW);
+	put_pixel_img(data->texture->minimap->base, data->player->corners[1][1], data->player->corners[1][0], YELLOW);
+	put_pixel_img(data->texture->minimap->base, data->player->corners[2][1], data->player->corners[2][0], YELLOW);
+	put_pixel_img(data->texture->minimap->base, data->player->corners[3][1], data->player->corners[3][0], YELLOW);
 	copy_to_small(data->player->x, data->player->y, minimap->base,
 		minimap->small);
 	if (minimap->resize)
@@ -80,7 +84,7 @@ int	render(t_data *data)
 	{
 		handle_keys(data);
 		render_background(data, data->texture->base_img);
-		delay_reset_all(data->keys, data->delay, data->rot);
+		delay_reset_all(data, data->keys, data->delay, data->rot);
 		render_minimap(data, data->texture->minimap);
 		put_img_to_img(data->texture->base_img, data->texture->minimap->resize,
 			10, 10);

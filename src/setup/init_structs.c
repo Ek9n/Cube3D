@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_structs.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:46:24 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/11 14:27:21 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/15 16:13:38 by jborner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,12 +107,14 @@ void	init_data(t_data *data)
 	data->map = NULL;
 	data->texture = NULL;
 	data->player = NULL;
+	data->player = malloc (sizeof(t_player));
 	data->map = malloc (sizeof(t_map));
 	data->texture = malloc (sizeof(t_texture));
-	data->player = malloc (sizeof(t_player));
 	init_array(data->keys, 0, 0);
 	init_array(data->delay, 0, 0);
 	init_array(data->rot, ROT_MIN, MOV_MIN);
+	data->rot_dir = 0;
+	data->mov_speed = 0;
 	init_player(data->player);
 	init_map(data->map);
 	init_texture(data->texture);

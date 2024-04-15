@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/11 14:25:30 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/15 16:28:49 by jborner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,9 @@
 # define MOVSPEED 1
 # define NUM_KEYS 65536
 # define ANIM_DELAY 5
-# define ROT_MIN 5
+# define ROT_MIN 1
 # define MOV_MIN 10
+# define SIDESTEP 10
 # define EPSILON 1e-6
 
 typedef struct s_read
@@ -184,6 +185,8 @@ typedef struct s_data
 	int			keys[NUM_KEYS];
 	int			delay[NUM_KEYS];
 	int			rot[NUM_KEYS];
+	float		rot_dir;
+	float		mov_speed;
 	int			minimap_width;
 	int			minimap_height;
 	char		err[50];
@@ -213,16 +216,14 @@ void			free_data(t_data *data);
 
 // collision_check.c
 
-void set_corners_mov(t_player *player, int sign);
-void set_corners_rot(t_player *player, int sign);
-/* int check_middle_collision(t_map *map, t_player *player); */
+void set_corners(t_player *player);
 int	check_corner_collision(t_data *data, t_map *map, t_player *player);
-int	check_collision(t_data *data, int sign, char move);
+void	check_collision(t_data *data);
 
 // keypress.c
 
-void			move_player(t_data *data, int sign, int num);
-void			rotate_player(t_data *data, int sign, int num);
+void			move_player(t_data *data, int sign, int num, int other_num);
+void			rotate_player(t_data *data, int sign, int num, int *delay);
 void			handle_keys(t_data *data);
 int				handle_keypress(int keysym, t_data *data);
 int				handle_keyrelease(int keysym, t_data *data);
@@ -230,8 +231,8 @@ int				handle_keyrelease(int keysym, t_data *data);
 // ============== EXECUTE =============
 
 // delay.c
-void	delay_reset_one(int *delay, int *rot);
-void	delay_reset_all(int *key, int *delay, int *rot);
+void	delay_reset_one(int *delay, int *rot, int rot_value);
+void	delay_reset_all(t_data *data, int *key, int *delay, int *rot);
 
 // render_game.c
 void			render_minimap(t_data *data, t_minimap *minimap);
