@@ -6,7 +6,7 @@
 /*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 13:58:23 by jborner           #+#    #+#             */
-/*   Updated: 2024/04/15 16:58:37 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/15 19:43:29 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int	render(t_data *data)
 	{
 		handle_keys(data);
 		render_background(data, data->texture->base_img);
-		delay_reset_all(data->keys, data->delay, data->rot);
+		delay_reset_all(data);
 		render_minimap(data, data->texture->minimap);
 		put_img_to_img(data->texture->base_img, data->texture->minimap->resize,
 			10, 10);

@@ -6,7 +6,7 @@
 /*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:46:24 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/15 16:59:18 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/15 19:46:47 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,11 +107,11 @@ void	init_data(t_data *data)
 	data->map = NULL;
 	data->texture = NULL;
 	data->player = NULL;
+	data->delay_rot = 0;
 	data->player = malloc (sizeof(t_player));
 	data->map = malloc (sizeof(t_map));
 	data->texture = malloc (sizeof(t_texture));
 	init_array(data->keys, 0, 0);
-	init_array(data->delay, 0, 0);
 	init_array(data->rot, ROT_MIN, MOV_MIN);
 	init_player(data->player);
 	init_map(data->map);

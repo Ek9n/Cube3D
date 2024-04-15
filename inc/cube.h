@@ -6,7 +6,7 @@
 /*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/15 16:56:54 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/15 19:48:58 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@
 # define BLUE 0x0000FF
 # define MOVSPEED 1
 # define NUM_KEYS 65536
-# define ANIM_DELAY 5
+# define ANIM_DELAY 6
 # define ROT_MIN 5
 # define MOV_MIN 10
 # define SIDESTEP 10
@@ -183,7 +183,7 @@ typedef struct s_data
 	int			width;
 	int			height;
 	int			keys[NUM_KEYS];
-	int			delay[NUM_KEYS];
+	int			delay_rot;
 	int			rot[NUM_KEYS];
 	int			minimap_width;
 	int			minimap_height;
@@ -230,7 +230,8 @@ int				handle_keyrelease(int keysym, t_data *data);
 
 // delay.c
 void	delay_reset_one(int *delay, int *rot, int rot_value);
-void	delay_reset_all(int *key, int *delay, int *rot);
+void	delay_reset_all(t_data *data/* , int *key, int *rot */);
+// void	delay_reset_all(int *key, int *delay, int *rot);
 
 // render_game.c
 void			render_minimap(t_data *data, t_minimap *minimap);

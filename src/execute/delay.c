@@ -6,34 +6,22 @@
 /*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 18:17:14 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/15 16:58:20 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/15 19:44:39 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-void	delay_reset_one(int *delay, int *rot, int rot_value)
+
+int check_delay(t_data *data, int num1, int num2, int min)
 {
-	*delay = 0;
-	*rot = rot_value;
+	if (data->keys[num1] == 0 && data->keys[num2] == 0 && data->rot[num1] <= min && data->rot[num2] <= min)
+		return (1);
+	return (0);
 }
 
-void	delay_reset_all(int *key, int *delay, int *rot)
+void	delay_reset_all(t_data *data/* , int *key, int *rot */)
 {
-	if (delay[XK_Right] != 0 && (key[XK_Right] == 0)
-		&& rot[XK_Right] <= ROT_MIN)
-		delay_reset_one(&delay[XK_Right], &rot[XK_Right], ROT_MIN);
-	if (delay[XK_Left] != 0 && (key[XK_Left] == 0)
-		&& rot[XK_Left] <= ROT_MIN)
-		delay_reset_one(&delay[XK_Left], &rot[XK_Left], ROT_MIN);
-	if (delay[XK_Up] != 0 && (key[XK_Up] == 0 && key[XK_w] == 0)
-		&& rot[XK_Up] <= ROT_MIN)
-		delay_reset_one(&delay[XK_Up], &rot[XK_Up], MOV_MIN);
-	if (delay[XK_Down] != 0 && (key[XK_Down] == 0 && key[XK_s] == 0)
-		&& rot[XK_Down] <= ROT_MIN)
-		delay_reset_one(&delay[XK_Down], &rot[XK_Down], MOV_MIN);
-	if (delay[XK_a] != 0 && key[XK_a] == 0)
-		delay_reset_one(&delay[XK_a], &rot[XK_a], 0);
-	if (delay[XK_d] != 0 && key[XK_d] == 0)
-		delay_reset_one(&delay[XK_d], &rot[XK_d], 0);
+	if (data->delay_rot && check_delay(data, XK_Right, XK_Left, ROT_MIN) && check_delay(data, XK_Up, XK_Down, MOV_MIN) && check_delay(data, XK_a, XK_d, 0))
+		data->delay_rot = 0;
 }
