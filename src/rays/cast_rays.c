@@ -6,7 +6,7 @@
 /*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 17:54:28 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/11 14:15:59 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/15 13:28:48 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	do_row_step(t_data *data, t_ray *ray)
 {
-	put_pixel_img(data->texture->minimap->base, (int)ray->row_y,
-		(int)ray->row_x, GREEN);
+	// put_pixel_img(data->texture->minimap->base, (int)ray->row_y,
+	// 	(int)ray->row_x, GREEN);
 	if (wall_found(data, ray->row_x, ray->row_y))
 	{
 		ray->ray_len = ray->dis_row;
@@ -30,8 +30,8 @@ int	do_row_step(t_data *data, t_ray *ray)
 
 int	do_col_step(t_data *data, t_ray *ray)
 {
-	put_pixel_img(data->texture->minimap->base, (int)ray->col_y,
-		(int)ray->col_x, GREEN);
+	// put_pixel_img(data->texture->minimap->base, (int)ray->col_y,
+	// 	(int)ray->col_x, GREEN);
 	if (wall_found(data, ray->col_x, ray->col_y))
 	{
 		ray->ray_len = ray->dis_col;

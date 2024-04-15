@@ -6,7 +6,7 @@
 /*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 15:29:02 by hstein            #+#    #+#             */
-/*   Updated: 2024/04/02 11:01:03 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/15 13:33:36 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,15 @@ void	calc_speed(t_data *data, int sign)
 		* 10;
 	if (data->player->speed[0] < 0)
 		data->player->speed[0] *= -1;
-	// printf("cur speed: %i\n", (int)data->player->speed[0]);
 }
 
-void	move_player(t_data *data, int sign, int num)
+void	move_player(t_data *data, int sign, int num, int other_num)
 {
 	data->delay[num] %= ANIM_DELAY;
 	data->delay[num] += 1;
 	if (data->delay[num] != 1)
 		return ;
-	if (!data->player->dead && data->keys[num] && data->rot[num] < 55)
+	if (!data->player->dead && (data->keys[num] || data->keys[other_num]) && data->rot[num] < 55)
 		data->rot[num] += 1;
 	else 
 		data->rot[num] -= 1;
@@ -51,6 +50,7 @@ void	move_player(t_data *data, int sign, int num)
 	data->player->y += data->player->dy * sign;
 	}
 	calc_speed(data, sign);
+	printf("cur speed: %i km/h\n", (int)data->player->speed[0]);
 }
 
 void	rotate_player(t_data *data, int sign, int num)
@@ -74,21 +74,36 @@ void	rotate_player(t_data *data, int sign, int num)
 	}
 }
 
+void move_side(t_data *data, int sign, int num)
+{
+	data->delay[num] %= ANIM_DELAY;
+	data->delay[num] += 1;
+	if (data->delay[num] != 1)
+		return ;
+	data->player->x += sin(data->player->angle + (0.5 * PI * sign)) * SIDESTEP;
+	data->player->y += cos(data->player->angle + (0.5 * PI * sign)) * SIDESTEP;
+}
+
 void	handle_keys(t_data *data)
 {
 	if (data->keys[XK_Escape])
 		close_game(data, NULL);
-	if ((data->keys[XK_Right] || data->keys[XK_d]
-			|| data->rot[XK_Right] > ROT_MIN) && check_collision(data, 1, 'r'))
+	if ((data->keys[XK_Right]
+			|| data->rot[XK_Right] > ROT_MIN))
 		rotate_player(data, 1, XK_Right);
-	if ((data->keys[XK_Left] || data->keys[XK_a]
-			|| data->rot[XK_Left] > ROT_MIN) && check_collision(data, -1, 'r'))
+	if ((data->keys[XK_Left]
+			|| data->rot[XK_Left] > ROT_MIN))
 		rotate_player(data, -1, XK_Left);
-	if ((data->keys[XK_Up] || data->keys[XK_w] || data->rot[XK_Up] > MOV_MIN) && check_collision(data, 1, 'm'))
-		move_player(data, 1, XK_Up);
+	if ((data->keys[XK_Up] || data->keys[XK_w] || data->rot[XK_Up] > MOV_MIN))
+		move_player(data, 1, XK_Up, XK_w);
 	if ((data->keys[XK_Down] || data->keys[XK_s]
-			|| data->rot[XK_Down] > MOV_MIN) && check_collision(data, -1, 'm'))
-		move_player(data, -1, XK_Down);
+			|| data->rot[XK_Down] > MOV_MIN))
+		move_player(data, -1, XK_Down, XK_s);
+	if (data->keys[XK_a])
+		move_side(data, -1, XK_a);
+	if (data->keys[XK_d])
+		move_side(data, 1, XK_d);
+	check_collision(data);
 }
 
 int	handle_keypress(int keysym, t_data *data)

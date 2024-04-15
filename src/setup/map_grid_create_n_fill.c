@@ -6,7 +6,7 @@
 /*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:55:14 by yubi42            #+#    #+#             */
-/*   Updated: 2024/03/25 22:05:23 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/15 13:22:08 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,18 +66,6 @@ void	newline_grid(t_map *map)
 	++map->j;
 }
 
-void set_player_corners(t_player *player)
-{
-	player->corners[0][0] = player->x + (IMG_SIZE / 4) * player->x_sin;
-	player->corners[0][1] = player->y + (IMG_SIZE / 4) * player->y_cos;
-	player->corners[1][0] = player->x + (IMG_SIZE / 4) * player->x_sin;
-	player->corners[1][1] = player->y + (3 * IMG_SIZE / 4) * player->y_cos;
-	player->corners[2][0] = player->x + (3 * IMG_SIZE / 4) * player->x_sin;
-	player->corners[2][1] = player->y + (IMG_SIZE / 4) * player->y_cos;
-	player->corners[3][0] = player->x + (3 * IMG_SIZE / 4) * player->x_sin;
-	player->corners[3][1] = player->y + (3 * IMG_SIZE / 4) * player->y_cos;
-}
-
 void set_player(t_player *player, t_map *map, char c)
 {
 	map->grid[map->j][map->i] = 2;
@@ -95,7 +83,7 @@ void set_player(t_player *player, t_map *map, char c)
 	player->dy = cos(player->angle) * MOVSPEED;
 	player->x_sin = sin(player->angle);
 	player->y_cos = cos(player->angle);
-	set_player_corners(player);
+	set_corners(player);
 	map->i++;
 }
 
