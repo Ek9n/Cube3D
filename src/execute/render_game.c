@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 13:58:23 by jborner           #+#    #+#             */
-/*   Updated: 2024/04/12 15:23:14 by hstein           ###   ########.fr       */
+/*   Updated: 2024/04/15 18:26:09 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,43 +67,91 @@
 // 	*img = img_rot;
 // }
 
+// void rotate_image(t_data *data, t_image **img, double angle)
+// {
+// 	static double old_angle;
+// 	if (old_angle != angle)
+// 	{
+// 		angle = angle - old_angle;
+		
+// 		// int center_x = 65;
+// 		int center_x = (*img)->width / 2;
+// 		// int center_y = 65;
+// 		int center_y = (*img)->height / 2;
+// 		double radians = angle * PI / 180.0;
+// printf("HOEHE:%d\n", center_x);
+// printf("WEITE:%d\n", center_y);
+		
+// 		// Buffer_Bild erstellen
+// 		t_image *img_rot;
+// 		img_rot = create_img(data, NULL, 129, 129);
+
+// 		for (int y = 0; y < img_rot->height; y++) {
+// 			for (int x = 0; x < img_rot->width; x++) {
+// 				// Berechne die Koordinaten im rotierten Bild
+// 				int new_x = ((x - center_x) * cos(radians) - (y - center_y) * sin(radians) + center_x);
+// 				int new_y = ((x - center_x) * sin(radians) + (y - center_y) * cos(radians) + center_y);
+
+// 				// Überprüfe, ob die neuen Koordinaten innerhalb des Bildes liegen
+// 				if (new_x >= 0 && new_x < (*img)->width && new_y >= 0 && new_y < (*img)->height) {
+// 					// Setze den Pixelwert im rotierten Bild
+// 					// put_pixel_img(img_rot, x, y, get_pixel_img(*img, new_x, new_y));
+// 					put_pixel_img(img_rot, new_x, new_y, get_pixel_img(*img, x, y));
+// 				}
+// 			}
+// 		}
+
+// 		free_img(*img, data->mlx);
+// 		*img = img_rot;
+// 		old_angle = angle;
+// 	}
+// }
 void rotate_image(t_data *data, t_image **img, double angle)
 {
-	static double old_angle;
-	if (old_angle != angle)
-	{
-		angle = angle - old_angle;
-		
-		int center_x = (*img)->width / 2;
-		int center_y = (*img)->height / 2;
-		double radians = angle * PI / 180.0;
+    static double old_angle;
+	printf("new%fold%f\n", angle, old_angle);
+    if (old_angle != angle)
+    {
+        angle = angle - old_angle;
 
-		// Größeres rotiertes Bild erstellen
-		int rotated_width = (int)(fabs(center_x * cos(radians)) + fabs(center_y * sin(radians))) * 2;
-		int rotated_height = (int)(fabs(center_x * sin(radians)) + fabs(center_y * cos(radians))) * 2;
+        double radians = angle * PI / 180.0;
 
-		t_image *img_rot;
-		img_rot = create_img(data, NULL, rotated_width, rotated_height);
+        // Größe des rotierten Bildes bestimmen
+        int rotated_width = (*img)->width;
+        int rotated_height = (*img)->height;
 
-		for (int y = 0; y < img_rot->height; y++) {
-			for (int x = 0; x < img_rot->width; x++) {
-				// Berechne die Koordinaten im rotierten Bild
-				int new_x = (int)((x - rotated_width / 2) * cos(radians) - (y - rotated_height / 2) * sin(radians) + center_x);
-				int new_y = (int)((x - rotated_width / 2) * sin(radians) + (y - rotated_height / 2) * cos(radians) + center_y);
+        // Buffer-Bild erstellen
+        t_image *img_rot;
+        img_rot = create_img(data, NULL, rotated_width, rotated_height);
 
-				// Überprüfe, ob die neuen Koordinaten innerhalb des Bildes liegen
-				if (new_x >= 0 && new_x < (*img)->width && new_y >= 0 && new_y < (*img)->height) {
-					// Setze den Pixelwert im rotierten Bild
-					put_pixel_img(img_rot, x, y, get_pixel_img(*img, new_x, new_y));
-				}
-			}
-		}
+        for (int y = 0; y < img_rot->height; y++) {
+            for (int x = 0; x < img_rot->width; x++) {
+                // Berechne die Koordinaten im rotierten Bild relativ zum Zentrum
+                int new_x = (x - rotated_width / 2);
+                int new_y = (y - rotated_height / 2);
 
-		free_img(*img, data->mlx);
-		*img = img_rot;
-		old_angle = angle;
-	}
+                // Rotiere die Koordinaten im rotierten Bild um den Ursprung (0,0)
+                int rotated_x = (int)(new_x * cos(radians) - new_y * sin(radians));
+                int rotated_y = (int)(new_x * sin(radians) + new_y * cos(radians));
+
+                // Konvertiere die Koordinaten zurück zum Koordinatensystem des ursprünglichen Bildes
+                rotated_x += rotated_width / 2;
+                rotated_y += rotated_height / 2;
+
+                // Überprüfe, ob die neuen Koordinaten innerhalb des Bildes liegen
+                if (rotated_x >= 0 && rotated_x < (*img)->width && rotated_y >= 0 && rotated_y < (*img)->height) {
+                    // Setze den Pixelwert im rotierten Bild
+                    put_pixel_img(img_rot, x, y, get_pixel_img(*img, rotated_x, rotated_y));
+                }
+            }
+        }
+
+        free_img(*img, data->mlx);
+        *img = img_rot;
+        old_angle = angle;
+    }
 }
+
 
 void	render_minimap(t_data *data, t_minimap *minimap)
 {
@@ -179,14 +227,24 @@ int	render(t_data *data)
 		render_background(data, data->texture->base_img);
 		delay_reset_all(data->keys, data->delay, data->rot);
 		render_minimap(data, data->texture->minimap);
-		put_img_to_img(data->texture->base_img, data->texture->minimap->resize, 10, 10);
 
 		put_img_to_img(data->texture->base_img, data->texture->carframe2, 0, 0);
+		put_img_to_img(data->texture->base_img, data->texture->minimap->resize, 1500, 600);
 
 		// static bool flag;
 		// if (flag == 0)
-		printf("angle:%lf", data->player->angle);
-			rotate_image(data, &data->texture->steeringwheel, 30);
+		// printf("angle:%lf", data->player->angle);
+		rotate_image(data, &data->texture->steeringwheel, 0);
+		// if (data->keys[XK_Left])
+		// {
+
+			rotate_image(data, &data->texture->steeringwheel, data->rot[XK_Left]);
+		// }
+		// else if (data->keys[XK_Right])
+		// {
+
+		// 	rotate_image(data, &data->texture->steeringwheel, -data->rot[XK_Right]);
+		// }
 		// flag = 1;
 		put_img_to_img(data->texture->base_img, data->texture->steeringwheel, 800, 800);
 		

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_minimap.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 14:04:35 by jborner           #+#    #+#             */
-/*   Updated: 2024/04/06 18:20:12 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/15 16:48:03 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,11 @@ void	create_minimap_texture(t_minimap *minimap, t_data *data)
 	minimap->wall = create_img(data, NULL, 64, 64);
 	fill_img_color(minimap->wall, PURPLE);
 	create_frame(minimap->wall, 1, BLACK);
-	minimap->player = create_img(data, NULL, 64, 64);
-	fill_img_color(minimap->player, RED);
-	create_frame(minimap->player, 24, TRANS);
-	draw_ray(data);
+	// minimap->player = create_img(data, NULL, 64, 64);
+	// fill_img_color(minimap->player, RED);
+	// create_frame(minimap->player, 24, TRANS);
+	minimap->player = create_img(data, "./img/minicar.xpm", 0, 0);
+	// draw_ray(data);
 	minimap->exit = create_img(data, NULL, 64, 64);
 	fill_img_color(minimap->exit, GREEN);
 }
