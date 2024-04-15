@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keypress.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 15:29:02 by hstein            #+#    #+#             */
-/*   Updated: 2024/04/15 13:33:36 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/15 16:36:36 by jborner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,25 +50,36 @@ void	move_player(t_data *data, int sign, int num, int other_num)
 	data->player->y += data->player->dy * sign;
 	}
 	calc_speed(data, sign);
-	printf("cur speed: %i km/h\n", (int)data->player->speed[0]);
+	// printf("cur speed: %i km/h\n", (int)data->player->speed[0]);
 }
 
-void	rotate_player(t_data *data, int sign, int num)
+void	rotate_player(t_data *data, int sign, int num, int *delay)
 {
-	data->delay[num] %= ANIM_DELAY;
-	data->delay[num] += 1;
-	if (data->delay[num] != 1)
+	printf("num: %i\n", num);
+	*delay %= ANIM_DELAY;
+	*delay += 1;
+	if (*delay != 1)
 		return ;
-	if (!data->player->dead && data->keys[num] && data->rot[num] < 60)
-		data->rot[num] += 2;
-	else 
-		data->rot[num] -= 1;
-	if (data->rot[num] > ROT_MIN)
+	// printf("rot_dir %f, num %i\n", data->rot_dir, num);
+	printf("test: rot_dir: %f\n", data->rot_dir);
+	if (!data->player->dead &&  data->keys[num] && data->rot_dir * sign < 0.005)
 	{
-	data->player->angle += 0.1 * sign * (1 + (((data->rot[num]
-					* data->rot[num])) / 200));
-	if (data->player->angle < 0 || data->player->angle >= 2 * PI)
-		data->player->angle -= 2 * PI * sign;
+		data->rot_dir += 0.0002 * sign;
+		printf("keypress: rot_dir: %f\n", data->rot_dir);
+	}
+	else if (data->rot_dir * sign >  0.0000 && !data->keys[num])
+	{
+		data->rot_dir -= 0.0001 * sign;
+		printf("not pressed rot_dir: %f\n", data->rot_dir);
+		if (data->rot_dir == 0.0001 * sign)
+			data->rot_dir = 0;
+	}
+		
+	if (data->rot_dir * sign >  0.000000)
+	{
+	data->player->angle += 0.1 * (1 + 0.001 * (((data->rot_dir)
+					 * (data->rot_dir)))) * sign;
+	adjust_angle(&data->player->angle);
 	data->player->x_sin = sin(data->player->angle);
 	data->player->y_cos = cos(data->player->angle);
 	}
@@ -88,12 +99,10 @@ void	handle_keys(t_data *data)
 {
 	if (data->keys[XK_Escape])
 		close_game(data, NULL);
-	if ((data->keys[XK_Right]
-			|| data->rot[XK_Right] > ROT_MIN))
-		rotate_player(data, 1, XK_Right);
-	if ((data->keys[XK_Left]
-			|| data->rot[XK_Left] > ROT_MIN))
-		rotate_player(data, -1, XK_Left);
+	if (data->rot[XK_Right] || ((data->rot_dir > 0) /* && !data->keys[XK_Left] */))
+		rotate_player(data, 1, XK_Right, &data->delay[XK_Right]);
+	if (data->rot[XK_Left] || ((data->rot_dir < 0) /* && !data->keys[XK_Right] */))
+		rotate_player(data, -1, XK_Left, &data->delay[XK_Right]);
 	if ((data->keys[XK_Up] || data->keys[XK_w] || data->rot[XK_Up] > MOV_MIN))
 		move_player(data, 1, XK_Up, XK_w);
 	if ((data->keys[XK_Down] || data->keys[XK_s]
@@ -104,6 +113,7 @@ void	handle_keys(t_data *data)
 	if (data->keys[XK_d])
 		move_side(data, 1, XK_d);
 	check_collision(data);
+	
 }
 
 int	handle_keypress(int keysym, t_data *data)
