@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_game.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 13:58:23 by jborner           #+#    #+#             */
-/*   Updated: 2024/04/16 15:33:32 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/16 17:53:07 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,52 @@
 //     // Skalieren Sie die Wandhöhe basierend auf dem Abstand des Betrachters zur Wand
 //     int wall_height = WALL_HEIGHT * VIEW_DISTANCE / wall_distance;
 
+void rotate_image(t_data *data, t_image **img, double angle)
+{
+    static double old_angle;
+	printf("new%fold%f\n", angle, old_angle);
+    if (old_angle != angle)
+    {
+        angle = angle - old_angle;
 
+        double radians = angle * PI / 180.0;
+
+        // Größe des rotierten Bildes bestimmen
+        int rotated_width = (*img)->width;
+        int rotated_height = (*img)->height;
+
+        // Buffer-Bild erstellen
+        t_image *img_rot;
+        img_rot = create_img(data, NULL, rotated_width, rotated_height);
+
+        for (int y = 0; y < img_rot->height; y++) {
+            for (int x = 0; x < img_rot->width; x++) {
+                // Berechne die Koordinaten im rotierten Bild relativ zum Zentrum
+                int new_x = (x - rotated_width / 2);
+                int new_y = (y - rotated_height / 2);
+
+                // Rotiere die Koordinaten im rotierten Bild um den Ursprung (0,0)
+                int rotated_x = (int)(new_x * cos(radians) - new_y * sin(radians));
+                int rotated_y = (int)(new_x * sin(radians) + new_y * cos(radians));
+
+                // Konvertiere die Koordinaten zurück zum Koordinatensystem des ursprünglichen Bildes
+                rotated_x += rotated_width / 2;
+                rotated_y += rotated_height / 2;
+
+                // Überprüfe, ob die neuen Koordinaten innerhalb des Bildes liegen
+                if (rotated_x >= 0 && rotated_x < (*img)->width && rotated_y >= 0 && rotated_y < (*img)->height) {
+                    // Setze den Pixelwert im rotierten Bild
+                    put_pixel_img(img_rot, x, y, get_pixel_img(*img, rotated_x, rotated_y));
+                    // put_pixel_img(img_rot, rotated_x, rotated_y, get_pixel_img(*img, x, y));
+                }
+            }
+        }
+
+        free_img(*img, data->mlx);
+        *img = img_rot;
+        old_angle = angle;
+    }
+}
 
 void	render_minimap(t_data *data, t_minimap *minimap)
 {
@@ -86,8 +131,11 @@ int	render(t_data *data)
 		render_background(data, data->texture->base_img);
 		delay_reset_all(data);
 		render_minimap(data, data->texture->minimap);
-		put_img_to_img(data->texture->base_img, data->texture->minimap->resize,
-			10, 10);
+		put_img_to_img(data->texture->base_img, data->texture->carframe2, 0, 0);
+		put_img_to_img(data->texture->base_img, data->texture->minimap->resize, 1500, 600);
+		rotate_image(data, &data->texture->steeringwheel, 0);
+			rotate_image(data, &data->texture->steeringwheel, data->rot[XK_Left]);
+		put_img_to_img(data->texture->base_img, data->texture->steeringwheel, 800, 800);
 		mlx_put_image_to_window(data->mlx, data->mlx_win,
 				data->texture->base_img->img_ptr, 0, 0);
 	}
