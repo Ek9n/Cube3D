@@ -6,7 +6,7 @@
 /*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 17:54:28 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/16 15:48:51 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/16 15:59:26 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	generate_vertical(t_data *data, t_ray ray, int i, t_image *img, int sign, f
 	double	k;
 	double	step;
 
-	len = data->height * 30 / (ray.ray_len * cos(angle_step * (i - (0.18 * i)) * sign));
+	len = data->height * 60 / (ray.ray_len * cos(angle_step * (i - (0.185 * i)) * sign));
 	j = 0;
 	k = 0;
 	step = IMG_SIZE / len;
