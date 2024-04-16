@@ -6,7 +6,7 @@
 /*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 17:54:28 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/16 12:34:29 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/16 15:48:51 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,18 +62,14 @@ void	cast_ray(t_data *data, float angle, int x, int y)
 	}
 }
 
-void	generate_vertical(t_data *data, t_ray ray, int i, t_image *img, int sign)
+void	generate_vertical(t_data *data, t_ray ray, int i, t_image *img, int sign, float angle_step)
 {
 	double	len;
 	double	j;
 	double	k;
 	double	step;
-	float	calc_angle;
 
-	
-	calc_angle = data->player->angle - ray.raw_angle;	
-	adjust_angle(&calc_angle);
-	len = data->height * 60 / (ray.ray_len * cos(calc_angle));
+	len = data->height * 30 / (ray.ray_len * cos(angle_step * (i - (0.18 * i)) * sign));
 	j = 0;
 	k = 0;
 	step = IMG_SIZE / len;
@@ -103,9 +99,9 @@ void	cast_rays(t_data *data, float angle, int deg, int amount)
 	while (i < amount / 2)
 	{
 		cast_ray(data, angle + (step * i), start_x, start_y);
-		generate_vertical(data, data->ray, i, data->ray.img, 1);
+		generate_vertical(data, data->ray, i, data->ray.img, 1, step);
 		cast_ray(data, angle - (step * i), start_x, start_y);
-		generate_vertical(data, data->ray, i, data->ray.img, -1);
+		generate_vertical(data, data->ray, i, data->ray.img, -1, step);
 		i++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 13:58:23 by jborner           #+#    #+#             */
-/*   Updated: 2024/04/15 19:43:29 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/16 15:33:32 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	render_minimap(t_data *data, t_minimap *minimap)
 	rotate_img(data, &minimap->player, &minimap->player_rot);
 	put_img_to_img(minimap->base, minimap->player_rot, data->player->y,
 		data->player->x);
-	cast_rays(data, data->player->angle , 60, data->width);
+	cast_rays(data, data->player->angle , 90, data->width);
 	put_pixel_img(data->texture->minimap->base, data->player->corners[0][1], data->player->corners[0][0], YELLOW);
 	put_pixel_img(data->texture->minimap->base, data->player->corners[1][1], data->player->corners[1][0], YELLOW);
 	put_pixel_img(data->texture->minimap->base, data->player->corners[2][1], data->player->corners[2][0], YELLOW);

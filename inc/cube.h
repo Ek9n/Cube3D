@@ -6,7 +6,7 @@
 /*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/16 12:26:56 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/16 15:37:27 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -265,7 +265,7 @@ int do_row_step(t_data *data, t_ray *ray);
 int do_col_step(t_data *data, t_ray *ray);
 void	cast_ray(t_data *data, float angle, int x, int y);
 // void	generate_vertical(t_data *data, t_ray ray, int i, t_image *img);
-void	generate_vertical(t_data *data, t_ray ray, int i, t_image *img, int sign);
+// void	generate_vertical(t_data *data, t_ray ray, int i, t_image *img, int sign);
 void	cast_rays(t_data *data, float angle, int deg, int amount);
 
 //init_ray_checker.c
