@@ -6,7 +6,7 @@
 /*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/15 19:48:58 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/16 12:26:56 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,12 +149,13 @@ typedef struct s_player
 typedef struct s_ray
 {
 	int		ray_amount;
-	double	ray_len;
+	float	ray_len;
 	int		img_col;
 	t_image	*img;
 	int x;
 	int y;
 	float angle;
+	float raw_angle;
 	float sin;
 	float cos;
 	float fabs_sin;
@@ -263,7 +264,8 @@ void			mlx_init_game(t_data *data);
 int do_row_step(t_data *data, t_ray *ray);
 int do_col_step(t_data *data, t_ray *ray);
 void	cast_ray(t_data *data, float angle, int x, int y);
-void	generate_vertical(t_data *data, t_ray ray, int i, t_image *img);
+// void	generate_vertical(t_data *data, t_ray ray, int i, t_image *img);
+void	generate_vertical(t_data *data, t_ray ray, int i, t_image *img, int sign);
 void	cast_rays(t_data *data, float angle, int deg, int amount);
 
 //init_ray_checker.c

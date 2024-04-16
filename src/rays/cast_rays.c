@@ -6,7 +6,7 @@
 /*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 17:54:28 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/15 13:28:48 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/16 12:34:29 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int	do_row_step(t_data *data, t_ray *ray)
 	if (wall_found(data, ray->row_x, ray->row_y))
 	{
 		ray->ray_len = ray->dis_row;
-		ray->angle = ray->angle;
 		return (1);
 	}
 	ray->row_x += ray->row_step_x;
@@ -35,7 +34,6 @@ int	do_col_step(t_data *data, t_ray *ray)
 	if (wall_found(data, ray->col_x, ray->col_y))
 	{
 		ray->ray_len = ray->dis_col;
-		ray->angle = ray->angle;
 		return (1);
 	}
 	ray->col_x += ray->col_step_x;
@@ -46,6 +44,7 @@ int	do_col_step(t_data *data, t_ray *ray)
 
 void	cast_ray(t_data *data, float angle, int x, int y)
 {
+	data->ray.raw_angle = angle;
 	adjust_angle(&angle);
 	init_check_ray(&data->ray, angle, x, y);
 	while (1)
@@ -63,7 +62,7 @@ void	cast_ray(t_data *data, float angle, int x, int y)
 	}
 }
 
-void	generate_vertical(t_data *data, t_ray ray, int i, t_image *img)
+void	generate_vertical(t_data *data, t_ray ray, int i, t_image *img, int sign)
 {
 	double	len;
 	double	j;
@@ -71,7 +70,8 @@ void	generate_vertical(t_data *data, t_ray ray, int i, t_image *img)
 	double	step;
 	float	calc_angle;
 
-	calc_angle = data->player->angle - ray.angle;
+	
+	calc_angle = data->player->angle - ray.raw_angle;	
 	adjust_angle(&calc_angle);
 	len = data->height * 60 / (ray.ray_len * cos(calc_angle));
 	j = 0;
@@ -79,7 +79,7 @@ void	generate_vertical(t_data *data, t_ray ray, int i, t_image *img)
 	step = IMG_SIZE / len;
 	while (j <= len)
 	{
-		put_pixel_img(data->texture->base_img, i, (data->height / 2) - (len / 2)
+		put_pixel_img(data->texture->base_img, (data->width / 2) + (i * sign), (data->height / 2) - (len / 2)
 			+ j, get_pixel_img(img, ray.img_col, k));
 		k += step;
 		j++;
@@ -100,11 +100,12 @@ void	cast_rays(t_data *data, float angle, int deg, int amount)
 	step = total / amount;
 	data->ray.ray_amount = amount;
 	i = 0;
-	while (i < amount)
+	while (i < amount / 2)
 	{
-		cast_ray(data, angle + (step * i) - total / 2 + step / 2, start_x,
-			start_y);
-		generate_vertical(data, data->ray, i, data->ray.img);
+		cast_ray(data, angle + (step * i), start_x, start_y);
+		generate_vertical(data, data->ray, i, data->ray.img, 1);
+		cast_ray(data, angle - (step * i), start_x, start_y);
+		generate_vertical(data, data->ray, i, data->ray.img, -1);
 		i++;
 	}
 }
