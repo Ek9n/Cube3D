@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_game.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 13:58:23 by jborner           #+#    #+#             */
-/*   Updated: 2024/04/18 13:20:33 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/18 16:31:53 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ void rotate_image(t_data *data, t_image **img, double angle)
                 int new_y = (y - rotated_height / 2);
 
                 // Rotiere die Koordinaten im rotierten Bild um den Ursprung (0,0)
-                int rotated_x = (int)(new_x * cos(radians) - new_y * sin(radians));
-                int rotated_y = (int)(new_x * sin(radians) + new_y * cos(radians));
+                int rotated_x = (new_x * cos(radians) - new_y * sin(radians));
+                int rotated_y = (new_x * sin(radians) + new_y * cos(radians));
 
                 // Konvertiere die Koordinaten zurück zum Koordinatensystem des ursprünglichen Bildes
                 rotated_x += rotated_width / 2;
@@ -61,8 +61,11 @@ void rotate_image(t_data *data, t_image **img, double angle)
             }
         }
 
-        free_img(*img, data->mlx);
-        *img = img_rot;
+        // free_img(*img, data->mlx);
+        // *img = img_rot;
+		if (data->texture->steeringwheel2)
+			free_img(data->texture->steeringwheel2, data->mlx);
+		data->texture->steeringwheel2 = img_rot;
         old_angle = angle;
     }
 }
@@ -136,8 +139,16 @@ int	render(t_data *data)
 	// 	10);
 	put_img_to_img(data->texture->base_img, data->texture->minimap->resize, 1500, 600);
 	rotate_image(data, &data->texture->steeringwheel, 0);
-	rotate_image(data, &data->texture->steeringwheel, data->rot[XK_Left]);
-	put_img_to_img(data->texture->base_img, data->texture->steeringwheel, 800, 800);
+		// static int i = 0;
+		// if (i > 360)
+		// 	i = 0;
+		// if (i % 30 == 0)
+		// {
+		// 	rotate_image(data, &data->texture->steeringwheel, i);
+		// }
+		// 	i += 10;
+		
+	put_img_to_img(data->texture->base_img, data->texture->steeringwheel2, 800, 800);
 	mlx_put_image_to_window(data->mlx, data->mlx_win,
 				data->texture->base_img->img_ptr, 0, 0);
 	usleep(42000);

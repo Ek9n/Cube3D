@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data_struct.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:46:24 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/18 13:19:40 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/18 16:29:15 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@ void	init_texture(t_texture *cub)
 	cub->img1 = NULL;
 	cub->img2 = NULL;
 	cub->black = NULL;
+	cub->steeringwheel = NULL;
+	cub->steeringwheel2 = NULL;
+	cub->carframe = NULL;
+	cub->carframe2 = NULL;
 	cub->no = NULL;
 	cub->so = NULL;
 	cub->ea = NULL;

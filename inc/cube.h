@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/18 13:18:22 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/18 16:36:08 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,10 @@ typedef struct s_read
 
 typedef struct s_image
 {
-	void *img_ptr; // Zeiger auf das Bild in der Grafikbibliothek
-	char *addr;    // Zeiger auf den Anfang des Bildspeichers
-	int bpp;       // Bits pro Pixel
-	int endian;    // Endianness (1 für big endian, 0 für little endian)
+	void		*img_ptr; // Zeiger auf das Bild in der Grafikbibliothek
+	char		*addr;    // Zeiger auf den Anfang des Bildspeichers
+	int			bpp;       // Bits pro Pixel
+	int			endian;    // Endianness (1 für big endian, 0 für little endian)
 	int			bytes_per_line;
 	int			width;
 	int			height;
