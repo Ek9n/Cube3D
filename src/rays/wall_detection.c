@@ -6,7 +6,7 @@
 /*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 18:00:07 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/11 14:15:36 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/18 12:47:32 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,19 +58,7 @@ int	west_wall(t_data *data, int x, int y)
 
 int	wall_found(t_data *data, float x, float y)
 {
-	data->ray.img = data->texture->no;
-	if (x - (int)x > 0 && (!((int)x % IMG_SIZE == IMG_SIZE - 1)))
-		++x;
-	if (y - (int)y > 0 && !((int)y % IMG_SIZE == IMG_SIZE - 1))
-		++y;
-	if (x < 0 + IMG_SIZE || y < 0 + IMG_SIZE
-		|| x >= data->map->row_max * IMG_SIZE - (IMG_SIZE - 1)
-		|| y >= data->map->col_max * IMG_SIZE - (IMG_SIZE - 1))
-		{
-			if (y < IMG_SIZE)
-				data->ray.img = data->texture->we;
-			return (1);
-		}
+	adjust_x_y(data, &x, &y);
 	if ((int)x % IMG_SIZE == 0)
 	{
 		if (north_wall(data, x, y))

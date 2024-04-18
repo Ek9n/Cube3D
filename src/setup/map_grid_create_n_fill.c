@@ -6,7 +6,7 @@
 /*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:55:14 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/15 13:22:08 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/18 13:08:00 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	count_map_row_col(char *str, int *max_col, int *max_row)
 		(*max_row)--;
 }
 
-
 void	create_grid(t_map *map)
 {
 	int	i;
@@ -66,7 +65,7 @@ void	newline_grid(t_map *map)
 	++map->j;
 }
 
-void set_player(t_player *player, t_map *map, char c)
+void	set_player(t_player *player, t_map *map, char c)
 {
 	map->grid[map->j][map->i] = 2;
 	player->x = map->j * IMG_SIZE;
@@ -102,7 +101,7 @@ int	fill_grid(char *str, t_map *map, t_player *player, char (*err)[50])
 			map->grid[map->j][map->i++] = 0;
 		else if (str[s_i] == 'N' || str[s_i] == 'E' || str[s_i] == 'S'
 			|| str[s_i] == 'W')
-				set_player(player, map, str[s_i]);
+			set_player(player, map, str[s_i]);
 		else if (str[s_i] == '\n')
 			newline_grid(map);
 		else
@@ -113,7 +112,5 @@ int	fill_grid(char *str, t_map *map, t_player *player, char (*err)[50])
 	}
 	while (map->i < map->col_max)
 		map->grid[map->j][map->i++] = -1;
-	map->i = 0;
-	map->j = 0;
 	return (TRUE);
 }

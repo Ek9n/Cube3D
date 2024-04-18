@@ -6,7 +6,7 @@
 /*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 15:08:21 by yubi42            #+#    #+#             */
-/*   Updated: 2024/03/14 00:59:18 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/18 13:02:44 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ int	check_filepath(char **cub, int *setup_var, t_read *reading, char (*err)[50])
 	*cub = malloc(sizeof(char) * (ft_strlen(ft_skip_ws(&reading->str[3])) + 1));
 	if (malloc_err(*cub, &reading->return_value, err))
 		return (FALSE);
-	ft_strlcpy(*cub, ft_skip_ws(&reading->str[3]), (ft_strlen(ft_skip_ws(&reading->str[3])) + 1));
+	ft_strlcpy(*cub, ft_skip_ws(&reading->str[3]),
+		(ft_strlen(ft_skip_ws(&reading->str[3])) + 1));
 	fd = open(*cub, O_RDONLY);
 	if (fd == -1)
 	{
@@ -47,11 +48,19 @@ int	is_rgb_num(char *str)
 	while (str[i])
 	{
 		if (!ft_isdigit(str[i++]))
-			return (FALSE);	
+			return (FALSE);
 	}
 	if (ft_atoi(str) > 255)
-		return (FALSE);	
+		return (FALSE);
 	return (TRUE);
+}
+
+int	err_rgb(t_read *reading, char (*err)[50], char **split, char *msg)
+{
+	ft_strlcpy(*err, msg, ft_strlen(msg) + 1);
+	reading->return_value = FALSE;
+	ft_free_split(split);
+	return (FALSE);
 }
 
 int	check_rgb(int (*cub)[3], int *setup_var, t_read *reading, char (*err)[50])
@@ -61,21 +70,10 @@ int	check_rgb(int (*cub)[3], int *setup_var, t_read *reading, char (*err)[50])
 	split = NULL;
 	split = ft_split(ft_skip_ws(&reading->str[2]), ',');
 	if (!split)
-	{
-		ft_strlcpy(*err, "Not enough memory", ft_strlen("Not enough memory")
-			+ 1);
-		reading->return_value = FALSE;
-		return (FALSE);
-	}
+		return (err_rgb(reading, err, split, "Not enough memory"));
 	if (ft_split_count(split) != 3 || !is_rgb_num(split[0])
 		|| !is_rgb_num(split[1]) || !is_rgb_num(split[2]))
-	{
-		ft_strlcpy(*err, "Invalid RGB value", ft_strlen("Invalid RGB value")
-			+ 1);
-		reading->return_value = FALSE;
-		ft_free_split(split);
-		return (FALSE);
-	}
+		return (err_rgb(reading, err, split, "Invalid RGB value"));
 	(*cub)[0] = ft_atoi(split[0]);
 	(*cub)[1] = ft_atoi(split[1]);
 	(*cub)[2] = ft_atoi(split[2]);

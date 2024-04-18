@@ -6,7 +6,7 @@
 /*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/16 15:37:27 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/18 12:48:40 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ typedef struct s_texture
 	t_image		*base_img;
 	t_image		*img1;
 	t_image		*img2;
-	t_image 	*black;
+	t_image		*black;
 	t_image		*no;
 	t_image		*so;
 	t_image		*ea;
@@ -145,37 +145,35 @@ typedef struct s_player
 	int			wall_hit;
 }				t_player;
 
-
 typedef struct s_ray
 {
-	int		ray_amount;
-	float	ray_len;
-	int		img_col;
-	t_image	*img;
-	int x;
-	int y;
-	float angle;
-	float raw_angle;
-	float sin;
-	float cos;
-	float fabs_sin;
-	float fabs_cos;
-	float row_x;
-	float row_y;
-	float col_x;
-	float col_y;
-	float row_step;
-	float col_step;
-	float row_step_x;
-	float row_step_y;
-	float col_step_x;
-	float col_step_y;
-	float first_row_step;
-	float first_col_step;
-	float dis_row;
-	float dis_col;
-	int first_col;
-}	t_ray;
+	int			ray_amount;
+	float		ray_len;
+	int			img_col;
+	t_image		*img;
+	int			x;
+	int			y;
+	float		angle;
+	float		sin;
+	float		cos;
+	float		fabs_sin;
+	float		fabs_cos;
+	float		row_x;
+	float		row_y;
+	float		col_x;
+	float		col_y;
+	float		row_step;
+	float		col_step;
+	float		row_step_x;
+	float		row_step_y;
+	float		col_step_x;
+	float		col_step_y;
+	float		first_row_step;
+	float		first_col_step;
+	float		dis_row;
+	float		dis_col;
+	int			first_col;
+}				t_ray;
 
 typedef struct s_data
 {
@@ -184,7 +182,6 @@ typedef struct s_data
 	int			width;
 	int			height;
 	int			keys[NUM_KEYS];
-	int			delay_rot;
 	int			rot[NUM_KEYS];
 	int			minimap_width;
 	int			minimap_height;
@@ -202,25 +199,35 @@ int				malloc_err(void *ptr, int *return_value, char (*err)[50]);
 void			close_game(t_data *data, char *msg);
 
 // free_structs.c
+void			free_minimap(t_minimap *minimap, t_data *data);
+void			free_texture(t_texture *texturefree_texture, t_data *data);
+void			free_map(t_map *map);
+void			free_data(t_data *data);
+
+// free_utils.c
 void			free_str(char **str);
 void			free_ptr(void **ptr);
 void			free_img(t_image *img, void *mlx);
-void			free_minimap(t_minimap *minimap, t_data *data);
-void			free_cub(t_texture *cub, t_data *data);
 void			free_grid(int ***grid, int max_row);
-void			free_map(t_map *map);
-void			free_data(t_data *data);
 
 // ================= CONTROL ==================
 
 // collision_check.c
+void			set_corners(t_player *player);
+int				mid_coll(t_map *map, int corner1[2], int corner2[2]);
+int				check_corner_collision(t_data *data, t_map *map,
+					t_player *player);
+void			check_collision(t_data *data);
 
-void set_corners(t_player *player);
-int	check_corner_collision(t_data *data, t_map *map, t_player *player);
-void	check_collision(t_data *data);
+// collision_check_utils.c
+int				in_border(t_data *data);
+int				calc_mod(int num);
+int				check_mid_wall(t_map *map, int corner1[2], int corner2[2],
+					int mod[2]);
+int				calc_coll_angle(t_data *data, float *angle, int side,
+					int dir);
 
 // keypress.c
-
 void			move_player(t_data *data, int sign, int num, int other_num);
 void			rotate_player(t_data *data, int sign, int num);
 void			handle_keys(t_data *data);
@@ -230,8 +237,8 @@ int				handle_keyrelease(int keysym, t_data *data);
 // ============== EXECUTE =============
 
 // delay.c
-void	delay_reset_one(int *delay, int *rot, int rot_value);
-void	delay_reset_all(t_data *data/* , int *key, int *rot */);
+void			delay_reset_one(int *delay, int *rot, int rot_value);
+void			delay_reset_all(t_data *data /* , int *key, int *rot */);
 // void	delay_reset_all(int *key, int *delay, int *rot);
 
 // render_game.c
@@ -245,7 +252,7 @@ void			run_game(t_data *data);
 // ================= MINIMAP ==================
 
 // create_minimap.c
-void	draw_ray(t_data *data);
+void			draw_ray(t_data *data);
 void			create_minimap_texture(t_minimap *minimap, t_data *data);
 void			copy_to_small(int player_row, int player_col, t_image *full,
 					t_image *part);
@@ -261,24 +268,23 @@ void			mlx_init_game(t_data *data);
 // ============== RAYS ==============
 
 // cast_rays.c
-int do_row_step(t_data *data, t_ray *ray);
-int do_col_step(t_data *data, t_ray *ray);
-void	cast_ray(t_data *data, float angle, int x, int y);
-// void	generate_vertical(t_data *data, t_ray ray, int i, t_image *img);
-// void	generate_vertical(t_data *data, t_ray ray, int i, t_image *img, int sign);
-void	cast_rays(t_data *data, float angle, int deg, int amount);
+int				do_row_step(t_data *data, t_ray *ray);
+int				do_col_step(t_data *data, t_ray *ray);
+void			cast_ray(t_data *data, float angle, int x, int y);
+void			cast_rays(t_data *data, float angle, int deg, int amount);
 
-//init_ray_checker.c
-void init_ray_steps(t_ray *ray);
-void init_next_steps(t_ray *ray);
-void init_check_ray(t_ray *ray, float angle, int x, int y);
+// init_ray_checker.c
+void			init_ray_steps(t_ray *ray);
+void			init_next_steps(t_ray *ray);
+void			init_check_ray(t_ray *ray, float angle, int x, int y);
 
-//ray_checker_utils.c
-float distance(float x1, float y1, float x2, float y2);
-void adjust_angle(float *angle);
+// ray_checker_utils.c
+float			distance(float x1, float y1, float x2, float y2);
+void			adjust_angle(float *angle);
+void			adjust_x_y(t_data *data, float *x, float *y);
 
-//wall_detection.c
-int	wall_found(t_data *data, float cur_x, float cur_y);
+// wall_detection.c
+int				wall_found(t_data *data, float cur_x, float cur_y);
 
 // ============== RENDER UTILS ==============
 
@@ -287,7 +293,6 @@ void			img_pix_put(t_image *img, int x, int y, int color);
 void			put_pixel_img(t_image *img, int x, int y, int color);
 unsigned int	get_pixel_img(t_image *img, int x, int y);
 void			put_img_to_img(t_image *dst, t_image *src, int x, int y);
-
 
 // render_utils.c
 void			fill_img_color(t_image *img, int color);
@@ -299,7 +304,7 @@ size_t			delay_ms(void);
 // resize_img.c
 void			scale_img(t_image **old, t_image **new, int w, int h);
 t_image			*resize_img(t_data *data, t_image **old, int w, int h);
-void			rotate_img(t_data *data, t_image **old, t_image **new);
+void			rotate_player_img(t_data *data, t_image **old, t_image **new);
 
 // ================= SETUP ==================
 
@@ -318,16 +323,19 @@ int				check_rgb(int (*cub)[3], int *setup_var, t_read *reading,
 int				line_valid(t_read *reading, t_texture *cub,
 					t_texture_ok *setup_vars, char (*err)[50]);
 
-// init_structs.c
+// init_data_struct.c
 
-void			init_setup_vars(t_texture_ok *setup_vars);
-void			init_reading(t_read *reading);
-void			init_minimap(t_minimap *minimap);
 void			init_texture(t_texture *cub);
 void			init_map(t_map *map);
 void			init_player(t_player *player);
 void			init_array(int array[NUM_KEYS], int num, int num2);
 void			init_data(t_data *data);
+
+// init_other_structs.c
+
+void			init_setup_vars(t_texture_ok *setup_vars);
+void			init_reading(t_read *reading);
+void			init_minimap(t_minimap *minimap);
 
 // map_grid_check.c
 void			check_edge(t_map *map, int *return_value, char (*err)[50]);
@@ -340,7 +348,6 @@ void			print_grid(t_map *map);
 void			count_map_row_col(char *str, int *max_col, int *max_row);
 void			create_grid(t_map *map);
 void			newline_grid(t_map *map);
-void			set_player_corners(t_player *player);
 int				fill_grid(char *str, t_map *map, t_player *player,
 					char (*err)[50]);
 int				fill_grid(char *str, t_map *map, t_player *player,

@@ -6,7 +6,7 @@
 /*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:51:16 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/08 19:06:41 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/18 09:39:01 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ float	calc_old_y(t_data *data, t_image **old, int x, int y)
 			/ 2) * data->player->y_cos + (*old)->height / 2);
 }
 
-void	rotate_img(t_data *data, t_image **old, t_image **new)
+void	rotate_player_img(t_data *data, t_image **old, t_image **new)
 {
 	int		x;
 	int		y;

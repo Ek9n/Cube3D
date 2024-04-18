@@ -6,16 +6,20 @@
 /*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 17:54:28 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/16 15:59:26 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/18 12:45:51 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
+/*
+to draw rays into map add in the beginning of do_row_step/do_col_step:
+ put_pixel_img(data->texture->minimap->base, (int)ray->row_y, (int)ray->row_x,
+	GREEN);
+ */
+
 int	do_row_step(t_data *data, t_ray *ray)
 {
-	// put_pixel_img(data->texture->minimap->base, (int)ray->row_y,
-	// 	(int)ray->row_x, GREEN);
 	if (wall_found(data, ray->row_x, ray->row_y))
 	{
 		ray->ray_len = ray->dis_row;
@@ -29,8 +33,6 @@ int	do_row_step(t_data *data, t_ray *ray)
 
 int	do_col_step(t_data *data, t_ray *ray)
 {
-	// put_pixel_img(data->texture->minimap->base, (int)ray->col_y,
-	// 	(int)ray->col_x, GREEN);
 	if (wall_found(data, ray->col_x, ray->col_y))
 	{
 		ray->ray_len = ray->dis_col;
@@ -44,7 +46,6 @@ int	do_col_step(t_data *data, t_ray *ray)
 
 void	cast_ray(t_data *data, float angle, int x, int y)
 {
-	data->ray.raw_angle = angle;
 	adjust_angle(&angle);
 	init_check_ray(&data->ray, angle, x, y);
 	while (1)
@@ -62,22 +63,27 @@ void	cast_ray(t_data *data, float angle, int x, int y)
 	}
 }
 
-void	generate_vertical(t_data *data, t_ray ray, int i, t_image *img, int sign, float angle_step)
+void	generate_vertical(t_data *data, int i, float angle_step, int sign)
 {
-	double	len;
-	double	j;
-	double	k;
-	double	step;
+	float	len;
+	float	j;
+	float	k;
+	int		l;
+	int		i2;
 
-	len = data->height * 60 / (ray.ray_len * cos(angle_step * (i - (0.185 * i)) * sign));
+	l = i - ((data->ray.ray_amount / 2) - data->ray.ray_amount / 10) + 1;
+	i2 = i;
+	if (l > 0)
+		i2 -= 0.0005 * (l * l);
+	len = data->height * 40 / (data->ray.ray_len * cos(angle_step * i2));
 	j = 0;
 	k = 0;
-	step = IMG_SIZE / len;
 	while (j <= len)
 	{
-		put_pixel_img(data->texture->base_img, (data->width / 2) + (i * sign), (data->height / 2) - (len / 2)
-			+ j, get_pixel_img(img, ray.img_col, k));
-		k += step;
+		put_pixel_img(data->texture->base_img, (data->width / 2) + (i * sign),
+			(data->height / 2) - (len / 2) + j, get_pixel_img(data->ray.img,
+				data->ray.img_col, k));
+		k += IMG_SIZE / len;
 		j++;
 	}
 }
@@ -99,9 +105,12 @@ void	cast_rays(t_data *data, float angle, int deg, int amount)
 	while (i < amount / 2)
 	{
 		cast_ray(data, angle + (step * i), start_x, start_y);
-		generate_vertical(data, data->ray, i, data->ray.img, 1, step);
-		cast_ray(data, angle - (step * i), start_x, start_y);
-		generate_vertical(data, data->ray, i, data->ray.img, -1, step);
+		generate_vertical(data, i, step, 1);
+		if (i)
+		{
+			cast_ray(data, angle - (step * i), start_x, start_y);
+			generate_vertical(data, i, step, -1);
+		}
 		i++;
 	}
 }

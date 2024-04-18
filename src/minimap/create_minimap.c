@@ -6,7 +6,7 @@
 /*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 14:04:35 by jborner           #+#    #+#             */
-/*   Updated: 2024/04/06 18:20:12 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/18 09:44:00 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ void	draw_ray(t_data *data)
 void	create_minimap_texture(t_minimap *minimap, t_data *data)
 {
 	minimap->base = create_img(data, NULL, IMG_SIZE * data->map->col_max,
-		IMG_SIZE * data->map->col_max);
+			IMG_SIZE * data->map->col_max);
 	data->texture->minimap->small = create_img(data, NULL, 5 * IMG_SIZE, 5
-		* IMG_SIZE);
+			* IMG_SIZE);
 	minimap->ground = create_img(data, NULL, 64, 64);
 	fill_img_color(minimap->ground, BLUE);
 	create_frame(minimap->ground, 1, BLACK);

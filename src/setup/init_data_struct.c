@@ -1,44 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_structs.c                                     :+:      :+:    :+:   */
+/*   init_data_struct.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/26 14:46:24 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/15 19:46:47 by yubi42           ###   ########.fr       */
+/*   Created: 2024/04/18 08:15:33 by yubi42            #+#    #+#             */
+/*   Updated: 2024/04/18 13:11:40 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
-
-void	init_setup_vars(t_texture_ok *setup_vars)
-{
-	setup_vars->no = FALSE;
-	setup_vars->so = FALSE;
-	setup_vars->ea = FALSE;
-	setup_vars->we = FALSE;
-	setup_vars->f = FALSE;
-	setup_vars->c = FALSE;
-}
-
-void	init_reading(t_read *reading)
-{
-	reading->return_value = TRUE;
-	reading->str = NULL;
-	reading->i = 0;
-}
-
-void init_minimap(t_minimap *minimap)
-{
-	minimap->base = NULL;
-	minimap->resize = NULL;
-	minimap->small = NULL;
-	minimap->wall = NULL;
-	minimap->ground = NULL;
-	minimap->player = NULL;
-	minimap->player_rot = NULL;
-}
 
 void	init_texture(t_texture *cub)
 {
@@ -87,30 +59,28 @@ void	init_player(t_player *player)
 
 void	init_array(int array[NUM_KEYS], int num, int num2)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while(i < NUM_KEYS)
+	while (i < NUM_KEYS)
 		array[i++] = num;
 	array[XK_Up] = num2;
 	array[XK_Down] = num2;
 }
 
-
 void	init_data(t_data *data)
 {
 	data->mlx = NULL;
 	data->mlx_win = NULL;
-    data->width = 1600;
-    data->height = 800;
+	data->width = 1600;
+	data->height = 800;
 	data->err[0] = '\0';
 	data->map = NULL;
 	data->texture = NULL;
 	data->player = NULL;
-	data->delay_rot = 0;
-	data->player = malloc (sizeof(t_player));
-	data->map = malloc (sizeof(t_map));
-	data->texture = malloc (sizeof(t_texture));
+	data->player = malloc(sizeof(t_player));
+	data->map = malloc(sizeof(t_map));
+	data->texture = malloc(sizeof(t_texture));
 	init_array(data->keys, 0, 0);
 	init_array(data->rot, ROT_MIN, MOV_MIN);
 	init_player(data->player);

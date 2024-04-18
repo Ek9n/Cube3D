@@ -21,9 +21,11 @@ SUBOBJ_PATH = .obj/close \
 SRC		=	main.c \
 			close/err.c \
 			close/free_structs.c \
+			close/free_utils.c \
 			control/collision_check.c \
+			control/collision_check_utils.c \
+			control/key_action.c \
 			control/keypress.c \
-			execute/delay.c \
 			execute/render_game.c \
 			execute/run_game.c \
 			minimap/create_minimap.c \
@@ -37,7 +39,8 @@ SRC		=	main.c \
 			render_utils/resize_img.c \
 			setup/file_check.c \
 			setup/file_line_check.c \
-			setup/init_structs.c \
+			setup/init_data_struct.c \
+			setup/init_other_structs.c \
 			setup/map_grid_check.c \
 			setup/map_grid_create_n_fill.c \
 			setup/validators.c \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file_check.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 15:08:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/02/27 13:36:58 by hstein           ###   ########.fr       */
+/*   Updated: 2024/04/18 13:11:54 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ int	setup_found(t_texture_ok setup_vars)
 	return (TRUE);
 }
 
-void	setup_vars_check(t_texture *cub, t_read *reading, t_texture_ok *setup_vars,
-		char (*err)[50])
+void	setup_vars_check(t_texture *cub, t_read *reading,
+		t_texture_ok *setup_vars, char (*err)[50])
 {
 	while (reading->bytes > 0 && !setup_found(*setup_vars))
 	{

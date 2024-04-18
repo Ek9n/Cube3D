@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_grid_check.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 15:01:10 by yubi42            #+#    #+#             */
-/*   Updated: 2024/03/06 14:38:09 by jborner          ###   ########.fr       */
+/*   Updated: 2024/04/18 13:03:15 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ void	check_mid(t_map *map, int *return_value, int *player_count,
 			ft_strlen("Edge of map has to be walls") + 1);
 		*return_value = FALSE;
 	}
-	else if ((map->grid[map->j - 1][map->i - 1] == -1 || map->grid[map->j + 1][map->i + 1] ==
-			-1 || map->grid[map->j + 1][map->i - 1] == -1
+	else if ((map->grid[map->j - 1][map->i - 1] == -1 || map->grid[map->j
+			+ 1][map->i + 1] == -1 || map->grid[map->j + 1][map->i - 1] == -1
 			|| map->grid[map->j - 1][map->i + 1] == -1)
 		&& !(map->grid[map->j][map->i] == -1 || map->grid[map->j][map->i] == 1))
-			{
+	{
 		ft_strlcpy(*err, "Map inner corner has to be wall",
 			ft_strlen("Map inner corner has to be wall") + 1);
 		*return_value = FALSE;
@@ -46,10 +46,9 @@ void	check_mid(t_map *map, int *return_value, int *player_count,
 	if (map->grid[map->j][map->i] == 2)
 	{
 		map->grid[map->j][map->i] = 0;
-		(*player_count)++;	
+		(*player_count)++;
 	}
 }
-
 
 int	check_grid(t_map *map, char (*err)[50])
 {
@@ -80,10 +79,10 @@ int	check_grid(t_map *map, char (*err)[50])
 	return (return_value);
 }
 
-void print_grid(t_map *map)
+void	print_grid(t_map *map)
 {
-	int i;
-	int j;
+	int		i;
+	int		j;
 
 	i = 0;
 	while (i < map->row_max)

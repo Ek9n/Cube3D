@@ -6,7 +6,7 @@
 /*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 13:50:10 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/15 13:24:16 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/18 09:28:32 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,103 +24,44 @@ void	set_corners(t_player *player)
 	sin2 = sin(player->angle + PI / 2.0f);
 	cos2 = cos(player->angle + PI / 2.0f);
 	player->corners[0][0] = player->x + (IMG_SIZE / 2) + (8 * cos1) - (8
-		* sin1);
+			* sin1);
 	player->corners[0][1] = player->y + (IMG_SIZE / 2) - (8 * sin1) - (8
-		* cos1);
+			* cos1);
 	player->corners[1][0] = player->x + (IMG_SIZE / 2) + (8 * cos2) - (8
-		* sin2);
+			* sin2);
 	player->corners[1][1] = player->y + (IMG_SIZE / 2) - (8 * sin2) - (8
-		* cos2);
+			* cos2);
 	player->corners[2][0] = player->x + (IMG_SIZE / 2) + (-8 * cos1) - (-8
-		* sin1);
+			* sin1);
 	player->corners[2][1] = player->y + (IMG_SIZE / 2) - (-8 * sin1) - (-8
-		* cos1);
+			* cos1);
 	player->corners[3][0] = player->x + (IMG_SIZE / 2) + (-8 * cos2) - (-8
-		* sin2);
+			* sin2);
 	player->corners[3][1] = player->y + (IMG_SIZE / 2) - (-8 * sin2) - (-8
-		* cos2);
+			* cos2);
 }
 
-int	calc_mod(int num)
+int	mid_coll(t_map *map, int corner1[2], int corner2[2])
 {
-	num %= IMG_SIZE;
-	if (num >= (IMG_SIZE / 2))
-		num = (num - 63) * -1;
-	return (num);
-}
+	int	mod_corner1[2];
+	int	mod_corner2[2];
 
-int	check_mid_wall(t_map *map, int x1, int y1, int x2, int y2, int modx,
-		int mody)
-{
-	if (modx > mody)
+	if (((corner1[0] / IMG_SIZE) - (corner2[0] / IMG_SIZE)) && ((corner1[1]
+				/ IMG_SIZE) - (corner2[1] / IMG_SIZE)))
 	{
-		if (map->grid[x1 / IMG_SIZE][y2 / IMG_SIZE] == 1)
+		mod_corner1[0] = calc_mod(corner1[0]);
+		mod_corner2[0] = calc_mod(corner2[0]);
+		mod_corner1[1] = calc_mod(corner1[1]);
+		mod_corner2[1] = calc_mod(corner2[1]);
+		if ((mod_corner1[0] + mod_corner1[1] <= mod_corner2[0] + mod_corner2[1])
+			&& check_mid_wall(map, corner1, corner2, mod_corner1))
 			return (1);
-	}
-	else
-	{
-		if (map->grid[x2 / IMG_SIZE][y1 / IMG_SIZE] == 1)
-			return (1);
-	}
-	return (0);
-}
-
-int	mid_coll(t_map *map, int x1, int y1, int x2, int y2)
-{
-	int	mod_x1;
-	int	mod_x2;
-	int	mod_y1;
-	int	mod_y2;
-
-	if (((x1 / IMG_SIZE) - (x2 / IMG_SIZE)) && ((y1 / IMG_SIZE) - (y2
-				/ IMG_SIZE)))
-	{
-		mod_x1 = calc_mod(x1);
-		mod_x2 = calc_mod(x2);
-		mod_y1 = calc_mod(y1);
-		mod_y2 = calc_mod(y2);
-		if ((mod_x1 + mod_y1 <= mod_x2 + mod_y2) && check_mid_wall(map, x1, y1,
-				x2, y2, mod_x1, mod_y1))
-			return (1);
-		else if ((mod_x2 + mod_y2 < mod_x1 + mod_y1) && check_mid_wall(map, x2,
-				y2, x1, y1, mod_x2, mod_y2))
+		else if ((mod_corner2[0] + mod_corner2[1] < mod_corner1[0]
+				+ mod_corner1[1]) && check_mid_wall(map, corner2, corner1,
+				mod_corner2))
 			return (1);
 	}
 	return (0);
-}
-
-int	calc_coll_angle(t_data *data, float *angle, char side, char dir)
-{
-	float	mod;
-	int		num;
-
-	mod = ((int)(data->player->angle * 1000) % (int)(0.5 * PI * 1000));
-	mod /= 1000;
-	if (dir == 'u')
-		num = XK_Up;
-	else
-		num = XK_Down;
-	if (side == 'l')
-	{
-		*angle += PI - (2 * mod);
-		if (!data->player->wall_hit)
-			data->rot[XK_Right] = data->rot[num];
-	}
-	else
-	{
-		*angle -= PI - (2 * mod);
-		if (!data->player->wall_hit)
-			data->rot[XK_Left] = data->rot[num];
-	}
-	if (*angle >= 2 * PI)
-		*angle -= 2 * PI;
-	if (*angle < 0)
-		*angle += 2 * PI;
-	if (!data->player->wall_hit)
-		data->player->angle = *angle;
-	data->player->wall_hit = 1;
-	data->player->dead = 1;
-	return (1);
 }
 
 int	check_corner_collision(t_data *data, t_map *map, t_player *player)
@@ -129,17 +70,15 @@ int	check_corner_collision(t_data *data, t_map *map, t_player *player)
 
 	angle = player->angle;
 	if (map->grid[player->corners[0][0] / 64][player->corners[0][1] / 64] == 1)
-		return (calc_coll_angle(data, &angle, 'l', 'd'));
+		return (calc_coll_angle(data, &angle, XK_Right, XK_Down));
 	if (map->grid[player->corners[1][0] / 64][player->corners[1][1] / 64] == 1)
-		return (calc_coll_angle(data, &angle, 'r', 'd'));
+		return (calc_coll_angle(data, &angle, XK_Left, XK_Down));
 	if (map->grid[player->corners[2][0] / 64][player->corners[2][1] / 64] == 1)
-		return (calc_coll_angle(data, &angle, 'l', 'u'));
+		return (calc_coll_angle(data, &angle, XK_Right, XK_Up));
 	if (map->grid[player->corners[3][0] / 64][player->corners[3][1] / 64] == 1)
-		return (calc_coll_angle(data, &angle, 'r', 'u'));
-	if (mid_coll(map, player->corners[2][0], player->corners[2][1],
-			player->corners[3][0], player->corners[3][1]) || mid_coll(map,
-			player->corners[0][0], player->corners[0][1], player->corners[1][0],
-			player->corners[1][1]))
+		return (calc_coll_angle(data, &angle, XK_Left, XK_Up));
+	if (mid_coll(map, player->corners[2], player->corners[3]) || mid_coll(map,
+			player->corners[0], player->corners[1]))
 	{
 		data->rot[XK_Up] = MOV_MIN;
 		data->rot[XK_Down] = MOV_MIN;
@@ -151,20 +90,11 @@ int	check_corner_collision(t_data *data, t_map *map, t_player *player)
 	return (1);
 }
 
-int	in_border(t_data *data)
-{
-	if (data->player->y > 0 && data->player->x > 0
-		&& data->player->x < data->map->row_max * IMG_SIZE - IMG_SIZE
-		&& data->player->y < data->map->col_max * IMG_SIZE - IMG_SIZE)
-		return (1);
-	return (0);
-}
-
 void	check_collision(t_data *data)
 {
 	if (data->player->dead)
-		return;
+		return ;
 	set_corners(data->player);
 	if (in_border(data))
-		check_corner_collision(data, data->map,data->player);
+		check_corner_collision(data, data->map, data->player);
 }
