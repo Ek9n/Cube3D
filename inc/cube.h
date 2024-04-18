@@ -6,7 +6,7 @@
 /*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/18 12:48:40 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/18 13:18:22 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,10 @@ typedef struct s_texture
 {
 	t_minimap	*minimap;
 	t_image		*base_img;
+	t_image		*carframe;
+	t_image		*carframe2;
+	t_image		*steeringwheel;
+	t_image		*steeringwheel2;
 	t_image		*img1;
 	t_image		*img2;
 	t_image		*black;

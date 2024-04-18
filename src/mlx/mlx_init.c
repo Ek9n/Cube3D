@@ -6,7 +6,7 @@
 /*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 14:29:57 by hstein            #+#    #+#             */
-/*   Updated: 2024/04/18 09:45:12 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/18 13:19:16 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,12 @@ void	mlx_init_game(t_data *data)
 			"cub3d");
 	if (data->mlx_win == NULL)
 		close_game(data, "ERROR");
-	data->texture->no = create_img(data, data->texture->no_path, 0, 0);
-	data->texture->so = create_img(data, data->texture->so_path, 0, 0);
-	data->texture->we = create_img(data, data->texture->we_path, 0, 0);
-	data->texture->ea = create_img(data, data->texture->ea_path, 0, 0);
-	data->texture->black = create_img(data, "./img/black.xpm", 0, 0);
+    data->texture->no = create_img(data, data->texture->no_path, 0, 0);
+    data->texture->so = create_img(data, data->texture->so_path, 0, 0);
+    data->texture->we = create_img(data, data->texture->we_path, 0, 0);
+    data->texture->ea = create_img(data, data->texture->ea_path, 0, 0);
+    data->texture->black = create_img(data, "./img/black.xpm", 0, 0);
+    data->texture->steeringwheel = create_img(data, "./img/steeringwheel.xpm", 0, 0);
+    data->texture->carframe = create_img(data, "./img/cockpit.xpm", 0, 0);
+    data->texture->carframe2 = resize_img(data, &data->texture->carframe, data->width, data->height);
 }

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/18 08:15:33 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/18 13:11:40 by yubi42           ###   ########.fr       */
+/*   Created: 2024/02/26 14:46:24 by yubi42            #+#    #+#             */
+/*   Updated: 2024/04/18 13:19:40 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,8 @@ void	init_data(t_data *data)
 {
 	data->mlx = NULL;
 	data->mlx_win = NULL;
-	data->width = 1600;
-	data->height = 800;
+    data->width = 1920;
+    data->height = 1080;
 	data->err[0] = '\0';
 	data->map = NULL;
 	data->texture = NULL;
