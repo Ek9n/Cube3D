@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 13:58:23 by jborner           #+#    #+#             */
-/*   Updated: 2024/04/18 16:37:31 by hstein           ###   ########.fr       */
+/*   Updated: 2024/04/21 18:22:30 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,15 +139,16 @@ int	render(t_data *data)
 	// 	10);
 	put_img_to_img(data->texture->base_img, data->texture->minimap->resize, 1500, 600);
 	// rotate_image(data, &data->texture->steeringwheel, 0);
-		static int i = 0;
-		if (i > 360)
-			i = 0;
-		if (i % 30 == 0)
-		{
-			rotate_image(data, &data->texture->steeringwheel, i);
-		}
-			i += 10;
-		
+	printf("rotpwr:%d\n", data->rot[XK_Right]);
+	if (data->keys[XK_Right])
+		rotate_image(data, &data->texture->steeringwheel, -45);
+		// rotate_image(data, &data->texture->steeringwheel, 4 * -data->rot[XK_Right]);
+	else if (data->keys[XK_Left])
+		rotate_image(data, &data->texture->steeringwheel, 45);
+		// rotate_image(data, &data->texture->steeringwheel, 4 * data->rot[XK_Left]);
+	else
+		rotate_image(data, &data->texture->steeringwheel, 0);
+
 	put_img_to_img(data->texture->base_img, data->texture->steeringwheel2, 800, 800);
 	mlx_put_image_to_window(data->mlx, data->mlx_win,
 				data->texture->base_img->img_ptr, 0, 0);
