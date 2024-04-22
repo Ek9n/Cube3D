@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_game.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 13:58:23 by jborner           #+#    #+#             */
-/*   Updated: 2024/04/18 16:37:31 by hstein           ###   ########.fr       */
+/*   Updated: 2024/04/20 10:09:57 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,11 @@ void	render_minimap(t_data *data, t_minimap *minimap)
 	rotate_player_img(data, &minimap->player, &minimap->player_rot);
 	put_img_to_img(minimap->base, minimap->player_rot, data->player->y,
 		data->player->x);
+	cast_rays(data, data->player->angle, 60, data->width);
+	put_pixel_img(data->texture->minimap->base, data->player->corners[0][1], data->player->corners[0][0], BLUE);
+	put_pixel_img(data->texture->minimap->base, data->player->corners[1][1], data->player->corners[1][0], BLUE);
+	put_pixel_img(data->texture->minimap->base, data->player->corners[2][1], data->player->corners[2][0], YELLOW);
+	put_pixel_img(data->texture->minimap->base, data->player->corners[3][1], data->player->corners[3][0], YELLOW);
 	cast_rays(data, data->player->angle, 60, data->width);
 	copy_to_small(data->player->x, data->player->y, minimap->base,
 		minimap->small);

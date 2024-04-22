@@ -6,7 +6,7 @@
 /*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:50:16 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/18 08:31:05 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/20 09:23:11 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,10 @@ void	free_texture(t_texture *texture, t_data *data)
 	free_img(texture->img1, data->mlx);
 	free_img(texture->img2, data->mlx);
 	free_img(texture->black, data->mlx);
+	free_img(texture->carframe, data->mlx);
+	free_img(texture->carframe2, data->mlx);
+	free_img(texture->steeringwheel, data->mlx);
+	free_img(texture->steeringwheel2, data->mlx);
 	free_img(texture->no, data->mlx);
 	free_img(texture->so, data->mlx);
 	free_img(texture->ea, data->mlx);

@@ -6,7 +6,7 @@
 /*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 13:50:10 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/18 09:28:32 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/21 19:58:23 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,9 @@ int	check_corner_collision(t_data *data, t_map *map, t_player *player)
 	if (map->grid[player->corners[1][0] / 64][player->corners[1][1] / 64] == 1)
 		return (calc_coll_angle(data, &angle, XK_Left, XK_Down));
 	if (map->grid[player->corners[2][0] / 64][player->corners[2][1] / 64] == 1)
-		return (calc_coll_angle(data, &angle, XK_Right, XK_Up));
-	if (map->grid[player->corners[3][0] / 64][player->corners[3][1] / 64] == 1)
 		return (calc_coll_angle(data, &angle, XK_Left, XK_Up));
+	if (map->grid[player->corners[3][0] / 64][player->corners[3][1] / 64] == 1)
+		return (calc_coll_angle(data, &angle, XK_Right, XK_Up));
 	if (mid_coll(map, player->corners[2], player->corners[3]) || mid_coll(map,
 			player->corners[0], player->corners[1]))
 	{
@@ -92,8 +92,8 @@ int	check_corner_collision(t_data *data, t_map *map, t_player *player)
 
 void	check_collision(t_data *data)
 {
-	if (data->player->dead)
-		return ;
+	// if (data->player->wall_hit)
+	// 	return ;
 	set_corners(data->player);
 	if (in_border(data))
 		check_corner_collision(data, data->map, data->player);

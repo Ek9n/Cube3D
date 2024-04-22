@@ -6,7 +6,7 @@
 /*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 13:41:09 by hstein            #+#    #+#             */
-/*   Updated: 2024/04/18 09:34:19 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/21 19:52:30 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	run_game(t_data *data)
 	print_grid(data->map);
 	data->texture->base_img = create_img(data, NULL, data->width, data->height);
 	create_minimap(data);
-	render(data);
 	mlx_loop_hook(data->mlx, &render, data);
 	mlx_hook(data->mlx_win, KeyPress, KeyPressMask, &handle_keypress, data);
 	mlx_hook(data->mlx_win, KeyRelease, KeyReleaseMask, &handle_keyrelease,
