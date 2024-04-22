@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 14:29:57 by hstein            #+#    #+#             */
-/*   Updated: 2024/04/18 16:29:53 by hstein           ###   ########.fr       */
+/*   Updated: 2024/04/22 16:47:10 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,13 @@ void	mlx_init_game(t_data *data)
 	if (data->mlx_win == NULL)
 		close_game(data, "ERROR");
     data->texture->no = create_img(data, data->texture->no_path, 0, 0);
+	resize_same_img(data, & data->texture->no, IMG_SIZE, IMG_SIZE);
     data->texture->so = create_img(data, data->texture->so_path, 0, 0);
+	resize_same_img(data, & data->texture->so, IMG_SIZE, IMG_SIZE);
     data->texture->we = create_img(data, data->texture->we_path, 0, 0);
+	resize_same_img(data, & data->texture->we, IMG_SIZE, IMG_SIZE);
     data->texture->ea = create_img(data, data->texture->ea_path, 0, 0);
+	resize_same_img(data, & data->texture->ea, IMG_SIZE, IMG_SIZE);
     data->texture->black = create_img(data, "./img/black.xpm", 0, 0);
     data->texture->steeringwheel = create_img(data, "./img/steeringwheel.xpm", 0, 0);
     data->texture->steeringwheel2 = create_img(data, "./img/steeringwheel.xpm", 0, 0);

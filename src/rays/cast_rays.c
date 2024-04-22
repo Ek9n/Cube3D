@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cast_rays.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 17:54:28 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/18 16:33:19 by hstein           ###   ########.fr       */
+/*   Updated: 2024/04/22 16:53:55 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	generate_vertical(t_data *data, int i, float angle_step, int sign)
 	i2 = i;
 	if (l > 0)
 		i2 -= 0.0005 * (l * l);
-	len = data->height * 110 / (data->ray.ray_len * cos(angle_step * i2));
+	len = data->height * 45 / (data->ray.ray_len * cos(angle_step * i2));
 	j = 0;
 	k = 0;
 	while (j <= len)

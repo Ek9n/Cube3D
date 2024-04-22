@@ -6,7 +6,7 @@
 /*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:51:16 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/18 09:39:01 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/22 16:44:56 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,20 @@ void	scale_img(t_image **old, t_image **new, int w, int h)
 		}
 		y++;
 	}
+}
+
+void	resize_same_img(t_data *data, t_image **img, int w, int h)
+{
+	t_image	*resize;
+
+	resize = create_img(data, NULL, w, h);
+	if (!resize)
+		close_game(data, "Not able to allocate memory");
+	resize->bpp = (*img)->bpp;
+	resize->endian = (*img)->endian;
+	scale_img(img, &resize, w, h);
+	free_img(*img, data->mlx);
+	*img = resize;
 }
 
 t_image	*resize_img(t_data *data, t_image **old, int w, int h)

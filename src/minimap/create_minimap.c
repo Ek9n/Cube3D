@@ -6,7 +6,7 @@
 /*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 14:04:35 by jborner           #+#    #+#             */
-/*   Updated: 2024/04/18 13:18:35 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/22 16:52:35 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,19 @@ void	create_minimap_texture(t_minimap *minimap, t_data *data)
 			IMG_SIZE * data->map->col_max);
 	data->texture->minimap->small = create_img(data, NULL, 5 * IMG_SIZE, 5
 			* IMG_SIZE);
-	minimap->ground = create_img(data, NULL, 64, 64);
+	minimap->ground = create_img(data, NULL, IMG_SIZE, IMG_SIZE);
 	fill_img_color(minimap->ground, BLUE);
 	create_frame(minimap->ground, 1, BLACK);
-	minimap->wall = create_img(data, NULL, 64, 64);
+	minimap->wall = create_img(data, NULL, IMG_SIZE, IMG_SIZE);
 	fill_img_color(minimap->wall, PURPLE);
 	create_frame(minimap->wall, 1, BLACK);
-	// minimap->player = create_img(data, NULL, 64, 64);
+	// minimap->player = create_img(data, NULL, IMG_SIZE, IMG_SIZE);
 	// fill_img_color(minimap->player, RED);
 	// create_frame(minimap->player, 24, TRANS);
 	// draw_ray(data);
 	minimap->player = create_img(data, "./img/minicar.xpm", 0, 0);
-	minimap->exit = create_img(data, NULL, 64, 64);
+	resize_same_img(data, &minimap->player, minimap->player->width / 2, minimap->player->height / 2);
+	minimap->exit = create_img(data, NULL, IMG_SIZE, IMG_SIZE);
 	fill_img_color(minimap->exit, GREEN);
 }
 

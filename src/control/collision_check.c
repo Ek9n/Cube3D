@@ -6,7 +6,7 @@
 /*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 13:50:10 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/21 19:58:23 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/22 16:35:58 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,13 @@ int	check_corner_collision(t_data *data, t_map *map, t_player *player)
 	float	angle;
 
 	angle = player->angle;
-	if (map->grid[player->corners[0][0] / 64][player->corners[0][1] / 64] == 1)
+	if (map->grid[player->corners[0][0] / IMG_SIZE][player->corners[0][1] / IMG_SIZE] == 1)
 		return (calc_coll_angle(data, &angle, XK_Right, XK_Down));
-	if (map->grid[player->corners[1][0] / 64][player->corners[1][1] / 64] == 1)
+	if (map->grid[player->corners[1][0] / IMG_SIZE][player->corners[1][1] / IMG_SIZE] == 1)
 		return (calc_coll_angle(data, &angle, XK_Left, XK_Down));
-	if (map->grid[player->corners[2][0] / 64][player->corners[2][1] / 64] == 1)
+	if (map->grid[player->corners[2][0] / IMG_SIZE][player->corners[2][1] / IMG_SIZE] == 1)
 		return (calc_coll_angle(data, &angle, XK_Left, XK_Up));
-	if (map->grid[player->corners[3][0] / 64][player->corners[3][1] / 64] == 1)
+	if (map->grid[player->corners[3][0] / IMG_SIZE][player->corners[3][1] / IMG_SIZE] == 1)
 		return (calc_coll_angle(data, &angle, XK_Right, XK_Up));
 	if (mid_coll(map, player->corners[2], player->corners[3]) || mid_coll(map,
 			player->corners[0], player->corners[1]))

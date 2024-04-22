@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/21 17:29:34 by hstein           ###   ########.fr       */
+/*   Updated: 2024/04/22 16:45:43 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # define TRUE 1
 # define FALSE 0
 # define PI 3.1415926535
-# define IMG_SIZE 64
+# define IMG_SIZE 32
 
 # define TRANS 0x000000
 # define GREEN 0xFF00
@@ -44,7 +44,7 @@
 # define MOVSPEED 1
 # define NUM_KEYS 65536
 # define ANIM_DELAY 6
-# define ROT_MIN 0
+# define ROT_MIN 5
 # define MOV_MIN 10
 # define SIDESTEP 10
 # define EPSILON 1e-6
@@ -307,6 +307,7 @@ size_t			delay_ms(void);
 
 // resize_img.c
 void			scale_img(t_image **old, t_image **new, int w, int h);
+void			resize_same_img(t_data *data, t_image **img, int w, int h);
 t_image			*resize_img(t_data *data, t_image **old, int w, int h);
 void			rotate_player_img(t_data *data, t_image **old, t_image **new);
 
