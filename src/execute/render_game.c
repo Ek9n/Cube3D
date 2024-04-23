@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_game.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 13:58:23 by jborner           #+#    #+#             */
-/*   Updated: 2024/04/23 11:06:45 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/23 15:07:54 by jborner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 void rotate_image(t_data *data, t_image **img, double angle)
 {
     static double old_angle;
-	printf("new%fold%f\n", angle, old_angle);
+	// printf("new%fold%f\n", angle, old_angle);
     if (old_angle != angle)
     {
         angle = angle - old_angle;
@@ -144,7 +144,7 @@ int	render(t_data *data)
 	// 	10);
 	put_img_to_img(data->texture->base_img, data->texture->minimap->resize, 1500, 600);
 	// rotate_image(data, &data->texture->steeringwheel, 0);
-	printf("rotpwr:%d\n", data->rot[XK_Right]);
+	// printf("rotpwr:%d\n", data->rot[XK_Right]);
 	if (data->keys[XK_Right])
 		rotate_image(data, &data->texture->steeringwheel, -45);
 		// rotate_image(data, &data->texture->steeringwheel, 4 * -data->rot[XK_Right]);

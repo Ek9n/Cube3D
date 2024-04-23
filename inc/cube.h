@@ -6,7 +6,7 @@
 /*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/23 14:33:21 by jborner          ###   ########.fr       */
+/*   Updated: 2024/04/23 15:52:39 by jborner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@
 # define NUM_KEYS 65536
 # define ANIM_DELAY 6
 # define ROT_MIN 5
-# define ROT_MAX 20
+# define ROT_MAX 200
 # define MOV_MIN 10
 # define SIDESTEP 10
 # define EPSILON 1e-6
@@ -189,6 +189,7 @@ typedef struct s_data
 	int			height;
 	int			keys[NUM_KEYS];
 	int			rot[NUM_KEYS];
+	int			rot_max;
 	int			minimap_width;
 	int			minimap_height;
 	char		err[50];

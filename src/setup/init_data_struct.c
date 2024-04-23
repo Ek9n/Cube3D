@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data_struct.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:46:24 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/23 10:55:59 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/23 14:45:16 by jborner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void	init_data(t_data *data)
 	data->map = NULL;
 	data->texture = NULL;
 	data->player = NULL;
+	data->rot_max = ROT_MAX;
 	data->player = malloc(sizeof(t_player));
 	data->map = malloc(sizeof(t_map));
 	data->texture = malloc(sizeof(t_texture));
