@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_action.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 08:35:01 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/18 09:31:16 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/23 14:36:34 by jborner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,10 @@ vvvvvvv
 */
 void	rotate_player(t_data *data, int sign, int num)
 {
-	if (!data->player->dead && data->keys[num] && data->rot[num] < 20)
+	if (!data->player->dead && data->keys[num] && data->rot[num] < ROT_MAX)
 		data->rot[num] += 2;
+	else if(!data->player->dead && data->keys[num] && data->rot[num] >= ROT_MAX)
+		data->rot[num] += 0;
 	else
 		data->rot[num] -= 1;
 	if (data->rot[num] > ROT_MIN)
