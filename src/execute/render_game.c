@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 13:58:23 by jborner           #+#    #+#             */
-/*   Updated: 2024/04/23 15:01:30 by hstein           ###   ########.fr       */
+/*   Updated: 2024/04/23 17:13:24 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ void rotate_image(t_data *data, t_image **img, double angle)
                 if (rotated_x >= 0 && rotated_x < (*img)->width && rotated_y >= 0 && rotated_y < (*img)->height) {
                     // Setze den Pixelwert im rotierten Bild
                     put_pixel_img(img_rot, x, y, get_pixel_img(*img, rotated_x, rotated_y));
+                    // put_pixel_img(img_rot, x, y, get_pixel_img(*img, rotated_x, rotated_y));
                     // put_pixel_img(img_rot, rotated_x, rotated_y, get_pixel_img(*img, x, y));
                 }
             }
@@ -200,7 +201,7 @@ int	render(t_data *data)
 		if (last_dir == 0)
 			rotate_image(data, &data->texture->steeringwheel, 4 * (data->rot[XK_Left] - ROT_MIN));
 	}
-	put_img_to_img(data->texture->base_img, data->texture->steeringwheel2, 800, 800);
+	put_img_to_img(data->texture->base_img, data->texture->steeringwheel2, 500, 500);
 	mlx_put_image_to_window(data->mlx, data->mlx_win,
 				data->texture->base_img->img_ptr, 0, 0);
 	usleep(42000);
