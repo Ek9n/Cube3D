@@ -6,7 +6,7 @@
 /*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/22 16:45:43 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/23 10:55:40 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # define TRUE 1
 # define FALSE 0
 # define PI 3.1415926535
-# define IMG_SIZE 32
+# define IMG_SIZE 64
 
 # define TRANS 0x000000
 # define GREEN 0xFF00
@@ -95,6 +95,7 @@ typedef struct s_texture
 	t_image		*carframe2;
 	t_image		*steeringwheel;
 	t_image		*steeringwheel2;
+	t_image		*game_over;
 	t_image		*img1;
 	t_image		*img2;
 	t_image		*black;
@@ -204,7 +205,7 @@ void			close_game(t_data *data, char *msg);
 
 // free_structs.c
 void			free_minimap(t_minimap *minimap, t_data *data);
-void			free_texture(t_texture *texturefree_texture, t_data *data);
+void			free_texture(t_texture *texture, t_data *data);
 void			free_map(t_map *map);
 void			free_data(t_data *data);
 
@@ -330,7 +331,7 @@ int				line_valid(t_read *reading, t_texture *cub,
 
 // init_data_struct.c
 
-void			init_texture(t_texture *cub);
+void			init_texture(t_texture *texture);
 void			init_map(t_map *map);
 void			init_player(t_player *player);
 void			init_array(int array[NUM_KEYS], int num, int num2);

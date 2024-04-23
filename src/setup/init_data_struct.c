@@ -3,41 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   init_data_struct.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:46:24 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/18 16:29:15 by hstein           ###   ########.fr       */
+/*   Updated: 2024/04/23 10:55:59 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-void	init_texture(t_texture *cub)
+void	init_texture(t_texture *texture)
 {
-	cub->minimap = NULL;
-	cub->no_path = NULL;
-	cub->so_path = NULL;
-	cub->we_path = NULL;
-	cub->ea_path = NULL;
-	cub->base_img = NULL;
-	cub->img1 = NULL;
-	cub->img2 = NULL;
-	cub->black = NULL;
-	cub->steeringwheel = NULL;
-	cub->steeringwheel2 = NULL;
-	cub->carframe = NULL;
-	cub->carframe2 = NULL;
-	cub->no = NULL;
-	cub->so = NULL;
-	cub->ea = NULL;
-	cub->we = NULL;
-	cub->f[0] = -1;
-	cub->f[1] = -1;
-	cub->f[2] = -1;
-	cub->c[0] = -1;
-	cub->c[1] = -1;
-	cub->c[2] = -1;
-	cub->map_str = NULL;
+	texture->minimap = NULL;
+	texture->no_path = NULL;
+	texture->so_path = NULL;
+	texture->we_path = NULL;
+	texture->ea_path = NULL;
+	texture->base_img = NULL;
+	texture->img1 = NULL;
+	texture->img2 = NULL;
+	texture->black = NULL;
+	texture->steeringwheel = NULL;
+	texture->steeringwheel2 = NULL;
+	texture->carframe = NULL;
+	texture->carframe2 = NULL;
+	texture->game_over = NULL;
+	texture->no = NULL;
+	texture->so = NULL;
+	texture->ea = NULL;
+	texture->we = NULL;
+	texture->f[0] = -1;
+	texture->f[1] = -1;
+	texture->f[2] = -1;
+	texture->c[0] = -1;
+	texture->c[1] = -1;
+	texture->c[2] = -1;
+	texture->map_str = NULL;
 }
 
 void	init_map(t_map *map)

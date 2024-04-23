@@ -6,7 +6,7 @@
 /*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 14:04:35 by jborner           #+#    #+#             */
-/*   Updated: 2024/04/22 16:52:35 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/23 10:41:51 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	create_minimap_texture(t_minimap *minimap, t_data *data)
 	// create_frame(minimap->player, 24, TRANS);
 	// draw_ray(data);
 	minimap->player = create_img(data, "./img/minicar.xpm", 0, 0);
-	resize_same_img(data, &minimap->player, minimap->player->width / 2, minimap->player->height / 2);
+	// resize_same_img(data, &minimap->player, minimap->player->width / 2, minimap->player->height / 2);
 	minimap->exit = create_img(data, NULL, IMG_SIZE, IMG_SIZE);
 	fill_img_color(minimap->exit, GREEN);
 }

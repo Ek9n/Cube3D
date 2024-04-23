@@ -6,7 +6,7 @@
 /*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 13:58:23 by jborner           #+#    #+#             */
-/*   Updated: 2024/04/22 16:33:12 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/23 11:06:45 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,8 +153,9 @@ int	render(t_data *data)
 		// rotate_image(data, &data->texture->steeringwheel, 4 * data->rot[XK_Left]);
 	else
 		rotate_image(data, &data->texture->steeringwheel, 0);
-
 	put_img_to_img(data->texture->base_img, data->texture->steeringwheel2, 800, 800);
+	if(data->player->dead)
+		put_img_to_img(data->texture->base_img, data->texture->game_over,  200, -200);
 	mlx_put_image_to_window(data->mlx, data->mlx_win,
 				data->texture->base_img->img_ptr, 0, 0);
 	usleep(42000);
