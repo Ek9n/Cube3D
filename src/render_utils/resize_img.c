@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   resize_img.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:51:16 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/24 16:56:37 by jborner          ###   ########.fr       */
+/*   Updated: 2024/04/24 19:35:28 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ void	resize_same_img(t_data *data, t_image **img, int w, int h)
 	resize = create_img(data, NULL, w, h);
 	if (!resize)
 		close_game(data, "Not able to allocate memory");
-	resize->bpp = (*img)->bpp;
-	resize->endian = (*img)->endian;
 	scale_img(img, &resize, w, h);
 	free_img(*img, data->mlx);
 	*img = resize;
