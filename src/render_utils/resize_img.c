@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   resize_img.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:51:16 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/24 12:52:59 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/24 16:56:37 by jborner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ void	scale_img(t_image **old, t_image **new, int w, int h)
 	unsigned int	color;
 	int				x;
 	int				y;
-	float			x_ratio;
-	float			y_ratio;
+	double			x_ratio;
+	double			y_ratio;
 
-	x_ratio = (float)(*old)->width / w;
-	y_ratio = (float)(*old)->height / h;
+	x_ratio = (double)(*old)->width / w;
+	y_ratio = (double)(*old)->height / h;
 	y = 0;
 	while (y < h)
 	{
@@ -63,13 +63,13 @@ t_image	*resize_img(t_data *data, t_image **old, int w, int h)
 	return (new_img);
 }
 
-float	calc_old_x(t_data *data, t_image **old, int x, int y)
+double	calc_old_x(t_data *data, t_image **old, int x, int y)
 {
 	return ((x - (*old)->width / 2) * data->player->y_cos + (y - (*old)->height
 			/ 2) * data->player->x_sin + (*old)->width / 2);
 }
 
-float	calc_old_y(t_data *data, t_image **old, int x, int y)
+double	calc_old_y(t_data *data, t_image **old, int x, int y)
 {
 	return (-(x - (*old)->width / 2) * data->player->x_sin + (y - (*old)->height
 			/ 2) * data->player->y_cos + (*old)->height / 2);
@@ -79,8 +79,8 @@ void	rotate_player_img(t_data *data, t_image **old, t_image **new)
 {
 	int		x;
 	int		y;
-	float	old_x;
-	float	old_y;
+	double	old_x;
+	double	old_y;
 
 	if (*new)
 		free_img(*new, data->mlx);

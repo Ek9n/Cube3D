@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validators.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:58:15 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/24 13:01:49 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/24 14:22:26 by jborner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,8 @@ int	file_validator(char *file, t_texture *cub, char (*err)[50])
 
 int	input_validator(int ac, char **av, char (*err)[50])
 {
-	printf("test\n");
 	if (ac != 2)
 	{
-		printf("test1");
 		ft_strlcpy(*err, "Usage: ./cube3d *.cub",
 			ft_strlen("Usage: ./cube3d *.cub") + 1);
 		return (FALSE);
@@ -61,7 +59,6 @@ int	input_validator(int ac, char **av, char (*err)[50])
 	if (ft_strncmp(&av[1][ft_strlen(av[1]) - ft_strlen(".cub")], ".cub",
 		5) != 0)
 	{
-		printf("test2");
 		ft_strlcpy(*err, "Usage: ./cube3d *.cub",
 			ft_strlen("Usage: ./cube3d *.cub") + 1);
 		return (FALSE);

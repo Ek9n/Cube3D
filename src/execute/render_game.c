@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_game.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 13:58:23 by jborner           #+#    #+#             */
-/*   Updated: 2024/04/24 12:52:59 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/24 16:56:37 by jborner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,16 @@
 // Skalieren Sie die Wandhöhe basierend auf dem Abstand des Betrachters zur Wand
 //     int wall_height = WALL_HEIGHT * VIEW_DISTANCE / wall_distance;
 
-// void rotate_image(t_data *data, t_image **img, float angle)
+// void rotate_image(t_data *data, t_image **img, double angle)
 // {
-//     static float old_angle;
+//     static double old_angle;
 // 	printf("new%fold%f\n", angle, old_angle);
 //     if (old_angle != angle)
 //     {
 //         angle = angle - old_angle;
 // 		printf("1ANGLE%f\n", angle);
 
-//         float radians = angle * PI / 180.0;
+//         double radians = angle * PI / 180.0;
 
 //         // Größe des rotierten Bildes bestimmen
 //         int rotated_width = (*img)->width;
@@ -71,11 +71,11 @@
 //     }
 // }
 
-void rotate_image(t_data *data, t_image **img, float angle)
+void rotate_image(t_data *data, t_image **img, double angle)
 {
 		// printf("1ANGLE%f\n", angle);
 
-        float radians;
+        double radians;
 		radians = angle * PI / 180.0;
 
         // Buffer-Bild erstellen

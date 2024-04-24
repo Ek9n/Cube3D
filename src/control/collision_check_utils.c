@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   collision_check_utils.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 08:54:54 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/24 12:52:59 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/24 16:56:37 by jborner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ int	check_mid_wall(t_map *map, int corner1[2], int corner2[2], int mod[2])
 	return (0);
 }
 
-int	calc_coll_angle(t_data *data, float *angle, int side, int dir)
+int	calc_coll_angle(t_data *data, double *angle, int side, int dir)
 {
-	float	mod;
+	double	mod;
 
 	mod = ((int)(*angle * 1000) % (int)(0.5 * PI * 1000));
 	mod /= 1000;

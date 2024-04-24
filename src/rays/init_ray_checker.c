@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_ray_checker.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 17:57:30 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/24 12:52:59 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/24 16:56:37 by jborner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	init_next_steps(t_ray *ray)
 	}
 }
 
-void	init_check_ray(t_ray *ray, float angle, int x, int y)
+void	init_check_ray(t_ray *ray, double angle, int x, int y)
 {
 	ray->x = x;
 	ray->y = y;

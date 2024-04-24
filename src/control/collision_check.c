@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   collision_check.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 13:50:10 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/24 12:52:59 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/24 16:56:37 by jborner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	set_corners(t_player *player)
 {
-	float	sin1;
-	float	cos1;
-	float	sin2;
-	float	cos2;
+	double	sin1;
+	double	cos1;
+	double	sin2;
+	double	cos2;
 
 	sin1 = sin(player->angle);
 	cos1 = cos(player->angle);
@@ -64,18 +64,25 @@ int	mid_coll(t_map *map, int corner1[2], int corner2[2])
 	return (0);
 }
 
+int	is_wall(t_map *map, int x, int y)
+{
+	if (map->grid[x / IMG_SIZE][y / IMG_SIZE] == 1)
+		return (1);
+	return (0);
+}
+
 int	check_corner_collision(t_data *data, t_map *map, t_player *player)
 {
-	float	angle;
+	double	angle;
 
 	angle = player->angle;
-	if (map->grid[player->corners[0][0] / IMG_SIZE][player->corners[0][1] / IMG_SIZE] == 1)
+	if (is_wall(map, player->corners[0][0], player->corners[0][1]))
 		return (calc_coll_angle(data, &angle, XK_Right, XK_Down));
-	if (map->grid[player->corners[1][0] / IMG_SIZE][player->corners[1][1] / IMG_SIZE] == 1)
+	if (is_wall(map, player->corners[1][0], player->corners[1][1]))
 		return (calc_coll_angle(data, &angle, XK_Left, XK_Down));
-	if (map->grid[player->corners[2][0] / IMG_SIZE][player->corners[2][1] / IMG_SIZE] == 1)
+	if (is_wall(map, player->corners[2][0], player->corners[2][1]))
 		return (calc_coll_angle(data, &angle, XK_Left, XK_Up));
-	if (map->grid[player->corners[3][0] / IMG_SIZE][player->corners[3][1] / IMG_SIZE] == 1)
+	if (is_wall(map, player->corners[3][0], player->corners[3][1]))
 		return (calc_coll_angle(data, &angle, XK_Right, XK_Up));
 	if (mid_coll(map, player->corners[2], player->corners[3]) || mid_coll(map,
 			player->corners[0], player->corners[1]))
@@ -92,8 +99,6 @@ int	check_corner_collision(t_data *data, t_map *map, t_player *player)
 
 void	check_collision(t_data *data)
 {
-	// if (data->player->wall_hit)
-	// 	return ;
 	set_corners(data->player);
 	if (in_border(data))
 		check_corner_collision(data, data->map, data->player);
