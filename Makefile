@@ -1,6 +1,6 @@
 CC      = cc
 CFLAGS  = -g -Wall -Werror -Wextra
-NAME    = cub3d
+NAME    = cub3D
 
 LIBFT   = lib/libft/libft.a
 MLX		= lib/.mlx_linux/libmlx.a

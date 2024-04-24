@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_game.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 13:58:23 by jborner           #+#    #+#             */
-/*   Updated: 2024/04/23 17:13:24 by hstein           ###   ########.fr       */
+/*   Updated: 2024/04/24 12:52:59 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,16 @@
 // Skalieren Sie die Wandhöhe basierend auf dem Abstand des Betrachters zur Wand
 //     int wall_height = WALL_HEIGHT * VIEW_DISTANCE / wall_distance;
 
-// void rotate_image(t_data *data, t_image **img, double angle)
+// void rotate_image(t_data *data, t_image **img, float angle)
 // {
-//     static double old_angle;
+//     static float old_angle;
 // 	printf("new%fold%f\n", angle, old_angle);
 //     if (old_angle != angle)
 //     {
 //         angle = angle - old_angle;
 // 		printf("1ANGLE%f\n", angle);
 
-//         double radians = angle * PI / 180.0;
+//         float radians = angle * PI / 180.0;
 
 //         // Größe des rotierten Bildes bestimmen
 //         int rotated_width = (*img)->width;
@@ -71,11 +71,11 @@
 //     }
 // }
 
-void rotate_image(t_data *data, t_image **img, double angle)
+void rotate_image(t_data *data, t_image **img, float angle)
 {
-		printf("1ANGLE%f\n", angle);
+		// printf("1ANGLE%f\n", angle);
 
-        double radians;
+        float radians;
 		radians = angle * PI / 180.0;
 
         // Buffer-Bild erstellen
@@ -183,7 +183,7 @@ int	render(t_data *data)
 	// 	10);
 	put_img_to_img(data->texture->base_img, data->texture->minimap->resize, 1500, 600);
 	// rotate_image(data, &data->texture->steeringwheel, 0);
-	printf("rotpwr:%d\n", data->rot[XK_Right]);
+	// printf("rotpwr:%d\n", data->rot[XK_Right]);
 	if (data->keys[XK_Right])
 	{
 		last_dir = 1;
@@ -202,6 +202,8 @@ int	render(t_data *data)
 			rotate_image(data, &data->texture->steeringwheel, 4 * (data->rot[XK_Left] - ROT_MIN));
 	}
 	put_img_to_img(data->texture->base_img, data->texture->steeringwheel2, 500, 500);
+	if (data->player->dead)
+		put_img_to_img(data->texture->base_img, data->texture->game_over, 200, -200);
 	mlx_put_image_to_window(data->mlx, data->mlx_win,
 				data->texture->base_img->img_ptr, 0, 0);
 	usleep(42000);
