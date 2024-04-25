@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wall_detection.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 18:00:07 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/18 12:47:32 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/24 16:56:37 by jborner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,10 @@ int	west_wall(t_data *data, int x, int y)
 	return (0);
 }
 
-int	wall_found(t_data *data, float x, float y)
+int	wall_found(t_data *data, double x, double y)
 {
 	adjust_x_y(data, &x, &y);
+	data->ray.ray_len = distance(data->ray.x, data->ray.y, x, y);
 	if ((int)x % IMG_SIZE == 0)
 	{
 		if (north_wall(data, x, y))

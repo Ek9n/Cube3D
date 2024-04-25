@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_game.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 13:58:23 by jborner           #+#    #+#             */
-/*   Updated: 2024/04/23 17:13:24 by hstein           ###   ########.fr       */
+/*   Updated: 2024/04/24 16:56:37 by jborner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@
 
 void rotate_image(t_data *data, t_image **img, double angle)
 {
-		printf("1ANGLE%f\n", angle);
+		// printf("1ANGLE%f\n", angle);
 
         double radians;
 		radians = angle * PI / 180.0;
@@ -183,7 +183,7 @@ int	render(t_data *data)
 	// 	10);
 	put_img_to_img(data->texture->base_img, data->texture->minimap->resize, 1400, 650);
 	// rotate_image(data, &data->texture->steeringwheel, 0);
-	printf("rotpwr:%d\n", data->rot[XK_Right]);
+	// printf("rotpwr:%d\n", data->rot[XK_Right]);
 	if (data->keys[XK_Right])
 	{
 		last_dir = 1;
@@ -202,6 +202,8 @@ int	render(t_data *data)
 			rotate_image(data, &data->texture->steeringwheel, 4 * (data->rot[XK_Left] - ROT_MIN));
 	}
 	put_img_to_img(data->texture->base_img, data->texture->steeringwheel2, 500, 500);
+	if (data->player->dead)
+		put_img_to_img(data->texture->base_img, data->texture->game_over, 200, -200);
 	mlx_put_image_to_window(data->mlx, data->mlx_win,
 				data->texture->base_img->img_ptr, 0, 0);
 	usleep(42000);

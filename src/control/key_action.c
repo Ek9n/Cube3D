@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_action.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 08:35:01 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/23 15:37:46 by hstein           ###   ########.fr       */
+/*   Updated: 2024/04/24 16:10:00 by jborner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,12 @@ void	calc_speed(t_data *data, int sign)
 		data->player->speed[2] = 0;
 	if (data->rot[XK_Down] <= MOV_MIN)
 		data->player->speed[1] = 0;
-	data->player->speed[0] = (data->player->speed[2] - data->player->speed[1])
-		* 10;
+	data->player->speed[0] = (data->player->speed[2] - data->player->speed[1]);
 	if (data->player->speed[0] < 0)
 		data->player->speed[0] *= -1;
+	data->player->rev_speed = (18 - data->player->speed[0]) / 2;
+	if (data->player->rev_speed < 3)
+		data->player->rev_speed = 3;
 }
 
 void	move_player(t_data *data, int sign, int num, int other_num)
@@ -47,26 +49,24 @@ void	move_player(t_data *data, int sign, int num, int other_num)
 		data->player->y += data->player->dy * sign;
 	}
 	calc_speed(data, sign);
-	printf("cur speed: %i km/h\n", (int)data->player->speed[0]);
 }
 
-/*
-if we want the rotate only when it is moving: if (data->rot[num] > ROT_MIN
-&& (data->rot[XK_Up] > MOV_MIN || data->rot[XK_Down] > MOV_MIN))
-vvvvvvv
-*/
+// printf("cur speed: %i km/h\n", (int)data->player->speed[0] * 10);
+
 void	rotate_player(t_data *data, int sign, int num)
 {
 	if (!data->player->dead && data->keys[num] && data->rot[num] < ROT_MAX)
 		data->rot[num] += 2;
-	else if(!data->player->dead && data->keys[num] && data->rot[num] >= ROT_MAX)
+	else if (!data->player->dead && data->keys[num]
+		&& data->rot[num] >= ROT_MAX)
 		data->rot[num] += 0;
 	else
 		data->rot[num] -= 1;
-	if (data->rot[num] > ROT_MIN)
+	if (data->rot[num] > ROT_MIN && (data->rot[XK_Up] > MOV_MIN
+			|| data->rot[XK_Down] > MOV_MIN))
 	{
-		data->player->angle += 0.1 * sign * (1 + (((data->rot[num]
-							* data->rot[num])) / 200));
+		data->player->angle += (0.002 * data->player->rev_speed
+				* data->player->rev_speed) * sign;
 		if (data->player->angle < 0 || data->player->angle >= 2 * PI)
 			data->player->angle -= 2 * PI * sign;
 		data->player->x_sin = sin(data->player->angle);

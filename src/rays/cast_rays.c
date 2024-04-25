@@ -6,7 +6,7 @@
 /*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 17:54:28 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/23 09:59:59 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/24 19:39:30 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,7 @@ to draw rays into map add in the beginning of do_row_step/do_col_step:
 int	do_row_step(t_data *data, t_ray *ray)
 {
 	if (wall_found(data, ray->row_x, ray->row_y))
-	{
-		ray->ray_len = ray->dis_row;
 		return (1);
-	}
 	ray->row_x += ray->row_step_x;
 	ray->row_y += ray->row_step_y;
 	ray->dis_row = distance(ray->x, ray->y, ray->row_x, ray->row_y);
@@ -44,13 +41,15 @@ int	do_col_step(t_data *data, t_ray *ray)
 	return (0);
 }
 
-void	cast_ray(t_data *data, float angle, int x, int y)
+void	cast_ray(t_data *data, double angle, int x, int y)
 {
 	adjust_angle(&angle);
 	init_check_ray(&data->ray, angle, x, y);
+	// printf("row_step %f, col_step %f\n", data->ray.row_step, data->ray.col_step);
+	// printf("row_dis %f, col_dis %f\n", data->ray.dis_row, data->ray.dis_col);
 	while (1)
 	{
-		if (data->ray.row_step > 0 && data->ray.dis_row <= data->ray.dis_col)
+		if (data->ray.row_step > 0 && (data->ray.dis_row <= data->ray.dis_col || data->ray.dis_col == 0))
 		{
 			if (do_row_step(data, &data->ray))
 				break ;
@@ -63,13 +62,13 @@ void	cast_ray(t_data *data, float angle, int x, int y)
 	}
 }
 
-void	generate_vertical(t_data *data, int i, float angle_step, int sign)
+void	generate_vertical(t_data *data, int i, double angle_step, int sign)
 {
-	float	len;
-	float	j;
-	float	k;
-	int		l;
-	int		i2;
+	double	len;
+	double	j;
+	double	k;
+	double	l;
+	double	i2;
 
 	l = i - ((data->ray.ray_amount / 2) - data->ray.ray_amount / 10) + 1;
 	i2 = i;
@@ -88,13 +87,13 @@ void	generate_vertical(t_data *data, int i, float angle_step, int sign)
 	}
 }
 
-void	cast_rays(t_data *data, float angle, int deg, int amount)
+void	cast_rays(t_data *data, double angle, int deg, int amount)
 {
 	int		start_x;
 	int		start_y;
 	int		i;
-	float	total;
-	float	step;
+	double	total;
+	double	step;
 
 	start_x = data->player->x + (data->texture->minimap->player->height / 2);
 	start_y = data->player->y + (data->texture->minimap->player->width / 2);

@@ -6,7 +6,7 @@
 /*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/23 14:33:21 by jborner          ###   ########.fr       */
+/*   Updated: 2024/04/24 16:56:37 by jborner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,14 +140,15 @@ typedef struct s_map
 
 typedef struct s_player
 {
-	float		x;
-	float		y;
-	float		dx;
-	float		dy;
-	float		x_sin;
-	float		y_cos;
-	float		angle;
-	float		speed[3];
+	double		x;
+	double		y;
+	double		dx;
+	double		dy;
+	double		x_sin;
+	double		y_cos;
+	double		angle;
+	double		speed[3];
+	int			rev_speed;
 	int			corners[4][2];
 	int			dead;
 	int			wall_hit;
@@ -156,30 +157,30 @@ typedef struct s_player
 typedef struct s_ray
 {
 	int			ray_amount;
-	float		ray_len;
+	double		ray_len;
 	int			img_col;
 	t_image		*img;
 	int			x;
 	int			y;
-	float		angle;
-	float		sin;
-	float		cos;
-	float		fabs_sin;
-	float		fabs_cos;
-	float		row_x;
-	float		row_y;
-	float		col_x;
-	float		col_y;
-	float		row_step;
-	float		col_step;
-	float		row_step_x;
-	float		row_step_y;
-	float		col_step_x;
-	float		col_step_y;
-	float		first_row_step;
-	float		first_col_step;
-	float		dis_row;
-	float		dis_col;
+	double		angle;
+	double		sin;
+	double		cos;
+	double		fabs_sin;
+	double		fabs_cos;
+	double		row_x;
+	double		row_y;
+	double		col_x;
+	double		col_y;
+	double		row_step;
+	double		col_step;
+	double		row_step_x;
+	double		row_step_y;
+	double		col_step_x;
+	double		col_step_y;
+	double		first_row_step;
+	double		first_col_step;
+	double		dis_row;
+	double		dis_col;
 	int			first_col;
 }				t_ray;
 
@@ -232,7 +233,7 @@ int				in_border(t_data *data);
 int				calc_mod(int num);
 int				check_mid_wall(t_map *map, int corner1[2], int corner2[2],
 					int mod[2]);
-int				calc_coll_angle(t_data *data, float *angle, int side,
+int				calc_coll_angle(t_data *data, double *angle, int side,
 					int dir);
 
 // keypress.c
@@ -278,21 +279,21 @@ void			mlx_init_game(t_data *data);
 // cast_rays.c
 int				do_row_step(t_data *data, t_ray *ray);
 int				do_col_step(t_data *data, t_ray *ray);
-void			cast_ray(t_data *data, float angle, int x, int y);
-void			cast_rays(t_data *data, float angle, int deg, int amount);
+void			cast_ray(t_data *data, double angle, int x, int y);
+void			cast_rays(t_data *data, double angle, int deg, int amount);
 
 // init_ray_checker.c
 void			init_ray_steps(t_ray *ray);
 void			init_next_steps(t_ray *ray);
-void			init_check_ray(t_ray *ray, float angle, int x, int y);
+void			init_check_ray(t_ray *ray, double angle, int x, int y);
 
 // ray_checker_utils.c
-float			distance(float x1, float y1, float x2, float y2);
-void			adjust_angle(float *angle);
-void			adjust_x_y(t_data *data, float *x, float *y);
+double			distance(double x1, double y1, double x2, double y2);
+void			adjust_angle(double *angle);
+void			adjust_x_y(t_data *data, double *x, double *y);
 
 // wall_detection.c
-int				wall_found(t_data *data, float cur_x, float cur_y);
+int				wall_found(t_data *data, double cur_x, double cur_y);
 
 // ============== RENDER UTILS ==============
 

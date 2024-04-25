@@ -6,7 +6,7 @@
 /*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 15:08:21 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/18 13:02:44 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/24 12:59:58 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	check_filepath(char **cub, int *setup_var, t_read *reading, char (*err)[50])
 
 	if (ft_strlen(reading->str) < 5)
 	{
+		
 		ft_strlcpy(*err, "Invalid texture path",
 			ft_strlen("Invalid texture path") + 1);
 		reading->return_value = FALSE;
