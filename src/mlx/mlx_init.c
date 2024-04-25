@@ -3,11 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/27 14:29:57 by hstein            #+#    #+#             */
-/*   Updated: 2024/04/24 16:22:29 by jborner          ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2024/04/25 16:17:29 by hstein           ###   ########.fr       */
 /*                                                                            */
+/* ************************************************************************** */
+
 /* ************************************************************************** */
 
 #include "cube.h"
@@ -30,6 +32,7 @@ t_image	*create_img(t_data *data, char *path, int w, int h)
 	if (path)
 		img->img_ptr = mlx_xpm_file_to_image(data->mlx, path, &(img->width),
 				&(img->height));
+				&(img->height));
 	else
 	{
 		img->img_ptr = mlx_new_image(data->mlx, w, h);
@@ -38,11 +41,13 @@ t_image	*create_img(t_data *data, char *path, int w, int h)
 	}
 	img->addr = mlx_get_data_addr(img->img_ptr, &(img->bpp),
 			&(img->bytes_per_line), &(img->endian));
+			&(img->bytes_per_line), &(img->endian));
 	if (!(img->img_ptr || img->addr))
 		close_game(data, "Not able to allocate memory for img_ptr or addr");
 	return (img);
 }
 
+void	create_wall_imgs(t_data *data)
 void	create_wall_imgs(t_data *data)
 {
 	data->texture->no = create_img(data, data->texture->no_path, 0, 0);
@@ -70,12 +75,12 @@ void	mlx_init_game(t_data *data)
 	create_wall_imgs(data);
 	data->texture->black = create_img(data, "./img/black.xpm", 0, 0);
 	data->texture->steeringwheel = create_img(data, "./img/steeringwheel.xpm",
-			0, 0);
+				0, 0);
 	data->texture->steeringwheel2 = create_img(data, "./img/steeringwheel.xpm",
-			0, 0);
+				0, 0);
 	data->texture->carframe = create_img(data, "./img/cockpit.xpm", 0, 0);
 	data->texture->carframe2 = resize_img(data, &data->texture->carframe,
-		data->width, data->height);
+			data->width, data->height);
 	data->texture->nums = create_img(data, "./img/nums.xpm", 0, 0);
 	data->texture->numshadow = create_img(data, "./img/numshadow.xpm", 0, 0);
 	data->texture->game_over = create_img(data, "./img/game_over2.xpm", 0, 0);
