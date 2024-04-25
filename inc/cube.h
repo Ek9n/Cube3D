@@ -96,6 +96,8 @@ typedef struct s_texture
 	t_image		*carframe2;
 	t_image		*steeringwheel;
 	t_image		*steeringwheel2;
+	t_image		*nums;
+	t_image		*numshadow;
 	t_image		*game_over;
 	t_image		*img1;
 	t_image		*img2;

@@ -71,6 +71,8 @@ void	mlx_init_game(t_data *data)
 	data->texture->carframe = create_img(data, "./img/cockpit.xpm", 0, 0);
 	data->texture->carframe2 = resize_img(data, &data->texture->carframe,
 		data->width, data->height);
+	data->texture->nums = create_img(data, "./img/nums.xpm", 0, 0);
+	data->texture->numshadow = create_img(data, "./img/numshadow.xpm", 0, 0);
 	data->texture->game_over = create_img(data, "./img/game_over2.xpm", 0, 0);
 	resize_same_img(data, &data->texture->game_over, data->width, data->height);
 }

@@ -27,6 +27,8 @@ void	init_texture(t_texture *texture)
 	texture->steeringwheel2 = NULL;
 	texture->carframe = NULL;
 	texture->carframe2 = NULL;
+	texture->nums = NULL;
+	texture->numshadow = NULL;
 	texture->game_over = NULL;
 	texture->no = NULL;
 	texture->so = NULL;

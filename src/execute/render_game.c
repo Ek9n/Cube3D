@@ -181,7 +181,7 @@ int	render(t_data *data)
 	put_img_to_img(data->texture->base_img, data->texture->carframe2, 0, 0);
 	// put_img_to_img(data->texture->base_img, data->texture->minimap->resize, 10,
 	// 	10);
-	put_img_to_img(data->texture->base_img, data->texture->minimap->resize, 1500, 600);
+	put_img_to_img(data->texture->base_img, data->texture->minimap->resize, 1400, 650);
 	// rotate_image(data, &data->texture->steeringwheel, 0);
 	printf("rotpwr:%d\n", data->rot[XK_Right]);
 	if (data->keys[XK_Right])

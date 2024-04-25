@@ -1,0 +1,26 @@
+/* XPM */
+static char *a2a9abed15234947c08b7482440ab7b5laSiH9HeznmC1IKZ[] = {
+/* columns rows colors chars-per-pixel */
+"256 17 3 1 ",
+"  c #990030",
+". c #00B7EF",
+"X c white",
+/* pixels */
+"                                                                                                                                                                                                                                                                ",
+"    XXX          XXXXXX         XXXXXX            XXX      XXXXXXXXXXXX      XXXXXX      XXXXXXXXX         XXXXXX         XXXXXX         XXXXXX      XXX      XXX   XXX         XXX   XXX      XXX           XXXX          .........                            ",
+"    XXX          XXXXXX         XXXXXX            XXX      XXXXXXXXXXXX      XXXXXX      XXXXXXXXX         XXXXXX         XXXXXX         XXXXXX      XXX      XXX   XXX         XXX   XXX      XXX          XXXXX          .........                            ",
+"    XXX          XXXXXX         XXXXXX            XXX      XXXXXXXXXXXX      XXXXXX      XXXXXXXXX         XXXXXX         XXXXXX         XXXXXX      XXX      XXX   XXX         XXX   XXX      XXX          XXX            .........                            ",
+" XXXXXX       XXX      XXX   XXX      XXX      XXXXXX      XXX            XXX                     XXX   XXX      XXX   XXX      XXX   XXX      XXX   XXX   XXX      XXXXXX   XXXXXX   XXX      XXX         XXXX         ...                                     ",
+" XXXXXX       XXX      XXX   XXX      XXX      XXXXXX      XXX            XXX                     XXX   XXX      XXX   XXX      XXX   XXX      XXX   XXX   XXX      XXXXXX   XXXXXX   XXX      XXX         XXX          ...                                     ",
+" XXXXXX       XXX      XXX   XXX      XXX      XXXXXX      XXX            XXX                     XXX   XXX      XXX   XXX      XXX   XXX      XXX   XXX   XXX      XXXXXX   XXXXXX   XXX      XXX        XXXX          ...                                     ",
+"    XXX             XXX            XXX      XXX   XXX      XXXXXXXXX      XXXXXXXXX               XXX      XXXXXX         XXXXXXXXX   XXX      XXX   XXXXXX         XXX   XXX   XXX   XXXXXXXXXXXX       XXXX              ......                               ",
+"    XXX             XXX            XXX      XXX   XXX      XXXXXXXXX      XXXXXXXXX               XXX      XXXXXX         XXXXXXXXX   XXX      XXX   XXXXXX         XXX   XXX   XXX   XXXXXXXXXXXX       XXX               ......                               ",
+"    XXX             XXX            XXX      XXX   XXX      XXXXXXXXX      XXXXXXXXX               XXX      XXXXXX         XXXXXXXXX   XXX      XXX   XXXXXX         XXX   XXX   XXX   XXXXXXXXXXXX      XXXX               ......                               ",
+"    XXX          XXX         XXX      XXX   XXXXXXXXXXXX            XXX   XXX      XXX         XXX      XXX      XXX            XXX   XXX      XXX   XXX   XXX      XXX         XXX   XXX      XXX     XXXX                      ...                            ",
+"    XXX          XXX         XXX      XXX   XXXXXXXXXXXX            XXX   XXX      XXX         XXX      XXX      XXX            XXX   XXX      XXX   XXX   XXX      XXX         XXX   XXX      XXX     XXX                       ...                            ",
+"    XXX          XXX         XXX      XXX   XXXXXXXXXXXX            XXX   XXX      XXX         XXX      XXX      XXX            XXX   XXX      XXX   XXX   XXX      XXX         XXX   XXX      XXX    XXXX                       ...                            ",
+" XXXXXXXXX    XXXXXXXXXXXX      XXXXXX            XXX      XXXXXXXXX         XXXXXX            XXX         XXXXXX            XXX         XXXXXX      XXX      XXX   XXX         XXX   XXX      XXX    XXX               .........                               ",
+" XXXXXXXXX    XXXXXXXXXXXX      XXXXXX            XXX      XXXXXXXXX         XXXXXX            XXX         XXXXXX            XXX         XXXXXX      XXX      XXX   XXX         XXX   XXX      XXX  XXXXX               .........                               ",
+" XXXXXXXXX    XXXXXXXXXXXX      XXXXXX            XXX      XXXXXXXXX         XXXXXX            XXX         XXXXXX            XXX         XXXXXX      XXX      XXX   XXX         XXX   XXX      XXX  XXXX                .........                               ",
+"                                                                                                                                                                                                                                                                "
+};
