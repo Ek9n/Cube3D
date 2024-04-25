@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_minimap.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 14:04:35 by jborner           #+#    #+#             */
-/*   Updated: 2024/04/24 16:19:53 by jborner          ###   ########.fr       */
+/*   Updated: 2024/04/25 16:27:46 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,6 @@ void	create_minimap(t_data *data)
 	if (!data->texture->minimap)
 		close_game(data, "Unable to allocate memory");
 	init_minimap(data->texture->minimap);
-	data->texture->minimap->resize_value = 5;
+	data->texture->minimap->resize_value = 6;
 	create_minimap_texture(data->texture->minimap, data);
 }

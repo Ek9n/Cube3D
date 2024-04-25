@@ -15,6 +15,7 @@ SUBOBJ_PATH = .obj/close \
 				.obj/rays \
 				.obj/render_utils \
 				.obj/setup \
+				.obj/sound \
 				
 				
 
@@ -44,7 +45,7 @@ SRC		=	main.c \
 			setup/map_grid_check.c \
 			setup/map_grid_create_n_fill.c \
 			setup/validators.c \
-			
+			sound/miniaudio.c \
 			
 
 SRCS    = $(addprefix $(SRC_PATH), $(SRC))
