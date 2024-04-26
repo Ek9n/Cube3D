@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_action.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 08:35:01 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/24 16:10:00 by jborner          ###   ########.fr       */
+/*   Updated: 2024/04/26 14:37:11 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,13 @@ void	calc_speed(t_data *data, int sign)
 	data->player->rev_speed = (18 - data->player->speed[0]) / 2;
 	if (data->player->rev_speed < 3)
 		data->player->rev_speed = 3;
+		
 }
 
 void	move_player(t_data *data, int sign, int num, int other_num)
 {
 	if (!data->player->dead && (data->keys[num] || data->keys[other_num])
-		&& data->rot[num] < 55)
+		&& data->rot[num] < MOV_MAX)
 		data->rot[num] += 1;
 	else
 		data->rot[num] -= 1;
@@ -51,6 +52,12 @@ void	move_player(t_data *data, int sign, int num, int other_num)
 	calc_speed(data, sign);
 }
 
+void calc_rotation(t_data *data)
+{
+	data->player->rotation = data->rot[XK_Right] - data->rot[XK_Left];
+	
+}
+// printf("rotation %i\n", data->player->rotation);
 // printf("cur speed: %i km/h\n", (int)data->player->speed[0] * 10);
 
 void	rotate_player(t_data *data, int sign, int num)
@@ -97,5 +104,6 @@ void	handle_keys(t_data *data)
 		move_side(data, -1);
 	if (data->keys[XK_d])
 		move_side(data, 1);
+	calc_rotation(data);
 	check_collision(data);
 }

@@ -6,7 +6,7 @@
 /*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:46:24 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/24 12:35:26 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/26 12:19:15 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	init_player(t_player *player)
 	player->speed[0] = 0;
 	player->speed[1] = 0;
 	player->speed[2] = 0;
+	player->rotation = 0;
 	player->rev_speed = 17;
 	player->dead = 0;
 	player->wall_hit = 0;
