@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/04/25 16:17:29 by hstein           ###   ########.fr       */
+/*   Updated: 2024/04/26 14:44:47 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ t_image	*create_img(t_data *data, char *path, int w, int h)
 	if (path)
 		img->img_ptr = mlx_xpm_file_to_image(data->mlx, path, &(img->width),
 				&(img->height));
-				&(img->height));
 	else
 	{
 		img->img_ptr = mlx_new_image(data->mlx, w, h);
@@ -41,13 +40,11 @@ t_image	*create_img(t_data *data, char *path, int w, int h)
 	}
 	img->addr = mlx_get_data_addr(img->img_ptr, &(img->bpp),
 			&(img->bytes_per_line), &(img->endian));
-			&(img->bytes_per_line), &(img->endian));
 	if (!(img->img_ptr || img->addr))
 		close_game(data, "Not able to allocate memory for img_ptr or addr");
 	return (img);
 }
 
-void	create_wall_imgs(t_data *data)
 void	create_wall_imgs(t_data *data)
 {
 	data->texture->no = create_img(data, data->texture->no_path, 0, 0);
