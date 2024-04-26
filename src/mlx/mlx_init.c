@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/04/26 14:44:47 by hstein           ###   ########.fr       */
+/*   Updated: 2024/04/26 15:54:46 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,5 @@ void	mlx_init_game(t_data *data)
 	data->texture->numshadow = create_img(data, "./img/numshadow.xpm", 0, 0);
 	data->texture->game_over = create_img(data, "./img/game_over2.xpm", 0, 0);
 	resize_same_img(data, &data->texture->game_over, data->width, data->height);
+	setup_sounds(data);
 }

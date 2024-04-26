@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/26 14:36:50 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/26 16:18:26 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # include <sys/time.h>
 # include <time.h>
 # include <unistd.h>
+# include "./miniaudio.h"
 
 # define TRUE 1
 # define FALSE 0
@@ -186,6 +187,15 @@ typedef struct s_ray
 	int			first_col;
 }				t_ray;
 
+typedef struct s_sound
+{
+	ma_result	result;
+	ma_engine	engine;
+	ma_sound	motor;
+	ma_sound	crash;
+	ma_sound	siren;
+}	t_sound;
+
 typedef struct s_data
 {
 	void		*mlx;
@@ -201,6 +211,7 @@ typedef struct s_data
 	t_map		*map;
 	t_player	*player;
 	t_ray		ray;
+	t_sound		sound;
 }				t_data;
 
 // ================= CLOSE ==================
@@ -369,5 +380,10 @@ int				fill_grid(char *str, t_map *map, t_player *player,
 int				map_validator(t_data *data, t_texture cub, char (*err)[50]);
 int				file_validator(char *file, t_texture *cub, char (*err)[50]);
 int				input_validator(int ac, char **av, char (*err)[50]);
+
+// ================= SOUND ================= 
+int		init_sounds_1(t_sound *sound);
+void	setup_sounds(t_data *data);
+void	terminate_sounds(t_data *data);
 
 #endif

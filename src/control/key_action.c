@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_action.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 08:35:01 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/26 15:09:35 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/26 16:37:40 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ void	move_side(t_data *data, int sign)
 
 void	handle_keys(t_data *data)
 {
+	static int	siren = 0;
+
 	if (data->keys[XK_Escape])
 		close_game(data, NULL);
 	if ((data->keys[XK_Right] || data->rot[XK_Right] > ROT_MIN))
@@ -105,6 +107,16 @@ void	handle_keys(t_data *data)
 		move_side(data, -1);
 	if (data->keys[XK_d])
 		move_side(data, 1);
+	if (data->keys[XK_h] && siren == 0)
+	{
+		ma_sound_start(&data->sound.siren);
+		siren = 1;
+	}
+	else if (data->keys[XK_h] && siren == 1)
+	{
+		ma_sound_stop(&data->sound.siren);
+		siren = 0;
+	}
 	calc_rotation(data);
 	check_collision(data);
 }
