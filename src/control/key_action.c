@@ -6,7 +6,7 @@
 /*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 08:35:01 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/26 14:51:45 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/26 15:09:35 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	calc_speed(t_data *data, int sign)
 	data->player->rev_speed = (18 - data->player->speed[0]) / 2;
 	if (data->player->rev_speed < 3)
 		data->player->rev_speed = 3;
+	printf("%i\n", (int)data->player->speed[0]);
 		
 }
 
@@ -72,7 +73,7 @@ void	rotate_player(t_data *data, int sign, int num)
 	if (data->rot[num] > ROT_MIN && (data->rot[XK_Up] > MOV_MIN
 			|| data->rot[XK_Down] > MOV_MIN))
 	{
-		data->player->angle += (0.00002 * data->rot[num] *data->rot[num] * data->player->rev_speed
+		data->player->angle += (0.000002 * (data->rot[num] + data->player->speed[0]) * (data->rot[num] + data->player->speed[0]) * data->player->rev_speed
 				* data->player->rev_speed) * sign;
 		if (data->player->angle < 0 || data->player->angle >= 2 * PI)
 			data->player->angle -= 2 * PI * sign;
