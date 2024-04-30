@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 13:58:23 by jborner           #+#    #+#             */
-/*   Updated: 2024/04/30 15:50:24 by hstein           ###   ########.fr       */
+/*   Updated: 2024/05/01 01:18:32 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,41 @@ void	render_background(t_data *data, t_image *bg)
 	}
 }
 
+void	put_signle_num(t_data *data, unsigned int num, int w, int h, int pos)
+{
+	if (num == 0)
+		put_img_to_img(data->texture->base_img, data->texture->num0, w + (w * pos), h);
+	else if (num == 1)
+		put_img_to_img(data->texture->base_img, data->texture->num1, w + (w * pos), h);
+	else if (num == 2)
+		put_img_to_img(data->texture->base_img, data->texture->num2, w + (w * pos), h);
+	else if (num == 3)
+		put_img_to_img(data->texture->base_img, data->texture->num3, w + (w * pos), h);
+	else if (num == 4)
+		put_img_to_img(data->texture->base_img, data->texture->num4, w + (w * pos), h);
+	else if (num == 5)
+		put_img_to_img(data->texture->base_img, data->texture->num5, w + (w * pos), h);
+	else if (num == 6)
+		put_img_to_img(data->texture->base_img, data->texture->num6, w + (w * pos), h);
+	else if (num == 7)
+		put_img_to_img(data->texture->base_img, data->texture->num7, w + (w * pos), h);
+	else if (num == 8)
+		put_img_to_img(data->texture->base_img, data->texture->num8, w + (w * pos), h);
+	else if (num == 9)
+		put_img_to_img(data->texture->base_img, data->texture->num9, w + (w * pos), h);
+}
+
+void	put_num_to_baseimg(t_data *data, unsigned int num, int w, int h, int pos)
+{
+	char	base[] = "0123456789";
+	if (num >= 10)
+	{
+		pos++;
+		put_num_to_baseimg(data, num / 10, w, h, pos);
+	}
+	put_signle_num(data, base[num % 10], w, h, pos);
+}
+
 int	render(t_data *data)
 {
 	// static int	last_dir;
@@ -143,7 +178,8 @@ int	render(t_data *data)
 	// 	printf("weite %d\n", data->texture->nums->width);
 	// 	flag = 1;
 	// }
-	put_img_to_img(data->texture->base_img, data->texture->num1, 50, 50);
+	// put_img_to_img(data->texture->base_img, data->texture->num2, 50, 50);
+	put_num_to_baseimg(data, 12, 50, 50, 0);
 	mlx_put_image_to_window(data->mlx, data->mlx_win,
 				data->texture->base_img->img_ptr, 0, 0);
 	usleep(42000);
