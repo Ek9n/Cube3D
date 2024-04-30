@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/04/29 09:42:59 by yubi42           ###   ########.fr       */
-=======
-/*   Updated: 2024/04/26 16:18:26 by hstein           ###   ########.fr       */
->>>>>>> 7cda069aea65d26aaf96e3782ce0b224faf06d91
+/*   Updated: 2024/04/30 14:57:16 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,6 +208,7 @@ typedef struct s_data
 	int			height;
 	int			keys[NUM_KEYS];
 	int			rot[NUM_KEYS];
+	int			rot_max;
 	int			minimap_width;
 	int			minimap_height;
 	char		err[50];
@@ -219,7 +216,7 @@ typedef struct s_data
 	t_map		*map;
 	t_player	*player;
 	t_ray		ray;
-	t_sound		sound;
+		t_sound		sound;
 }				t_data;
 
 // ================= CLOSE ==================

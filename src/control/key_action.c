@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_action.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 08:35:01 by yubi42            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/04/30 11:15:08 by yubi42           ###   ########.fr       */
-=======
-/*   Updated: 2024/04/26 16:37:40 by hstein           ###   ########.fr       */
->>>>>>> 7cda069aea65d26aaf96e3782ce0b224faf06d91
+/*   Updated: 2024/04/30 14:59:35 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +91,6 @@ void	move_side(t_data *data, int sign)
 void	handle_keys(t_data *data)
 {
 	static int	siren = 0;
-
 	if (data->keys[XK_Escape])
 		close_game(data, NULL);
 	if ((data->keys[XK_Right] || data->rot[XK_Right] > ROT_MIN))
@@ -111,7 +106,7 @@ void	handle_keys(t_data *data)
 		move_side(data, -1);
 	if (data->keys[XK_d])
 		move_side(data, 1);
-	if (data->keys[XK_h] && siren == 0)
+			if (data->keys[XK_h] && siren == 0)
 	{
 		ma_sound_start(&data->sound.siren);
 		siren = 1;
