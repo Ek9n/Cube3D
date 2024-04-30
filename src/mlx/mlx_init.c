@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/04/30 15:11:21 by hstein           ###   ########.fr       */
+/*   Updated: 2024/04/30 15:49:31 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,19 @@ void	mlx_init_game(t_data *data)
 	data->texture->carframe = create_img(data, "./img/cockpit.xpm", 0, 0);
 	data->texture->carframe2 = resize_img(data, &data->texture->carframe,
 			data->width, data->height);
-	data->texture->nums = create_img(data, "./img/nums.xpm", 0, 0);
-	printf("hier %d\n", data->texture->nums->width);
-	data->texture->numshadow = create_img(data, "./img/numshadow.xpm", 0, 0);
+	data->texture->num0 = create_img(data, "./img/0.xpm", 0, 0);
+	data->texture->num1 = create_img(data, "./img/1.xpm", 0, 0);
+	data->texture->num2 = create_img(data, "./img/2.xpm", 0, 0);
+	data->texture->num3 = create_img(data, "./img/3.xpm", 0, 0);
+	data->texture->num4 = create_img(data, "./img/4.xpm", 0, 0);
+	data->texture->num5 = create_img(data, "./img/5.xpm", 0, 0);
+	data->texture->num6 = create_img(data, "./img/6.xpm", 0, 0);
+	data->texture->num7 = create_img(data, "./img/7.xpm", 0, 0);
+	data->texture->num8 = create_img(data, "./img/8.xpm", 0, 0);
+	data->texture->num9 = create_img(data, "./img/9.xpm", 0, 0);
+	// data->texture->nums = create_img(data, "./img/nums.xpm", 0, 0);
+	// printf("hier %d\n", data->texture->nums->width);
+	// data->texture->numshadow = create_img(data, "./img/numshadow.xpm", 0, 0);
 	data->texture->game_over = create_img(data, "./img/game_over2.xpm", 0, 0);
 	resize_same_img(data, &data->texture->game_over, data->width, data->height);
 	setup_sounds(data);

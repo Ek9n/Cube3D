@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data_struct.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:46:24 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/29 09:45:49 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/30 15:54:18 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,16 @@ void	init_texture(t_texture *texture)
 	texture->steeringwheel2 = NULL;
 	texture->carframe = NULL;
 	texture->carframe2 = NULL;
-	texture->nums = NULL;
+	texture->num0 = NULL;
+	texture->num1 = NULL;
+	texture->num2 = NULL;
+	texture->num3 = NULL;
+	texture->num4 = NULL;
+	texture->num5 = NULL;
+	texture->num6 = NULL;
+	texture->num7 = NULL;
+	texture->num8 = NULL;
+	texture->num9 = NULL;
 	texture->numshadow = NULL;
 	texture->game_over = NULL;
 	texture->goal = NULL;
