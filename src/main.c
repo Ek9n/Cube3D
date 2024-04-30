@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 15:47:45 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/24 13:03:40 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/26 15:54:24 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	main(int ac, char **av)
 	}
 	ft_printf("all ok :)\n");
 	run_game(&data);
+	terminate_sounds(&data);
 	free_data(&data);
 	return (0);
 }
