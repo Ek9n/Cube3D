@@ -6,7 +6,7 @@
 /*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 15:01:10 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/18 13:03:15 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/28 23:53:23 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ void	check_mid(t_map *map, int *return_value, int *player_count,
 			ft_strlen("Map inner corner has to be wall") + 1);
 		*return_value = FALSE;
 	}
-	if (map->grid[map->j][map->i] == 2)
+	if (map->grid[map->j][map->i] == 2 || map->grid[map->j][map->i] == 3 || map->grid[map->j][map->i] == 4 || map->grid[map->j][map->i] == 5)
 	{
-		map->grid[map->j][map->i] = 0;
+		// map->grid[map->j][map->i] = 0;
 		(*player_count)++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/26 14:36:50 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/29 09:42:59 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@
 # define MOV_MIN 10
 # define SIDESTEP 10
 # define EPSILON 1e-6
+#define MINIMAP_WIDTH 15
+#define MINIMAP_HEIGHT 9
 
 typedef struct s_read
 {
@@ -103,6 +105,7 @@ typedef struct s_texture
 	t_image		*img1;
 	t_image		*img2;
 	t_image		*black;
+	t_image		*goal;
 	t_image		*no;
 	t_image		*so;
 	t_image		*ea;
@@ -137,6 +140,7 @@ typedef struct s_map
 	int			col_max;
 	int			i;
 	int			j;
+	char		player;
 }				t_map;
 
 typedef struct s_player

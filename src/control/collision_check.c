@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   collision_check.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 13:50:10 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/24 16:56:37 by jborner          ###   ########.fr       */
+/*   Updated: 2024/04/27 12:42:19 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,13 +77,13 @@ int	check_corner_collision(t_data *data, t_map *map, t_player *player)
 
 	angle = player->angle;
 	if (is_wall(map, player->corners[0][0], player->corners[0][1]))
-		return (calc_coll_angle(data, &angle, XK_Right, XK_Down));
-	if (is_wall(map, player->corners[1][0], player->corners[1][1]))
 		return (calc_coll_angle(data, &angle, XK_Left, XK_Down));
+	if (is_wall(map, player->corners[1][0], player->corners[1][1]))
+		return (calc_coll_angle(data, &angle, XK_Right, XK_Down));
 	if (is_wall(map, player->corners[2][0], player->corners[2][1]))
-		return (calc_coll_angle(data, &angle, XK_Left, XK_Up));
-	if (is_wall(map, player->corners[3][0], player->corners[3][1]))
 		return (calc_coll_angle(data, &angle, XK_Right, XK_Up));
+	if (is_wall(map, player->corners[3][0], player->corners[3][1]))
+		return (calc_coll_angle(data, &angle, XK_Left, XK_Up));
 	if (mid_coll(map, player->corners[2], player->corners[3]) || mid_coll(map,
 			player->corners[0], player->corners[1]))
 	{
