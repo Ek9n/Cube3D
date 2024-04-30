@@ -6,11 +6,10 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/04/30 15:10:14 by hstein           ###   ########.fr       */
+/*   Updated: 2024/04/30 15:11:21 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* ************************************************************************** */
 
 #include "cube.h"
 
@@ -60,6 +59,18 @@ void	create_wall_imgs(t_data *data)
 	}
 }
 
+void	create_goal_img(t_data *data)
+{
+	if (data->map->player == 'E')
+		data->texture->goal = create_img(data, "./img/goal_e.xpm", 0, 0);
+	else if (data->map->player == 'W')
+		data->texture->goal = create_img(data, "./img/goal_w.xpm", 0, 0);
+	else if (data->map->player == 'N')
+		data->texture->goal = create_img(data, "./img/goal_n.xpm", 0, 0);
+	else if (data->map->player == 'S')
+		data->texture->goal = create_img(data, "./img/goal_s.xpm", 0, 0);
+}
+
 void	mlx_init_game(t_data *data)
 {
 	data->mlx = mlx_init();
@@ -70,6 +81,7 @@ void	mlx_init_game(t_data *data)
 	if (data->mlx_win == NULL)
 		close_game(data, "ERROR");
 	create_wall_imgs(data);
+	create_goal_img(data);
 	data->texture->black = create_img(data, "./img/black.xpm", 0, 0);
 	data->texture->steeringwheel = create_img(data, "./img/steeringwheel.xpm",
 				0, 0);

@@ -6,7 +6,7 @@
 /*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:46:24 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/26 12:19:15 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/29 09:45:49 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	init_texture(t_texture *texture)
 	texture->nums = NULL;
 	texture->numshadow = NULL;
 	texture->game_over = NULL;
+	texture->goal = NULL;
 	texture->no = NULL;
 	texture->so = NULL;
 	texture->ea = NULL;
@@ -50,6 +51,7 @@ void	init_map(t_map *map)
 	map->row_max = 0;
 	map->i = 0;
 	map->j = 0;
+	map->player = 0;
 }
 
 void	init_player(t_player *player)

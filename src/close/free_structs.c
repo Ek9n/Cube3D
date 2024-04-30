@@ -6,7 +6,7 @@
 /*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:50:16 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/24 19:37:41 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/04/30 11:30:29 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,13 @@ void	free_texture(t_texture *texture, t_data *data)
 	free_img(texture->carframe2, data->mlx);
 	free_img(texture->steeringwheel, data->mlx);
 	free_img(texture->steeringwheel2, data->mlx);
+	free_img(texture->nums, data->mlx);
+	free_img(texture->numshadow, data->mlx);
 	free_img(texture->game_over, data->mlx);
 	free_img(texture->img1, data->mlx);
 	free_img(texture->img2, data->mlx);
 	free_img(texture->black, data->mlx);
+	free_img(texture->goal, data->mlx);
 	free_img(texture->no, data->mlx);
 	free_img(texture->so, data->mlx);
 	free_img(texture->ea, data->mlx);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_minimap.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 14:04:35 by jborner           #+#    #+#             */
-/*   Updated: 2024/04/24 16:19:53 by jborner          ###   ########.fr       */
+/*   Updated: 2024/04/27 12:36:28 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	create_minimap_texture(t_minimap *minimap, t_data *data)
 {
 	minimap->base = create_img(data, NULL, IMG_SIZE * data->map->col_max,
 			IMG_SIZE * data->map->col_max);
-	data->texture->minimap->small = create_img(data, NULL, 5 * IMG_SIZE, 5
+	data->texture->minimap->small = create_img(data, NULL, MINIMAP_WIDTH * IMG_SIZE, MINIMAP_HEIGHT
 			* IMG_SIZE);
 	minimap->ground = create_img(data, NULL, IMG_SIZE, IMG_SIZE);
 	fill_img_color(minimap->ground, BLUE);
@@ -56,8 +56,8 @@ void	copy_to_small(int player_row, int player_col, t_image *full,
 	int	y;
 	int	color;
 
-	start_row = player_row - (2 * IMG_SIZE);
-	start_col = player_col - (2 * IMG_SIZE);
+	start_row = player_row - ((MINIMAP_HEIGHT - 1) / 2 * IMG_SIZE);
+	start_col = player_col - ((MINIMAP_WIDTH - 1) / 2 * IMG_SIZE);
 	y = 0;
 	while (y < part->height)
 	{

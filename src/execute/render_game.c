@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 13:58:23 by jborner           #+#    #+#             */
-/*   Updated: 2024/04/30 14:54:50 by hstein           ###   ########.fr       */
+/*   Updated: 2024/04/30 15:12:15 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,9 @@ void	render_default_minimap(t_data *data, t_minimap *minimap)
 			else if (data->map->grid[row][col] == 1)
 				put_img_to_img(minimap->base, minimap->wall, col * IMG_SIZE, row
 					* IMG_SIZE);
+			else
+				put_img_to_img(minimap->base, data->texture->goal, col * IMG_SIZE, row
+					* IMG_SIZE);
 		}
 	}
 }
@@ -87,8 +90,7 @@ void	render_minimap(t_data *data, t_minimap *minimap)
 		minimap->small);
 	if (minimap->resize)
 		free_img(minimap->resize, data->mlx);
-	minimap->resize = resize_img(data, &minimap->small, data->width
-			/ minimap->resize_value, data->width / minimap->resize_value);
+	minimap->resize = resize_img(data, &minimap->small, minimap->small->width / 2, minimap->small->height / 2);
 	create_frame(minimap->resize, 5, BLACK);
 }
 

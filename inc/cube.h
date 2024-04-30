@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/30 13:27:29 by hstein           ###   ########.fr       */
+/*   Updated: 2024/04/30 15:11:52 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@
 # define MOV_MIN 10
 # define SIDESTEP 10
 # define EPSILON 1e-6
+#define MINIMAP_WIDTH 15
+#define MINIMAP_HEIGHT 9
 
 typedef struct s_read
 {
@@ -105,6 +107,7 @@ typedef struct s_texture
 	t_image		*img1;
 	t_image		*img2;
 	t_image		*black;
+	t_image		*goal;
 	t_image		*no;
 	t_image		*so;
 	t_image		*ea;
@@ -139,6 +142,7 @@ typedef struct s_map
 	int			col_max;
 	int			i;
 	int			j;
+	char		player;
 }				t_map;
 
 typedef struct s_player
@@ -205,6 +209,7 @@ typedef struct s_data
 	int			height;
 	int			keys[NUM_KEYS];
 	int			rot[NUM_KEYS];
+	int			rot_max;
 	int			minimap_width;
 	int			minimap_height;
 	char		err[50];
@@ -212,7 +217,7 @@ typedef struct s_data
 	t_map		*map;
 	t_player	*player;
 	t_ray		ray;
-	t_sound		sound;
+		t_sound		sound;
 }				t_data;
 
 // ================= CLOSE ==================
