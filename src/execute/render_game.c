@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 13:58:23 by jborner           #+#    #+#             */
-/*   Updated: 2024/04/26 16:30:31 by hstein           ###   ########.fr       */
+/*   Updated: 2024/04/30 14:54:50 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,15 @@ int	render(t_data *data)
 		ma_sound_start(&data->sound.crash);
 		put_img_to_img(data->texture->base_img, data->texture->game_over, 200, -200);
 	}
+	// int flag = 0;
+	// if (!flag)
+	// {
+	// 	data->texture->nums1->addr += 64;
+	// 	data->texture->nums1 = resize_img(data, &data->texture->nums, data->texture->nums->width * 3, data->texture->nums->height * 3);
+	// 	printf("weite %d\n", data->texture->nums->width);
+	// 	flag = 1;
+	// }
+	put_img_to_img(data->texture->base_img, data->texture->nums, 50, 50);
 	mlx_put_image_to_window(data->mlx, data->mlx_win,
 				data->texture->base_img->img_ptr, 0, 0);
 	usleep(42000);

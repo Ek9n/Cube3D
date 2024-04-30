@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/26 16:18:26 by hstein           ###   ########.fr       */
+/*   Updated: 2024/04/30 13:27:29 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ typedef struct s_texture
 	t_image		*steeringwheel;
 	t_image		*steeringwheel2;
 	t_image		*nums;
+	t_image		*nums1;
 	t_image		*numshadow;
 	t_image		*game_over;
 	t_image		*img1;
