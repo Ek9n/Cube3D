@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:46:24 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/30 15:54:18 by hstein           ###   ########.fr       */
+/*   Updated: 2024/05/01 02:39:05 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	init_texture(t_texture *texture)
 	texture->num7 = NULL;
 	texture->num8 = NULL;
 	texture->num9 = NULL;
-	texture->numshadow = NULL;
+	texture->kmh = NULL;
 	texture->game_over = NULL;
 	texture->goal = NULL;
 	texture->no = NULL;

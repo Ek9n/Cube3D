@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/04/30 15:49:31 by hstein           ###   ########.fr       */
+/*   Updated: 2024/05/01 02:37:11 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ void	mlx_init_game(t_data *data)
 	data->texture->num7 = create_img(data, "./img/7.xpm", 0, 0);
 	data->texture->num8 = create_img(data, "./img/8.xpm", 0, 0);
 	data->texture->num9 = create_img(data, "./img/9.xpm", 0, 0);
+	data->texture->kmh = create_img(data, "./img/kmh.xpm", 0, 0);
 	// data->texture->nums = create_img(data, "./img/nums.xpm", 0, 0);
 	// printf("hier %d\n", data->texture->nums->width);
 	// data->texture->numshadow = create_img(data, "./img/numshadow.xpm", 0, 0);

@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/30 15:47:18 by hstein           ###   ########.fr       */
+/*   Updated: 2024/05/01 03:29:04 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ typedef struct s_texture
 	t_image		*num7;
 	t_image		*num8;
 	t_image		*num9;
-	t_image		*numshadow;
+	t_image		*kmh;
 	t_image		*game_over;
 	t_image		*img1;
 	t_image		*img2;
