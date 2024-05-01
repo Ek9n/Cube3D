@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:46:24 by yubi42            #+#    #+#             */
-/*   Updated: 2024/05/01 02:39:05 by hstein           ###   ########.fr       */
+/*   Updated: 2024/05/01 05:07:21 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	init_texture(t_texture *texture)
 	texture->img1 = NULL;
 	texture->img2 = NULL;
 	texture->black = NULL;
+	texture->transparent = NULL;
 	texture->steeringwheel = NULL;
 	texture->steeringwheel2 = NULL;
 	texture->carframe = NULL;

@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/05/01 03:29:04 by hstein           ###   ########.fr       */
+/*   Updated: 2024/05/01 05:10:58 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@
 # define PURPLE 0xFF00FF
 # define YELLOW 0xFFFF00
 # define BLACK 0x000001
+# define WHITE 0xFFFFFF
 # define RED 0xFF0000
 # define LIME 0x00FF00
 # define BLUE 0x0000FF
@@ -115,6 +116,7 @@ typedef struct s_texture
 	t_image		*img1;
 	t_image		*img2;
 	t_image		*black;
+	t_image		*transparent;
 	t_image		*goal;
 	t_image		*no;
 	t_image		*so;

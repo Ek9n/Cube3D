@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 13:58:23 by jborner           #+#    #+#             */
-/*   Updated: 2024/05/01 04:57:45 by hstein           ###   ########.fr       */
+/*   Updated: 2024/05/01 05:26:05 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,10 @@ void rotate_image(t_data *data, t_image **img, double angle)
         t_image *img_rot;
         img_rot = create_img(data, NULL, (*img)->width, (*img)->height);
 
-        for (int y = 0; y < img_rot->height; y++) {
-            for (int x = 0; x < img_rot->width; x++) {
+        for (int y = 0; y < img_rot->height; y++)
+		{
+            for (int x = 0; x < img_rot->width; x++)
+			{
                 // Berechne die Koordinaten im rotierten Bild relativ zum Zentrum
                 int new_x = (x - (*img)->width / 2);
                 int new_y = (y - (*img)->height / 2);
@@ -39,17 +41,10 @@ void rotate_image(t_data *data, t_image **img, double angle)
                 rotated_y += (*img)->height / 2;
 
                 // Überprüfe, ob die neuen Koordinaten innerhalb des Bildes liegen
-                if (rotated_x >= 0 && rotated_x < (*img)->width && rotated_y >= 0 && rotated_y < (*img)->height) {
-                    // Setze den Pixelwert im rotierten Bild
+                if (rotated_x >= 0 && rotated_x < (*img)->width && rotated_y >= 0 && rotated_y < (*img)->height)
                     put_pixel_img(img_rot, x, y, get_pixel_img(*img, rotated_x, rotated_y));
-                    // put_pixel_img(img_rot, x, y, get_pixel_img(*img, rotated_x, rotated_y));
-                    // put_pixel_img(img_rot, rotated_x, rotated_y, get_pixel_img(*img, x, y));
-                }
             }
         }
-
-        // free_img(*img, data->mlx);
-        // *img = img_rot;
 		if (data->texture->steeringwheel2)
 			free_img(data->texture->steeringwheel2, data->mlx);
 		data->texture->steeringwheel2 = img_rot;
@@ -142,11 +137,9 @@ void	put_single_num(t_data *data, unsigned int num, int w, int h)
 void	put_num(t_data *data, unsigned int num, int *w_h, int pos)
 {
 	char	base[] = "0123456789";
+
 	if (num >= 10)
-	{
-		printf("hier %d\n", pos);
 		put_num(data, num / 10, w_h, pos - 1);
-	}
 	put_single_num(data, base[num % 10] - 48, w_h[0] + (pos * 40), w_h[1]);
 }
 
@@ -176,26 +169,7 @@ void	put_kmh(t_data *data, unsigned int num, int w, int h)
 	put_img_to_img(data->texture->base_img, data->texture->kmh, w, h + 64);
 }
 
-void	put_laptime_s(t_data *data, int w, int h)
-{
-	static bool		flag;
-	static size_t	secs;
-	int				delay;
-	char			*time;
-	char			*output;
-
-	delay = 50;
-	if (remote_delay_ms(delay))
-		flag = true;
-	if (flag == true && !remote_delay_ms(delay))
-	{
-		secs++;
-		flag = false;
-	}
-	put_num_to_baseimg(data, secs, w, h);
-}
-
-long long get_elapsed_time_ms()
+long long	get_elapsed_time_ms()
 {
     static struct	timeval start_time;
     struct			timeval current_time;
@@ -212,6 +186,29 @@ long long get_elapsed_time_ms()
 void	put_laptime_ms(t_data *data, int w, int h)
 {
 	put_num_to_baseimg(data, get_elapsed_time_ms(), w, h);
+}
+
+void	put_laptime_ms_rest(t_data *data, int w, int h)
+{
+	put_num_to_baseimg(data, get_elapsed_time_ms() % 1000, w, h);
+}
+
+void	put_laptime_s(t_data *data, int w, int h)
+{
+	put_num_to_baseimg(data, get_elapsed_time_ms()/1000, w, h);
+}
+
+void	put_laptime(t_data *data, int w, int h)
+{
+	// static char	flag; // evtl das resize img ins texturestruct verschieben und nur einmal erstellen beim start..
+	t_image	*resize;
+
+	put_laptime_ms_rest(data, w, h + 50);
+	put_laptime_s(data, w, h);
+	resize = resize_img(data, &data->texture->transparent, 145, 115);
+	create_frame(data->texture->transparent, 3, WHITE);
+	put_img_to_img(data->texture->base_img, resize, w, h);
+	free_img(resize, data->mlx);
 }
 
 int	render(t_data *data)
@@ -235,7 +232,8 @@ int	render(t_data *data)
 		put_img_to_img(data->texture->base_img, data->texture->game_over, 200, -200);
 	}
 	put_kmh(data, data->player->speed[0] * 5, 1200, 870);
-	put_laptime_ms(data, 50, 50);
+	put_laptime(data, 1750, 100);
+
 	mlx_put_image_to_window(data->mlx, data->mlx_win,
 				data->texture->base_img->img_ptr, 0, 0);
 	usleep(42000);

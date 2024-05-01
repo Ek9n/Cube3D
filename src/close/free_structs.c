@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:50:16 by yubi42            #+#    #+#             */
-/*   Updated: 2024/05/01 02:37:39 by hstein           ###   ########.fr       */
+/*   Updated: 2024/05/01 05:06:13 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	free_texture(t_texture *texture, t_data *data)
 	free_img(texture->img1, data->mlx);
 	free_img(texture->img2, data->mlx);
 	free_img(texture->black, data->mlx);
+	free_img(texture->transparent, data->mlx);
 	free_img(texture->goal, data->mlx);
 	free_img(texture->no, data->mlx);
 	free_img(texture->so, data->mlx);
