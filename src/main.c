@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 15:47:45 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/30 14:56:51 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/05/02 17:32:43 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,23 @@ int	main(int ac, char **av)
 {
 	t_data	data;
 	
-	init_data(&data);
-	if (!input_validator(ac, av, &data.err) || !file_validator(av[1],
-			data.texture, &data.err) || !map_validator(&data, *(data.texture),
-			&data.err))
-	{
-		ft_printf_err("Error\n%s\n", data.err);
+	// data.restart = true;
+	// while (data.restart)
+	// {
+		init_data(&data);
+		if (!input_validator(ac, av, &data.err) || !file_validator(av[1],
+				data.texture, &data.err) || !map_validator(&data, *(data.texture),
+				&data.err))
+		{
+			ft_printf_err("Error\n%s\n", data.err);
+			free_data(&data);
+			return (1);
+		}
+		ft_printf("all ok :)\n");
+		run_game(&data);
+		terminate_sounds(&data);
+		// free_data_restart(&data);
 		free_data(&data);
-		return (1);
-	}
-	ft_printf("all ok :)\n");
-	run_game(&data);
-	terminate_sounds(&data);
-	free_data(&data);
+	// }
 	return (0);
 }

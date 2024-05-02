@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/05/01 05:10:58 by hstein           ###   ########.fr       */
+/*   Updated: 2024/05/02 16:48:54 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,7 +227,8 @@ typedef struct s_data
 	t_map		*map;
 	t_player	*player;
 	t_ray		ray;
-		t_sound		sound;
+	t_sound		sound;
+	bool		restart;
 }				t_data;
 
 // ================= CLOSE ==================

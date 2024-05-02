@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keypress.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 15:29:02 by hstein            #+#    #+#             */
-/*   Updated: 2024/04/24 16:10:14 by jborner          ###   ########.fr       */
+/*   Updated: 2024/05/02 17:11:03 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	handle_keypress(int keysym, t_data *data)
 {
-	if (!data->player->dead || keysym == XK_Escape)
+	if (!data->player->dead || keysym == XK_Escape || keysym == XK_y || keysym == XK_n)
 		data->keys[keysym] = 1;
 	return (0);
 }

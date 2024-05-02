@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 13:58:23 by jborner           #+#    #+#             */
-/*   Updated: 2024/05/01 05:26:05 by hstein           ###   ########.fr       */
+/*   Updated: 2024/05/02 17:05:46 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,16 +226,21 @@ int	render(t_data *data)
 	// printf("cur speed: %f\n", data->player->speed[0]);
 
 	put_img_to_img(data->texture->base_img, data->texture->steeringwheel2, 500, 500);
+
+	static bool	flag;
+	printf("deadflag = %d\n", data->player->dead);
 	if (data->player->dead)
 	{
-		ma_sound_start(&data->sound.crash);
+		if (!flag)
+			ma_sound_start(&data->sound.crash);
 		put_img_to_img(data->texture->base_img, data->texture->game_over, 200, -200);
+		flag = true;
 	}
 	put_kmh(data, data->player->speed[0] * 5, 1200, 870);
 	put_laptime(data, 1750, 100);
 
 	mlx_put_image_to_window(data->mlx, data->mlx_win,
 				data->texture->base_img->img_ptr, 0, 0);
-	usleep(42000);
+	// usleep(42000);
 	return (0);
 }
