@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 13:58:23 by jborner           #+#    #+#             */
-/*   Updated: 2024/05/02 17:05:46 by hstein           ###   ########.fr       */
+/*   Updated: 2024/05/02 17:35:59 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,6 +211,29 @@ void	put_laptime(t_data *data, int w, int h)
 	free_img(resize, data->mlx);
 }
 
+void goal_logic(t_data *data)
+{
+	if(data->player->x >= IMG_SIZE && data->player->y >= IMG_SIZE && data->player->x <= data->map->row_max * IMG_SIZE - IMG_SIZE && data->player->y <= data->map->col_max * IMG_SIZE - IMG_SIZE)
+	{
+	if(data->map->grid[(int)(data->player->x + (IMG_SIZE / 2)) / IMG_SIZE][(int)(data->player->y + (IMG_SIZE / 2)) / IMG_SIZE] == 2)
+	{
+		if (!data->round_touch)
+			data->round++;
+		data->round_touch = 1;
+	}
+	else
+		data->round_touch = 0;
+	}
+	if (data->round <= 0)
+		put_num_to_baseimg(data, 0, 20, 20);
+	else if (data->round >= 2)
+		put_num_to_baseimg(data, 2, 20, 20);
+	else 
+		put_num_to_baseimg(data, data->round, 20, 20);
+	put_img_to_img(data->texture->base_img, data->texture->slash, 60, 20);
+	put_img_to_img(data->texture->base_img, data->texture->num2, 100, 20);
+}
+
 int	render(t_data *data)
 {
 	// static int	last_dir;
@@ -238,7 +261,7 @@ int	render(t_data *data)
 	}
 	put_kmh(data, data->player->speed[0] * 5, 1200, 870);
 	put_laptime(data, 1750, 100);
-
+	goal_logic(data);
 	mlx_put_image_to_window(data->mlx, data->mlx_win,
 				data->texture->base_img->img_ptr, 0, 0);
 	// usleep(42000);
