@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_structs.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:50:16 by yubi42            #+#    #+#             */
-/*   Updated: 2024/05/01 05:06:13 by hstein           ###   ########.fr       */
+/*   Updated: 2024/05/02 17:11:48 by jborner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	free_texture(t_texture *texture, t_data *data)
 	free_img(texture->num7, data->mlx);
 	free_img(texture->num8, data->mlx);
 	free_img(texture->num9, data->mlx);
+	free_img(texture->slash, data->mlx);
 	free_img(texture->kmh, data->mlx);
 	free_img(texture->game_over, data->mlx);
 	free_img(texture->img1, data->mlx);

@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   validators.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:58:15 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/30 11:33:58 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/05/02 15:37:14 by jborner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-void	opt1_fill_start(t_map *map, int c, int k, int opt)
+void	opt1_fill_start(t_map *map, int k, int opt)
 {
 	while ((map->grid[k][map->i] != 1 && map->grid[k][map->i] != -1)
 		&& (k < map->row_max && k >= 0) && (map->i < map->col_max
 			&& map->i >= 0))
 	{
-		map->grid[k][map->i] = c;
+		map->grid[k][map->i] = 2;
 		if (opt == 1)
 			++k;
 		else
@@ -26,13 +26,13 @@ void	opt1_fill_start(t_map *map, int c, int k, int opt)
 	}
 }
 
-void	opt2_fill_start(t_map *map, int c, int k, int opt)
+void	opt2_fill_start(t_map *map, int k, int opt)
 {
 	while ((map->grid[map->j][k] != 1 && map->grid[map->j][k] != -1)
 		&& (k < map->col_max && k >= 0) && (map->j < map->row_max
 			&& map->j >= 0))
 	{
-		map->grid[map->j][k] = c;
+		map->grid[map->j][k] = 2;
 		if (opt == 1)
 			++k;
 		else
@@ -45,27 +45,27 @@ void	choose_fill_start(t_map *map, int c)
 	map->grid[map->j][map->i] = 0;
 	if (c == 2)
 	{
-		map->j -= 2;
-		opt2_fill_start(map, c, map->i, 1);
-		opt2_fill_start(map, c, map->i, 2);
+		map->j -= 1;
+		opt2_fill_start(map, map->i, 1);
+		opt2_fill_start(map, map->i, 2);
 	}
 	else if (c == 3)
 	{
-		map->i += 2;
-		opt1_fill_start(map, c, map->j, 1);
-		opt1_fill_start(map, c, map->j, 2);
+		map->i += 1;
+		opt1_fill_start(map, map->j, 1);
+		opt1_fill_start(map, map->j, 2);
 	}
 	else if (c == 4)
 	{
-		map->j += 2;
-		opt2_fill_start(map, c, map->i, 1);
-		opt2_fill_start(map, c, map->i, 2);
+		map->j += 1;
+		opt2_fill_start(map, map->i, 1);
+		opt2_fill_start(map, map->i, 2);
 	}
 	else if (c == 5)
 	{
-		map->i -= 2;
-		opt1_fill_start(map, c, map->j, 1);
-		opt1_fill_start(map, c, map->j, 2);
+		map->i -= 1;
+		opt1_fill_start(map, map->j, 1);
+		opt1_fill_start(map, map->j, 2);
 	}
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/05/01 05:10:58 by hstein           ###   ########.fr       */
+/*   Updated: 2024/05/02 17:11:15 by jborner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ typedef struct s_texture
 	t_image		*num7;
 	t_image		*num8;
 	t_image		*num9;
+	t_image		*slash;
 	t_image		*kmh;
 	t_image		*game_over;
 	t_image		*img1;
@@ -220,6 +221,8 @@ typedef struct s_data
 	int			keys[NUM_KEYS];
 	int			rot[NUM_KEYS];
 	int			rot_max;
+	int			round;
+	int			round_touch;
 	int			minimap_width;
 	int			minimap_height;
 	char		err[50];
