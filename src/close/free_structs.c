@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:50:16 by yubi42            #+#    #+#             */
-/*   Updated: 2024/05/02 18:19:45 by hstein           ###   ########.fr       */
+/*   Updated: 2024/05/03 01:23:00 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,17 +92,3 @@ void	free_data(t_data *data)
 		terminate_sounds(data);
 }
 
-void	free_data_restart(t_data *data)
-{
-	free_texture(data->texture, data);
-	// free_map(data->map);
-	if (data->player)
-		free(data->player);
-	if (data->mlx_win)
-	{
-		mlx_destroy_window(data->mlx, data->mlx_win);
-		mlx_destroy_display(data->mlx);
-	}
-	if (data->mlx)
-		free(data->mlx);
-}

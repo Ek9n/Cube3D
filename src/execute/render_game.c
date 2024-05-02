@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 13:58:23 by jborner           #+#    #+#             */
-/*   Updated: 2024/05/02 18:15:19 by hstein           ###   ########.fr       */
+/*   Updated: 2024/05/03 01:29:40 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,16 +171,16 @@ void	put_kmh(t_data *data, unsigned int num, int w, int h)
 
 long long	get_elapsed_time_ms()
 {
-    static struct	timeval start_time;
-    struct			timeval current_time;
-    long long		elapsed_time_ms;
+	static struct	timeval start_time;
+	struct			timeval current_time;
+	long long		elapsed_time_ms;
 
-    gettimeofday(&current_time, NULL);
-    if (start_time.tv_sec == 0 && start_time.tv_usec == 0)
-        start_time = current_time;
-	elapsed_time_ms = (current_time.tv_sec - start_time.tv_sec) * 1000LL +
-                                (current_time.tv_usec - start_time.tv_usec) / 1000LL;
-    return (elapsed_time_ms);
+	gettimeofday(&current_time, NULL);
+	if (start_time.tv_sec == 0 && start_time.tv_usec == 0)
+		start_time = current_time;
+	elapsed_time_ms = (current_time.tv_sec - start_time.tv_sec) * 1000LL + \
+		(current_time.tv_usec - start_time.tv_usec) / 1000LL;
+	return (elapsed_time_ms);
 }
 
 void	put_laptime_ms(t_data *data, int w, int h)

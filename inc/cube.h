@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/05/02 18:25:51 by hstein           ###   ########.fr       */
+/*   Updated: 2024/05/03 01:48:30 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@
 # define MOV_MIN 10
 # define SIDESTEP 10
 # define EPSILON 1e-6
-#define MINIMAP_WIDTH 15
-#define MINIMAP_HEIGHT 9
+# define MINIMAP_WIDTH 15
+# define MINIMAP_HEIGHT 9
 
 typedef struct s_read
 {
@@ -233,6 +233,7 @@ typedef struct s_data
 	t_sound		sound;
 	bool		restart;
 	bool		sound_on;
+	size_t		score[10]; // wird noch nicht benutzt.. soll die beste zeit speichern
 }				t_data;
 
 // ================= CLOSE ==================
