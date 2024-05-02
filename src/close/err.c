@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 15:03:58 by yubi42            #+#    #+#             */
-/*   Updated: 2024/05/02 17:47:27 by hstein           ###   ########.fr       */
+/*   Updated: 2024/05/02 18:18:34 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ int	malloc_err(void *ptr, int *return_value, char (*err)[50])
 void	close_game(t_data *data, char *msg)
 {
 	free_data(data);
-	terminate_sounds(data);
+	if (data->sound_on)
+		terminate_sounds(data);
 	if (!msg)
 		exit(EXIT_SUCCESS);
 	ft_printf_err(msg);

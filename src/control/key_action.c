@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 08:35:01 by yubi42            #+#    #+#             */
-/*   Updated: 2024/05/02 17:28:11 by hstein           ###   ########.fr       */
+/*   Updated: 2024/05/02 18:06:28 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,12 @@ void	move_side(t_data *data, int sign)
 	data->player->y += cos(data->player->angle + (0.5 * PI * sign)) * SIDESTEP;
 }
 
-void	restart_game(t_data *data)
+void	restart_game(t_data *data, bool opt)
 {
-	// free_data(data);
+	if (opt)
+		data->restart = true;
+	else
+		data->restart = false;
 	mlx_loop_end(data->mlx);
 }
 
@@ -100,15 +103,9 @@ void	handle_keys(t_data *data)
 	if (data->keys[XK_Escape])
 		close_game(data, NULL);
 	if (data->player->dead && data->keys[XK_y])
-	{
-		// data->restart = true;
-		restart_game(data);
-	}
+		restart_game(data, true);
 	if (data->player->dead && data->keys[XK_n])
-	{
-		data->restart = false;
-		close_game(data, NULL);
-	}
+		restart_game(data, false);
 	if ((data->keys[XK_Right] || data->rot[XK_Right] > ROT_MIN))
 		rotate_player(data, 1, XK_Right);
 	if ((data->keys[XK_Left] || data->rot[XK_Left] > ROT_MIN))

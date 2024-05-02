@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data_struct.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:46:24 by yubi42            #+#    #+#             */
-/*   Updated: 2024/05/02 17:11:31 by jborner          ###   ########.fr       */
+/*   Updated: 2024/05/02 18:16:36 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ void	init_data(t_data *data)
 	data->mlx_win = NULL;
     data->width = 1920;
     data->height = 1080;
+	data->restart = false;
 	data->err[0] = '\0';
 	data->round = -1;
 	data->round_touch = 0;

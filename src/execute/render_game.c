@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 13:58:23 by jborner           #+#    #+#             */
-/*   Updated: 2024/05/02 17:35:59 by hstein           ###   ########.fr       */
+/*   Updated: 2024/05/02 18:15:19 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -234,6 +234,19 @@ void goal_logic(t_data *data)
 	put_img_to_img(data->texture->base_img, data->texture->num2, 100, 20);
 }
 
+void	death_check(t_data *data)
+{
+	static bool	flag;
+
+	if (data->player->dead)
+	{
+		if (data->sound_on && !flag)
+			ma_sound_start(&data->sound.crash);
+		put_img_to_img(data->texture->base_img, data->texture->game_over, 200, -200);
+		flag = true;
+	}
+}
+
 int	render(t_data *data)
 {
 	// static int	last_dir;
@@ -245,20 +258,14 @@ int	render(t_data *data)
 	put_img_to_img(data->texture->base_img, data->texture->minimap->resize, 1400, 650);
 
 	rotate_image(data, &data->texture->steeringwheel, -4 * data->player->rotation);
-	ma_sound_set_pitch(&data->sound.motor, data->player->speed[0] / 8);
+	if (data->sound_on)
+		ma_sound_set_pitch(&data->sound.motor, data->player->speed[0] / 8);
 	// printf("cur speed: %f\n", data->player->speed[0]);
 
 	put_img_to_img(data->texture->base_img, data->texture->steeringwheel2, 500, 500);
 
-	static bool	flag;
-	printf("deadflag = %d\n", data->player->dead);
-	if (data->player->dead)
-	{
-		if (!flag)
-			ma_sound_start(&data->sound.crash);
-		put_img_to_img(data->texture->base_img, data->texture->game_over, 200, -200);
-		flag = true;
-	}
+	death_check(data);
+	
 	put_kmh(data, data->player->speed[0] * 5, 1200, 870);
 	put_laptime(data, 1750, 100);
 	goal_logic(data);
