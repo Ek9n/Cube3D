@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 15:47:45 by yubi42            #+#    #+#             */
-/*   Updated: 2024/05/06 14:43:35 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/05/06 16:54:05 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,49 @@ int safe_score(t_data *data)
 {
 	int	fd;
 
-	fd = open("./highscore", O_WRONLY /* | O_APPEND */ | O_CREAT, 0644);
-	write(fd, &data->highscore, sizeof(size_t));
+	// // fd = open("./highscore", O_WRONLY /* | O_APPEND */ | O_CREAT, 0644);
+	fd = open("./highscore", O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	close(fd);
+	fd = open("./highscore", O_WRONLY | O_APPEND, 0644);
+
+	int i = -1;
+	while (++i < SCORE_ENTRYS)
+	{
+		if (data->score[i] == 0 || data->highscore < data->score[i])
+		{
+			data->score[i] = data->highscore;
+			// if (i + 1 < SCORE_ENTRYS && data->cur_score < data->score[i + 1])
+			// 	data->score[i + 1] = data->cur_score;
+			break ;
+		}
+	}
+	i = -1;
+	while (++i < SCORE_ENTRYS)
+		write(fd, &data->score[i], sizeof(long long));
 	close(fd);
 	return (0);
 }
 
 int load_score(t_data *data)
 {
-	// nummern immer size_t gross.. bei 100 nummern wird alles gelesen und dann durch size geteilt.. dann hat man die anzahl der nummern...
-	// oder einfach fest sagen.. zb 10 eintraege hat der highscore.. dann kann man genau 10 * sizeof(size_t) lesen.. wenn es erst 2 scores gibt sind die anderen 999999 .. oder 0 oder so
 	int	fd;
+	int	i = -1;
+	long long	null = 0;
 
 	fd = open("./highscore", O_RDONLY);
-	read(fd, &data->highscore, sizeof(size_t));
-	close(fd);
-	ft_printf("score is %zu\n", data->highscore);
+	if (fd != -1)
+	{
+		while (++i < SCORE_ENTRYS)
+			read(fd, &data->score[i], sizeof(long long));
+		close(fd);
+	}
+	else
+		while (++i < SCORE_ENTRYS)
+			data->score[i] = 0;
+	printf("HIGHSCORE:\n");
+	i = -1;
+	while (++i < SCORE_ENTRYS)
+		printf("%lld\n", data->score[i]);
 	return (0);
 }
 
@@ -43,7 +70,12 @@ int	main(int ac, char **av)
 	while (data.restart)
 	{
 		init_data(&data);
+		// data.highscore = 11111;
+		// for (int i = 0; i < 10; i++)
+		// 	data.score[i] = i;
 		load_score(&data);
+		safe_score(&data);
+		// close_game(&data, NULL);
 		if (!input_validator(ac, av, &data.err) || !file_validator(av[1],
 				data.texture, &data.err) || !map_validator(&data, *(data.texture),
 				&data.err))
@@ -55,7 +87,7 @@ int	main(int ac, char **av)
 		data.sound_on = true;
 		ft_printf("all ok :)\n");
 		run_game(&data);
-		// safe_score(&data);
+		safe_score(&data);
 		free_data(&data);
 	}
 	return (0);

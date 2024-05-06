@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_game.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 13:58:23 by jborner           #+#    #+#             */
-/*   Updated: 2024/05/06 14:53:42 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/05/06 16:36:51 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,7 +233,7 @@ void goal_logic(t_data *data)
 		put_num_to_baseimg(data, data->round, 20, 20);
 	if (data->round == ROUNDS && !data->end_reached)
 	{
-		if (data->cur_score > data->highscore)
+		if (data->cur_score < data->highscore)
 			data->highscore = data->cur_score;
 		safe_score(data);
 		data->end_reached = 1;

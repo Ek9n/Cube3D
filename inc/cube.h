@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/05/06 14:15:46 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/05/06 16:19:17 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@
 # define MINIMAP_WIDTH 15
 # define MINIMAP_HEIGHT 9
 # define ROUNDS 2
+# define SCORE_ENTRYS 10
 
 typedef struct s_read
 {
@@ -237,7 +238,7 @@ typedef struct s_data
 	t_sound		sound;
 	bool		restart;
 	bool		sound_on;
-	size_t		score[10]; // wird noch nicht benutzt.. soll die beste zeit speichern
+	long long	score[10]; // wird noch nicht benutzt.. soll die beste zeit speichern
 }				t_data;
 
 // ================= CLOSE ==================
@@ -411,5 +412,9 @@ int				input_validator(int ac, char **av, char (*err)[50]);
 int		init_sounds_1(t_sound *sound);
 void	setup_sounds(t_data *data);
 void	terminate_sounds(t_data *data);
+
+
+int safe_score(t_data *data);
+int load_score(t_data *data);
 
 #endif
