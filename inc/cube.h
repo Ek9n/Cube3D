@@ -6,7 +6,7 @@
 /*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/05/06 14:15:46 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/05/06 15:12:03 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,8 @@ typedef struct s_texture
 	t_image		*slash;
 	t_image		*kmh;
 	t_image		*game_over;
+	t_image		*your_score;
+	t_image		*high_score;
 	t_image		*img1;
 	t_image		*img2;
 	t_image		*black;

@@ -6,7 +6,7 @@
 /*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:46:24 by yubi42            #+#    #+#             */
-/*   Updated: 2024/05/06 14:12:44 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/05/06 15:13:45 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void	init_texture(t_texture *texture)
 	texture->slash = NULL;
 	texture->kmh = NULL;
 	texture->game_over = NULL;
+	texture->high_score = NULL;
+	texture->your_score = NULL;
 	texture->goal = NULL;
 	texture->no = NULL;
 	texture->so = NULL;
