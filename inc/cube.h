@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/05/06 16:19:17 by hstein           ###   ########.fr       */
+/*   Updated: 2024/05/06 16:55:13 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,8 @@ typedef struct s_texture
 	t_image		*slash;
 	t_image		*kmh;
 	t_image		*game_over;
+	t_image		*your_score;
+	t_image		*high_score;
 	t_image		*img1;
 	t_image		*img2;
 	t_image		*black;

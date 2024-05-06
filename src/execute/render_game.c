@@ -6,9 +6,10 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 13:58:23 by jborner           #+#    #+#             */
-/*   Updated: 2024/05/06 16:36:51 by hstein           ###   ########.fr       */
+/*   Updated: 2024/05/06 16:57:28 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "cube.h"
 
@@ -183,32 +184,37 @@ long long	get_elapsed_time_ms()
 	return (elapsed_time_ms);
 }
 
-void	put_laptime_ms(t_data *data, int w, int h)
+void	put_laptime_ms(t_data *data, int w, int h, long long score)
 {
-	put_num_to_baseimg(data, data->cur_score, w, h);
+	put_num_to_baseimg(data, score, w, h);
 }
 
-void	put_laptime_ms_rest(t_data *data, int w, int h)
+void	put_laptime_ms_rest(t_data *data, int w, int h, long long score)
 {
-	put_num_to_baseimg(data, data->cur_score % 1000, w, h);
+	put_num_to_baseimg(data, score % 1000, w, h);
 }
 
-void	put_laptime_s(t_data *data, int w, int h)
+void	put_laptime_s(t_data *data, int w, int h, long long score)
 {
-	put_num_to_baseimg(data, data->cur_score / 1000, w, h);
+	put_num_to_baseimg(data, score / 1000, w, h);
 }
 
-void	put_laptime(t_data *data, int w, int h)
+void	put_laptime(t_data *data, int w, int h, int highscore)
 {
 	// static char	flag; // evtl das resize img ins texturestruct verschieben und nur einmal erstellen beim start..
+	long long score;
+
 	t_image	*resize;
 	if (!data->end_reached)
 		data->cur_score = get_elapsed_time_ms();
-	put_laptime_ms_rest(data, w, h + 50);
-	put_laptime_s(data, w, h);
+	score = data->cur_score;
+	if (highscore)
+		score = data->highscore;
 	resize = resize_img(data, &data->texture->transparent, 145, 115);
+	put_laptime_ms_rest(data, w - (resize->width / 2), h + 50, score);
+	put_laptime_s(data, w - (resize->width / 2), h, score);
 	create_frame(data->texture->transparent, 3, WHITE);
-	put_img_to_img(data->texture->base_img, resize, w, h);
+	put_img_to_img(data->texture->base_img, resize, w - (resize->width / 2), h);
 	free_img(resize, data->mlx);
 }
 
@@ -240,7 +246,10 @@ void goal_logic(t_data *data)
 	}
 	if (data->end_reached)
 	{
-		put_laptime(data, data->width / 2, 64);
+		put_img_to_img(data->texture->base_img, data->texture->your_score,  data->width / 2 - (data->texture->your_score->width / 2), 20);
+		put_laptime(data, data->width / 2, 100, 0);
+		put_img_to_img(data->texture->base_img, data->texture->high_score,  data->width / 2 - (data->texture->high_score->width / 2), 260);
+		put_laptime(data, data->width / 2, 340, 1);
 	}
 	put_img_to_img(data->texture->base_img, data->texture->slash, 60, 20);
 	put_img_to_img(data->texture->base_img, data->texture->num2, 100, 20);
@@ -280,7 +289,7 @@ int	render(t_data *data)
 	
 	put_kmh(data, data->player->speed[0] * 5, 1200, 870);
 	if (!data->end_reached)
-		put_laptime(data, 1750, 100);
+		put_laptime(data, 1750, 100, 0);
 	goal_logic(data);
 	mlx_put_image_to_window(data->mlx, data->mlx_win,
 				data->texture->base_img->img_ptr, 0, 0);

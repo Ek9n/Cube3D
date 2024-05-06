@@ -6,18 +6,13 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/05/06 15:22:44 by hstein           ###   ########.fr       */
+/*   Updated: 2024/05/06 16:58:19 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
-#include "cube.h"
 
-void	init_img(t_image *img)
-{
-	img->addr = NULL;
-	img->img_ptr = NULL;
-}
+#include "cube.h"
 
 t_image	*create_img(t_data *data, char *path, int w, int h)
 {
@@ -27,7 +22,8 @@ t_image	*create_img(t_data *data, char *path, int w, int h)
 	img = malloc(sizeof(t_image));
 	if (!img)
 		close_game(data, "Not able to allocate memory or wrong img path");
-	init_img(img);
+	img->addr = NULL;
+	img->img_ptr = NULL;
 	if (path)
 		img->img_ptr = mlx_xpm_file_to_image(data->mlx, path, &(img->width),
 				&(img->height));
@@ -71,26 +67,8 @@ void	create_goal_img(t_data *data)
 		data->texture->goal = create_img(data, "./img/goal_s.xpm", 0, 0);
 }
 
-void	mlx_init_game(t_data *data)
+void create_text_imgs(t_data *data)
 {
-	data->mlx = mlx_init();
-	if (data->mlx == NULL)
-		close_game(data, "ERROR");
-	data->mlx_win = mlx_new_window(data->mlx, data->width, data->height,
-			"cub3d");
-	if (data->mlx_win == NULL)
-		close_game(data, "ERROR");
-	create_wall_imgs(data);
-	create_goal_img(data);
-	data->texture->black = create_img(data, "./img/black.xpm", 0, 0);
-	data->texture->transparent = create_img(data, "./img/transparent.xpm", 0, 0);
-	data->texture->steeringwheel = create_img(data, "./img/steeringwheel.xpm",
-				0, 0);
-	data->texture->steeringwheel2 = create_img(data, "./img/steeringwheel.xpm",
-				0, 0);
-	data->texture->carframe = create_img(data, "./img/cockpit.xpm", 0, 0);
-	data->texture->carframe2 = resize_img(data, &data->texture->carframe,
-			data->width, data->height);
 	data->texture->num0 = create_img(data, "./img/0.xpm", 0, 0);
 	data->texture->num1 = create_img(data, "./img/1.xpm", 0, 0);
 	data->texture->num2 = create_img(data, "./img/2.xpm", 0, 0);
@@ -103,9 +81,31 @@ void	mlx_init_game(t_data *data)
 	data->texture->num9 = create_img(data, "./img/9.xpm", 0, 0);
 	data->texture->slash = create_img(data, "./img/slash.xpm", 0, 0);
 	data->texture->kmh = create_img(data, "./img/kmh.xpm", 0, 0);
-	// data->texture->nums = create_img(data, "./img/nums.xpm", 0, 0);
-	// printf("hier %d\n", data->texture->nums->width);
-	// data->texture->numshadow = create_img(data, "./img/numshadow.xpm", 0, 0);
+	data->texture->high_score = create_img(data, "./img/highscore.xpm", 0, 0);
+	data->texture->your_score = create_img(data, "./img/your_score.xpm", 0, 0);
+}
+
+void	mlx_init_game(t_data *data)
+{
+	data->mlx = mlx_init();
+	if (data->mlx == NULL)
+		close_game(data, "ERROR");
+	data->mlx_win = mlx_new_window(data->mlx, data->width, data->height,
+			"cub3d");
+	if (data->mlx_win == NULL)
+		close_game(data, "ERROR");
+	create_wall_imgs(data);
+	create_goal_img(data);
+	create_text_imgs(data);
+	data->texture->black = create_img(data, "./img/black.xpm", 0, 0);
+	data->texture->transparent = create_img(data, "./img/transparent.xpm", 0, 0);
+	data->texture->steeringwheel = create_img(data, "./img/steeringwheel.xpm",
+				0, 0);
+	data->texture->steeringwheel2 = create_img(data, "./img/steeringwheel.xpm",
+				0, 0);
+	data->texture->carframe = create_img(data, "./img/cockpit.xpm", 0, 0);
+	data->texture->carframe2 = resize_img(data, &data->texture->carframe,
+			data->width, data->height);
 	data->texture->game_over = create_img(data, "./img/game_over2.xpm", 0, 0);
 	resize_same_img(data, &data->texture->game_over, data->width, data->height);
 	if (data->sound_on)
