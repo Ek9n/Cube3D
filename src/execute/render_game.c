@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 13:58:23 by jborner           #+#    #+#             */
-/*   Updated: 2024/05/06 16:57:28 by hstein           ###   ########.fr       */
+/*   Updated: 2024/05/06 18:11:44 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,17 +170,17 @@ void	put_kmh(t_data *data, unsigned int num, int w, int h)
 	put_img_to_img(data->texture->base_img, data->texture->kmh, w, h + 64);
 }
 
-long long	get_elapsed_time_ms()
+long long	get_elapsed_time_ms(struct timeval *start_time)
 {
-	static struct	timeval start_time;
-	struct			timeval current_time;
-	long long		elapsed_time_ms;
+	// static struct timeval	start_time;
+	struct		timeval current_time;
+	long long	elapsed_time_ms;
 
 	gettimeofday(&current_time, NULL);
-	if (start_time.tv_sec == 0 && start_time.tv_usec == 0)
-		start_time = current_time;
-	elapsed_time_ms = (current_time.tv_sec - start_time.tv_sec) * 1000LL + \
-		(current_time.tv_usec - start_time.tv_usec) / 1000LL;
+	if (start_time->tv_sec == 0 && start_time->tv_usec == 0)
+		*start_time = current_time;
+	elapsed_time_ms = (current_time.tv_sec - start_time->tv_sec) * 1000LL + \
+		(current_time.tv_usec - start_time->tv_usec) / 1000LL;
 	return (elapsed_time_ms);
 }
 
@@ -206,7 +206,7 @@ void	put_laptime(t_data *data, int w, int h, int highscore)
 
 	t_image	*resize;
 	if (!data->end_reached)
-		data->cur_score = get_elapsed_time_ms();
+		data->cur_score = get_elapsed_time_ms(&data->start_time);
 	score = data->cur_score;
 	if (highscore)
 		score = data->highscore;
@@ -239,7 +239,7 @@ void goal_logic(t_data *data)
 		put_num_to_baseimg(data, data->round, 20, 20);
 	if (data->round == ROUNDS && !data->end_reached)
 	{
-		if (data->cur_score < data->highscore)
+		if (data->highscore == 0 || data->cur_score < data->highscore)
 			data->highscore = data->cur_score;
 		safe_score(data);
 		data->end_reached = 1;

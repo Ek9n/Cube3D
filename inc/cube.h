@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/05/06 16:55:13 by hstein           ###   ########.fr       */
+/*   Updated: 2024/05/06 17:40:57 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,6 +227,7 @@ typedef struct s_data
 	int			rot_max;
 	long long	highscore;
 	long long	cur_score;
+	struct timeval	start_time;
 	int			round;
 	int			round_touch;
 	int			end_reached;

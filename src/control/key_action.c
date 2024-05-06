@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_action.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 08:35:01 by yubi42            #+#    #+#             */
-/*   Updated: 2024/05/06 15:06:30 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/05/06 17:06:38 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,8 @@ void	handle_keys(t_data *data)
 	static int	siren = 0;
 	if (data->keys[XK_Escape])
 		close_game(data, NULL);
-	if (data->player->dead && data->keys[XK_y])
+	// if (data->player->dead && data->keys[XK_y])
+	if (data->keys[XK_y])
 		restart_game(data, true);
 	if (data->player->dead && data->keys[XK_n])
 		restart_game(data, false);

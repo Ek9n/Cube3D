@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_grid_check.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 15:01:10 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/28 23:53:23 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/05/06 17:23:47 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,10 +90,10 @@ void	print_grid(t_map *map)
 		j = 0;
 		while (j < map->col_max)
 		{
-			ft_printf("%i", map->grid[i][j]);
+			// ft_printf("%i", map->grid[i][j]);
 			j++;
 		}
-		ft_printf("\n");
+		// ft_printf("\n");
 		i++;
 	}
 }

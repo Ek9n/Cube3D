@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 14:02:56 by jborner           #+#    #+#             */
-/*   Updated: 2024/04/08 19:12:23 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/05/06 19:37:45 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,24 @@ void	create_frame(t_image *img, int size, int color)
 		++y;
 	}
 }
+
+// void	create_rectangular(t_image *img, int w, int h, int color)
+// {
+// 	int	y;
+// 	int	x;
+
+// 	y = 0;
+// 	while (y < img->width)
+// 	{
+// 		x = 0;
+// 		while (x < img->height)
+// 		{
+// 			img_pix_put(img, y, x, color);
+// 			++x;
+// 		}
+// 		++y;
+// 	}
+// }
 
 unsigned long	rgb_to_hex(int rgb[3])
 {
