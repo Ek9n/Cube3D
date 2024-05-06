@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/05/03 01:48:30 by hstein           ###   ########.fr       */
+/*   Updated: 2024/05/06 14:15:46 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@
 # define EPSILON 1e-6
 # define MINIMAP_WIDTH 15
 # define MINIMAP_HEIGHT 9
+# define ROUNDS 2
 
 typedef struct s_read
 {
@@ -221,8 +222,11 @@ typedef struct s_data
 	int			keys[NUM_KEYS];
 	int			rot[NUM_KEYS];
 	int			rot_max;
+	long long	highscore;
+	long long	cur_score;
 	int			round;
 	int			round_touch;
+	int			end_reached;
 	int			minimap_width;
 	int			minimap_height;
 	char		err[50];

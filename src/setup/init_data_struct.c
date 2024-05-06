@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data_struct.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:46:24 by yubi42            #+#    #+#             */
-/*   Updated: 2024/05/02 18:16:36 by hstein           ###   ########.fr       */
+/*   Updated: 2024/05/06 14:12:44 by yubi42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,13 @@ void	init_data(t_data *data)
     data->width = 1920;
     data->height = 1080;
 	data->restart = false;
+	data->highscore = 0;
+	data->cur_score = 0;
+	data->sound_on = false;
 	data->err[0] = '\0';
 	data->round = -1;
 	data->round_touch = 0;
+	data->end_reached = 0;
 	data->map = NULL;
 	data->texture = NULL;
 	data->player = NULL;
