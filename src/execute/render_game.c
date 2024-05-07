@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 13:58:23 by jborner           #+#    #+#             */
-/*   Updated: 2024/05/06 18:11:44 by hstein           ###   ########.fr       */
+/*   Updated: 2024/05/07 22:27:51 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,7 +218,23 @@ void	put_laptime(t_data *data, int w, int h, int highscore)
 	free_img(resize, data->mlx);
 }
 
-void goal_logic(t_data *data)
+void	put_highscore(t_data *data, int w, int h)
+{
+	int	i;
+
+	put_img_to_img(data->texture->base_img, data->texture->high_score, w, h);
+	h += 60;
+	i = -1;
+	while (++i < SCORE_ENTRYS)
+	{
+		put_num_to_baseimg(data, data->score[i], w, h);
+		// put_num_to_baseimg(data, data->score[i] / 1000, w, h);
+		// put_num_to_baseimg(data, data->score[i] % 1000, w + 80, h);
+		h += 50;
+	}
+}
+
+void	goal_logic(t_data *data)
 {
 	if(data->player->x >= IMG_SIZE && data->player->y >= IMG_SIZE && data->player->x <= data->map->row_max * IMG_SIZE - IMG_SIZE && data->player->y <= data->map->col_max * IMG_SIZE - IMG_SIZE)
 	{
@@ -246,10 +262,9 @@ void goal_logic(t_data *data)
 	}
 	if (data->end_reached)
 	{
-		put_img_to_img(data->texture->base_img, data->texture->your_score,  data->width / 2 - (data->texture->your_score->width / 2), 20);
-		put_laptime(data, data->width / 2, 100, 0);
-		put_img_to_img(data->texture->base_img, data->texture->high_score,  data->width / 2 - (data->texture->high_score->width / 2), 260);
-		put_laptime(data, data->width / 2, 340, 1);
+		put_img_to_img(data->texture->base_img, data->texture->your_score,  data->width / 2 - (data->texture->your_score->width / 2), 100);
+		put_num_to_baseimg(data, data->highscore,  data->width / 2 - (data->texture->your_score->width / 2), 160);
+		put_highscore(data, data->width / 2 - (data->texture->high_score->width / 2), 260);
 	}
 	put_img_to_img(data->texture->base_img, data->texture->slash, 60, 20);
 	put_img_to_img(data->texture->base_img, data->texture->num2, 100, 20);
@@ -291,6 +306,11 @@ int	render(t_data *data)
 	if (!data->end_reached)
 		put_laptime(data, 1750, 100, 0);
 	goal_logic(data);
+
+	// put_img_to_img(data->texture->base_img, data->texture->your_score,  data->width / 2 - (data->texture->your_score->width / 2), 100);
+	// put_num_to_baseimg(data, data->highscore,  data->width / 2 - (data->texture->your_score->width / 2), 160);
+	// put_highscore(data, data->width / 2 - (data->texture->high_score->width / 2), 260);
+	
 	mlx_put_image_to_window(data->mlx, data->mlx_win,
 				data->texture->base_img->img_ptr, 0, 0);
 	usleep(42000);

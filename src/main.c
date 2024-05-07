@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 15:47:45 by yubi42            #+#    #+#             */
-/*   Updated: 2024/05/06 18:10:29 by hstein           ###   ########.fr       */
+/*   Updated: 2024/05/07 20:45:04 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,23 @@
 int safe_score(t_data *data)
 {
 	int	fd;
+	int	i;
+	int	j;
 
-	// // fd = open("./highscore", O_WRONLY /* | O_APPEND */ | O_CREAT, 0644);
 	fd = open("./highscore", O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	close(fd);
 	fd = open("./highscore", O_WRONLY | O_APPEND, 0644);
-
-	int i = -1;
+	i = -1;
 	while (++i < SCORE_ENTRYS)
 	{
 		if (data->score[i] == 0 || data->highscore < data->score[i])
 		{
+			j = SCORE_ENTRYS - 1;
+			while (j > i)
+			{
+				data->score[j] = data->score[j - 1];
+				j--;
+			}
 			data->score[i] = data->highscore;
 			// if (i + 1 < SCORE_ENTRYS && data->cur_score < data->score[i + 1])
 			// 	data->score[i + 1] = data->cur_score;
@@ -59,7 +65,8 @@ int load_score(t_data *data)
 	i = -1;
 	while (++i < SCORE_ENTRYS)
 		printf("%lld\n", data->score[i]);
-	data->highscore = data->score[0];
+	// data->highscore = data->score[0];
+	data->highscore = 0;
 	return (0);
 }
 
