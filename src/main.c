@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 15:47:45 by yubi42            #+#    #+#             */
-/*   Updated: 2024/05/07 20:45:04 by hstein           ###   ########.fr       */
+/*   Updated: 2024/05/08 17:14:51 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,30 @@ void	reset_elapsed_time(struct timeval *start_time)
 	start_time->tv_usec = 0;
 }
 
+void	get_user_name()
+{
+    char buffer[20]; // Puffer für die Eingabe
+	char c = 0;
+	int i = 0;
+    ssize_t bytesRead; // Anzahl der gelesenen Bytes
+
+	printf("INPuT:\n");
+
+    // Daten von stdin lesen
+	while (c != '\n' && i < 20)
+	{
+		bytesRead = read(STDIN_FILENO, &c, sizeof(char));
+		buffer[i] = c;
+		if (bytesRead == 0)
+			break ;
+		i++;
+	}
+	buffer[i] = '\0';
+	
+
+	printf("INPuT:%s\n", buffer);
+}
+
 int	main(int ac, char **av)
 {
 	t_data	data;
@@ -97,7 +121,8 @@ int	main(int ac, char **av)
 		load_score(&data);
 		
 		// safe_score(&data);
-		// close_game(&data, NULL);
+		get_user_name();
+		close_game(&data, NULL);
 		if (!input_validator(ac, av, &data.err) || !file_validator(av[1],
 				data.texture, &data.err) || !map_validator(&data, *(data.texture),
 				&data.err))
