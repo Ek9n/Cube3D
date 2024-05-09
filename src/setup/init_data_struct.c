@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:46:24 by yubi42            #+#    #+#             */
-/*   Updated: 2024/05/06 18:10:39 by hstein           ###   ########.fr       */
+/*   Updated: 2024/05/09 18:21:47 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ void	init_data(t_data *data)
 	data->player = malloc(sizeof(t_player));
 	data->map = malloc(sizeof(t_map));
 	data->texture = malloc(sizeof(t_texture));
+	ft_memcpy(data->name, "DEFAULT", 8);
 	init_array(data->keys, 0, 0);
 	init_array(data->rot, ROT_MIN, MOV_MIN);
 	init_player(data->player);

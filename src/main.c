@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 15:47:45 by yubi42            #+#    #+#             */
-/*   Updated: 2024/05/08 17:14:51 by hstein           ###   ########.fr       */
+/*   Updated: 2024/05/09 18:54:10 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,12 @@ int safe_score(t_data *data)
 			while (j > i)
 			{
 				data->score[j] = data->score[j - 1];
+				ft_memcpy(data->names[j], data->names[j - 1], 20);
 				j--;
 			}
 			data->score[i] = data->highscore;
+			ft_memcpy(data->names[i], data->name, sizeof(data->name));
+			// printf("NAME:%s\n", data->names[i]);
 			// if (i + 1 < SCORE_ENTRYS && data->cur_score < data->score[i + 1])
 			// 	data->score[i + 1] = data->cur_score;
 			break ;
@@ -40,7 +43,10 @@ int safe_score(t_data *data)
 	}
 	i = -1;
 	while (++i < SCORE_ENTRYS)
+	{
+		write(fd, &data->names[i], 20);
 		write(fd, &data->score[i], sizeof(long long));
+	}
 	close(fd);
 	return (0);
 }
@@ -55,16 +61,25 @@ int load_score(t_data *data)
 	if (fd != -1)
 	{
 		while (++i < SCORE_ENTRYS)
+		{
+			read(fd, &data->names[i], 20);
 			read(fd, &data->score[i], sizeof(long long));
+		}
 		close(fd);
 	}
 	else
 		while (++i < SCORE_ENTRYS)
+		{
+			ft_memcpy(data->names[i], "DEFAULT", 8);
 			data->score[i] = 0;
-	printf("HIGHSCORE:\n");
+		}
+	// printf("HIGHSCORE:\n");
 	i = -1;
 	while (++i < SCORE_ENTRYS)
+	{
+		printf("%s\n", data->names[i]);
 		printf("%lld\n", data->score[i]);
+	}
 	// data->highscore = data->score[0];
 	data->highscore = 0;
 	return (0);
@@ -76,9 +91,9 @@ void	reset_elapsed_time(struct timeval *start_time)
 	start_time->tv_usec = 0;
 }
 
-void	get_user_name()
+void	get_user_name(t_data *data)
 {
-    char buffer[20]; // Puffer für die Eingabe
+    // char buffer[20]; // Puffer für die Eingabe
 	char c = 0;
 	int i = 0;
     ssize_t bytesRead; // Anzahl der gelesenen Bytes
@@ -89,40 +104,34 @@ void	get_user_name()
 	while (c != '\n' && i < 20)
 	{
 		bytesRead = read(STDIN_FILENO, &c, sizeof(char));
-		buffer[i] = c;
+		data->name[i] = c;
 		if (bytesRead == 0)
 			break ;
 		i++;
 	}
-	buffer[i] = '\0';
-	
+	if (c == '\n' && i == 1)
+		ft_memcpy(data->name, "noname", 7);
+	else
+		data->name[i - 1] = '\0';
 
-	printf("INPuT:%s\n", buffer);
+	// printf("INPuT:%s\n", data->name);
 }
 
 int	main(int ac, char **av)
 {
 	t_data	data;
-	
+
 	data.restart = true;
 	while (data.restart)
 	{
 		init_data(&data);
 		// reset_elapsed_time(&data.start_time);
-		// if (data.start_time > 0)
-		// data.cur_score = data.start_time;
-		printf("1:%lld\n", data.cur_score);
-		// data.cur_score -= data.start_time;
-		// printf("2:%lld\n", data.cur_score);
 
-		// data.highscore = 11111;
-		// for (int i = 0; i < 10; i++)
-		// 	data.score[i] = i;
 		load_score(&data);
-		
+		get_user_name(&data);
+
 		// safe_score(&data);
-		get_user_name();
-		close_game(&data, NULL);
+		// close_game(&data, NULL);
 		if (!input_validator(ac, av, &data.err) || !file_validator(av[1],
 				data.texture, &data.err) || !map_validator(&data, *(data.texture),
 				&data.err))

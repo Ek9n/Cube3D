@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/05/07 21:51:29 by hstein           ###   ########.fr       */
+/*   Updated: 2024/05/09 18:38:39 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -242,6 +242,7 @@ typedef struct s_data
 	bool		restart;
 	bool		sound_on;
 	long long	score[10]; // wird noch nicht benutzt.. soll die beste zeit speichern
+	char		name[20];
 	char		names[10][20]; // wird noch nicht benutzt.. soll die beste zeit speichern
 }				t_data;
 
