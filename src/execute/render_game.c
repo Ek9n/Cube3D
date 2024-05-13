@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_game.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 13:58:23 by jborner           #+#    #+#             */
-/*   Updated: 2024/05/07 22:27:51 by hstein           ###   ########.fr       */
+/*   Updated: 2024/05/13 15:02:14 by jborner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -313,6 +313,6 @@ int	render(t_data *data)
 	
 	mlx_put_image_to_window(data->mlx, data->mlx_win,
 				data->texture->base_img->img_ptr, 0, 0);
-	usleep(42000);
+	fps_delay(60);
 	return (0);
 }

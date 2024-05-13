@@ -36,6 +36,7 @@ SRC		=	main.c \
 			rays/ray_checker_utils.c \
 			rays/wall_detection.c \
 			render_utils/draw_pixel.c \
+			render_utils/fps.c \
 			render_utils/render_utils.c \
 			render_utils/resize_img.c \
 			setup/file_check.c \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_action.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 08:35:01 by yubi42            #+#    #+#             */
-/*   Updated: 2024/05/06 17:06:38 by hstein           ###   ########.fr       */
+/*   Updated: 2024/05/13 15:57:23 by jborner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	rotate_player(t_data *data, int sign, int num)
 	if (data->rot[num] > ROT_MIN && (data->rot[XK_Up] > MOV_MIN
 			|| data->rot[XK_Down] > MOV_MIN))
 	{
-		data->player->angle += (0.000003 * (data->rot[num] + (data->player->speed[0] / 2) + 10) * (data->rot[num] + data->player->speed[0] + 10) * data->player->rev_speed
+		data->player->angle += (0.000003 * (data->rot[num] + (data->player->speed[0] / 1.4) + 10) * (data->rot[num] + (data->player->speed[0] / 1.4)+ 10) * data->player->rev_speed
 				* data->player->rev_speed) * sign;
 		if (data->player->angle < 0 || data->player->angle >= 2 * PI)
 			data->player->angle -= 2 * PI * sign;

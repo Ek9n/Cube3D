@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/05/09 18:38:39 by hstein           ###   ########.fr       */
+/*   Updated: 2024/05/13 15:00:26 by jborner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -290,11 +290,6 @@ int				handle_keyrelease(int keysym, t_data *data);
 
 // ============== EXECUTE =============
 
-// delay.c
-void			delay_reset_one(int *delay, int *rot, int rot_value);
-void			delay_reset_all(t_data *data /* , int *key, int *rot */);
-// void	delay_reset_all(int *key, int *delay, int *rot);
-
 // render_game.c
 void			render_minimap(t_data *data, t_minimap *minimap);
 void			render_background(t_data *data, t_image *bg);
@@ -347,6 +342,9 @@ void			img_pix_put(t_image *img, int x, int y, int color);
 void			put_pixel_img(t_image *img, int x, int y, int color);
 unsigned int	get_pixel_img(t_image *img, int x, int y);
 void			put_img_to_img(t_image *dst, t_image *src, int x, int y);
+
+// fps.c
+void	fps_delay(int fps);
 
 // render_utils.c
 void			fill_img_color(t_image *img, int color);
