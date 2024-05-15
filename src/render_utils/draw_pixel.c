@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_pixel.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:44:20 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/08 19:02:52 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/05/15 00:36:43 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,7 @@ void	put_pixel_img(t_image *img, int x, int y, int color)
 
 unsigned int	get_pixel_img(t_image *img, int x, int y)
 {
-	return (*(unsigned int *)((img->addr + (y * img->bytes_per_line) + (x
-				* img->bpp / 8))));
+	return (*(unsigned int *)((img->addr + (y * img->bytes_per_line) + (x * img->bpp / 8))));
 }
 
 void	put_img_to_img(t_image *dst, t_image *src, int x, int y)

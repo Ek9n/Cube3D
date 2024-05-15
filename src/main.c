@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 15:47:45 by yubi42            #+#    #+#             */
-/*   Updated: 2024/05/09 18:54:10 by hstein           ###   ########.fr       */
+/*   Updated: 2024/05/15 14:39:07 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,13 +122,13 @@ int	main(int ac, char **av)
 	t_data	data;
 
 	data.restart = true;
+	get_user_name(&data);
 	while (data.restart)
 	{
 		init_data(&data);
 		// reset_elapsed_time(&data.start_time);
 
 		load_score(&data);
-		get_user_name(&data);
 
 		// safe_score(&data);
 		// close_game(&data, NULL);

@@ -6,11 +6,9 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/05/06 16:58:19 by hstein           ###   ########.fr       */
+/*   Updated: 2024/05/15 02:13:47 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
 
 #include "cube.h"
 
@@ -79,6 +77,8 @@ void create_text_imgs(t_data *data)
 	data->texture->num7 = create_img(data, "./img/7.xpm", 0, 0);
 	data->texture->num8 = create_img(data, "./img/8.xpm", 0, 0);
 	data->texture->num9 = create_img(data, "./img/9.xpm", 0, 0);
+	data->texture->alpha = create_img(data, "./img/alpha.xpm", 0, 0);
+	data->texture->alpha2 = create_img(data, "./img/alpha.xpm", 0, 0);
 	data->texture->slash = create_img(data, "./img/slash.xpm", 0, 0);
 	data->texture->kmh = create_img(data, "./img/kmh.xpm", 0, 0);
 	data->texture->high_score = create_img(data, "./img/highscore.xpm", 0, 0);
@@ -98,11 +98,10 @@ void	mlx_init_game(t_data *data)
 	create_goal_img(data);
 	create_text_imgs(data);
 	data->texture->black = create_img(data, "./img/black.xpm", 0, 0);
+	// data->texture->black->addr = data->texture->alpha->addr;
 	data->texture->transparent = create_img(data, "./img/transparent.xpm", 0, 0);
-	data->texture->steeringwheel = create_img(data, "./img/steeringwheel.xpm",
-				0, 0);
-	data->texture->steeringwheel2 = create_img(data, "./img/steeringwheel.xpm",
-				0, 0);
+	data->texture->steeringwheel = create_img(data, "./img/steeringwheel.xpm", 0, 0);
+	data->texture->steeringwheel2 = create_img(data, "./img/steeringwheel.xpm", 0, 0);
 	data->texture->carframe = create_img(data, "./img/cockpit.xpm", 0, 0);
 	data->texture->carframe2 = resize_img(data, &data->texture->carframe,
 			data->width, data->height);

@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 13:58:23 by jborner           #+#    #+#             */
-/*   Updated: 2024/05/07 22:27:51 by hstein           ###   ########.fr       */
+/*   Updated: 2024/05/15 14:37:55 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -283,6 +283,65 @@ void	death_check(t_data *data)
 	}
 }
 
+// void	put_letter(t_data *data, char letter, int w, int h)
+// {
+// 	int	start = (letter - 65) * data->texture->alpha->height;
+// 	int	end = (letter - 65) * data->texture->alpha->height + data->texture->alpha->height;
+
+// 	int	i;
+// 	int	j;
+// 	// printf("%dx%d\n", data->texture->alpha->height, data->texture->alpha->width);
+// 	// printf("start%d end:%d\n", start, end);
+// 	i = 0;
+// 	while (i < data->texture->alpha->height)
+// 	{
+// 		j = 0;
+// 		while (j < data->texture->alpha->height)
+// 		{
+// 			put_pixel_img(data->texture->base_img, w + j, h + i, get_pixel_img(data->texture->alpha, start + j, i));
+// 			j++;
+// 		}
+		
+// 		i++;
+// 	}
+// 	// put_img_to_img(data->texture->base_img, data->texture->alpha2, w - pos * data->texture->alpha->height, h);
+// }
+void	put_letter(t_data *data, char letter, int w, int h)
+{
+	int	start = (letter - 65) * data->texture->alpha->height;
+	int	end = (letter - 65) * data->texture->alpha->height + data->texture->alpha->height;
+
+	int size = 2;
+	int	i;
+	int	j;
+	// printf("%dx%d\n", data->texture->alpha->height, data->texture->alpha->width);
+	// printf("start%d end:%d\n", start, end);
+	i = 0;
+	while (i < data->texture->alpha->height)
+	{
+		j = 0;
+		while (j < data->texture->alpha->height)
+		{
+			put_pixel_img(data->texture->base_img, w + j, h + i, get_pixel_img(data->texture->alpha, start + j, i));
+			j++;
+		}
+		i++;
+	}
+	// put_img_to_img(data->texture->base_img, data->texture->alpha2, w - pos * data->texture->alpha->height, h);
+}
+void	put_str(t_data *data, char *str, int w, int h)
+{
+	int	i;
+
+	w -= 2; // correction
+	i = -1;
+	while (str[++i])
+	{
+		put_letter(data, str[i], w + i * 10, h);
+		// put_letter(data, str[i], w + i * data->texture->alpha->height, h);
+	}
+}
+
 int	render(t_data *data)
 {
 	// static int	last_dir;
@@ -300,6 +359,8 @@ int	render(t_data *data)
 
 	put_img_to_img(data->texture->base_img, data->texture->steeringwheel2, 500, 500);
 
+	// put_img_to_img(data->texture->base_img, data->texture->alpha2, 140, 140);
+
 	death_check(data);
 	
 	put_kmh(data, data->player->speed[0] * 5, 1200, 870);
@@ -310,9 +371,12 @@ int	render(t_data *data)
 	// put_img_to_img(data->texture->base_img, data->texture->your_score,  data->width / 2 - (data->texture->your_score->width / 2), 100);
 	// put_num_to_baseimg(data, data->highscore,  data->width / 2 - (data->texture->your_score->width / 2), 160);
 	// put_highscore(data, data->width / 2 - (data->texture->high_score->width / 2), 260);
-	
+	// put_letter(data, 'Z', 0, 0);
+	put_str(data, "HALLO", 0, 0);
 	mlx_put_image_to_window(data->mlx, data->mlx_win,
 				data->texture->base_img->img_ptr, 0, 0);
+	// mlx_string_put(data->mlx, data->mlx_win, 23, 23, GREEN,
+	// 	       "HALL2O");
 	usleep(42000);
 	return (0);
 }
