@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_structs.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:50:16 by yubi42            #+#    #+#             */
-/*   Updated: 2024/05/06 15:13:48 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/05/15 15:16:13 by jborner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,8 @@ void	free_minimap(t_minimap *minimap, t_data *data)
 	free(minimap);
 }
 
-void	free_texture(t_texture *texture, t_data *data)
+void	free_text_texture(t_texture *texture, t_data *data)
 {
-	if (!texture)
-		return ;
-	free_minimap(texture->minimap, data);
-	free_img(texture->base_img, data->mlx);
-	free_img(texture->carframe, data->mlx);
-	free_img(texture->carframe2, data->mlx);
-	free_img(texture->steeringwheel, data->mlx);
-	free_img(texture->steeringwheel2, data->mlx);
 	free_img(texture->num0, data->mlx);
 	free_img(texture->num1, data->mlx);
 	free_img(texture->num2, data->mlx);
@@ -52,6 +44,19 @@ void	free_texture(t_texture *texture, t_data *data)
 	free_img(texture->game_over, data->mlx);
 	free_img(texture->your_score, data->mlx);
 	free_img(texture->high_score, data->mlx);
+}
+
+void	free_texture(t_texture *texture, t_data *data)
+{
+	if (!texture)
+		return ;
+	free_minimap(texture->minimap, data);
+	free_text_texture(texture, data);
+	free_img(texture->base_img, data->mlx);
+	free_img(texture->carframe, data->mlx);
+	free_img(texture->carframe2, data->mlx);
+	free_img(texture->steeringwheel, data->mlx);
+	free_img(texture->steeringwheel2, data->mlx);
 	free_img(texture->img1, data->mlx);
 	free_img(texture->img2, data->mlx);
 	free_img(texture->black, data->mlx);
@@ -93,4 +98,3 @@ void	free_data(t_data *data)
 	if (data->sound_on)
 		terminate_sounds(data);
 }
-

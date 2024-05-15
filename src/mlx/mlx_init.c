@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/05/15 02:13:47 by hstein           ###   ########.fr       */
+/*   Updated: 2024/05/15 16:18:18 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	create_goal_img(t_data *data)
 		data->texture->goal = create_img(data, "./img/goal_s.xpm", 0, 0);
 }
 
-void create_text_imgs(t_data *data)
+void	create_text_imgs(t_data *data)
 {
 	data->texture->num0 = create_img(data, "./img/0.xpm", 0, 0);
 	data->texture->num1 = create_img(data, "./img/1.xpm", 0, 0);
@@ -98,10 +98,12 @@ void	mlx_init_game(t_data *data)
 	create_goal_img(data);
 	create_text_imgs(data);
 	data->texture->black = create_img(data, "./img/black.xpm", 0, 0);
-	// data->texture->black->addr = data->texture->alpha->addr;
-	data->texture->transparent = create_img(data, "./img/transparent.xpm", 0, 0);
-	data->texture->steeringwheel = create_img(data, "./img/steeringwheel.xpm", 0, 0);
-	data->texture->steeringwheel2 = create_img(data, "./img/steeringwheel.xpm", 0, 0);
+	data->texture->transparent = create_img(data, "./img/transparent.xpm", 0,
+			0);
+	data->texture->steeringwheel = create_img(data, "./img/steeringwheel.xpm",
+			0, 0);
+	data->texture->steeringwheel2 = create_img(data, "./img/steeringwheel.xpm",
+			0, 0);
 	data->texture->carframe = create_img(data, "./img/cockpit.xpm", 0, 0);
 	data->texture->carframe2 = resize_img(data, &data->texture->carframe,
 			data->width, data->height);

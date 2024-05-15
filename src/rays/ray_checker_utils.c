@@ -6,7 +6,7 @@
 /*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 18:03:24 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/24 16:56:37 by jborner          ###   ########.fr       */
+/*   Updated: 2024/05/15 15:38:48 by jborner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,15 @@
 
 double	distance(double x1, double y1, double x2, double y2)
 {
-	double x;
-	double y;
-	double x_square;
-	double y_square;
+	double	x;
+	double	y;
+	double	x_square;
+	double	y_square;
 
 	x = x2 - x1;
 	y = y2 - y1;
 	x_square = x * x;
 	y_square = y * y;
-
 	return (sqrt(x_square + y_square));
 }
 
@@ -37,8 +36,8 @@ void	adjust_angle(double *angle)
 
 void	adjust_x_y(t_data *data, double *x, double *y)
 {
-	int max_pos_x;
-	int max_pos_y;
+	int	max_pos_x;
+	int	max_pos_y;
 
 	max_pos_x = (data->map->row_max * IMG_SIZE) - 1;
 	max_pos_y = (data->map->col_max * IMG_SIZE) - 1;
