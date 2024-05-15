@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 13:58:23 by jborner           #+#    #+#             */
-/*   Updated: 2024/05/15 14:37:55 by hstein           ###   ########.fr       */
+/*   Updated: 2024/05/15 14:54:00 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -375,8 +375,6 @@ int	render(t_data *data)
 	put_str(data, "HALLO", 0, 0);
 	mlx_put_image_to_window(data->mlx, data->mlx_win,
 				data->texture->base_img->img_ptr, 0, 0);
-	// mlx_string_put(data->mlx, data->mlx_win, 23, 23, GREEN,
-	// 	       "HALL2O");
-	usleep(42000);
+	fps_delay(60);
 	return (0);
 }
