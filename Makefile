@@ -39,8 +39,10 @@ SRC		=	main.c \
 			render_utils/fps.c \
 			render_utils/render_utils.c \
 			render_utils/resize_img.c \
+			render_utils/rotate_player_img.c \
 			setup/file_check.c \
 			setup/file_line_check.c \
+			setup/generate_goal.c \
 			setup/init_data_struct.c \
 			setup/init_other_structs.c \
 			setup/map_grid_check.c \

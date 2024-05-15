@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cast_rays.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 17:54:28 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/24 19:39:30 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/05/15 15:38:31 by jborner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,10 @@ void	cast_ray(t_data *data, double angle, int x, int y)
 {
 	adjust_angle(&angle);
 	init_check_ray(&data->ray, angle, x, y);
-	// printf("row_step %f, col_step %f\n", data->ray.row_step, data->ray.col_step);
-	// printf("row_dis %f, col_dis %f\n", data->ray.dis_row, data->ray.dis_col);
 	while (1)
 	{
-		if (data->ray.row_step > 0 && (data->ray.dis_row <= data->ray.dis_col || data->ray.dis_col == 0))
+		if (data->ray.row_step > 0 && (data->ray.dis_row <= data->ray.dis_col
+				|| data->ray.dis_col == 0))
 		{
 			if (do_row_step(data, &data->ray))
 				break ;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_other_structs.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yubi42 <yubi42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:46:24 by yubi42            #+#    #+#             */
-/*   Updated: 2024/04/18 13:11:32 by yubi42           ###   ########.fr       */
+/*   Updated: 2024/05/15 15:58:57 by jborner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,54 @@ void	init_minimap(t_minimap *minimap)
 	minimap->ground = NULL;
 	minimap->player = NULL;
 	minimap->player_rot = NULL;
+}
+
+void	init_3d_textures(t_texture *texture)
+{
+	texture->num0 = NULL;
+	texture->num1 = NULL;
+	texture->num2 = NULL;
+	texture->num3 = NULL;
+	texture->num4 = NULL;
+	texture->num5 = NULL;
+	texture->num6 = NULL;
+	texture->num7 = NULL;
+	texture->num8 = NULL;
+	texture->num9 = NULL;
+	texture->slash = NULL;
+	texture->kmh = NULL;
+	texture->game_over = NULL;
+	texture->high_score = NULL;
+	texture->your_score = NULL;
+	texture->steeringwheel = NULL;
+	texture->steeringwheel2 = NULL;
+	texture->carframe = NULL;
+	texture->carframe2 = NULL;
+	texture->goal = NULL;
+	texture->no = NULL;
+	texture->so = NULL;
+	texture->ea = NULL;
+	texture->we = NULL;
+}
+
+void	init_texture(t_texture *texture)
+{
+	init_3d_textures(texture);
+	texture->minimap = NULL;
+	texture->no_path = NULL;
+	texture->so_path = NULL;
+	texture->we_path = NULL;
+	texture->ea_path = NULL;
+	texture->base_img = NULL;
+	texture->img1 = NULL;
+	texture->img2 = NULL;
+	texture->black = NULL;
+	texture->transparent = NULL;
+	texture->f[0] = -1;
+	texture->f[1] = -1;
+	texture->f[2] = -1;
+	texture->c[0] = -1;
+	texture->c[1] = -1;
+	texture->c[2] = -1;
+	texture->map_str = NULL;
 }

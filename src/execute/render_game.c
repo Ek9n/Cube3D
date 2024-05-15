@@ -6,7 +6,7 @@
 /*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 13:58:23 by jborner           #+#    #+#             */
-/*   Updated: 2024/05/15 15:08:42 by jborner          ###   ########.fr       */
+/*   Updated: 2024/05/15 15:32:42 by jborner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	render_default_minimap(t_data *data, t_minimap *minimap)
 			else if (data->map->grid[row][col] == 1)
 				put_img_to_img(minimap->base, minimap->wall, col * IMG_SIZE, row
 					* IMG_SIZE);	
-			else
+			else if (data->map->grid[row][col] != -1)
 				put_img_to_img(minimap->base, data->texture->goal, col * IMG_SIZE, row
 					* IMG_SIZE);
 		}
