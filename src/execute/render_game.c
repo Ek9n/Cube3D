@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 13:58:23 by jborner           #+#    #+#             */
-/*   Updated: 2024/05/15 15:09:49 by hstein           ###   ########.fr       */
+/*   Updated: 2024/05/15 16:15:56 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,7 +227,8 @@ void	put_highscore(t_data *data, int w, int h)
 	i = -1;
 	while (++i < SCORE_ENTRYS)
 	{
-		put_num_to_baseimg(data, data->score[i], w, h);
+		put_str(data, data->names[i], w, h);
+		put_num_to_baseimg(data, data->score[i], w, h + 10);
 		// put_num_to_baseimg(data, data->score[i] / 1000, w, h);
 		// put_num_to_baseimg(data, data->score[i] % 1000, w + 80, h);
 		h += 50;
@@ -327,18 +328,23 @@ void	put_letter(t_data *data, char letter, int w, int h)
 		}
 		i++;
 	}
-	// put_img_to_img(data->texture->base_img, data->texture->alpha2, w - pos * data->texture->alpha->height, h);
 }
+
 void	put_str(t_data *data, char *str, int w, int h)
 {
-	int	i;
+	int		i;
+	char	c;
 
 	w -= 2; // correction
 	i = -1;
 	while (str[++i])
 	{
-		put_letter(data, str[i], w + i * 10, h);
-		// put_letter(data, str[i], w + i * data->texture->alpha->height, h);
+		c = str[i];
+		if (c >= 'a' && c <= 'z')
+			c -= 32;
+		else if (!(c >= 'a' && c <= 'z') && !(c >= 'A' && c <= 'Z'))
+			c = 'X';
+		put_letter(data, c, w + i * 10, h);
 	}
 }
 
@@ -370,9 +376,7 @@ int	render(t_data *data)
 
 	// put_img_to_img(data->texture->base_img, data->texture->your_score,  data->width / 2 - (data->texture->your_score->width / 2), 100);
 	// put_num_to_baseimg(data, data->highscore,  data->width / 2 - (data->texture->your_score->width / 2), 160);
-	// put_highscore(data, data->width / 2 - (data->texture->high_score->width / 2), 260);
-	// put_letter(data, 'Z', 0, 0);
-	put_str(data, "HALLO", 0, 0);
+	put_highscore(data, data->width / 2 - (data->texture->high_score->width / 2), 260);
 	mlx_put_image_to_window(data->mlx, data->mlx_win,
 				data->texture->base_img->img_ptr, 0, 0);
 	fps_delay(60);

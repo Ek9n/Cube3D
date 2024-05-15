@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/05/15 14:52:13 by hstein           ###   ########.fr       */
+/*   Updated: 2024/05/15 15:30:47 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -421,5 +421,7 @@ void	terminate_sounds(t_data *data);
 
 int safe_score(t_data *data);
 int load_score(t_data *data);
+
+void	put_str(t_data *data, char *str, int w, int h);
 
 #endif
