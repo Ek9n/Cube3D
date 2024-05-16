@@ -75,7 +75,6 @@ void	init_data(t_data *data)
 	data->round_touch = 0;
 	data->end_reached = 0;
 	init_in_data_structs(data);
-	ft_memcpy(data->name, "DEFAULT", 8);
 	init_array(data->keys, 0, 0);
 	init_array(data->rot, ROT_MIN, MOV_MIN);
 	init_player(data->player);

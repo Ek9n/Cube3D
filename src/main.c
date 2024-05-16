@@ -35,7 +35,7 @@ int safe_score(t_data *data)
 			}
 			data->score[i] = data->highscore;
 			ft_memcpy(data->names[i], data->name, sizeof(data->name));
-			// printf("NAME:%s\n", data->names[i]);
+			printf("NAME:%s\n", data->name);
 			// if (i + 1 < SCORE_ENTRYS && data->cur_score < data->score[i + 1])
 			// 	data->score[i + 1] = data->cur_score;
 			break ;
@@ -114,7 +114,7 @@ void	get_user_name(t_data *data)
 	else
 		data->name[i - 1] = '\0';
 
-	// printf("INPuT:%s\n", data->name);
+	printf("INPuT:%s\n", data->name);
 }
 
 int	main(int ac, char **av)
@@ -122,6 +122,7 @@ int	main(int ac, char **av)
 	t_data	data;
 
 	data.restart = true;
+	ft_memcpy(data.name, "DEFAULT", 8);
 	get_user_name(&data);
 	while (data.restart)
 	{
