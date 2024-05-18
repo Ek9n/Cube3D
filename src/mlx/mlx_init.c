@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/05/18 00:52:04 by hstein           ###   ########.fr       */
+/*   Updated: 2024/05/18 04:46:33 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ void	mlx_init_game(t_data *data)
 	create_wall_imgs(data);
 	create_goal_img(data);
 	create_text_imgs(data);
+	data->texture->sprite1 = create_img(data, "./img/south.xpm", 0, 0);
 	data->texture->black = create_img(data, "./img/black.xpm", 0, 0);
 	data->texture->transparent = create_img(data, "./img/transparent.xpm", 0,
 			0);
