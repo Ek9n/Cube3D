@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 15:47:45 by yubi42            #+#    #+#             */
-/*   Updated: 2024/05/15 14:39:07 by hstein           ###   ########.fr       */
+/*   Updated: 2024/05/18 04:12:08 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ int	main(int ac, char **av)
 
 	data.restart = true;
 	ft_memcpy(data.name, "DEFAULT", 8);
-	get_user_name(&data);
+	// get_user_name(&data);
 	while (data.restart)
 	{
 		init_data(&data);

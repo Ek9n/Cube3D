@@ -61,6 +61,9 @@ LDFLAGS = -L lib/libft -lft
 
 all: $(NAME)
 
+m: all
+	./cub3D maps/race1.cub
+
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	mkdir -p $(OBJ_PATH) $(SUBOBJ_PATH)
 	$(CC) $(CFLAGS) $(INCS) -O3 -c $< -o $@

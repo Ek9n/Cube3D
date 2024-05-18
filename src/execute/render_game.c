@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 13:58:23 by jborner           #+#    #+#             */
-/*   Updated: 2024/05/15 17:41:14 by hstein           ###   ########.fr       */
+/*   Updated: 2024/05/18 04:25:11 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -320,24 +320,58 @@ void	put_str(t_data *data, char *str, int w, int h)
 	}
 }
 
+void	fill_points(t_data *data)
+{
+	data->line->xy0[0] = data->player->x;
+	data->line->xy0[1] = data->player->y;
+	// Erst alle Sprites zaehlen und dann damit ein sprite-struc-tarray fuellen s_sprite p0, p1, midpoint
+	// danach bei jedem move die sprites rotieren. 
+	// Punkte muessen nicht geupdatet werden da die Sprites jedesmal
+	// von der Ausgangsstellung neu gedreht werden.
+	// data->line->xy1[0] = ; sprite x
+	// data->line->xy1[1] = ; sprite y
+
+
+}
+
+void	gen_line(t_data	*data, t_line *line)
+{
+	line->xy0[0] = 2;
+	line->xy0[1] = 0;
+	line->xy1[0] = 0;
+	line->xy1[1] = -2;
+
+	// if (line->xy0[0] == line->xy1[0])
+// line is vertical
+	// else if (line->xy0[1] == line->xy1[1])
+// line is horizontal
+	line->m = (line->xy1[1] - line->xy0[1]) / (line->xy1[0] - line->xy0[0]);
+	line->b = line->xy0[1] - line->m * line->xy0[0];
+
+
+	printf("f(x)=m*x+b\nf(x)=%d*x+%d\n", line->m, line->b);
+}
+
 int	render(t_data *data)
 {
+	gen_line(data, data->line);
+
 	handle_keys(data);
-	render_background(data, data->texture->base_img);
-	render_minimap(data, data->texture->minimap);
-	put_img_to_img(data->texture->base_img, data->texture->carframe2, 0, 0);
-	put_img_to_img(data->texture->base_img, data->texture->minimap->resize, 1400, 650);
-	rotate_image(data, &data->texture->steeringwheel, -4 * data->player->rotation);
-	if (data->sound_on)
-		ma_sound_set_pitch(&data->sound.motor, data->player->speed[0] / 8);
-	put_img_to_img(data->texture->base_img, data->texture->steeringwheel2, 500, 500);
-	death_check(data);
-	put_kmh(data, data->player->speed[0] * 5, 1200, 870);
-	if (!data->end_reached)
-		put_laptime(data, 1750, 100, 0);
-	goal_logic(data);
-	mlx_put_image_to_window(data->mlx, data->mlx_win,
-				data->texture->base_img->img_ptr, 0, 0);
+	// render_background(data, data->texture->base_img);
+	// render_minimap(data, data->texture->minimap);
+	// put_img_to_img(data->texture->base_img, data->texture->carframe2, 0, 0);
+	// put_img_to_img(data->texture->base_img, data->texture->minimap->resize, 1400, 650);
+	// rotate_image(data, &data->texture->steeringwheel, -4 * data->player->rotation);
+	// if (data->sound_on)
+	// 	ma_sound_set_pitch(&data->sound.motor, data->player->speed[0] / 8);
+	// put_img_to_img(data->texture->base_img, data->texture->steeringwheel2, 500, 500);
+	// death_check(data);
+	// put_kmh(data, data->player->speed[0] * 5, 1200, 870);
+	// if (!data->end_reached)
+	// 	put_laptime(data, 1750, 100, 0);
+	// goal_logic(data);
+	// mlx_put_image_to_window(data->mlx, data->mlx_win,
+	// 			data->texture->base_img->img_ptr, 0, 0);
 	fps_delay(60);
 	return (0);
 }

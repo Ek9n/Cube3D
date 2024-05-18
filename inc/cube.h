@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/05/15 16:17:39 by hstein           ###   ########.fr       */
+/*   Updated: 2024/05/18 00:53:03 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,12 +211,22 @@ typedef struct s_ray
 
 typedef struct s_sound
 {
-	ma_result		result;
-	ma_engine		engine;
-	ma_sound		motor;
-	ma_sound		crash;
-	ma_sound		siren;
-}					t_sound;
+	ma_result	result;
+	ma_engine	engine;
+	ma_sound	motor;
+	ma_sound	crash;
+	ma_sound	siren;
+}	t_sound;
+
+typedef struct s_line
+{
+	long long xy0[2];
+	long long xy1[2];
+	long long	m;
+	long long	x;
+	long long	y;
+	long long	b;
+}	t_line;
 
 typedef struct s_data
 {
@@ -242,6 +252,7 @@ typedef struct s_data
 	t_player		*player;
 	t_ray			ray;
 	t_sound			sound;
+	t_line			line[3];
 	bool			restart;
 	bool			sound_on;
 	long long		score[10];
