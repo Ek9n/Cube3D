@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 15:47:45 by yubi42            #+#    #+#             */
-/*   Updated: 2024/05/09 18:54:10 by hstein           ###   ########.fr       */
+/*   Updated: 2024/05/21 22:00:30 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ int	main(int ac, char **av)
 	t_data	data;
 
 	data.restart = true;
+	data.sound_on = true;
 	while (data.restart)
 	{
 		init_data(&data);
@@ -140,7 +141,6 @@ int	main(int ac, char **av)
 			free_data(&data);
 			return (1);
 		}
-		data.sound_on = true;
 		ft_printf("all ok :)\n");
 		run_game(&data);
 		free_data(&data);

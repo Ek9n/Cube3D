@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:46:24 by yubi42            #+#    #+#             */
-/*   Updated: 2024/05/09 18:21:47 by hstein           ###   ########.fr       */
+/*   Updated: 2024/05/21 21:44:21 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,12 +98,10 @@ void	init_data(t_data *data)
 	data->mlx_win = NULL;
     data->width = 1920;
     data->height = 1080;
-	data->restart = false;
 	data->highscore = 0;
 	data->cur_score = 0;
 	data->start_time.tv_sec = 0;
 	data->start_time.tv_usec = 0;
-	data->sound_on = false;
 	data->err[0] = '\0';
 	data->round = -1;
 	data->round_touch = 0;

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_game.c                                      :+:      :+:    :+:   */
+/*   render_game_somebackup.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 13:58:23 by jborner           #+#    #+#             */
-/*   Updated: 2024/05/21 23:25:19 by hstein           ###   ########.fr       */
+/*   Updated: 2024/05/21 23:25:21 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,41 +14,42 @@
 #include "cube.h"
 
 
-void rotate_image(t_data *data, t_image **img, double angle)
+void	rotate_wheel(t_data *data, t_image **img, double angle)
 {
-		// printf("1ANGLE%f\n", angle);
+	t_image *img_rot;
+	double	radians;
+	int		y;
+	int		x;
+	int		new_x;
+	int		new_y;
+	int		rotated_x;
+	int		rotated_y;
 
-        double radians;
-		radians = angle * PI / 180.0;
-
-        // Buffer-Bild erstellen
-        t_image *img_rot;
-        img_rot = create_img(data, NULL, (*img)->width, (*img)->height);
-
-        for (int y = 0; y < img_rot->height; y++)
+	y = -1;
+	x = -1;
+	radians = angle * PI / 180.0;
+	img_rot = create_img(data, NULL, (*img)->width, (*img)->height);
+	// img_rot = data->texture->steeringwheel2;
+	while (++y < img_rot->height)
+	{
+		while (++x < img_rot->width)
 		{
-            for (int x = 0; x < img_rot->width; x++)
-			{
-                // Berechne die Koordinaten im rotierten Bild relativ zum Zentrum
-                int new_x = (x - (*img)->width / 2);
-                int new_y = (y - (*img)->height / 2);
-
-                // Rotiere die Koordinaten im rotierten Bild um den Ursprung (0,0)
-                int rotated_x = (new_x * cos(radians) - new_y * sin(radians));
-                int rotated_y = (new_x * sin(radians) + new_y * cos(radians));
-
-                // Konvertiere die Koordinaten zurück zum Koordinatensystem des ursprünglichen Bildes
-                rotated_x += (*img)->width / 2;
-                rotated_y += (*img)->height / 2;
-
-                // Überprüfe, ob die neuen Koordinaten innerhalb des Bildes liegen
-                if (rotated_x >= 0 && rotated_x < (*img)->width && rotated_y >= 0 && rotated_y < (*img)->height)
-                    put_pixel_img(img_rot, x, y, get_pixel_img(*img, rotated_x, rotated_y));
-            }
-        }
-		if (data->texture->steeringwheel2)
-			free_img(data->texture->steeringwheel2, data->mlx);
-		data->texture->steeringwheel2 = img_rot;
+			new_x = (x - (*img)->width / 2);
+			new_y = (y - (*img)->height / 2);
+			rotated_x = (new_x * cos(radians) - new_y * sin(radians));
+			rotated_y = (new_x * sin(radians) + new_y * cos(radians));
+			rotated_x += (*img)->width / 2;
+			rotated_y += (*img)->height / 2;
+			if (rotated_x >= 0 && rotated_x < (*img)->width && rotated_y >= 0 && rotated_y < (*img)->height)
+				put_pixel_img(img_rot, x, y, get_pixel_img(*img, rotated_x, rotated_y));
+		}
+	}
+	// if (data->texture->steeringwheel2)
+	// 	free_img(data->texture->steeringwheel2, data->mlx);
+	// data->texture->steeringwheel2 = img_rot;
+	// img_rot = data->texture->steeringwheel;
+	put_img_to_img(data->texture->base_img, img_rot, 500, 500);
+	free_img(img_rot, data->mlx);
 }
 
 void	render_default_minimap(t_data *data, t_minimap *minimap)
@@ -67,8 +68,8 @@ void	render_default_minimap(t_data *data, t_minimap *minimap)
 					row * IMG_SIZE);
 			else if (data->map->grid[row][col] == 1)
 				put_img_to_img(minimap->base, minimap->wall, col * IMG_SIZE, row
-					* IMG_SIZE);
-			else
+					* IMG_SIZE);	
+			else if (data->map->grid[row][col] != -1)
 				put_img_to_img(minimap->base, data->texture->goal, col * IMG_SIZE, row
 					* IMG_SIZE);
 		}
@@ -201,7 +202,6 @@ void	put_laptime_s(t_data *data, int w, int h, long long score)
 
 void	put_laptime(t_data *data, int w, int h, int highscore)
 {
-	// static char	flag; // evtl das resize img ins texturestruct verschieben und nur einmal erstellen beim start..
 	long long score;
 
 	t_image	*resize;
@@ -227,10 +227,9 @@ void	put_highscore(t_data *data, int w, int h)
 	i = -1;
 	while (++i < SCORE_ENTRYS)
 	{
-		put_num_to_baseimg(data, data->score[i], w, h);
-		// put_num_to_baseimg(data, data->score[i] / 1000, w, h);
-		// put_num_to_baseimg(data, data->score[i] % 1000, w + 80, h);
-		h += 50;
+		put_str(data, data->names[i], w + 20, h + 3);
+		put_num_to_baseimg(data, data->score[i], w, h + 10);
+		h += 70;
 	}
 }
 
@@ -238,12 +237,12 @@ void	goal_logic(t_data *data)
 {
 	if(data->player->x >= IMG_SIZE && data->player->y >= IMG_SIZE && data->player->x <= data->map->row_max * IMG_SIZE - IMG_SIZE && data->player->y <= data->map->col_max * IMG_SIZE - IMG_SIZE)
 	{
-	if(data->map->grid[(int)(data->player->x + (IMG_SIZE / 2)) / IMG_SIZE][(int)(data->player->y + (IMG_SIZE / 2)) / IMG_SIZE] == 2)
-	{
-		if (!data->round_touch)
-			data->round++;
-		data->round_touch = 1;
-	}
+		if(data->map->grid[(int)(data->player->x + (IMG_SIZE / 2)) / IMG_SIZE][(int)(data->player->y + (IMG_SIZE / 2)) / IMG_SIZE] == 2)
+		{
+			if (!data->round_touch)
+				data->round++;
+			data->round_touch = 1;
+		}
 	else
 		data->round_touch = 0;
 	}
@@ -283,36 +282,108 @@ void	death_check(t_data *data)
 	}
 }
 
+void	put_letter(t_data *data, char letter, int w, int h)
+{
+	int	start;
+	int	end;
+	int	i;
+	int	j;
+	int size;
+
+	start = (letter - 65) * data->texture->alpha->height;
+	end = (letter - 65) * data->texture->alpha->height + data->texture->alpha->height;
+	size = 2;
+	i = 0;
+	while (i < data->texture->alpha->height)
+	{
+		j = 0;
+		while (j < data->texture->alpha->height)
+		{
+			put_pixel_img(data->texture->base_img, w + j, h + i, get_pixel_img(data->texture->alpha, start + j, i));
+			j++;
+		}
+		i++;
+	}
+}
+
+void	put_str(t_data *data, char *str, int w, int h)
+{
+	int		i;
+	char	c;
+
+	w -= 2;
+	i = -1;
+	while (str[++i])
+	{
+		c = str[i];
+		if (c >= 'a' && c <= 'z')
+			c -= 32;
+		else if (!(c >= 'a' && c <= 'z') && !(c >= 'A' && c <= 'Z'))
+			c = 'X';
+		put_letter(data, c, w + i * 10, h);
+	}
+}
+
+void	fill_points(t_data *data)
+{
+	data->line->xy0[0] = data->player->x;
+	data->line->xy0[1] = data->player->y;
+	// Erst alle Sprites zaehlen und dann damit ein sprite-struc-tarray fuellen s_sprite p0, p1, midpoint
+	// danach bei jedem move die sprites rotieren. 
+	// Punkte muessen nicht geupdatet werden da die Sprites jedesmal
+	// von der Ausgangsstellung neu gedreht werden.
+	// >> Wenn der spieler einen sprite mit seinen rays trifft wird der sprite an seiner position 
+	// mit dem berechneten winkel in das bild eingefuegt mit put_img_to_img,
+	// dabei wird die groesse in abhaengigkeit der entfernung berechnet (zum mittelpkt).
+	// data->line->xy1[0] = ; sprite x
+	// data->line->xy1[1] = ; sprite y
+}
+
+void	gen_line(t_data	*data, t_line *line)
+{
+	line->xy0[0] = 2;
+	line->xy0[1] = 0;
+	line->xy1[0] = 0;
+	line->xy1[1] = -2;
+
+	// if (line->xy0[0] == line->xy1[0])
+		// line is vertical
+	// else if (line->xy0[1] == line->xy1[1])
+		// line is horizontal
+	line->m = (line->xy1[1] - line->xy0[1]) / (line->xy1[0] - line->xy0[0]);
+	line->b = line->xy0[1] - line->m * line->xy0[0];
+
+
+	printf("f(x)=m*x+b\nf(x)=%d*x+%d\n", line->m, line->b);
+}
+
 int	render(t_data *data)
 {
-	// static int	last_dir;
+	gen_line(data, data->line);
+
 	handle_keys(data);
-	render_background(data, data->texture->base_img);
-	render_minimap(data, data->texture->minimap);
 
-	put_img_to_img(data->texture->base_img, data->texture->carframe2, 0, 0);
-	put_img_to_img(data->texture->base_img, data->texture->minimap->resize, 1400, 650);
-
-	rotate_image(data, &data->texture->steeringwheel, -4 * data->player->rotation);
 	if (data->sound_on)
 		ma_sound_set_pitch(&data->sound.motor, data->player->speed[0] / 8);
-	// printf("cur speed: %f\n", data->player->speed[0]);
 
-	put_img_to_img(data->texture->base_img, data->texture->steeringwheel2, 500, 500);
-
+	render_background(data, data->texture->base_img);
+	render_minimap(data, data->texture->minimap);
+	put_img_to_img(data->texture->base_img, data->texture->carframe2, 0, 0);
+	put_img_to_img(data->texture->base_img, data->texture->minimap->resize, 1400, 650);
+	rotate_wheel(data, &data->texture->steeringwheel, -4 * data->player->rotation);
+	// put_img_to_img(data->texture->base_img, data->texture->steeringwheel2, 500, 500);
 	death_check(data);
-	
 	put_kmh(data, data->player->speed[0] * 5, 1200, 870);
 	if (!data->end_reached)
 		put_laptime(data, 1750, 100, 0);
 	goal_logic(data);
 
-	// put_img_to_img(data->texture->base_img, data->texture->your_score,  data->width / 2 - (data->texture->your_score->width / 2), 100);
-	// put_num_to_baseimg(data, data->highscore,  data->width / 2 - (data->texture->your_score->width / 2), 160);
-	// put_highscore(data, data->width / 2 - (data->texture->high_score->width / 2), 260);
-	
+	// put_img_to_img(data->texture->base_img, data->texture->sprite1, 500, 500);
+	// put_img_to_img(data->texture->base_img, data->texture->sprite1, 500, 500);
 	mlx_put_image_to_window(data->mlx, data->mlx_win,
 				data->texture->base_img->img_ptr, 0, 0);
-	usleep(42000);
+	// printf("dx:%f,dy%f\n", data->player->dx, data->player->dy);
+	
+	fps_delay(60);
 	return (0);
 }
