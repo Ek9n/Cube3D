@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 13:58:23 by jborner           #+#    #+#             */
-/*   Updated: 2024/05/18 04:49:11 by hstein           ###   ########.fr       */
+/*   Updated: 2024/05/21 20:42:16 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -359,14 +359,14 @@ int	render(t_data *data)
 
 	handle_keys(data);
 
+	if (data->sound_on)
+		ma_sound_set_pitch(&data->sound.motor, data->player->speed[0] / 8);
 
 	render_background(data, data->texture->base_img);
 	render_minimap(data, data->texture->minimap);
 	put_img_to_img(data->texture->base_img, data->texture->carframe2, 0, 0);
 	put_img_to_img(data->texture->base_img, data->texture->minimap->resize, 1400, 650);
 	rotate_image(data, &data->texture->steeringwheel, -4 * data->player->rotation);
-	if (data->sound_on)
-		ma_sound_set_pitch(&data->sound.motor, data->player->speed[0] / 8);
 	put_img_to_img(data->texture->base_img, data->texture->steeringwheel2, 500, 500);
 	death_check(data);
 	put_kmh(data, data->player->speed[0] * 5, 1200, 870);
@@ -374,10 +374,11 @@ int	render(t_data *data)
 		put_laptime(data, 1750, 100, 0);
 	goal_logic(data);
 
-	put_img_to_img(data->texture->base_img, data->texture->sprite1, 500, 500);
+	// put_img_to_img(data->texture->base_img, data->texture->sprite1, 500, 500);
+	// put_img_to_img(data->texture->base_img, data->texture->sprite1, 500, 500);
 	mlx_put_image_to_window(data->mlx, data->mlx_win,
 				data->texture->base_img->img_ptr, 0, 0);
-
+	// printf("dx:%f,dy%f\n", data->player->dx, data->player->dy);
 	
 	fps_delay(60);
 	return (0);

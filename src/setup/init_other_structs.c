@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:46:24 by yubi42            #+#    #+#             */
-/*   Updated: 2024/05/18 04:48:12 by hstein           ###   ########.fr       */
+/*   Updated: 2024/05/20 23:48:54 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	init_3d_textures(t_texture *texture)
 
 void	init_texture(t_texture *texture)
 {
-	data->texture->sprite1 = NULL;
+	texture->sprite1 = NULL;
 	init_3d_textures(texture);
 	texture->minimap = NULL;
 	texture->no_path = NULL;

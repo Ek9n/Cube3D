@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 15:47:45 by yubi42            #+#    #+#             */
-/*   Updated: 2024/05/18 04:12:08 by hstein           ###   ########.fr       */
+/*   Updated: 2024/05/21 20:43:25 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,11 +128,7 @@ int	main(int ac, char **av)
 	{
 		init_data(&data);
 		// reset_elapsed_time(&data.start_time);
-
 		load_score(&data);
-
-		// safe_score(&data);
-		// close_game(&data, NULL);
 		if (!input_validator(ac, av, &data.err) || !file_validator(av[1],
 				data.texture, &data.err) || !map_validator(&data, *(data.texture),
 				&data.err))

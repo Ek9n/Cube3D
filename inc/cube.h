@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/05/18 04:44:30 by hstein           ###   ########.fr       */
+/*   Updated: 2024/05/20 23:43:13 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,6 +228,13 @@ typedef struct s_line
 	long long	y;
 	long long	b;
 }	t_line;
+
+typedef struct s_sprite
+{
+	int	x;
+	int	y;
+
+}	t_sprite;
 
 typedef struct s_data
 {
