@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 13:58:23 by jborner           #+#    #+#             */
-/*   Updated: 2024/05/21 20:42:16 by hstein           ###   ########.fr       */
+/*   Updated: 2024/05/21 21:28:41 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "cube.h"
 
 
-void	rotate_image(t_data *data, t_image **img, double angle)
+void	rotate_wheel(t_data *data, t_image **img, double angle)
 {
 	t_image *img_rot;
 	double	radians;
@@ -29,6 +29,7 @@ void	rotate_image(t_data *data, t_image **img, double angle)
 	x = -1;
 	radians = angle * PI / 180.0;
 	img_rot = create_img(data, NULL, (*img)->width, (*img)->height);
+	// img_rot = data->texture->steeringwheel2;
 	while (++y < img_rot->height)
 	{
 		while (++x < img_rot->width)
@@ -43,9 +44,12 @@ void	rotate_image(t_data *data, t_image **img, double angle)
 				put_pixel_img(img_rot, x, y, get_pixel_img(*img, rotated_x, rotated_y));
 		}
 	}
-	if (data->texture->steeringwheel2)
-		free_img(data->texture->steeringwheel2, data->mlx);
-	data->texture->steeringwheel2 = img_rot;
+	// if (data->texture->steeringwheel2)
+	// 	free_img(data->texture->steeringwheel2, data->mlx);
+	// data->texture->steeringwheel2 = img_rot;
+	// img_rot = data->texture->steeringwheel;
+	put_img_to_img(data->texture->base_img, img_rot, 500, 500);
+	free_img(img_rot, data->mlx);
 }
 
 void	render_default_minimap(t_data *data, t_minimap *minimap)
@@ -366,8 +370,8 @@ int	render(t_data *data)
 	render_minimap(data, data->texture->minimap);
 	put_img_to_img(data->texture->base_img, data->texture->carframe2, 0, 0);
 	put_img_to_img(data->texture->base_img, data->texture->minimap->resize, 1400, 650);
-	rotate_image(data, &data->texture->steeringwheel, -4 * data->player->rotation);
-	put_img_to_img(data->texture->base_img, data->texture->steeringwheel2, 500, 500);
+	rotate_wheel(data, &data->texture->steeringwheel, -4 * data->player->rotation);
+	// put_img_to_img(data->texture->base_img, data->texture->steeringwheel2, 500, 500);
 	death_check(data);
 	put_kmh(data, data->player->speed[0] * 5, 1200, 870);
 	if (!data->end_reached)
