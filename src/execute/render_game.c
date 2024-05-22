@@ -6,50 +6,45 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 13:58:23 by jborner           #+#    #+#             */
-/*   Updated: 2024/05/21 21:28:41 by hstein           ###   ########.fr       */
+/*   Updated: 2024/05/22 16:52:54 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "cube.h"
 
 
-void	rotate_wheel(t_data *data, t_image **img, double angle)
+void	rotate_wheel(t_rotate *rot)
 {
-	t_image *img_rot;
-	double	radians;
-	int		y;
-	int		x;
-	int		new_x;
-	int		new_y;
-	int		rotated_x;
-	int		rotated_y;
-
-	y = -1;
-	x = -1;
-	radians = angle * PI / 180.0;
-	img_rot = create_img(data, NULL, (*img)->width, (*img)->height);
-	// img_rot = data->texture->steeringwheel2;
-	while (++y < img_rot->height)
+	rot->y = -1;
+	rot->x = -1;
+	while (++(rot->y) < rot->img_rot->height)
 	{
-		while (++x < img_rot->width)
+		while (++(rot->x) < rot->img_rot->width)
 		{
-			new_x = (x - (*img)->width / 2);
-			new_y = (y - (*img)->height / 2);
-			rotated_x = (new_x * cos(radians) - new_y * sin(radians));
-			rotated_y = (new_x * sin(radians) + new_y * cos(radians));
-			rotated_x += (*img)->width / 2;
-			rotated_y += (*img)->height / 2;
-			if (rotated_x >= 0 && rotated_x < (*img)->width && rotated_y >= 0 && rotated_y < (*img)->height)
-				put_pixel_img(img_rot, x, y, get_pixel_img(*img, rotated_x, rotated_y));
+			rot->new_x = (rot->x - (*rot->img)->width / 2);
+			rot->new_y = (rot->y - (*rot->img)->height / 2);
+			rot->rotated_x = (rot->new_x * cos(rot->radians) - rot->new_y * sin(rot->radians));
+			rot->rotated_y = (rot->new_x * sin(rot->radians) + rot->new_y * cos(rot->radians));
+			rot->rotated_x += (*rot->img)->width / 2;
+			rot->rotated_y += (*rot->img)->height / 2;
+			if (rot->rotated_x >= 0 && rot->rotated_x < (*rot->img)->width && rot->rotated_y >= 0 && rot->rotated_y < (*rot->img)->height)
+				put_pixel_img(rot->img_rot, rot->x, rot->y, get_pixel_img(*rot->img, rot->rotated_x, rot->rotated_y));
 		}
+		rot->x = -1;
 	}
-	// if (data->texture->steeringwheel2)
-	// 	free_img(data->texture->steeringwheel2, data->mlx);
-	// data->texture->steeringwheel2 = img_rot;
-	// img_rot = data->texture->steeringwheel;
-	put_img_to_img(data->texture->base_img, img_rot, 500, 500);
-	free_img(img_rot, data->mlx);
+}
+
+void	rotate_stuff(t_data *data, t_image **img, double angle, int opt)
+{
+	t_rotate	rot;
+
+	rot.img = img;
+	rot.radians = angle * PI / 180.0;
+	rot.img_rot = create_img(data, NULL, (*img)->width, (*img)->height);
+	if (opt == 1)
+		rotate_wheel(&rot);
+	put_img_to_img(data->texture->base_img, rot.img_rot, 500, 500);
+	free_img(rot.img_rot, data->mlx);
 }
 
 void	render_default_minimap(t_data *data, t_minimap *minimap)
@@ -161,19 +156,16 @@ void	put_num_to_baseimg(t_data *data, unsigned int num, int w, int h)
 		pos++;
 	}
 	put_num(data, num, w_h, pos);
-	// put_img_to_img(data->texture->base_img, data->texture->kmh, w + (++pos * 50), h);
 }
 
 void	put_kmh(t_data *data, unsigned int num, int w, int h)
 {
-	// data->texture->kmh = resize_img(data, &data->texture->kmh, 300, 300);
 	put_num_to_baseimg(data, num, w, h);
 	put_img_to_img(data->texture->base_img, data->texture->kmh, w, h + 64);
 }
 
 long long	get_elapsed_time_ms(struct timeval *start_time)
 {
-	// static struct timeval	start_time;
 	struct		timeval current_time;
 	long long	elapsed_time_ms;
 
@@ -324,66 +316,23 @@ void	put_str(t_data *data, char *str, int w, int h)
 	}
 }
 
-void	fill_points(t_data *data)
-{
-	data->line->xy0[0] = data->player->x;
-	data->line->xy0[1] = data->player->y;
-	// Erst alle Sprites zaehlen und dann damit ein sprite-struc-tarray fuellen s_sprite p0, p1, midpoint
-	// danach bei jedem move die sprites rotieren. 
-	// Punkte muessen nicht geupdatet werden da die Sprites jedesmal
-	// von der Ausgangsstellung neu gedreht werden.
-	// >> Wenn der spieler einen sprite mit seinen rays trifft wird der sprite an seiner position 
-	// mit dem berechneten winkel in das bild eingefuegt mit put_img_to_img,
-	// dabei wird die groesse in abhaengigkeit der entfernung berechnet (zum mittelpkt).
-	// data->line->xy1[0] = ; sprite x
-	// data->line->xy1[1] = ; sprite y
-}
-
-void	gen_line(t_data	*data, t_line *line)
-{
-	line->xy0[0] = 2;
-	line->xy0[1] = 0;
-	line->xy1[0] = 0;
-	line->xy1[1] = -2;
-
-	// if (line->xy0[0] == line->xy1[0])
-		// line is vertical
-	// else if (line->xy0[1] == line->xy1[1])
-		// line is horizontal
-	line->m = (line->xy1[1] - line->xy0[1]) / (line->xy1[0] - line->xy0[0]);
-	line->b = line->xy0[1] - line->m * line->xy0[0];
-
-
-	printf("f(x)=m*x+b\nf(x)=%d*x+%d\n", line->m, line->b);
-}
-
 int	render(t_data *data)
 {
-	gen_line(data, data->line);
-
 	handle_keys(data);
-
 	if (data->sound_on)
 		ma_sound_set_pitch(&data->sound.motor, data->player->speed[0] / 8);
-
 	render_background(data, data->texture->base_img);
 	render_minimap(data, data->texture->minimap);
 	put_img_to_img(data->texture->base_img, data->texture->carframe2, 0, 0);
 	put_img_to_img(data->texture->base_img, data->texture->minimap->resize, 1400, 650);
-	rotate_wheel(data, &data->texture->steeringwheel, -4 * data->player->rotation);
-	// put_img_to_img(data->texture->base_img, data->texture->steeringwheel2, 500, 500);
+	rotate_stuff(data, &data->texture->steeringwheel, -4 * data->player->rotation, 1);
 	death_check(data);
 	put_kmh(data, data->player->speed[0] * 5, 1200, 870);
 	if (!data->end_reached)
 		put_laptime(data, 1750, 100, 0);
 	goal_logic(data);
-
-	// put_img_to_img(data->texture->base_img, data->texture->sprite1, 500, 500);
-	// put_img_to_img(data->texture->base_img, data->texture->sprite1, 500, 500);
 	mlx_put_image_to_window(data->mlx, data->mlx_win,
 				data->texture->base_img->img_ptr, 0, 0);
-	// printf("dx:%f,dy%f\n", data->player->dx, data->player->dy);
-	
 	fps_delay(60);
 	return (0);
 }

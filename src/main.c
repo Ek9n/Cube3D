@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 15:47:45 by yubi42            #+#    #+#             */
-/*   Updated: 2024/05/21 20:43:25 by hstein           ###   ########.fr       */
+/*   Updated: 2024/05/22 16:16:19 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,6 @@ int safe_score(t_data *data)
 			}
 			data->score[i] = data->highscore;
 			ft_memcpy(data->names[i], data->name, sizeof(data->name));
-			printf("NAME:%s\n", data->name);
-			// if (i + 1 < SCORE_ENTRYS && data->cur_score < data->score[i + 1])
-			// 	data->score[i + 1] = data->cur_score;
 			break ;
 		}
 	}
@@ -96,11 +93,9 @@ void	get_user_name(t_data *data)
     // char buffer[20]; // Puffer für die Eingabe
 	char c = 0;
 	int i = 0;
-    ssize_t bytesRead; // Anzahl der gelesenen Bytes
+    int	bytesRead; // Anzahl der gelesenen Bytes
 
-	printf("INPuT:\n");
-
-    // Daten von stdin lesen
+	printf("WeLcOme TO CArRacEr!\nwHat Is uR nAme dRiVer?:");
 	while (c != '\n' && i < 20)
 	{
 		bytesRead = read(STDIN_FILENO, &c, sizeof(char));
@@ -113,8 +108,6 @@ void	get_user_name(t_data *data)
 		ft_memcpy(data->name, "noname", 7);
 	else
 		data->name[i - 1] = '\0';
-
-	printf("INPuT:%s\n", data->name);
 }
 
 int	main(int ac, char **av)
@@ -122,12 +115,12 @@ int	main(int ac, char **av)
 	t_data	data;
 
 	data.restart = true;
+	data.sound_on = false;
 	ft_memcpy(data.name, "DEFAULT", 8);
 	// get_user_name(&data);
 	while (data.restart)
 	{
 		init_data(&data);
-		// reset_elapsed_time(&data.start_time);
 		load_score(&data);
 		if (!input_validator(ac, av, &data.err) || !file_validator(av[1],
 				data.texture, &data.err) || !map_validator(&data, *(data.texture),
@@ -137,11 +130,9 @@ int	main(int ac, char **av)
 			free_data(&data);
 			return (1);
 		}
-		data.sound_on = true;
 		ft_printf("all ok :)\n");
 		run_game(&data);
 		free_data(&data);
-		// data.start_time = data.cur_score;
 	}
 	return (0);
 }

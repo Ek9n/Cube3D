@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/05/20 23:43:13 by hstein           ###   ########.fr       */
+/*   Updated: 2024/05/22 16:46:01 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -235,6 +235,20 @@ typedef struct s_sprite
 	int	y;
 
 }	t_sprite;
+
+typedef struct s_rotate
+{
+	t_image **img;
+	t_image *img_rot;
+	double	radians;
+	int		y;
+	int		x;
+	int		new_x;
+	int		new_y;
+	int		rotated_x;
+	int		rotated_y;	
+}	t_rotate;
+
 
 typedef struct s_data
 {
