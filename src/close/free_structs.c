@@ -6,7 +6,7 @@
 /*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:50:16 by yubi42            #+#    #+#             */
-/*   Updated: 2024/05/15 15:16:13 by jborner          ###   ########.fr       */
+/*   Updated: 2024/05/22 14:28:24 by jborner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ void	free_text_texture(t_texture *texture, t_data *data)
 	free_img(texture->num7, data->mlx);
 	free_img(texture->num8, data->mlx);
 	free_img(texture->num9, data->mlx);
+	free_img(texture->alpha, data->mlx);
+	free_img(texture->alpha2, data->mlx);
 	free_img(texture->slash, data->mlx);
 	free_img(texture->kmh, data->mlx);
 	free_img(texture->game_over, data->mlx);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_game.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 13:41:09 by hstein            #+#    #+#             */
-/*   Updated: 2024/05/11 21:52:58 by hstein           ###   ########.fr       */
+/*   Updated: 2024/05/22 14:41:06 by jborner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@ void	run_game(t_data *data)
 	mlx_hook(data->mlx_win, KeyPress, KeyPressMask, &handle_keypress, data);
 	mlx_hook(data->mlx_win, KeyRelease, KeyReleaseMask, &handle_keyrelease,
 		data);
+	mlx_hook(data->mlx_win, DestroyNotify, NoEventMask, &destroy_window, data);
 	mlx_loop(data->mlx);
 }

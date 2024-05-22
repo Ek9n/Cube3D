@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/05/15 16:17:39 by hstein           ###   ########.fr       */
+/*   Updated: 2024/05/22 14:40:44 by jborner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,38 +97,38 @@ typedef struct s_minimap
 
 typedef struct s_texture
 {
-	t_minimap	*minimap;
-	t_image		*base_img;
-	t_image		*carframe;
-	t_image		*carframe2;
-	t_image		*steeringwheel;
-	t_image		*steeringwheel2;
-	t_image		*alpha;
-	t_image		*alpha2;
-	t_image		*num0;
-	t_image		*num1;
-	t_image		*num2;
-	t_image		*num3;
-	t_image		*num4;
-	t_image		*num5;
-	t_image		*num6;
-	t_image		*num7;
-	t_image		*num8;
-	t_image		*num9;
-	t_image		*slash;
-	t_image		*kmh;
-	t_image		*game_over;
-	t_image		*your_score;
-	t_image		*high_score;
-	t_image		*img1;
-	t_image		*img2;
-	t_image		*black;
-	t_image		*transparent;
-	t_image		*goal;
-	t_image		*no;
-	t_image		*so;
-	t_image		*ea;
-	t_image		*we;
+	t_minimap		*minimap;
+	t_image			*base_img;
+	t_image			*carframe;
+	t_image			*carframe2;
+	t_image			*steeringwheel;
+	t_image			*steeringwheel2;
+	t_image			*alpha;
+	t_image			*alpha2;
+	t_image			*num0;
+	t_image			*num1;
+	t_image			*num2;
+	t_image			*num3;
+	t_image			*num4;
+	t_image			*num5;
+	t_image			*num6;
+	t_image			*num7;
+	t_image			*num8;
+	t_image			*num9;
+	t_image			*slash;
+	t_image			*kmh;
+	t_image			*game_over;
+	t_image			*your_score;
+	t_image			*high_score;
+	t_image			*img1;
+	t_image			*img2;
+	t_image			*black;
+	t_image			*transparent;
+	t_image			*goal;
+	t_image			*no;
+	t_image			*so;
+	t_image			*ea;
+	t_image			*we;
 
 	char			*img_map_ground;
 	char			*map_ground;
@@ -294,6 +294,7 @@ void				move_side(t_data *data, int sign);
 void				restart_game(t_data *data, bool opt);
 
 // keypress.c
+int					destroy_window(t_data *data);
 int					handle_keypress(int keysym, t_data *data);
 int					handle_keyrelease(int keysym, t_data *data);
 void				handle_sound_keys(t_data *data);
@@ -441,9 +442,9 @@ int					init_sounds_1(t_sound *sound);
 void				setup_sounds(t_data *data);
 void				terminate_sounds(t_data *data);
 
-int safe_score(t_data *data);
-int load_score(t_data *data);
+int					safe_score(t_data *data);
+int					load_score(t_data *data);
 
-void	put_str(t_data *data, char *str, int w, int h);
+void				put_str(t_data *data, char *str, int w, int h);
 
 #endif
