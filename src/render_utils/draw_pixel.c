@@ -6,11 +6,29 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:44:20 by yubi42            #+#    #+#             */
-/*   Updated: 2024/05/15 00:36:43 by hstein           ###   ########.fr       */
+/*   Updated: 2024/05/22 22:34:35 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
+
+void	fill_img_color(t_image *img, int color)
+{
+	int	y;
+	int	x;
+
+	y = 0;
+	while (y < img->width)
+	{
+		x = 0;
+		while (x < img->height)
+		{
+			img_pix_put(img, y, x, color);
+			++x;
+		}
+		++y;
+	}
+}
 
 void	img_pix_put(t_image *img, int x, int y, int color)
 {
@@ -35,7 +53,8 @@ void	put_pixel_img(t_image *img, int x, int y, int color)
 
 unsigned int	get_pixel_img(t_image *img, int x, int y)
 {
-	return (*(unsigned int *)((img->addr + (y * img->bytes_per_line) + (x * img->bpp / 8))));
+	return (*(unsigned int *)((img->addr + (y * img->bytes_per_line) \
+		+ (x * img->bpp / 8))));
 }
 
 void	put_img_to_img(t_image *dst, t_image *src, int x, int y)

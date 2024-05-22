@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/05/22 16:46:01 by hstein           ###   ########.fr       */
+/*   Updated: 2024/05/22 22:36:36 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -342,6 +342,27 @@ int					render(t_data *data);
 // run_game.c
 void				run_game(t_data *data);
 
+// put_score_utils_1.c
+void				put_single_num(t_data *data, unsigned int num, \
+						int w, int h);
+void				put_num(t_data *data, unsigned int num, int *w_h, int pos);
+void				put_num_to_baseimg(t_data *data, unsigned int num, \
+						int w, int h);
+void				put_kmh(t_data *data, unsigned int num, int w, int h);
+long long			get_elapsed_time_ms(struct timeval *start_time);
+
+// put_score_utils_2.c
+void				put_laptime_ms(t_data *data, int w, int h, long long score);
+void				put_laptime_ms_rest(t_data *data, int w, int h, \
+						long long score);
+void				put_laptime_s(t_data *data, int w, int h, long long score);
+void				put_laptime(t_data *data, int w, int h, int highscore);
+void				put_highscore(t_data *data, int w, int h);
+
+// put_str_utils.c
+void				put_letter(t_data *data, char letter, int w, int h);
+void				put_str(t_data *data, char *str, int w, int h);
+
 // ================= MINIMAP ==================
 
 // create_minimap.c
@@ -382,6 +403,7 @@ int					wall_found(t_data *data, double cur_x, double cur_y);
 // ============== RENDER UTILS ==============
 
 // draw_pixel.c
+void				fill_img_color(t_image *img, int color);
 void				img_pix_put(t_image *img, int x, int y, int color);
 void				put_pixel_img(t_image *img, int x, int y, int color);
 unsigned int		get_pixel_img(t_image *img, int x, int y);
@@ -389,24 +411,32 @@ void				put_img_to_img(t_image *dst, t_image *src, int x, int y);
 
 // fps.c
 void				fps_delay(int fps);
-
-// render_utils.c
-void				fill_img_color(t_image *img, int color);
-void				create_frame(t_image *img, int size, int color);
-unsigned long		rgb_to_hex(int rgb[3]);
 int					remote_delay_ms(size_t delay);
 size_t				delay_ms(void);
+
+// render_utils.c
+void				create_frame(t_image *img, int size, int color);
+unsigned long		rgb_to_hex(int rgb[3]);
+void				render_default_minimap(t_data *data, \
+						t_minimap *minimap);
+void				render_minimap(t_data *data, \
+						t_minimap *minimap);
+void				render_background(t_data *data, \
+						t_image *bg);
 
 // resize_img.c
 void				scale_img(t_image **old, t_image **new, int w, int h);
 void				resize_same_img(t_data *data, t_image **img, int w, int h);
 t_image				*resize_img(t_data *data, t_image **old, int w, int h);
 
-// rotate_player_img.c
+// rotate_utils.c
 double				calc_old_x(t_data *data, t_image **old, int x, int y);
 double				calc_old_y(t_data *data, t_image **old, int x, int y);
 void				rotate_player_img(t_data *data, t_image **old,
 						t_image **new);
+void				rotate_wheel(t_rotate *rot);
+void				rotate_stuff(t_data *data, t_image **img, \
+						double angle, int opt);
 
 // ================= SETUP ==================
 
@@ -476,7 +506,5 @@ void				terminate_sounds(t_data *data);
 
 int safe_score(t_data *data);
 int load_score(t_data *data);
-
-void	put_str(t_data *data, char *str, int w, int h);
 
 #endif

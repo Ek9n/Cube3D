@@ -29,6 +29,9 @@ SRC		=	main.c \
 			control/keypress.c \
 			execute/render_game.c \
 			execute/run_game.c \
+			execute/put_score_utils_1.c \
+			execute/put_score_utils_2.c \
+			execute/put_str_utils.c \
 			minimap/create_minimap.c \
 			mlx/mlx_init.c \
 			rays/cast_rays.c \
@@ -39,7 +42,7 @@ SRC		=	main.c \
 			render_utils/fps.c \
 			render_utils/render_utils.c \
 			render_utils/resize_img.c \
-			render_utils/rotate_player_img.c \
+			render_utils/rotate_utils.c \
 			setup/file_check.c \
 			setup/file_line_check.c \
 			setup/generate_goal.c \
