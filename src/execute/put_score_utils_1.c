@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 22:15:38 by hstein            #+#    #+#             */
-/*   Updated: 2024/05/22 22:47:31 by hstein           ###   ########.fr       */
+/*   Updated: 2024/05/24 16:32:28 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,16 @@ void	put_single_num(t_data *data, unsigned int num, int w, int h)
 
 void	put_num(t_data *data, unsigned int num, int *w_h, int pos)
 {
-	char	base[11];
+	char	base[] = "0123456789";
+	// char	base[11];
 
-	ft_memcpy(base, "0123456789", 11);
+	// ft_memcpy(base, "0123456789", 11);
+	/*
+		static char	base[11];
+		printf("base:%p, base[0]:%d\n", base, base[0]);
+		// if (base == NULL)
+		// 	ft_memcpy(base, "0123456789", 11);
+	*/
 	if (num >= 10)
 		put_num(data, num / 10, w_h, pos - 1);
 	put_single_num(data, base[num % 10] - 48, w_h[0] + (pos * 40), w_h[1]);
