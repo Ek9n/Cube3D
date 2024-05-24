@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/05/22 22:36:36 by hstein           ###   ########.fr       */
+/*   Updated: 2024/05/24 17:49:38 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,16 +69,16 @@ typedef struct s_read
 
 typedef struct s_image
 {
-	void *img_ptr; // Zeiger auf das Bild in der Grafikbibliothek
-	char *addr;    // Zeiger auf den Anfang des Bildspeichers
-	int bpp;       // Bits pro Pixel
-	int endian;    // Endianness (1 für big endian, 0 für little endian)
-	int				bytes_per_line;
-	int				width;
-	int				height;
-	int				x;
-	int				y;
-	int				z;
+	void	*img_ptr;
+	char	*addr;
+	int		bpp;
+	int		endian;
+	int		bytes_per_line;
+	int		width;
+	int		height;
+	int		x;
+	int		y;
+	int		z;
 }					t_image;
 
 typedef struct s_minimap
@@ -130,18 +130,16 @@ typedef struct s_texture
 	t_image		*ea;
 	t_image		*we;
 	t_image		*sprite1;
-
-	char			*img_map_ground;
-	char			*map_ground;
-
-	char			*no_path;
-	char			*so_path;
-	char			*we_path;
-	char			*ea_path;
-	int				f[3];
-	int				c[3];
-	char			*map_str;
-}					t_texture;
+	char		*img_map_ground;
+	char		*map_ground;
+	char		*no_path;
+	char		*so_path;
+	char		*we_path;
+	char		*ea_path;
+	int			f[3];
+	int			c[3];
+	char		*map_str;
+}	t_texture;
 
 typedef struct s_texture_ok
 {
@@ -151,7 +149,7 @@ typedef struct s_texture_ok
 	int				ea;
 	int				f;
 	int				c;
-}					t_texture_ok;
+}	t_texture_ok;
 
 typedef struct s_map
 {
@@ -161,7 +159,7 @@ typedef struct s_map
 	int				i;
 	int				j;
 	char			player;
-}					t_map;
+}	t_map;
 
 typedef struct s_player
 {
@@ -178,7 +176,7 @@ typedef struct s_player
 	int				corners[4][2];
 	int				dead;
 	int				wall_hit;
-}					t_player;
+}	t_player;
 
 typedef struct s_ray
 {
@@ -208,7 +206,7 @@ typedef struct s_ray
 	double			dis_row;
 	double			dis_col;
 	int				first_col;
-}					t_ray;
+}	t_ray;
 
 typedef struct s_sound
 {
@@ -221,8 +219,8 @@ typedef struct s_sound
 
 typedef struct s_line
 {
-	long long xy0[2];
-	long long xy1[2];
+	long long	xy0[2];
+	long long	xy1[2];
 	long long	m;
 	long long	x;
 	long long	y;
@@ -238,8 +236,8 @@ typedef struct s_sprite
 
 typedef struct s_rotate
 {
-	t_image **img;
-	t_image *img_rot;
+	t_image	**img;
+	t_image	*img_rot;
 	double	radians;
 	int		y;
 	int		x;
@@ -248,7 +246,6 @@ typedef struct s_rotate
 	int		rotated_x;
 	int		rotated_y;	
 }	t_rotate;
-
 
 typedef struct s_data
 {
@@ -278,14 +275,11 @@ typedef struct s_data
 	bool			restart;
 	bool			sound_on;
 	long long		score[10];
-	// wird noch nicht benutzt.. soll die beste zeit speichern
 	char			name[20];
 	char			names[10][20];
-	// wird noch nicht benutzt.. soll die beste zeit speichern
-}					t_data;
+}	t_data;
 
 // ================= CLOSE ==================
-
 // err.c
 int					malloc_err(void *ptr, int *return_value, char (*err)[50]);
 void				close_game(t_data *data, char *msg);
@@ -303,7 +297,6 @@ void				free_img(t_image *img, void *mlx);
 void				free_grid(int ***grid, int max_row);
 
 // ================= CONTROL ==================
-
 // collision_check.c
 void				set_corners(t_player *player);
 int					mid_coll(t_map *map, int corner1[2], int corner2[2]);
@@ -333,7 +326,6 @@ void				handle_sound_keys(t_data *data);
 void				handle_keys(t_data *data);
 
 // ============== EXECUTE =============
-
 // render_game.c
 void				render_minimap(t_data *data, t_minimap *minimap);
 void				render_background(t_data *data, t_image *bg);
@@ -364,7 +356,6 @@ void				put_letter(t_data *data, char letter, int w, int h);
 void				put_str(t_data *data, char *str, int w, int h);
 
 // ================= MINIMAP ==================
-
 // create_minimap.c
 void				draw_ray(t_data *data);
 void				create_minimap_texture(t_minimap *minimap, t_data *data);
@@ -373,14 +364,12 @@ void				copy_to_small(int player_row, int player_col, t_image *full,
 void				create_minimap(t_data *data);
 
 // ================= MLX ==================
-
 // mlx_init.c
 void				init_img(t_image *img);
 t_image				*create_img(t_data *data, char *path, int w, int h);
 void				mlx_init_game(t_data *data);
 
 // ============== RAYS ==============
-
 // cast_rays.c
 int					do_row_step(t_data *data, t_ray *ray);
 int					do_col_step(t_data *data, t_ray *ray);
@@ -401,7 +390,6 @@ void				adjust_x_y(t_data *data, double *x, double *y);
 int					wall_found(t_data *data, double cur_x, double cur_y);
 
 // ============== RENDER UTILS ==============
-
 // draw_pixel.c
 void				fill_img_color(t_image *img, int color);
 void				img_pix_put(t_image *img, int x, int y, int color);
@@ -439,7 +427,6 @@ void				rotate_stuff(t_data *data, t_image **img, \
 						double angle, int opt);
 
 // ================= SETUP ==================
-
 // file_check.c
 int					setup_found(t_texture_ok setup_vars);
 void				setup_vars_check(t_texture *cub, t_read *reading,
@@ -463,7 +450,6 @@ void				choose_fill_start(t_map *map, int c);
 void				set_start(t_map *map);
 
 // init_data_struct.c
-
 void				init_map(t_map *map);
 void				init_player(t_player *player);
 void				init_array(int array[NUM_KEYS], int num, int num2);
@@ -471,7 +457,6 @@ void				init_in_data_structs(t_data *data);
 void				init_data(t_data *data);
 
 // init_other_structs.c
-
 void				init_setup_vars(t_texture_ok *setup_vars);
 void				init_reading(t_read *reading);
 void				init_minimap(t_minimap *minimap);
@@ -500,11 +485,14 @@ int					file_validator(char *file, t_texture *cub, char (*err)[50]);
 int					input_validator(int ac, char **av, char (*err)[50]);
 
 // ================= SOUND =================
+// sound.c
 int					init_sounds_1(t_sound *sound);
 void				setup_sounds(t_data *data);
 void				terminate_sounds(t_data *data);
 
-int safe_score(t_data *data);
-int load_score(t_data *data);
+// ================= DATA =================
+// load_and_save.c
+int					safe_score(t_data *data);
+int					load_score(t_data *data);
 
 #endif

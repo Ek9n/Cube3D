@@ -1,5 +1,5 @@
 CC      = cc
-CFLAGS  = -g #-Wall -Werror -Wextra
+CFLAGS  = -Wall -Werror -Wextra
 NAME    = cub3D
 
 LIBFT   = lib/libft/libft.a
@@ -7,7 +7,7 @@ MLX		= lib/.mlx_linux/libmlx.a
 
 SRC_PATH = src/
 OBJ_PATH = .obj/
-SUBOBJ_PATH = .obj/close \
+SUBOBJ_PATH	=	.obj/close \
 				.obj/control \
 				.obj/execute \
 				.obj/minimap \
@@ -16,45 +16,43 @@ SUBOBJ_PATH = .obj/close \
 				.obj/render_utils \
 				.obj/setup \
 				.obj/sound \
-				
-				
+				.obj/data \
 
-SRC		=	main.c \
-			close/err.c \
-			close/free_structs.c \
-			close/free_utils.c \
-			control/collision_check.c \
-			control/collision_check_utils.c \
-			control/key_action.c \
-			control/keypress.c \
-			execute/render_game.c \
-			execute/run_game.c \
-			execute/put_score_utils_1.c \
-			execute/put_score_utils_2.c \
-			execute/put_str_utils.c \
-			minimap/create_minimap.c \
-			mlx/mlx_init.c \
-			rays/cast_rays.c \
-			rays/init_ray_checker.c \
-			rays/ray_checker_utils.c \
-			rays/wall_detection.c \
-			render_utils/draw_pixel.c \
-			render_utils/fps.c \
-			render_utils/render_utils.c \
-			render_utils/resize_img.c \
-			render_utils/rotate_utils.c \
-			setup/file_check.c \
-			setup/file_line_check.c \
-			setup/generate_goal.c \
-			setup/init_data_struct.c \
-			setup/init_other_structs.c \
-			setup/map_grid_check.c \
-			setup/map_grid_create_n_fill.c \
-			setup/validators.c \
-			sound/miniaudio.c \
-			sound/sound.c \
-			
-			
+SRC	=	main.c \
+		close/err.c \
+		close/free_structs.c \
+		close/free_utils.c \
+		control/collision_check.c \
+		control/collision_check_utils.c \
+		control/key_action.c \
+		control/keypress.c \
+		execute/render_game.c \
+		execute/run_game.c \
+		execute/put_score_utils_1.c \
+		execute/put_score_utils_2.c \
+		execute/put_str_utils.c \
+		minimap/create_minimap.c \
+		mlx/mlx_init.c \
+		rays/cast_rays.c \
+		rays/init_ray_checker.c \
+		rays/ray_checker_utils.c \
+		rays/wall_detection.c \
+		render_utils/draw_pixel.c \
+		render_utils/fps.c \
+		render_utils/render_utils.c \
+		render_utils/resize_img.c \
+		render_utils/rotate_utils.c \
+		setup/file_check.c \
+		setup/file_line_check.c \
+		setup/generate_goal.c \
+		setup/init_data_struct.c \
+		setup/init_other_structs.c \
+		setup/map_grid_check.c \
+		setup/map_grid_create_n_fill.c \
+		setup/validators.c \
+		sound/miniaudio.c \
+		sound/sound.c \
+		data/load_and_save.c \
 
 SRCS    = $(addprefix $(SRC_PATH), $(SRC))
 OBJ     = $(SRC:.c=.o)
