@@ -6,7 +6,7 @@
 /*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:55:14 by yubi42            #+#    #+#             */
-/*   Updated: 2024/05/15 15:08:55 by jborner          ###   ########.fr       */
+/*   Updated: 2024/05/27 15:12:57 by jborner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void	count_map_row_col(char *str, int *max_col, int *max_row)
 			col++;
 		i++;
 	}
+	if (col > *max_col)
+        *max_col = col;
 	(*max_row)++;
 	if (str[i - 1] == '\n')
 		(*max_row)--;
