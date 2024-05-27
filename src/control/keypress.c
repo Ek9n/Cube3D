@@ -6,7 +6,7 @@
 /*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 15:29:02 by hstein            #+#    #+#             */
-/*   Updated: 2024/05/15 15:35:52 by jborner          ###   ########.fr       */
+/*   Updated: 2024/05/22 14:40:09 by jborner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,12 @@ int	handle_keyrelease(int keysym, t_data *data)
 	data->keys[keysym] = 0;
 	return (0);
 }
+
+int		destroy_window(t_data *data)
+{
+	close_game(data, NULL);
+	return (0);
+} 
 
 void	handle_sound_keys(t_data *data)
 {
@@ -61,7 +67,8 @@ void	handle_keys(t_data *data)
 		move_side(data, -1);
 	if (data->keys[XK_d])
 		move_side(data, 1);
-	handle_sound_keys(data);
+	if (data->sound_on)
+		handle_sound_keys(data);
 	data->player->rotation = data->rot[XK_Right] - data->rot[XK_Left];
 	check_collision(data);
 }

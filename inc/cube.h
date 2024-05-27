@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/05/24 17:49:38 by hstein           ###   ########.fr       */
+/*   Updated: 2024/05/27 13:49:42 by jborner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -320,6 +320,7 @@ void				move_side(t_data *data, int sign);
 void				restart_game(t_data *data, bool opt);
 
 // keypress.c
+int					destroy_window(t_data *data);
 int					handle_keypress(int keysym, t_data *data);
 int					handle_keyrelease(int keysym, t_data *data);
 void				handle_sound_keys(t_data *data);
