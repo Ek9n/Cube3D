@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 15:47:45 by yubi42            #+#    #+#             */
-/*   Updated: 2024/05/24 17:51:34 by hstein           ###   ########.fr       */
+/*   Updated: 2024/05/27 14:37:24 by jborner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,7 @@ int	main(int ac, char **av)
 	t_data	data;
 
 	data.restart = true;
-	data.sound_on = true;
 	ft_memcpy(data.name, "DEFAULT", 8);
-	get_user_name(&data);
 	while (data.restart)
 	{
 		init_data(&data);
@@ -59,7 +57,8 @@ int	main(int ac, char **av)
 			free_data(&data);
 			return (1);
 		}
-		ft_printf("all ok :)\n");
+		get_user_name(&data);
+		data.sound_on = false;
 		run_game(&data);
 		free_data(&data);
 	}

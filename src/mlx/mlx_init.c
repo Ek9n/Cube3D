@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 17:50:35 by hstein            #+#    #+#             */
-/*   Updated: 2024/05/24 17:50:47 by hstein           ###   ########.fr       */
+/*   Updated: 2024/05/27 14:25:26 by jborner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,6 @@ void	mlx_init_game(t_data *data)
 	create_wall_imgs(data);
 	create_goal_img(data);
 	create_text_imgs(data);
-	data->texture->sprite1 = create_img(data, "./img/south.xpm", 0, 0);
 	data->texture->black = create_img(data, "./img/black.xpm", 0, 0);
 	data->texture->transparent = create_img(data, "./img/transparent.xpm", 0,
 			0);

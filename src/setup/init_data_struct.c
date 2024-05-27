@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data_struct.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:46:24 by yubi42            #+#    #+#             */
-/*   Updated: 2024/05/22 14:59:25 by hstein           ###   ########.fr       */
+/*   Updated: 2024/05/27 14:29:35 by jborner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void	init_data(t_data *data)
 	data->height = 1080;
 	data->highscore = 0;
 	data->cur_score = 0;
+	data->sound_on = false;
 	data->start_time.tv_sec = 0;
 	data->start_time.tv_usec = 0;
 	data->siren = 0;
