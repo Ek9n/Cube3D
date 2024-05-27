@@ -6,7 +6,7 @@
 /*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 15:29:02 by hstein            #+#    #+#             */
-/*   Updated: 2024/05/22 14:40:09 by jborner          ###   ########.fr       */
+/*   Updated: 2024/05/27 14:42:48 by jborner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ int	handle_keyrelease(int keysym, t_data *data)
 	return (0);
 }
 
-int		destroy_window(t_data *data)
+int	destroy_window(t_data *data)
 {
 	close_game(data, NULL);
 	return (0);
-} 
+}
 
 void	handle_sound_keys(t_data *data)
 {

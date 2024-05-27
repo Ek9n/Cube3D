@@ -6,7 +6,7 @@
 /*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 08:35:01 by yubi42            #+#    #+#             */
-/*   Updated: 2024/05/22 16:50:55 by jborner          ###   ########.fr       */
+/*   Updated: 2024/05/27 14:42:06 by jborner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,10 @@ void	rotate_player(t_data *data, int sign, int num)
 	if (data->rot[num] > ROT_MIN && (data->rot[XK_Up] > MOV_MIN
 			|| data->rot[XK_Down] > MOV_MIN))
 	{
-data->player->angle += (0.01  + (0.00002 * data->player->rev_speed * data->rot[num] * data->rot[num] * data->player->rev_speed)) * sign;		if (data->player->angle < 0 || data->player->angle >= 2 * PI)
+		data->player->angle += (0.01 + (0.00002 * data->player->rev_speed
+					* data->rot[num] * data->rot[num]
+					* data->player->rev_speed)) * sign;
+		if (data->player->angle < 0 || data->player->angle >= 2 * PI)
 			data->player->angle -= 2 * PI * sign;
 		data->player->x_sin = sin(data->player->angle);
 		data->player->y_cos = cos(data->player->angle);
