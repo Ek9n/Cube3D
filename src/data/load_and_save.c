@@ -6,11 +6,34 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 22:15:38 by hstein            #+#    #+#             */
-/*   Updated: 2024/05/24 17:02:27 by hstein           ###   ########.fr       */
+/*   Updated: 2024/05/27 13:59:28 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
+
+static int	safe_score_open(void)
+{
+	int	fd;
+
+	fd = open("./highscore", O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	close(fd);
+	fd = open("./highscore", O_WRONLY | O_APPEND, 0644);
+	return (fd);
+}
+
+static void	safe_score_write(t_data *data, int fd)
+{
+	int	i;
+
+	i = -1;
+	while (++i < SCORE_ENTRYS)
+	{
+		write(fd, &data->names[i], 20);
+		write(fd, &data->score[i], sizeof(long long));
+	}
+	close(fd);
+}
 
 int	safe_score(t_data *data)
 {
@@ -18,9 +41,7 @@ int	safe_score(t_data *data)
 	int	i;
 	int	j;
 
-	fd = open("./highscore", O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	close(fd);
-	fd = open("./highscore", O_WRONLY | O_APPEND, 0644);
+	fd = safe_score_open();
 	i = -1;
 	while (++i < SCORE_ENTRYS)
 	{
@@ -38,13 +59,7 @@ int	safe_score(t_data *data)
 			break ;
 		}
 	}
-	i = -1;
-	while (++i < SCORE_ENTRYS)
-	{
-		write(fd, &data->names[i], 20);
-		write(fd, &data->score[i], sizeof(long long));
-	}
-	close(fd);
+	safe_score_write(data, fd);
 	return (0);
 }
 
