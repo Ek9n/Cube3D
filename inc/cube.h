@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/05/27 13:49:42 by jborner          ###   ########.fr       */
+/*   Updated: 2024/06/02 00:59:12 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,8 @@ typedef struct s_texture
 {
 	t_minimap	*minimap;
 	t_image		*base_img;
+	t_image		*base_img2;
+	t_image		*base_img2_resize;
 	t_image		*carframe;
 	t_image		*carframe2;
 	t_image		*steeringwheel;
@@ -208,6 +210,36 @@ typedef struct s_ray
 	int				first_col;
 }	t_ray;
 
+typedef struct s_ray2
+{
+	int				ray_amount;
+	double			ray_len;
+	int				img_col;
+	t_image			*img;
+	int				x;
+	int				y;
+	double			angle;
+	double			sin;
+	double			cos;
+	double			fabs_sin;
+	double			fabs_cos;
+	double			row_x;
+	double			row_y;
+	double			col_x;
+	double			col_y;
+	double			row_step;
+	double			col_step;
+	double			row_step_x;
+	double			row_step_y;
+	double			col_step_x;
+	double			col_step_y;
+	double			first_row_step;
+	double			first_col_step;
+	double			dis_row;
+	double			dis_col;
+	int				first_col;
+}	t_ray2;
+
 typedef struct s_sound
 {
 	ma_result	result;
@@ -270,6 +302,7 @@ typedef struct s_data
 	t_map			*map;
 	t_player		*player;
 	t_ray			ray;
+	t_ray2			ray2;
 	t_sound			sound;
 	t_line			line[3];
 	bool			restart;
@@ -377,10 +410,19 @@ int					do_col_step(t_data *data, t_ray *ray);
 void				cast_ray(t_data *data, double angle, int x, int y);
 void				cast_rays(t_data *data, double angle, int deg, int amount);
 
+int					do_row_step2(t_data *data, t_ray2 *ray);
+int					do_col_step2(t_data *data, t_ray2 *ray);
+void				cast_ray2(t_data *data, double angle, int x, int y);
+void				cast_rays2(t_data *data, double angle, int deg, int amount);
+
 // init_ray_checker.c
 void				init_ray_steps(t_ray *ray);
 void				init_next_steps(t_ray *ray);
 void				init_check_ray(t_ray *ray, double angle, int x, int y);
+
+void				init_ray_steps2(t_ray2 *ray);
+void				init_next_steps2(t_ray2 *ray);
+void				init_check_ray2(t_ray2 *ray, double angle, int x, int y);
 
 // ray_checker_utils.c
 double				distance(double x1, double y1, double x2, double y2);
@@ -389,6 +431,8 @@ void				adjust_x_y(t_data *data, double *x, double *y);
 
 // wall_detection.c
 int					wall_found(t_data *data, double cur_x, double cur_y);
+
+int					wall_found2(t_data *data, double cur_x, double cur_y);
 
 // ============== RENDER UTILS ==============
 // draw_pixel.c

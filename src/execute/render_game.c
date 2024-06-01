@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 13:58:23 by jborner           #+#    #+#             */
-/*   Updated: 2024/05/22 22:46:04 by hstein           ###   ########.fr       */
+/*   Updated: 2024/06/02 01:16:41 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ int	render(t_data *data)
 	if (data->sound_on)
 		ma_sound_set_pitch(&data->sound.motor, data->player->speed[0] / 8);
 	render_background(data, data->texture->base_img);
+	render_background(data, data->texture->base_img2); //**************
 	render_minimap(data, data->texture->minimap);
 	put_img_to_img(data->texture->base_img, data->texture->carframe2, 0, 0);
 	put_img_to_img(data->texture->base_img, \
@@ -90,8 +91,16 @@ int	render(t_data *data)
 	if (!data->end_reached)
 		put_laptime(data, 1750, 100, 0);
 	goal_logic(data);
+
+	data->texture->base_img2_resize = resize_img(data, &data->texture->base_img2, \
+		data->texture->base_img2->width / 6, data->texture->base_img2->height / 6);
+	put_img_to_img(data->texture->base_img, data->texture->base_img2_resize, \
+		data->texture->base_img->width / 2 - data->texture->base_img2_resize->width / 2, 60); //******************
+
 	mlx_put_image_to_window(data->mlx, data->mlx_win,
 		data->texture->base_img->img_ptr, 0, 0);
+	// mlx_put_image_to_window(data->mlx, data->mlx_win,
+	// 	data->texture->base_img2_resize->img_ptr, 0, 0);
 	fps_delay(60);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:46:24 by yubi42            #+#    #+#             */
-/*   Updated: 2024/05/20 23:48:54 by hstein           ###   ########.fr       */
+/*   Updated: 2024/06/02 01:01:01 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ void	init_texture(t_texture *texture)
 	texture->we_path = NULL;
 	texture->ea_path = NULL;
 	texture->base_img = NULL;
+	texture->base_img2 = NULL;
+	texture->base_img2_resize = NULL;
 	texture->alpha = NULL;
 	texture->alpha2 = NULL;
 	texture->img1 = NULL;
