@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 13:58:23 by jborner           #+#    #+#             */
-/*   Updated: 2024/06/02 01:16:41 by hstein           ###   ########.fr       */
+/*   Updated: 2024/06/02 04:46:14 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,14 +93,16 @@ int	render(t_data *data)
 	goal_logic(data);
 
 	data->texture->base_img2_resize = resize_img(data, &data->texture->base_img2, \
-		data->texture->base_img2->width / 6, data->texture->base_img2->height / 6);
-	put_img_to_img(data->texture->base_img, data->texture->base_img2_resize, \
-		data->texture->base_img->width / 2 - data->texture->base_img2_resize->width / 2, 60); //******************
+		data->texture->base_img2->width / 4 - 80, data->texture->base_img2->height / 4 - 50);
+
+
+	put_img_to_img(data->texture->backmirror2, data->texture->backmirror, 0, 0); //******************
+	put_img_to_img2(data->texture->backmirror2, data->texture->base_img2_resize, 0, 0); //******************
+	put_img_to_img(data->texture->base_img, data->texture->backmirror2, \
+		data->texture->base_img->width / 2 + 20, 30);
 
 	mlx_put_image_to_window(data->mlx, data->mlx_win,
 		data->texture->base_img->img_ptr, 0, 0);
-	// mlx_put_image_to_window(data->mlx, data->mlx_win,
-	// 	data->texture->base_img2_resize->img_ptr, 0, 0);
 	fps_delay(60);
 	return (0);
 }

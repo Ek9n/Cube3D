@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 17:50:35 by hstein            #+#    #+#             */
-/*   Updated: 2024/05/24 17:50:47 by hstein           ###   ########.fr       */
+/*   Updated: 2024/06/02 04:31:52 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,12 @@ void	mlx_init_game(t_data *data)
 	data->texture->carframe = create_img(data, "./img/cockpit.xpm", 0, 0);
 	data->texture->carframe2 = resize_img(data, &data->texture->carframe,
 			data->width, data->height);
+			
+	data->texture->backmirror = create_img(data, "./img/backmirror.xpm", 0, 0);
+	data->texture->backmirror2 = create_img(data, "./img/backmirror.xpm", 0, 0);
+	resize_same_img(data, &data->texture->backmirror, 406,  150);
+	resize_same_img(data, &data->texture->backmirror2, 406,  150);
+
 	data->texture->game_over = create_img(data, "./img/game_over2.xpm", 0, 0);
 	resize_same_img(data, &data->texture->game_over, data->width, data->height);
 	if (data->sound_on)

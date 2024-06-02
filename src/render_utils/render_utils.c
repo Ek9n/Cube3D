@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 14:02:56 by jborner           #+#    #+#             */
-/*   Updated: 2024/06/02 01:18:14 by hstein           ###   ########.fr       */
+/*   Updated: 2024/06/02 01:38:56 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	render_minimap(t_data *data, t_minimap *minimap)
 	put_img_to_img(minimap->base, minimap->player_rot, data->player->y,
 		data->player->x);
 	cast_rays(data, data->player->angle, 60, data->width);
-	cast_rays2(data, -data->player->angle, 30, data->width);
+	cast_rays2(data, data->player->angle + PI, 60, data->width);
 		// minimap->resize = resize_img(data, &minimap->small, \
 		// minimap->small->width / 2, minimap->small->height / 2);
 

@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/06/02 00:59:12 by hstein           ###   ########.fr       */
+/*   Updated: 2024/06/02 04:27:24 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,8 @@ typedef struct s_texture
 	t_image		*base_img;
 	t_image		*base_img2;
 	t_image		*base_img2_resize;
+	t_image		*backmirror;
+	t_image		*backmirror2;
 	t_image		*carframe;
 	t_image		*carframe2;
 	t_image		*steeringwheel;
@@ -441,6 +443,7 @@ void				img_pix_put(t_image *img, int x, int y, int color);
 void				put_pixel_img(t_image *img, int x, int y, int color);
 unsigned int		get_pixel_img(t_image *img, int x, int y);
 void				put_img_to_img(t_image *dst, t_image *src, int x, int y);
+void				put_img_to_img2(t_image *dst, t_image *src, int x, int y);
 
 // fps.c
 void				fps_delay(int fps);
