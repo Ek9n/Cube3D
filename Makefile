@@ -25,7 +25,8 @@ SRC	=	main.c \
 		control/collision_check.c \
 		control/collision_check_utils.c \
 		control/key_action.c \
-		control/keypress.c \
+		control/keypress_1.c \
+		control/keypress_2.c \
 		execute/render_game.c \
 		execute/run_game.c \
 		execute/put_score_utils_1.c \

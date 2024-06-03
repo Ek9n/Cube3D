@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_action.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 08:35:01 by yubi42            #+#    #+#             */
-/*   Updated: 2024/06/03 14:27:53 by jborner          ###   ########.fr       */
+/*   Updated: 2024/06/03 16:46:26 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	calc_speed(t_data *data, int sign)
 	data->player->speed[0] = (data->player->speed[2] - data->player->speed[1]);
 	if (data->player->speed[0] < 0)
 		data->player->speed[0] *= -1;
-	data->player->rev_speed = (18 - data->player->speed[0]) / 2;
+	data->player->rev_speed = 18 - data->player->speed[0];
 	if (data->player->rev_speed < 3)
 		data->player->rev_speed = 3;
 }
@@ -53,19 +53,23 @@ void	move_player(t_data *data, int sign, int num, int other_num)
 
 void	rotate_player(t_data *data, int sign, int num)
 {
+	float	rotspeed;
+
 	if (!data->player->dead && data->keys[num] && data->rot[num] < ROT_MAX)
 		data->rot[num] += 2;
 	else if (!data->player->dead && data->keys[num]
 		&& data->rot[num] >= ROT_MAX)
 		data->rot[num] += 0;
-	else
-		data->rot[num] -= 1;
 	if (data->rot[num] > ROT_MIN && (data->rot[XK_Up] > MOV_MIN
 			|| data->rot[XK_Down] > MOV_MIN))
 	{
-		data->player->angle += (0.01 + (0.00002 * data->player->rev_speed
-					* data->rot[num] * data->rot[num]
-					* data->player->rev_speed)) * sign;
+		if (data->player->speed[0] < 5)
+			rotspeed = (0.15 - 0.004 * data->player->rev_speed) * sign;
+		else
+			rotspeed = (0.15 - (0.002 * data->player->speed[0])) * sign;
+		if ((sign > 0 && rotspeed < 0) || (sign < 0 && rotspeed > 0))
+			rotspeed = 0;
+		data->player->angle += rotspeed;
 		if (data->player->angle < 0 || data->player->angle >= 2 * PI)
 			data->player->angle -= 2 * PI * sign;
 		data->player->x_sin = sin(data->player->angle);
