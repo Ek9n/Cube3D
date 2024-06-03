@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/06/03 14:12:04 by jborner          ###   ########.fr       */
+/*   Updated: 2024/06/03 14:20:50 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -249,6 +249,7 @@ typedef struct s_sound
 	ma_sound	motor;
 	ma_sound	crash;
 	ma_sound	siren;
+	ma_sound	soundtrack;
 }	t_sound;
 
 typedef struct s_line
