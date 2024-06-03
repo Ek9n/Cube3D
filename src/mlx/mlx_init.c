@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 17:50:35 by hstein            #+#    #+#             */
-/*   Updated: 2024/06/02 04:31:52 by hstein           ###   ########.fr       */
+/*   Updated: 2024/06/03 13:57:56 by jborner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,18 @@ void	create_goal_img(t_data *data)
 		data->texture->goal = create_img(data, "./img/goal_n.xpm", 0, 0);
 	else if (data->map->player == 'S')
 		data->texture->goal = create_img(data, "./img/goal_s.xpm", 0, 0);
+	data->texture->black = create_img(data, "./img/black.xpm", 0, 0);
+	data->texture->transparent = create_img(data, "./img/transparent.xpm", 0,
+			0);
+	data->texture->steeringwheel = create_img(data, "./img/steeringwheel.xpm",
+			0, 0);
+	data->texture->steeringwheel2 = create_img(data, "./img/steeringwheel.xpm",
+			0, 0);
+	data->texture->carframe = create_img(data, "./img/cockpit.xpm", 0, 0);
+	data->texture->carframe2 = resize_img(data, &data->texture->carframe,
+			data->width, data->height);
+	data->texture->backmirror = create_img(data, "./img/backmirror.xpm", 0, 0);
+	data->texture->backmirror2 = create_img(data, "./img/backmirror.xpm", 0, 0);
 }
 
 void	create_text_imgs(t_data *data)
@@ -97,23 +109,8 @@ void	mlx_init_game(t_data *data)
 	create_wall_imgs(data);
 	create_goal_img(data);
 	create_text_imgs(data);
-	data->texture->sprite1 = create_img(data, "./img/south.xpm", 0, 0);
-	data->texture->black = create_img(data, "./img/black.xpm", 0, 0);
-	data->texture->transparent = create_img(data, "./img/transparent.xpm", 0,
-			0);
-	data->texture->steeringwheel = create_img(data, "./img/steeringwheel.xpm",
-			0, 0);
-	data->texture->steeringwheel2 = create_img(data, "./img/steeringwheel.xpm",
-			0, 0);
-	data->texture->carframe = create_img(data, "./img/cockpit.xpm", 0, 0);
-	data->texture->carframe2 = resize_img(data, &data->texture->carframe,
-			data->width, data->height);
-			
-	data->texture->backmirror = create_img(data, "./img/backmirror.xpm", 0, 0);
-	data->texture->backmirror2 = create_img(data, "./img/backmirror.xpm", 0, 0);
-	resize_same_img(data, &data->texture->backmirror, 406,  150);
-	resize_same_img(data, &data->texture->backmirror2, 406,  150);
-
+	resize_same_img(data, &data->texture->backmirror, 406, 150);
+	resize_same_img(data, &data->texture->backmirror2, 406, 150);
 	data->texture->game_over = create_img(data, "./img/game_over2.xpm", 0, 0);
 	resize_same_img(data, &data->texture->game_over, data->width, data->height);
 	if (data->sound_on)

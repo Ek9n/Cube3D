@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_ray_checker.c                                 :+:      :+:    :+:   */
+/*   init_ray_checker_back.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/06 17:57:30 by yubi42            #+#    #+#             */
-/*   Updated: 2024/06/03 14:08:14 by jborner          ###   ########.fr       */
+/*   Created: 2024/06/03 14:06:40 by jborner           #+#    #+#             */
+/*   Updated: 2024/06/03 14:12:16 by jborner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-void	init_ray_steps(t_ray *ray)
+void	init_ray_steps_back(t_ray_back *ray)
 {
 	if (ray->fabs_sin < EPSILON)
 		ray->row_step = 0;
@@ -38,7 +38,7 @@ void	init_ray_steps(t_ray *ray)
 		ray->first_col_step = (IMG_SIZE - (ray->y % IMG_SIZE)) / ray->fabs_cos;
 }
 
-void	init_next_steps(t_ray *ray)
+void	init_next_steps_back(t_ray_back *ray)
 {
 	if (ray->first_row_step != 0)
 	{
@@ -62,7 +62,7 @@ void	init_next_steps(t_ray *ray)
 	}
 }
 
-void	init_check_ray(t_ray *ray, double angle, int x, int y)
+void	init_check_ray_back(t_ray_back *ray, double angle, int x, int y)
 {
 	ray->x = x;
 	ray->y = y;
@@ -71,12 +71,12 @@ void	init_check_ray(t_ray *ray, double angle, int x, int y)
 	ray->cos = cos(angle);
 	ray->fabs_sin = fabs(ray->sin);
 	ray->fabs_cos = fabs(ray->cos);
-	init_ray_steps(ray);
+	init_ray_steps_back(ray);
 	ray->row_step_x = ray->row_step * ray->sin;
 	ray->row_step_y = ray->row_step * ray->cos;
 	ray->col_step_x = ray->col_step * ray->sin;
 	ray->col_step_y = ray->col_step * ray->cos;
-	init_next_steps(ray);
+	init_next_steps_back(ray);
 	ray->dis_row = distance(ray->x, ray->y, ray->row_x, ray->row_y);
 	ray->dis_col = distance(ray->x, ray->y, ray->col_x, ray->col_y);
 	ray->first_col = 1;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/06/02 04:27:24 by hstein           ###   ########.fr       */
+/*   Updated: 2024/06/03 14:12:04 by jborner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,7 +212,7 @@ typedef struct s_ray
 	int				first_col;
 }	t_ray;
 
-typedef struct s_ray2
+typedef struct s_ray_back
 {
 	int				ray_amount;
 	double			ray_len;
@@ -240,7 +240,7 @@ typedef struct s_ray2
 	double			dis_row;
 	double			dis_col;
 	int				first_col;
-}	t_ray2;
+}	t_ray_back;
 
 typedef struct s_sound
 {
@@ -304,7 +304,7 @@ typedef struct s_data
 	t_map			*map;
 	t_player		*player;
 	t_ray			ray;
-	t_ray2			ray2;
+	t_ray_back			ray_back;
 	t_sound			sound;
 	t_line			line[3];
 	bool			restart;
@@ -406,25 +406,27 @@ t_image				*create_img(t_data *data, char *path, int w, int h);
 void				mlx_init_game(t_data *data);
 
 // ============== RAYS ==============
+// cast_rays_back.c
+int					do_row_step_back(t_data *data, t_ray_back *ray);
+int					do_col_step_back(t_data *data, t_ray_back *ray);
+void				cast_ray_back(t_data *data, double angle, int x, int y);
+void				cast_rays2(t_data *data, double angle, int deg, int amount);
+
 // cast_rays.c
 int					do_row_step(t_data *data, t_ray *ray);
 int					do_col_step(t_data *data, t_ray *ray);
 void				cast_ray(t_data *data, double angle, int x, int y);
 void				cast_rays(t_data *data, double angle, int deg, int amount);
 
-int					do_row_step2(t_data *data, t_ray2 *ray);
-int					do_col_step2(t_data *data, t_ray2 *ray);
-void				cast_ray2(t_data *data, double angle, int x, int y);
-void				cast_rays2(t_data *data, double angle, int deg, int amount);
+// init_ray_checker_back.c
+void				init_ray_steps_back(t_ray_back *ray);
+void				init_next_steps_back(t_ray_back *ray);
+void				init_check_ray_back(t_ray_back *ray, double angle, int x, int y);
 
 // init_ray_checker.c
 void				init_ray_steps(t_ray *ray);
 void				init_next_steps(t_ray *ray);
 void				init_check_ray(t_ray *ray, double angle, int x, int y);
-
-void				init_ray_steps2(t_ray2 *ray);
-void				init_next_steps2(t_ray2 *ray);
-void				init_check_ray2(t_ray2 *ray, double angle, int x, int y);
 
 // ray_checker_utils.c
 double				distance(double x1, double y1, double x2, double y2);
@@ -434,7 +436,8 @@ void				adjust_x_y(t_data *data, double *x, double *y);
 // wall_detection.c
 int					wall_found(t_data *data, double cur_x, double cur_y);
 
-int					wall_found2(t_data *data, double cur_x, double cur_y);
+//wall_detection_back.c
+int					wall_found_back(t_data *data, double cur_x, double cur_y);
 
 // ============== RENDER UTILS ==============
 // draw_pixel.c
