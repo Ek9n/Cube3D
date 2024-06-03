@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 13:58:23 by jborner           #+#    #+#             */
-/*   Updated: 2024/06/03 16:45:20 by hstein           ###   ########.fr       */
+/*   Updated: 2024/06/03 16:48:08 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ void	death_check(t_data *data)
 
 void	render_backmirror(t_data *data)
 {
+	if (data->texture->base_img2_resize)
+		free_img(data->texture->base_img2_resize, data->mlx);
 	data->texture->base_img2_resize = \
 		resize_img(data, &data->texture->base_img2, \
 		data->texture->base_img2->width / 4 - 80, \
