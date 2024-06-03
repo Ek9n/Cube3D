@@ -6,7 +6,7 @@
 /*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 13:41:09 by hstein            #+#    #+#             */
-/*   Updated: 2024/05/27 13:49:55 by jborner          ###   ########.fr       */
+/*   Updated: 2024/06/03 13:54:23 by jborner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@ void	run_game(t_data *data)
 	mlx_init_game(data);
 	print_grid(data->map);
 	data->texture->base_img = create_img(data, NULL, data->width, data->height);
+	data->texture->base_img2 = create_img(data, NULL, data->width,
+			data->height);
+	data->texture->base_img2_resize = create_img(data, NULL, data->width,
+			data->height);
 	create_minimap(data);
 	mlx_loop_hook(data->mlx, &render, data);
 	mlx_hook(data->mlx_win, KeyPress, KeyPressMask, &handle_keypress, data);

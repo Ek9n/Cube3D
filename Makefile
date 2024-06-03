@@ -34,10 +34,14 @@ SRC	=	main.c \
 		minimap/create_minimap.c \
 		mlx/mlx_init.c \
 		rays/cast_rays.c \
+		rays/cast_rays_back.c \
 		rays/init_ray_checker.c \
+		rays/init_ray_checker_back.c \
 		rays/ray_checker_utils.c \
 		rays/wall_detection.c \
+		rays/wall_detection_back.c \
 		render_utils/draw_pixel.c \
+		render_utils/draw_pixel2.c \
 		render_utils/fps.c \
 		render_utils/render_utils.c \
 		render_utils/resize_img.c \

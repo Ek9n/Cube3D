@@ -6,7 +6,7 @@
 /*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 13:58:23 by jborner           #+#    #+#             */
-/*   Updated: 2024/05/22 22:46:04 by hstein           ###   ########.fr       */
+/*   Updated: 2024/06/03 14:09:30 by hstein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,27 @@ void	death_check(t_data *data)
 	}
 }
 
+void	render_backmirror(t_data *data)
+{
+	data->texture->base_img2_resize = \
+		resize_img(data, &data->texture->base_img2, \
+		data->texture->base_img2->width / 4 - 80, \
+		data->texture->base_img2->height / 4 - 50);
+	put_img_to_img(data->texture->backmirror2, \
+		data->texture->backmirror, 0, 0);
+	put_img_to_img2(data->texture->backmirror2, \
+		data->texture->base_img2_resize, 0, 0);
+	put_img_to_img(data->texture->base_img, data->texture->backmirror2, \
+		data->texture->base_img->width / 2 + 20, 30);
+}
+
 int	render(t_data *data)
 {
 	handle_keys(data);
 	if (data->sound_on)
 		ma_sound_set_pitch(&data->sound.motor, data->player->speed[0] / 8);
 	render_background(data, data->texture->base_img);
+	render_background(data, data->texture->base_img2);
 	render_minimap(data, data->texture->minimap);
 	put_img_to_img(data->texture->base_img, data->texture->carframe2, 0, 0);
 	put_img_to_img(data->texture->base_img, \
@@ -89,6 +104,7 @@ int	render(t_data *data)
 	put_kmh(data, data->player->speed[0] * 5, 1200, 870);
 	if (!data->end_reached)
 		put_laptime(data, 1750, 100, 0);
+	render_backmirror(data);
 	goal_logic(data);
 	mlx_put_image_to_window(data->mlx, data->mlx_win,
 		data->texture->base_img->img_ptr, 0, 0);
