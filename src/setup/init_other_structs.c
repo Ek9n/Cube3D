@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_other_structs.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:46:24 by yubi42            #+#    #+#             */
-/*   Updated: 2024/06/02 01:01:01 by hstein           ###   ########.fr       */
+/*   Updated: 2024/06/03 15:27:14 by jborner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,14 @@ void	init_3d_textures(t_texture *texture)
 	texture->your_score = NULL;
 	texture->steeringwheel = NULL;
 	texture->steeringwheel2 = NULL;
+	texture->backmirror = NULL;
+	texture->backmirror2 = NULL;
 	texture->carframe = NULL;
 	texture->carframe2 = NULL;
 	texture->goal = NULL;
-	texture->no = NULL;
-	texture->so = NULL;
-	texture->ea = NULL;
-	texture->we = NULL;
+	texture->base_img = NULL;
+	texture->base_img2 = NULL;
+	texture->base_img2_resize = NULL;
 }
 
 void	init_texture(t_texture *texture)
@@ -73,13 +74,14 @@ void	init_texture(t_texture *texture)
 	texture->sprite1 = NULL;
 	init_3d_textures(texture);
 	texture->minimap = NULL;
+	texture->no = NULL;
+	texture->so = NULL;
+	texture->ea = NULL;
+	texture->we = NULL;
 	texture->no_path = NULL;
 	texture->so_path = NULL;
 	texture->we_path = NULL;
 	texture->ea_path = NULL;
-	texture->base_img = NULL;
-	texture->base_img2 = NULL;
-	texture->base_img2_resize = NULL;
 	texture->alpha = NULL;
 	texture->alpha2 = NULL;
 	texture->img1 = NULL;

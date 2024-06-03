@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:12:36 by yubi42            #+#    #+#             */
-/*   Updated: 2024/06/03 14:20:50 by hstein           ###   ########.fr       */
+/*   Updated: 2024/06/03 15:12:44 by jborner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -366,6 +366,7 @@ void				handle_keys(t_data *data);
 // render_game.c
 void				render_minimap(t_data *data, t_minimap *minimap);
 void				render_background(t_data *data, t_image *bg);
+void				render_backmirror(t_data *data);
 int					render(t_data *data);
 
 // run_game.c
