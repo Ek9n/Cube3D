@@ -41,6 +41,7 @@ SRC	=	main.c \
 		rays/wall_detection.c \
 		rays/wall_detection_back.c \
 		render_utils/draw_pixel.c \
+		render_utils/draw_pixel2.c \
 		render_utils/fps.c \
 		render_utils/render_utils.c \
 		render_utils/resize_img.c \
