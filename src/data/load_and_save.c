@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_and_save.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hstein <hstein@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 22:15:38 by hstein            #+#    #+#             */
-/*   Updated: 2024/05/27 13:59:28 by hstein           ###   ########.fr       */
+/*   Updated: 2024/06/03 17:40:41 by jborner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	safe_score_write(t_data *data, int fd)
 	i = -1;
 	while (++i < SCORE_ENTRYS)
 	{
-		write(fd, &data->names[i], 20);
+		write(fd, &data->names[i], ft_strlen(data->names[i]) + 1);
 		write(fd, &data->score[i], sizeof(long long));
 	}
 	close(fd);
@@ -51,11 +51,12 @@ int	safe_score(t_data *data)
 			while (j > i)
 			{
 				data->score[j] = data->score[j - 1];
-				ft_memcpy(data->names[j], data->names[j - 1], 20);
+				ft_strlcpy(data->names[j], data->names[j - 1],
+					ft_strlen(data->names[j - 1]) + 1);
 				j--;
 			}
 			data->score[i] = data->highscore;
-			ft_memcpy(data->names[i], data->name, sizeof(data->name));
+			ft_strlcpy(data->names[i], data->name, ft_strlen(data->name) + 1);
 			break ;
 		}
 	}
@@ -65,8 +66,8 @@ int	safe_score(t_data *data)
 
 int	load_score(t_data *data)
 {
-	int			fd;
-	int			i;
+	int	fd;
+	int	i;
 
 	i = -1;
 	fd = open("./highscore", O_RDONLY);
@@ -74,7 +75,7 @@ int	load_score(t_data *data)
 	{
 		while (++i < SCORE_ENTRYS)
 		{
-			read(fd, &data->names[i], 20);
+			read(fd, &data->names[i], ft_strlen(data->names[i]));
 			read(fd, &data->score[i], sizeof(long long));
 		}
 		close(fd);
@@ -83,7 +84,7 @@ int	load_score(t_data *data)
 	{
 		while (++i < SCORE_ENTRYS)
 		{
-			ft_memcpy(data->names[i], "DEFAULT", 8);
+			ft_strlcpy(data->names[i], "DEFAULT", 8);
 			data->score[i] = 0;
 		}
 	}

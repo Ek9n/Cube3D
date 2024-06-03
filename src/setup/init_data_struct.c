@@ -6,7 +6,7 @@
 /*   By: jborner <jborner@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:46:24 by yubi42            #+#    #+#             */
-/*   Updated: 2024/05/27 14:29:35 by jborner          ###   ########.fr       */
+/*   Updated: 2024/06/03 17:39:46 by jborner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,21 @@ void	init_array(int array[NUM_KEYS], int num, int num2)
 
 void	init_in_data_structs(t_data *data)
 {
+	int	i;
+
 	data->map = NULL;
 	data->texture = NULL;
 	data->player = NULL;
 	data->map = malloc(sizeof(t_map));
 	data->texture = malloc(sizeof(t_texture));
 	data->player = malloc(sizeof(t_player));
+	i = 0;
+	data->name[0] = 0;
+	while (i < SCORE_ENTRYS)
+	{
+		data->score[i] = 0;
+		data->names[i++][0] = 0;
+	}
 }
 
 void	init_data(t_data *data)
