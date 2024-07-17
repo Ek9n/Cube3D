@@ -23,34 +23,25 @@ Features
 To install and set up CarRaycer, follow these steps:
 
     Clone the repository:
-    git clone https://github.com/yourusername/cub3d.git
-    cd ./carraycer
+    git clone git@github.com:Ek9n/Cube3D.git
+    cd ./cub3D
 
 Build the project:
 
-sh
-
     make
 
-    This command compiles the source code and creates the carraycer executable.
-
-Usage
+## Usage
 
 To start playing CarRaycer, run the following command in your terminal:
 
-sh
+    ./cub3D
+    You will be greeted with the game's main menu, where you can start your race.
 
-./carraycer
-
-You will be greeted with the game's main menu, where you can start your race.
-Gameplay
+## Gameplay
 
 CarRaycer is a fast-paced racing game where you must navigate the track and complete a lap as quickly as possible. Use the arrow keys to control your car and avoid obstacles.
-
 Here is a preview of the game in action:
 
-CarRaycer Gameplay
+#### CarRaycer Gameplay
 
-This CarRaycer project is designed to demonstrate the capabilities of 3D raycasting in a fun and interactive way. For any questions or suggestions, please feel free to open an issue or contact the project maintainers.
-
-Happy racing!
+Happy raycing!
