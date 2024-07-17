@@ -40,8 +40,7 @@ To start playing CarRaycer, run the following command in your terminal:
 ## Gameplay
 
 CarRaycer is a fast-paced racing game where you must navigate the track and complete a lap as quickly as possible. Use the arrow keys to control your car and avoid obstacles.
-Here is a preview of the game in action:
 
-#### CarRaycer Gameplay
+![carraycer](https://github.com/user-attachments/assets/dc1a0378-3cb9-4a74-8285-14c3a2b6e44b)
 
 Happy raycing!
