@@ -10,7 +10,8 @@
 ## Introduction
 
 CarRaycer is a 3D racing game where the objective is to complete a lap in the shortest possible time. Built entirely in C, CarRaycer utilizes raycasting technology to create an immersive and challenging racing experience.
-Features
+
+## Features
 
     3D Raycasting: Real-time 3D graphics rendered using raycasting.
     Single Lap Challenge: Race against the clock to set the fastest lap time.
