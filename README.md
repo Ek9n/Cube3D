@@ -34,7 +34,7 @@ Build the project:
 
 To start playing CarRaycer, run the following command in your terminal:
 
-    ./cub3D
+    ./cub3D maps/race1.cub
     You will be greeted with the game's main menu, where you can start your race.
 
 ## Gameplay
