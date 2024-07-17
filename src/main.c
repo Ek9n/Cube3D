@@ -22,7 +22,7 @@ void	get_user_name(t_data *data)
 	i = 0;
 	printf("\033[2J");
 	printf("\033[H");
-	printf("\nWeLcOme TO CArRacEr!\n");
+	printf("\nWeLcOme tO CarRaycer!\n");
 	printf("------------------------\n");
 	printf("WhAt Is uR nAme DrIVeR?:\n");
 	while (c != '\n' && i < 20)
